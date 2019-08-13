@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢">
-<meta property="og:type" content="website">
-<meta property="og:title" content="蒟蒻最后的倔强">
-<meta property="og:url" content="http://zhxu98.github.io/index.html">
+<meta name="description" content="原文链接：  https://www.cnblogs.com/RabbitHu/p/BIT.html  “高级”数据结构——树状数组！※本文一切代码未经编译，不保证正确性，如发现问题，欢迎指正！  单点修改 + 区间查询最简单的树状数组就是这样的：  void add(int p, int x){ //给位置p增加x     while(p &amp;lt;= n) sum[p] += x, p += p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高级树状数组——区间修改区间查询、二维树状数组">
+<meta property="og:url" content="http://zhxu98.github.io/2019/08/12/高级树状数组——区间修改区间查询、二维树状数组/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢">
+<meta property="og:description" content="原文链接：  https://www.cnblogs.com/RabbitHu/p/BIT.html  “高级”数据结构——树状数组！※本文一切代码未经编译，不保证正确性，如发现问题，欢迎指正！  单点修改 + 区间查询最简单的树状数组就是这样的：  void add(int p, int x){ //给位置p增加x     while(p &amp;lt;= n) sum[p] += x, p += p">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-13T10:49:52.954Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="蒟蒻最后的倔强">
-<meta name="twitter:description" content="等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢">
+<meta name="twitter:title" content="高级树状数组——区间修改区间查询、二维树状数组">
+<meta name="twitter:description" content="原文链接：  https://www.cnblogs.com/RabbitHu/p/BIT.html  “高级”数据结构——树状数组！※本文一切代码未经编译，不保证正确性，如发现问题，欢迎指正！  单点修改 + 区间查询最简单的树状数组就是这样的：  void add(int p, int x){ //给位置p增加x     while(p &amp;lt;= n) sum[p] += x, p += p">
 
 
 
@@ -118,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://zhxu98.github.io/">
+  <link rel="canonical" href="http://zhxu98.github.io/2019/08/12/高级树状数组——区间修改区间查询、二维树状数组/">
 
 
 
 
 
-  <title>蒟蒻最后的倔强</title>
+  <title>高级树状数组——区间修改区间查询、二维树状数组 | 蒟蒻最后的倔强</title>
   
 
 
@@ -153,8 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,9 +257,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -289,9 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/12/高级树状数组——区间修改区间查询、二维树状数组/" itemprop="url">高级树状数组——区间修改区间查询、二维树状数组</a></h1>
+          <h1 class="post-title" itemprop="name headline">高级树状数组——区间修改区间查询、二维树状数组</h1>
         
 
         <div class="post-meta">
@@ -341,9 +339,7 @@
       
 
       
-        
-          
-            <p>原文链接： <a href="https://www.cnblogs.com/RabbitHu/p/BIT.html" target="_blank" rel="noopener"> https://www.cnblogs.com/RabbitHu/p/BIT.html
+        <p>原文链接： <a href="https://www.cnblogs.com/RabbitHu/p/BIT.html" target="_blank" rel="noopener"> https://www.cnblogs.com/RabbitHu/p/BIT.html
 </a></p>
 <h1 id="“高级”数据结构——树状数组！"><a href="#“高级”数据结构——树状数组！" class="headerlink" title="“高级”数据结构——树状数组！"></a>“高级”数据结构——树状数组！</h1><p>※本文一切代码未经编译，不保证正确性，如发现问题，欢迎指正！</p>
 <ol>
@@ -538,8 +534,6 @@ int main(){
     return 0;
 }</code></pre><p>本文作者：胡小兔<br>博客地址： <a href="http://rabbithu.cnblogs.com" target="_blank" rel="noopener"> http://rabbithu.cnblogs.com </a></p>
 
-          
-        
       
     </div>
     
@@ -556,411 +550,28 @@ int main(){
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/12/KMP + Z函数 基本概念 入门水题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHXU1998">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="蒟蒻最后的倔强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/12/KMP + Z函数 基本概念 入门水题/" itemprop="url">KMP + Z函数 基本概念 入门水题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-12T13:31:14+08:00">
-                2019-08-12
-              </time>
+              <a href="/2019/08/12/KMP + Z函数 基本概念 入门水题/" rel="next" title="KMP + Z函数 基本概念 入门水题">
+                <i class="fa fa-chevron-left"></i> KMP + Z函数 基本概念 入门水题
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/字符串/" itemprop="url" rel="index">
-                    <span itemprop="name">字符串</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/字符串/KMP/" itemprop="url" rel="index">
-                    <span itemprop="name">KMP</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/字符串/KMP/Z函数-拓展kmp/" itemprop="url" rel="index">
-                    <span itemprop="name">Z函数(拓展kmp)</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p><a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> </a> 版权声明：本文为博主原创文章，遵循 <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0<br>by-sa </a> 版权协议，转载请附上原文出处链接和本声明。</p>
-<p>本文链接： <a href="https://blog.csdn.net/qq_40831340/article/details/99289620" target="_blank" rel="noopener"> https://blog.csdn.net/qq_40831340/article/details/99289620
-</a></p>
-<p>KMP<br>Z函数 | 拓展KMP</p>
-<h2 id="kmp"><a href="#kmp" class="headerlink" title="kmp"></a>kmp</h2><p>字符串 abcabcd 的前缀函数为 0 0 0 1 2 3 0 ，<br>字符串 aabaaab的前缀函数为 0 1 0 1 2 2 3 .<br>以第 i 个 作为 结尾 和前缀匹配 最多往前匹多长</p>
-<h2 id="Z函数"><a href="#Z函数" class="headerlink" title="Z函数"></a>Z函数</h2><p><img src="https://img-blog.csdnimg.cn/2019081211182145.png" alt="在这里插入图片描述"><br>已第i个 作为开始 和前缀匹配 往后面最长匹配多少</p>
-<h5 id="洛谷板子题-kmp-找位置"><a href="#洛谷板子题-kmp-找位置" class="headerlink" title="洛谷板子题 kmp 找位置"></a>洛谷板子题 kmp 找位置</h5><pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-using namespace std;
-const int maxn = 1e6 + 10;
-
-int nxt[maxn];
-char s1[maxn], s2[maxn];
-
-void get_nxt(int n, char *s){
-    memset(nxt, 0, (n + 5) * sizeof(int));
-    nxt[0] = -1;
-    int i = 0, j = -1;
-    while(i &lt; n){
-        if(j == -1 || s[j] == s[i]){
-            i++, j++;
-            nxt[i] = j;
-        }
-        else j = nxt[j];
-    }
-}
-
-void kmp(int n, int m) {
-    int t1 = 0, t2 = 0;
-    while(t1 &lt; n) {
-        if(t2 == -1 || s1[t1] == s2[t2]) t1 ++, t2 ++;
-        else t2 = nxt[t2];
-        if(t2 == m) {
-            printf(&quot;%d\n&quot;, t1 - m + 1);
-            t2 = nxt[t2]; // t2 = 0 不重复用的输出
-        }
-    }
-}
-
-int main() {
-    scanf(&quot;%s %s&quot;, s1, s2);
-    int n, m;
-    n = strlen(s1), m = strlen(s2);
-    get_nxt(m, s2);
-    kmp(n, m);
-    for(int i = 1; i &lt;= m; i ++) printf(&quot;%d &quot;, nxt[i]);
-    puts(&quot;&quot;);
-    return 0;
-}</code></pre><h5 id="kmp-找循环节"><a href="#kmp-找循环节" class="headerlink" title="kmp 找循环节"></a>kmp 找循环节</h5><p>POJ 2406</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-using namespace std;
-const int maxn = 1e6 + 10;
-
-int nxt[maxn];
-char s[maxn];
-int n;
-
-void get_nxt(){
-    memset(nxt, 0, (n + 5) * sizeof(int));
-    nxt[0] = -1;
-    int i = 0, j = -1;
-    while(i &lt; n){
-        if(j == -1 || s[j] == s[i]){
-            i++;
-            j++;
-            nxt[i] = j;
-        }
-        else
-            j = nxt[j];
-    }
-}
-
-int main() {
-    while(scanf(&quot;%s&quot;, s) &amp;&amp; s[0] != &apos;.&apos;) {
-        n = strlen(s);
-        get_nxt();
-        if(n % (n - nxt[n]) != 0) puts(&quot;1&quot;);
-        else printf(&quot;%d\n&quot;, n / (n - nxt[n]));
-    }
-    return 0;
-}</code></pre><h5 id="kmp-找所有循环节周期"><a href="#kmp-找所有循环节周期" class="headerlink" title="kmp 找所有循环节周期"></a>kmp 找所有循环节周期</h5><p>POJ 1961</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-using namespace std;
-const int maxn = 1e6 + 10;
-
-int nxt[maxn];
-char s[maxn];
-int n;
-
-void get_nxt(){
-    memset(nxt, 0, (n + 5) * sizeof(int));
-    nxt[0] = -1;
-    int i = 0, j = -1;
-    while(i &lt; n){
-        if(j == -1 || s[j] == s[i]){
-            i++, j++;
-            nxt[i] = j;
-        }
-        else j = nxt[j];
-    }
-}
-
-int main() {
-    int cas = 1;
-    while(scanf(&quot;%d&quot;, &amp;n) &amp;&amp; n) {
-
-        scanf(&quot;%s&quot;, s);
-        get_nxt();
-        printf(&quot;Test case# %d\n&quot;, cas ++);
-        for(int i = 1; i &lt;= n; i ++) {
-            int k = i - nxt[i];
-            if(i % k == 0 &amp;&amp; i != k) printf(&quot;%d %d\n&quot;, i, i/k);
-        }    puts(&quot;&quot;);
-    }
-    return 0;
-}</code></pre><h2 id="Z-函数"><a href="#Z-函数" class="headerlink" title="Z 函数"></a>Z 函数</h2><h4 id="Codeforces-126B-Password"><a href="#Codeforces-126B-Password" class="headerlink" title="Codeforces 126B Password"></a>Codeforces 126B Password</h4><p>你要在一个串中找到“密码”，密码定义为既是前缀，也是后缀，同时在串中间出现过的子串。<br>i + z[i] == n i位开始能匹配到的 后缀 同时 ma &gt;= n - i 之前 出现过不小它 的串</p>
-<pre><code>#include&lt;bits/stdc++.h&gt;
-using namespace std;
-const int maxn = 1e6 + 10;
-
-int z[maxn];
-string s;
-int n;
-
-void get_z() {
-    int l=0,r=0;
-    for (int i=1; i&lt;n; i++) {
-        if (i&gt;r) {
-            l=i,r=i;
-            while (r&lt;n &amp;&amp; s[r-l]==s[r]) r++;
-            z[i]=r-l,r--;
-        } else {
-            int k=i-l;
-            if (z[k]&lt;r-i+1) z[i]=z[k];
-            else {
-                l=i;
-                while (r&lt;n &amp;&amp; s[r-l]==s[r]) r++;
-                z[i]=r-l,r--;
-            }
-        }
-    }
-}
-
-int main() {
-    cin &gt;&gt; s;
-    n = s.size();
-    get_z();
-    int pos = -1, ma = 0;
-    for(int i = 1; i &lt; n; i ++) {
-        if(z[i] + i == n &amp;&amp; ma &gt;= n - i) {
-            pos = i;
-            break;
-        }
-        ma = max(ma, z[i]);
-    }
-
-//    for(int i = 1; i &lt; n; i ++) {
-//        cout &lt;&lt; z[i] &lt;&lt; &quot; &quot;;
-//    }
-//    cout &lt;&lt; endl;
-//    cout &lt;&lt; pos &lt;&lt; &quot; &quot; &lt;&lt; ma &lt;&lt; endl;
-    if(pos == -1) cout &lt;&lt; &quot;Just a legend&quot;;
-    else for(int i = 0; i &lt; n - pos; i ++) cout &lt;&lt; s[i];
-    cout &lt;&lt; endl;
-    return 0;
-}</code></pre><h4 id="Codeforces-535D-Tavas-and-Malekas"><a href="#Codeforces-535D-Tavas-and-Malekas" class="headerlink" title="Codeforces 535D Tavas and Malekas"></a>Codeforces 535D Tavas and Malekas</h4><p>每个位置 如果不与之前重合 直接放就行<br>重合 判断 能不能合法放进去<br>用差分标记 最后0得位置就是26 ^ 多少</p>
-<pre><code>#include&lt;bits/stdc++.h&gt;
-using namespace std;
-const int maxn = 1e6 + 10;
-const int mod = 1e9 + 7;
-
-int z[maxn], pos[maxn], a[maxn];
-string s;
-int n, m, l;
-
-void get_z(int n) {
-    int l=0,r=0;
-    for (int i=1; i&lt;n; i++) {
-        if (i&gt;r) {
-            l=i,r=i;
-            while (r&lt;n &amp;&amp; s[r-l]==s[r]) r++;
-            z[i]=r-l,r--;
-        } else {
-            int k=i-l;
-            if (z[k]&lt;r-i+1) z[i]=z[k];
-            else {
-                l=i;
-                while (r&lt;n &amp;&amp; s[r-l]==s[r]) r++;
-                z[i]=r-l,r--;
-            }
-        }
-    }
-}
-
-bool chk(int i, int j) {
-    if(i + l &lt;= j) return 1;
-    return z[j - i] &gt;= i + l - j;
-}
-
-int ksm(int a, int b) {
-    int res = 1;
-    for(; b; b &gt;&gt;= 1) {
-        if(b &amp; 1) res = 1ll * res * a % mod;
-        a = 1ll * a * a % mod;
-    }
-    return res;
-}
-
-signed main() {
-    cin &gt;&gt; n &gt;&gt; m;
-    cin &gt;&gt; s;
-    l = s.size();
-    get_z(l);
-    for(int i = 1; i &lt;= m; i ++) cin &gt;&gt; pos[i], pos[i]--;
-
-    for(int i = 1; i &lt; m; i ++) {
-        if(chk(pos[i], pos[i + 1])) {
-            a[pos[i]] ++, a[pos[i] + l] --;
-        } else {
-            cout &lt;&lt; 0 &lt;&lt; endl;
-            return 0;
-        }
-    }
-    if(m) a[pos[m]] ++, a[pos[m] + l] --;
-    for(int i = 1; i &lt; n; i ++) 
-        a[i] += a[i - 1];
-
-    int tot = 0;
-    for(int i = 0; i &lt; n; i ++) if(!a[i]) tot ++;
-    cout &lt;&lt; ksm(26, tot) &lt;&lt; endl;
-    return 0;
-}</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -970,10 +581,11 @@ signed main() {
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -981,6 +593,10 @@ signed main() {
 
 
           
+
+  
+
+
 
         </div>
         
@@ -1001,8 +617,17 @@ signed main() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1064,6 +689,22 @@ signed main() {
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#“高级”数据结构——树状数组！"><span class="nav-number">1.</span> <span class="nav-text">“高级”数据结构——树状数组！</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1204,6 +845,10 @@ signed main() {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
