@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="舞动的晚会我自己写的 建图可能写错了 导致后面输出的像是可行边 我也很迷 感觉没有检错图  匹配边(i,j) j到i连边 非匹配边 (i,j) i到j连边 匹配的左点i (i,S) 不匹配的左点i (S,i) 匹配的右点j (T,j) 不匹配的右点j (j,T) 然后用Tarjan求强连通分量 (i,j)是可行边的条件： (i,j)是匹配边 或者 i,j在同一个scc里 那么总边数减去可行边数就是">
+<meta name="description" content="舞动的晚会   我自己写的 建图可能写错了 导致后面输出的像是可行边 我也很迷 感觉没有检错图  匹配边(i,j) j到i连边 非匹配边 (i,j) i到j连边 匹配的左点i (i,S) 不匹配的左点i (S,i) 匹配的右点j (T,j) 不匹配的右点j (j,T) 然后用Tarjan求强连通分量 (i,j)是可行边的条件： (i,j)是匹配边 或者 i,j在同一个scc里 那么总边数减去可行边">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《算法竞赛进阶指南》 0x6A 代码 + 杂谈">
 <meta property="og:url" content="http://zhxu98.github.io/2019/08/07/《算法竞赛进阶指南》 0x6A 代码 + 杂谈/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="舞动的晚会我自己写的 建图可能写错了 导致后面输出的像是可行边 我也很迷 感觉没有检错图  匹配边(i,j) j到i连边 非匹配边 (i,j) i到j连边 匹配的左点i (i,S) 不匹配的左点i (S,i) 匹配的右点j (T,j) 不匹配的右点j (j,T) 然后用Tarjan求强连通分量 (i,j)是可行边的条件： (i,j)是匹配边 或者 i,j在同一个scc里 那么总边数减去可行边数就是">
+<meta property="og:description" content="舞动的晚会   我自己写的 建图可能写错了 导致后面输出的像是可行边 我也很迷 感觉没有检错图  匹配边(i,j) j到i连边 非匹配边 (i,j) i到j连边 匹配的左点i (i,S) 不匹配的左点i (S,i) 匹配的右点j (T,j) 不匹配的右点j (j,T) 然后用Tarjan求强连通分量 (i,j)是可行边的条件： (i,j)是匹配边 或者 i,j在同一个scc里 那么总边数减去可行边">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T03:10:53.575Z">
+<meta property="og:updated_time" content="2019-08-28T05:51:10.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《算法竞赛进阶指南》 0x6A 代码 + 杂谈">
-<meta name="twitter:description" content="舞动的晚会我自己写的 建图可能写错了 导致后面输出的像是可行边 我也很迷 感觉没有检错图  匹配边(i,j) j到i连边 非匹配边 (i,j) i到j连边 匹配的左点i (i,S) 不匹配的左点i (S,i) 匹配的右点j (T,j) 不匹配的右点j (j,T) 然后用Tarjan求强连通分量 (i,j)是可行边的条件： (i,j)是匹配边 或者 i,j在同一个scc里 那么总边数减去可行边数就是">
+<meta name="twitter:description" content="舞动的晚会   我自己写的 建图可能写错了 导致后面输出的像是可行边 我也很迷 感觉没有检错图  匹配边(i,j) j到i连边 非匹配边 (i,j) i到j连边 匹配的左点i (i,S) 不匹配的左点i (S,i) 匹配的右点j (T,j) 不匹配的右点j (j,T) 然后用Tarjan求强连通分量 (i,j)是可行边的条件： (i,j)是匹配边 或者 i,j在同一个scc里 那么总边数减去可行边">
 
 
 
@@ -361,7 +361,8 @@
       
 
       
-        <p>舞动的晚会<br>我自己写的 建图可能写错了 导致后面输出的像是可行边 我也很迷 感觉没有检错图</p>
+        <a id="more"></a>舞动的晚会  
+<p>我自己写的 建图可能写错了 导致后面输出的像是可行边 我也很迷 感觉没有检错图</p>
 <blockquote>
 <p>匹配边(i,j) j到i连边<br> 非匹配边 (i,j) i到j连边<br> 匹配的左点i (i,S)<br> 不匹配的左点i (S,i)<br> 匹配的右点j (T,j)<br> 不匹配的右点j (j,T)<br> 然后用Tarjan求强连通分量<br> (i,j)是可行边的条件：<br> (i,j)是匹配边 或者 i,j在同一个scc里<br> 那么总边数减去可行边数就是不可行边数，即答案。<br> 注意这个新图要包含源和汇，不能只在二分图两部之间连边，除非原最大匹配是一个完备匹配。</p>
 </blockquote>
@@ -638,8 +639,8 @@ int main() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/06/2019HDU多校第五场 6630+permutation 2 (打表找规律)/" rel="next" title="2019HDU多校第五场 6630	permutation 2 (打表找规律)">
-                <i class="fa fa-chevron-left"></i> 2019HDU多校第五场 6630	permutation 2 (打表找规律)
+              <a href="/2019/08/06/2019HDU多校第五场 6630+permutation 2 (打表找规律)/" rel="next" title="2019HDU多校第五场 6630+permutation 2 (打表找规律)">
+                <i class="fa fa-chevron-left"></i> 2019HDU多校第五场 6630+permutation 2 (打表找规律)
               </a>
             
           </div>
@@ -720,7 +721,7 @@ int main() {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

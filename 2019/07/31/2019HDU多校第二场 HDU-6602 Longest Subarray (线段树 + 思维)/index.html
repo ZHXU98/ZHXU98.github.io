@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="题意： 长度为n的序列，求最大的子序列长度，要求子序列中所出现的数字个数&amp;gt;=k。 思路： 枚举右边界r，线段树维护左边界l的范围。对于每一个数a[r]来说，我们可以清楚的知道 l 可以在什么地方 放入一个 a[r] 对于 i 位置 c - 1数据不需要出现对于它之前出现的 我们是要选择r这个位置的数据的 所以我们要把 它前一个数据位置 到 r - 1 先 -1选择r位置 就把之前位置在的地方">
+<meta name="description" content="题意： 长度为n的序列，求最大的子序列长度，要求子序列中所出现的数字个数&amp;gt;=k。  思路： 枚举右边界r，线段树维护左边界l的范围。对于每一个数a[r]来说，我们可以清楚的知道 l 可以在什么地方 放入一个 a[r] 对于 i 位置 c - 1数据不需要出现对于它之前出现的 我们是要选择r这个位置的数据的 所以我们要把 它前一个数据位置 到 r - 1 先 -1选择r位置 就把之前位置在的地方a[">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019HDU多校第二场 HDU-6602 Longest Subarray (线段树 + 思维)">
 <meta property="og:url" content="http://zhxu98.github.io/2019/07/31/2019HDU多校第二场 HDU-6602 Longest Subarray (线段树 + 思维)/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="题意： 长度为n的序列，求最大的子序列长度，要求子序列中所出现的数字个数&amp;gt;=k。 思路： 枚举右边界r，线段树维护左边界l的范围。对于每一个数a[r]来说，我们可以清楚的知道 l 可以在什么地方 放入一个 a[r] 对于 i 位置 c - 1数据不需要出现对于它之前出现的 我们是要选择r这个位置的数据的 所以我们要把 它前一个数据位置 到 r - 1 先 -1选择r位置 就把之前位置在的地方">
+<meta property="og:description" content="题意： 长度为n的序列，求最大的子序列长度，要求子序列中所出现的数字个数&amp;gt;=k。  思路： 枚举右边界r，线段树维护左边界l的范围。对于每一个数a[r]来说，我们可以清楚的知道 l 可以在什么地方 放入一个 a[r] 对于 i 位置 c - 1数据不需要出现对于它之前出现的 我们是要选择r这个位置的数据的 所以我们要把 它前一个数据位置 到 r - 1 先 -1选择r位置 就把之前位置在的地方a[">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T03:10:58.214Z">
+<meta property="og:updated_time" content="2019-08-28T05:51:14.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019HDU多校第二场 HDU-6602 Longest Subarray (线段树 + 思维)">
-<meta name="twitter:description" content="题意： 长度为n的序列，求最大的子序列长度，要求子序列中所出现的数字个数&amp;gt;=k。 思路： 枚举右边界r，线段树维护左边界l的范围。对于每一个数a[r]来说，我们可以清楚的知道 l 可以在什么地方 放入一个 a[r] 对于 i 位置 c - 1数据不需要出现对于它之前出现的 我们是要选择r这个位置的数据的 所以我们要把 它前一个数据位置 到 r - 1 先 -1选择r位置 就把之前位置在的地方">
+<meta name="twitter:description" content="题意： 长度为n的序列，求最大的子序列长度，要求子序列中所出现的数字个数&amp;gt;=k。  思路： 枚举右边界r，线段树维护左边界l的范围。对于每一个数a[r]来说，我们可以清楚的知道 l 可以在什么地方 放入一个 a[r] 对于 i 位置 c - 1数据不需要出现对于它之前出现的 我们是要选择r这个位置的数据的 所以我们要把 它前一个数据位置 到 r - 1 先 -1选择r位置 就把之前位置在的地方a[">
 
 
 
@@ -361,7 +361,8 @@
       
 
       
-        <p>题意： 长度为n的序列，求最大的子序列长度，要求子序列中所出现的数字个数&gt;=k。</p>
+        <a id="more"></a>题意： 长度为n的序列，求最大的子序列长度，要求子序列中所出现的数字个数>=k。
+
 <p>思路： 枚举右边界r，线段树维护左边界l的范围。<br>对于每一个数a[r]来说，我们可以清楚的知道 l 可以在什么地方</p>
 <p>放入一个 a[r] 对于 i 位置 c - 1数据不需要出现<br>对于它之前出现的 我们是要选择r这个位置的数据的 所以我们要把 它前一个数据位置 到 r - 1 先 -1<br>选择r位置 就把之前位置在的地方a[r] 数据出现减去</p>
 <p>离a[r]最近的 同一个数据数子 位置为 P1，<br>离a[r]第k远的 同一个数据数字 位置 P2，<br>它这个数据之后的下一位 P3<br>当 a[r] 加入 p2 ~ p3 位置 就对a[r] 数据 合法了 区间 + 1；<br>右边 就是 p1 ~ r 这个区间 与之前 1 ~ p2 ~ p3 区间 对应<br>最后查询区间个数&gt;=c的最左边的边界l即可。</p>
@@ -543,7 +544,7 @@ int main() {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="题目要使得最大值最小？考虑二分答案 对于每次二分答案（假设为x）， 如何判定x能否满足分为k份的要求呢？考虑动态规划 dp[i] = max(dp[j]) + 1; (sum[i] - sum[j] &amp;lt;= x) 令dp[i]表示前i个数最多能分成几段, 则 如果直接dp，时间复杂度为n^2，显然会TLE!    考虑用平衡树维护或者离散化后权值线段树维护，总体复杂度n*log(n)  考虑">
+<meta name="description" content="&amp;gt; 题目要使得最大值最小？考虑二分答案 对于每次二分答案（假设为x），     如何判定x能否满足分为k份的要求呢？考虑动态规划 dp[i] = max(dp[j]) + 1; (sum[i] - sum[j] &amp;lt;= x) 令dp[i]表示前i个数最多能分成几段, 则 如果直接dp，时间复杂度为n^2，显然会TLE!    考虑用平衡树维护或者离散化后权值线段树维护，总体复杂度n*log(n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019HDU杭电多校第三场 HDU 6606  Distribution of books (DP+线段树)">
 <meta property="og:url" content="http://zhxu98.github.io/2019/08/08/2019HDU杭电多校第三场 HDU 6606  Distribution of books (DP+线段树)/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="题目要使得最大值最小？考虑二分答案 对于每次二分答案（假设为x）， 如何判定x能否满足分为k份的要求呢？考虑动态规划 dp[i] = max(dp[j]) + 1; (sum[i] - sum[j] &amp;lt;= x) 令dp[i]表示前i个数最多能分成几段, 则 如果直接dp，时间复杂度为n^2，显然会TLE!    考虑用平衡树维护或者离散化后权值线段树维护，总体复杂度n*log(n)  考虑">
+<meta property="og:description" content="&amp;gt; 题目要使得最大值最小？考虑二分答案 对于每次二分答案（假设为x），     如何判定x能否满足分为k份的要求呢？考虑动态规划 dp[i] = max(dp[j]) + 1; (sum[i] - sum[j] &amp;lt;= x) 令dp[i]表示前i个数最多能分成几段, 则 如果直接dp，时间复杂度为n^2，显然会TLE!    考虑用平衡树维护或者离散化后权值线段树维护，总体复杂度n*log(n">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T03:10:51.426Z">
+<meta property="og:updated_time" content="2019-08-28T05:51:08.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019HDU杭电多校第三场 HDU 6606  Distribution of books (DP+线段树)">
-<meta name="twitter:description" content="题目要使得最大值最小？考虑二分答案 对于每次二分答案（假设为x）， 如何判定x能否满足分为k份的要求呢？考虑动态规划 dp[i] = max(dp[j]) + 1; (sum[i] - sum[j] &amp;lt;= x) 令dp[i]表示前i个数最多能分成几段, 则 如果直接dp，时间复杂度为n^2，显然会TLE!    考虑用平衡树维护或者离散化后权值线段树维护，总体复杂度n*log(n)  考虑">
+<meta name="twitter:description" content="&amp;gt; 题目要使得最大值最小？考虑二分答案 对于每次二分答案（假设为x），     如何判定x能否满足分为k份的要求呢？考虑动态规划 dp[i] = max(dp[j]) + 1; (sum[i] - sum[j] &amp;lt;= x) 令dp[i]表示前i个数最多能分成几段, 则 如果直接dp，时间复杂度为n^2，显然会TLE!    考虑用平衡树维护或者离散化后权值线段树维护，总体复杂度n*log(n">
 
 
 
@@ -361,8 +361,9 @@
       
 
       
-        <blockquote>
-<p>题目要使得最大值最小？考虑二分答案 对于每次二分答案（假设为x），<br> 如何判定x能否满足分为k份的要求呢？考虑动态规划<br> dp[i] = max(dp[j]) + 1; (sum[i] - sum[j] &lt;= x)<br> 令dp[i]表示前i个数最多能分成几段, 则 如果直接dp，时间复杂度为n^2，显然会TLE!  
+        <a id="more"></a>> 题目要使得最大值最小？考虑二分答案 对于每次二分答案（假设为x），  
+<blockquote>
+<p> 如何判定x能否满足分为k份的要求呢？考虑动态规划<br> dp[i] = max(dp[j]) + 1; (sum[i] - sum[j] &lt;= x)<br> 令dp[i]表示前i个数最多能分成几段, 则 如果直接dp，时间复杂度为n^2，显然会TLE!  
  考虑用平衡树维护或者离散化后权值线段树维护，总体复杂度n*log(n)</p>
 </blockquote>
 <p>考虑一个答案，然后dp[i]表示分配前i本书最多可以分给几个人，然后如果无法以i结尾就不更新dp数组<br>然后把前缀和离散化，dp[i]=max(dp[j]+1),sum[i]-sum[j]&lt;=mid ，那么就用sum[j]&gt;=sum[i]-mid，<br>二分出最小的离散化值，权值树状数组维护下标表示的sum[j]能得到的最大dp[j]。<br>然后注意由于是要前i个完全分配，所以一定要有解的情况才更新dp[i]和权值树<br>线段树优化DP orz chklonglong和 int 没有对应 然后我连样例都跑不出来</p>
@@ -549,7 +550,7 @@ int main() {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

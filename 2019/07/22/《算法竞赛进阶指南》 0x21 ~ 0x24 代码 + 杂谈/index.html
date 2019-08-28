@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="树与图的遍历 可达性统计给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。数据 1≤N,M≤30000 这里folyd 跑 不仅数组开不下 还有n^3的复杂度chun关于 这个点每个状态的用矩阵肯定存不下这些关系 所以可以考虑用int 二进制来进行压缩还有bitset STL 进行非常长长度二进制存储和运算可达性就可以考虑 topsort了 找到循序序列 之后 倒着来吧每个">
+<meta name="description" content="##  树与图的遍历   可达性统计给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。数据 1≤N,M≤30000 这里folyd 跑 不仅数组开不下 还有n^3的复杂度chun关于 这个点每个状态的用矩阵肯定存不下这些关系 所以可以考虑用int 二进制来进行压缩还有bitset STL 进行非常长长度二进制存储和运算可达性就可以考虑 topsort了 找到循序序列 之后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《算法竞赛进阶指南》 0x21 ~ 0x24 代码 + 杂谈">
 <meta property="og:url" content="http://zhxu98.github.io/2019/07/22/《算法竞赛进阶指南》 0x21 ~ 0x24 代码 + 杂谈/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="树与图的遍历 可达性统计给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。数据 1≤N,M≤30000 这里folyd 跑 不仅数组开不下 还有n^3的复杂度chun关于 这个点每个状态的用矩阵肯定存不下这些关系 所以可以考虑用int 二进制来进行压缩还有bitset STL 进行非常长长度二进制存储和运算可达性就可以考虑 topsort了 找到循序序列 之后 倒着来吧每个">
+<meta property="og:description" content="##  树与图的遍历   可达性统计给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。数据 1≤N,M≤30000 这里folyd 跑 不仅数组开不下 还有n^3的复杂度chun关于 这个点每个状态的用矩阵肯定存不下这些关系 所以可以考虑用int 二进制来进行压缩还有bitset STL 进行非常长长度二进制存储和运算可达性就可以考虑 topsort了 找到循序序列 之后">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T03:11:04.940Z">
+<meta property="og:updated_time" content="2019-08-28T05:51:20.703Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《算法竞赛进阶指南》 0x21 ~ 0x24 代码 + 杂谈">
-<meta name="twitter:description" content="树与图的遍历 可达性统计给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。数据 1≤N,M≤30000 这里folyd 跑 不仅数组开不下 还有n^3的复杂度chun关于 这个点每个状态的用矩阵肯定存不下这些关系 所以可以考虑用int 二进制来进行压缩还有bitset STL 进行非常长长度二进制存储和运算可达性就可以考虑 topsort了 找到循序序列 之后 倒着来吧每个">
+<meta name="twitter:description" content="##  树与图的遍历   可达性统计给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。数据 1≤N,M≤30000 这里folyd 跑 不仅数组开不下 还有n^3的复杂度chun关于 这个点每个状态的用矩阵肯定存不下这些关系 所以可以考虑用int 二进制来进行压缩还有bitset STL 进行非常长长度二进制存储和运算可达性就可以考虑 topsort了 找到循序序列 之后">
 
 
 
@@ -361,7 +361,9 @@
       
 
       
-        <h2 id="树与图的遍历"><a href="#树与图的遍历" class="headerlink" title="树与图的遍历"></a>树与图的遍历</h2><ol>
+        <a id="more"></a>##  树与图的遍历
+
+<ol>
 <li><strong>可达性统计</strong><br>给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。<br>数据 1≤N,M≤30000 这里folyd 跑 不仅数组开不下 还有n^3的复杂度chun<br>关于 这个点每个状态的用矩阵肯定存不下这些关系 所以可以考虑用int 二进制来进行压缩<br>还有bitset STL 进行非常长长度二进制存储和运算<br>可达性就可以考虑 topsort了 找到循序序列 之后 倒着来吧每个点 或 一下 就 吧可达点 付到上一个 完成统计</li>
 </ol>
 <pre><code>#include &lt;iostream&gt;
@@ -881,7 +883,7 @@ int main(){
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -927,7 +929,7 @@ int main(){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树与图的遍历"><span class="nav-number">1.</span> <span class="nav-text">树与图的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS"><span class="nav-number">2.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化搜索"><span class="nav-number">3.</span> <span class="nav-text">优化搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代加深"><span class="nav-number">3.0.1.</span> <span class="nav-text">迭代加深</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#双向搜索"><span class="nav-number">3.0.1.1.</span> <span class="nav-text">双向搜索</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS"><span class="nav-number">1.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化搜索"><span class="nav-number">2.</span> <span class="nav-text">优化搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代加深"><span class="nav-number">2.0.1.</span> <span class="nav-text">迭代加深</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#双向搜索"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">双向搜索</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

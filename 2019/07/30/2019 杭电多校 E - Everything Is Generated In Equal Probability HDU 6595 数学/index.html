@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="给了你一个程序![在这里插入图片描述](https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_F">
+<meta name="description" content="给了你一个程序   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,colo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 杭电多校 E - Everything Is Generated In Equal Probability HDU 6595 数学">
 <meta property="og:url" content="http://zhxu98.github.io/2019/07/30/2019 杭电多校 E - Everything Is Generated In Equal Probability HDU 6595 数学/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="给了你一个程序![在这里插入图片描述](https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_F">
+<meta property="og:description" content="给了你一个程序   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,colo">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T03:10:59.570Z">
+<meta property="og:updated_time" content="2019-08-28T05:51:16.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 杭电多校 E - Everything Is Generated In Equal Probability HDU 6595 数学">
-<meta name="twitter:description" content="给了你一个程序![在这里插入图片描述](https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_F">
+<meta name="twitter:description" content="给了你一个程序   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,colo">
 
 
 
@@ -361,7 +361,8 @@
       
 
       
-        <p>给了你一个程序<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>程序 S1 将传入的 数组 返回一个随机子序列(不一定连续)<br>程序 S2 算这个数组 逆序对数量<br>程序 S3 算这个数组 经过S1 之后 用S2算逆序对数量</p>
+        <a id="more"></a>给了你一个程序  
+<p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190730084116806.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>程序 S1 将传入的 数组 返回一个随机子序列(不一定连续)<br>程序 S2 算这个数组 逆序对数量<br>程序 S3 算这个数组 经过S1 之后 用S2算逆序对数量</p>
 <p>到这里 我们知道了 这个程序是在算 一个序列 包括它子序列 随机排列 最后 逆序对期望值</p>
 <p>首先 我们知道 一个长度为n的 它随机排列的逆序对期望 C(n, 2) 可以产生多少逆序对 每个 逆序对的存在概率是/2<br>所以 是C（n, 2）/ 2<br>知道这个后面 我们就好算 算 它子序列的逆序对期望了 ![在这里插入图片描述](<a href="https://img-" target="_blank" rel="noopener">https://img-</a><br>blog.csdnimg.cn/20190730085322270.gif)<br>移向之后 我们就算出 i 子序列的个数了 在 + 上 它自身期望<br>答案 问的是 n 之内 的 期望 所以 我们 sum (f 1 ~ n) / n 就是答案<br>n^2 打表处理</p>
 <pre><code>#include &lt;bits/stdc++.h&gt;
@@ -522,7 +523,7 @@ signed main(){
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

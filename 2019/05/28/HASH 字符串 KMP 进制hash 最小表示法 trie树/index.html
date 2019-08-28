@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="雪花雪花  有N片雪花，每片雪花由六个角组成，每个角都有长度。 第i片雪花六个角的长度从某个角开始顺时针依次记为ai,1,ai,2,…,ai,6。 因为雪花的形状是封闭的环形，所以从任何一个角开始顺时针或逆时针往后记录长度，得到的六元组都代表形状相同的雪花。 例如ai,1,ai,2,…,ai,6和ai,2,ai,3,…,ai,6，ai,1就是形状相同的雪花。 ai,1,ai,2,…,ai,6和ai">
+<meta name="description" content="**雪花雪花**   有N片雪花，每片雪花由六个角组成，每个角都有长度。 第i片雪花六个角的长度从某个角开始顺时针依次记为ai,1,ai,2,…,ai,6。 因为雪花的形状是封闭的环形，所以从任何一个角开始顺时针或逆时针往后记录长度，得到的六元组都代表形状相同的雪花。 例如ai,1,ai,2,…,ai,6和ai,2,ai,3,…,ai,6，ai,1就是形状相同的雪花。 ai,1,ai,2,…,ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HASH 字符串 KMP 进制hash 最小表示法 trie树">
 <meta property="og:url" content="http://zhxu98.github.io/2019/05/28/HASH 字符串 KMP 进制hash 最小表示法 trie树/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="雪花雪花  有N片雪花，每片雪花由六个角组成，每个角都有长度。 第i片雪花六个角的长度从某个角开始顺时针依次记为ai,1,ai,2,…,ai,6。 因为雪花的形状是封闭的环形，所以从任何一个角开始顺时针或逆时针往后记录长度，得到的六元组都代表形状相同的雪花。 例如ai,1,ai,2,…,ai,6和ai,2,ai,3,…,ai,6，ai,1就是形状相同的雪花。 ai,1,ai,2,…,ai,6和ai">
+<meta property="og:description" content="**雪花雪花**   有N片雪花，每片雪花由六个角组成，每个角都有长度。 第i片雪花六个角的长度从某个角开始顺时针依次记为ai,1,ai,2,…,ai,6。 因为雪花的形状是封闭的环形，所以从任何一个角开始顺时针或逆时针往后记录长度，得到的六元组都代表形状相同的雪花。 例如ai,1,ai,2,…,ai,6和ai,2,ai,3,…,ai,6，ai,1就是形状相同的雪花。 ai,1,ai,2,…,ai">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T03:11:18.691Z">
+<meta property="og:updated_time" content="2019-08-28T05:51:33.623Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HASH 字符串 KMP 进制hash 最小表示法 trie树">
-<meta name="twitter:description" content="雪花雪花  有N片雪花，每片雪花由六个角组成，每个角都有长度。 第i片雪花六个角的长度从某个角开始顺时针依次记为ai,1,ai,2,…,ai,6。 因为雪花的形状是封闭的环形，所以从任何一个角开始顺时针或逆时针往后记录长度，得到的六元组都代表形状相同的雪花。 例如ai,1,ai,2,…,ai,6和ai,2,ai,3,…,ai,6，ai,1就是形状相同的雪花。 ai,1,ai,2,…,ai,6和ai">
+<meta name="twitter:description" content="**雪花雪花**   有N片雪花，每片雪花由六个角组成，每个角都有长度。 第i片雪花六个角的长度从某个角开始顺时针依次记为ai,1,ai,2,…,ai,6。 因为雪花的形状是封闭的环形，所以从任何一个角开始顺时针或逆时针往后记录长度，得到的六元组都代表形状相同的雪花。 例如ai,1,ai,2,…,ai,6和ai,2,ai,3,…,ai,6，ai,1就是形状相同的雪花。 ai,1,ai,2,…,ai">
 
 
 
@@ -361,7 +361,8 @@
       
 
       
-        <p><strong>雪花雪花</strong></p>
+        <a id="more"></a>**雪花雪花**
+
 <blockquote>
 <p>有N片雪花，每片雪花由六个角组成，每个角都有长度。<br> 第i片雪花六个角的长度从某个角开始顺时针依次记为ai,1,ai,2,…,ai,6。<br> 因为雪花的形状是封闭的环形，所以从任何一个角开始顺时针或逆时针往后记录长度，得到的六元组都代表形状相同的雪花。<br> 例如ai,1,ai,2,…,ai,6和ai,2,ai,3,…,ai,6，ai,1就是形状相同的雪花。<br> ai,1,ai,2,…,ai,6和ai,6,ai,5,…,ai,1也是形状相同的雪花。<br> 我们称两片雪花形状相同，当且仅当它们各自从某一角开始顺时针或逆时针记录长度，能得到两个相同的六元组。<br> 求这N片雪花中是否存在两片形状相同的雪花。<br> 输入格式<br> 第一行输入一个整数N，代表雪花的数量。<br> 接下来N行，每行描述一片雪花。<br> 每行包含6个整数，分别代表雪花的六个角的长度（这六个数即为从雪花的随机一个角顺时针或逆时针记录长度得到）。<br> 同行数值之间，用空格隔开。<br> 输出格式<br> 如果不存在两片形状相同的雪花，则输出：<br> No two snowflakes are alike.<br> 如果存在两片形状相同的雪花，则输出：<br> Twin snowflakes found.<br> 数据范围<br> 1≤n≤100000,<br> 0≤ai,j&lt;10000000<br> 输入样例：<br> 2<br> 1 2 3 4 5 6<br> 4 3 2 1 6 5<br> 输出样例：<br> Twin snowflakes found.</p>
 </blockquote>
@@ -661,8 +662,8 @@ signed main() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/15/2019 第十四届 中北大学ACM程序设计竞赛 题解/" rel="next" title="2019 第十四届 中北大学ACM程序设计竞赛 题解">
-                <i class="fa fa-chevron-left"></i> 2019 第十四届 中北大学ACM程序设计竞赛 题解
+              <a href="/2019/05/28/【 算法竞赛进阶指南 0x10 】 杂谈/" rel="next" title="【 算法竞赛进阶指南 0x10 】 杂谈">
+                <i class="fa fa-chevron-left"></i> 【 算法竞赛进阶指南 0x10 】 杂谈
               </a>
             
           </div>
@@ -671,8 +672,8 @@ signed main() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/30/2019 ACM-ICPC 西安邀请赛 A C D L M (+签到题 题解)/" rel="prev" title="2019 ACM-ICPC 西安邀请赛 A C D L M (/签到题 题解)">
-                2019 ACM-ICPC 西安邀请赛 A C D L M (/签到题 题解) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/28/【 算法竞赛进阶指南 0x40 】 杂谈/" rel="prev" title="【 算法竞赛进阶指南 0x40 】 杂谈">
+                【 算法竞赛进阶指南 0x40 】 杂谈 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -752,7 +753,7 @@ signed main() {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

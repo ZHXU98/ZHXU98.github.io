@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="感想 入门即劝退 还有个动态主席树先弃坑了  这里贴点其他博客的关键字和解释 主席树的每个节点对应一颗线段树，此处有点抽象。在我们的印象中，每个线段树的节点维护的树左右子树下标以及当前节点对应区间的信息（信息视具体问题定）。对于一个待处理的序列a[1]、a[2]…a[n]，有n个前缀。每个前缀可以看做一棵线段树，共有n棵线段树；若不采用可持久化结构，带来的严重后果就是会MLE，即对内存来说很难承受">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【主席树】 自己对 静态主席树 的一个学习小结">
+<meta property="og:url" content="http://zhxu98.github.io/2018/09/16/【主席树】 自己对 静态主席树 的一个学习小结/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="感想 入门即劝退 还有个动态主席树先弃坑了  这里贴点其他博客的关键字和解释 主席树的每个节点对应一颗线段树，此处有点抽象。在我们的印象中，每个线段树的节点维护的树左右子树下标以及当前节点对应区间的信息（信息视具体问题定）。对于一个待处理的序列a[1]、a[2]…a[n]，有n个前缀。每个前缀可以看做一棵线段树，共有n棵线段树；若不采用可持久化结构，带来的严重后果就是会MLE，即对内存来说很难承受">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-28T05:51:54.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【主席树】 自己对 静态主席树 的一个学习小结">
+<meta name="twitter:description" content="感想 入门即劝退 还有个动态主席树先弃坑了  这里贴点其他博客的关键字和解释 主席树的每个节点对应一颗线段树，此处有点抽象。在我们的印象中，每个线段树的节点维护的树左右子树下标以及当前节点对应区间的信息（信息视具体问题定）。对于一个待处理的序列a[1]、a[2]…a[n]，有n个前缀。每个前缀可以看做一棵线段树，共有n棵线段树；若不采用可持久化结构，带来的严重后果就是会MLE，即对内存来说很难承受">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2018/09/16/【主席树】 自己对 静态主席树 的一个学习小结/">
+
+
+
+
+
+  <title>【主席树】 自己对 静态主席树 的一个学习小结 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2018/09/16/【主席树】 自己对 静态主席树 的一个学习小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【主席树】 自己对 静态主席树 的一个学习小结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T21:19:27+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>感想 入门即劝退 还有个动态主席树先弃坑了
+
+<p>这里贴点其他博客的关键字和解释</p>
+<p>主席树的每个节点对应一颗线段树，此处有点抽象。在我们的印象中，每个线段树的节点维护的树左右子树下标以及当前节点对应区间的信息（信息视具体问题定）。对于一个待处理的序列a[1]、a[2]…a[n]，有n个前缀。每个前缀可以看做一棵线段树，共有n棵线段树；若不采用可持久化结构，带来的严重后果就是会MLE，即对内存来说很难承受。根据可持久化数据结构的定义，由于相邻线段树即前缀的公共部分很多，可以充分利用，达到优化目的，同时每棵线段树还是保留所有的叶节点只是较之前共用了很多共用节点。主席树很重要的操作就是如何寻找公用的节点信息，这些可能可能出现在根节点也可能出现在叶节点。<br>下面是某大牛的理解：所谓主席树呢，就是对原来的数列[1…n]的每一个前缀[1…i]（1≤i≤n）建立一棵线段树，线段树的每一个节点存某个前缀[1…i]中属于区间[L…R]的数一共有多少个（比如根节点是[1…n]，一共i个数，sum[root]<br>= i；根节点的左儿子是[1…(L+R)/2]，若不大于(L+R)/2的数有x个，那么sum[root.left] =<br>x）。若要查找[i…j]中第k大数时，设某结点x，那么x.sum[j] - x.sum[i -<br>1]就是[i…j]中在结点x内的数字总数。而对每一个前缀都建一棵树，会MLE，观察到每个[1…i]和[1…i-1]只有一条路是不一样的，那么其他的结点只要用回前一棵树的结点即可，时空复杂度为O(nlogn)。</p>
+<p>我的理解就低端点了 就是一直调用之前用的线段树 每次只改变我要用的那个链</p>
+<p>这篇博客关于图的 讲解 来源<a href="https://blog.csdn.net/williamsun0122/article/details/77871278" target="_blank" rel="noopener">https://blog.csdn.net/williamsun0122/article/details/77871278</a><br>具体建树方法建下图：<br>序列为 1 3 4 2<br>![这里写图片描述](<a href="https://img-" target="_blank" rel="noopener">https://img-</a><br>blog.csdn.net/20180916210305237?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)<br>转的 一定要他们在sort后面的pos位置进树</p>
+<p>同转的<br>比如有4个数5 3 6 9，求区间[2,4]第2小的数。<br>T[i]表示第i棵线段树的根节点编号，L[i]表示节点i的左子节点编号，R[i]表示节点i的右子节点编号，sum[i]表示节点i对应区间中数的个数。<br>我们先把序列离散化后是2 1 3 4。<br>我之前已经说了，主席树就是很多线段树的总体，而这些线段树就是按给定序列的所有前缀建立的。从T[0]开始建立空树，之后依次加入第i个数建立T[i]。<br>注意，如果我们直接以序列的所有前缀建立线段树肯定会MLE，这里主席树最精妙的地方就出来了。我们建立的这些线段树的结构，维护的区间是相同的，主席树充分利用了这些线段树中的相同部分，大大减少了空间消耗，达到优化目的。<br>直接上图，边看图边理解上面的话。</p>
+<p>![这里写图片描述](<a href="https://img-" target="_blank" rel="noopener">https://img-</a><br>blog.csdn.net/20180916210733521?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)</p>
+<p>图中上面为用序列所有前缀建立的线段树，下面为所有线段树组合成主席树。<br>图中每个节点上面为节点编号，节点下面为对应区间，节点中数为区间中含有的数的个数，后面省略了区间。<br>从图中应该可以看出主席树是怎么充分利用这些线段树的相同结构来减少空间消耗的。当要新建一个线段树时最多只需要新增log2n个节点，相当于只更新了一条链，其它节点与它的前一个线段树公用。<br>建完主席树后我们看看它是怎么查找区间[2,4]第2小的数的。<br>首先我们要了解这些线段树是可加减的，比如我们要处理区间[l,r]，那么我们只需处理sum[T[r]]-sum[T[l-1]]就是给定序列的区间[l,r]中的数的个数。因为我们是按前缀处理的，这里看图自己体会一下。<br>这里我们要先计算res=sum[L[T[4]]]-sum[L[T[1]]]=1，即算出给定序列区间[2,4]中数的范围在区间[1,2]的数的个数，如果它的值大于k那么我们就应该从线段树的根节点走到左节点找第k个数，否则我们就应该从根节点到右节点找第k-<br>res个数，之后递归下去直到叶子节点，返回叶子节点对应区间即为我们查找的数在离散化后序列中的下标。这里返回值为3，对应离散化后序列中数3，即原序列中数6。<br>讲到这里，静态的主席树就讲完了。我们算算时空复杂度。<br>设原序列有n个数，含有m次询问<br>空间复杂度：（建空树）4*n+（前缀和更新）nlog2</p>
+<p>一般我们数组大小就开log2n、</p>
+<p>时间复杂度：mlog2n</p>
+<p>先画图 理解图 好理解<br>关键是对图的理解。。。 看懂图<br>方便 读代码 这份代码写了很多程序要注意的 已经解释</p>
+<p>题目链接：<a href="http://poj.org/problem?id=2104" target="_blank" rel="noopener">http://poj.org/problem?id=2104</a><br>就是区间第K小 静态主席树板子<br>下面程序 数据不重复（然而并不清楚 重复数据怎么办 学习中）</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+using namespace std;
+typedef long long ll;
+
+const int maxn = 1e5+5;
+const int mod = 1e9+7;
+const int INF = 0x3f3f3f3f;
+
+struct node{
+    int ls,rs;
+    int cnt;
+}tree[maxn*20];// 主席树看起来蛮大的 orz相比写n堆线段树 小了不是太多 
+
+int cur,rt[maxn];
+// 建树
+int build(int l,int r){
+    int k=++cur;// 这里也可以写cnt++从0开始
+    tree[k].cnt=0;
+    if(l==r) return k;
+    int mid=(l+r)&gt;&gt;1;
+    tree[k].ls=build(l,mid);
+    tree[k].rs=build(mid+1,r);
+    return k;
+}
+// pre 继承上一个节点内容 rt[pre]就是 上一个头结点的位置 
+// 只改变 pos所在那个链 更新他在的ls或rs 
+// 每次都继承上一次的树 只改变 pos所在链  其他沿用 pre那个树
+// 达成减少使用内存的目的 
+// orz  你fotile不亏是你主席 厉害厉害 
+int updata(int pre,int l,int r,int pos){
+    int k=++cur;
+    tree[k]=tree[pre];
+    if(l==pos&amp;&amp;r==pos){
+        tree[k].cnt++;
+        return k;
+    }
+    int mid=(l+r)&gt;&gt;1;
+//    cout&lt;&lt;k&lt;&lt;&quot; &quot;&lt;&lt;tree[k].ls&lt;&lt;&quot; &quot;&lt;&lt;tree[k].rs&lt;&lt;endl;
+    if(pos&lt;=mid) tree[k].ls=updata(tree[k].ls,l,mid,pos);
+    else tree[k].rs=updata(tree[k].rs,mid+1,r,pos);
+    tree[k].cnt=tree[tree[k].ls].cnt+tree[tree[k].rs].cnt;
+    return k;
+}
+
+int query(int L,int R,int l,int r,int k){// L,R 数据的左右2端 l,r树中的位置 
+    if(R==L) return L;
+    int mid=(L+R)&gt;&gt;1;
+    int th=tree[tree[r].ls].cnt-tree[tree[l].ls].cnt; // 前缀和思想 这样算区间有几个数据 
+    if(k&lt;=th) return query(L,mid,tree[l].ls,tree[r].ls,k); // k如果比TH小 就在这个区间 
+    else return query(mid+1,R,tree[l].rs,tree[r].rs,k-th); // 不然就找 右儿子 
+}
+
+int a[maxn];
+int hasha[maxn];
+int n,m,cnt,pos;
+
+void init(){
+    cur=0;
+    cnt=0;
+}
+
+int main(){
+    while(cin&gt;&gt;n&gt;&gt;m){
+        init();
+        for(int i=1;i&lt;=n;i++){
+            scanf(&quot;%d&quot;,&amp;a[i]);
+            hasha[i]=a[i];
+        }
+
+        sort(hasha+1,hasha+1+n);
+        cnt=unique(hasha+1,hasha+1+n)-hasha-1;
+        // 我们离散化后 建树 
+        rt[0]=build(1,cnt);
+    //    for(int i=0;i&lt;20;i++){
+    //        cout&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;tree[i].ls&lt;&lt;&quot; &quot;&lt;&lt;tree[i].rs&lt;&lt;endl;
+    //    }
+        // 这里可以类比前缀和 update 不断将 a[i] 应该在的位置 放入主席树中
+        // 因为已经建好树了 找pos位置在i个线段树的位置 并将那个位置的CNT++;
+        // 这样查 特定区间的第K大值 只是在找 右端cnt-左端cnt == k 的数据在那里
+        // 查到时 肯定L==R  
+        for(int i=1;i&lt;=n;i++){
+            pos=lower_bound(hasha+1,hasha+1+cnt,a[i])-hasha;
+            rt[i]=updata(rt[i-1],1,cnt,pos);
+        }    
+    //    for(int i=0;i&lt;20;i++){
+    //        cout&lt;&lt;rt[i]&lt;&lt;&quot; &quot;;
+    //    } cout&lt;&lt;endl;
+         // 这里返回是sort好以后的下标 其实也在告诉你
+         // 就是输入一堆数据大部分都是一个值 这个时候他也在新树中 
+         // 唯一改变的就是 a[i]位置所在链 和对应链头结点cnt都+1
+
+         // 另外 理解一下 在主席树 图中 怎么看 
+         // 2 1 4 3 
+         // 1 2 位置 第1小数据 为什么是 1 
+         // 第1个线段树 在 最底端 第2个位置+1 
+         // 第2个线段树 在 最底端 第一个位置+1 其他继承上一个数(第二个数据在的链) 
+         // 递归 去查 th==4第一次是大于k的 找左子树 l,r=(1,4) 
+         // 第二次 th为2 同时k为1 还是找左子树  l,r=(1,2)
+         // 第3次 th为1 只能找右子树 返回id 1; l=1 
+
+         // 同上 你信不信我其实直接coyp上面的没有改多少 orz
+
+         // 再看 1 2 位置第2小数据
+         // 第1个线段树 在 最底端 第2个位置+1 
+         // 第2个线段树 在 最底端 第一个位置+1 其他继承上一个数(第二个数据在的链) 
+         // 递归 去查 th==4第一次是大于k的 找左子树 l,r=(1,4) 
+         // 第二次 th为2 同时k为2 还是找左子树  l,r=(1,2)
+         // 第3次 th为1 只能找右子树 返回id 2; l=r=2; 
+        int pl,pr,kth,id;
+        for(int i=1;i&lt;=m;i++){
+            scanf(&quot;%d %d %d&quot;,&amp;pl,&amp;pr,&amp;kth);
+            id=query(1,cnt,rt[pl-1],rt[pr],kth);
+            printf(&quot;%d\n&quot;,hasha[id]);
+        }
+    }
+    return 0;
+} </code></pre><p>2019 更新 好看点的代码。。<br>洛谷 <a href="https://www.luogu.org/problem/P3834" target="_blank" rel="noopener"> https://www.luogu.org/problem/P3834
+</a></p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 2e5 + 10;
+
+int n, m;
+int a[maxn], b[maxn], cnt;
+struct node {
+    int lc, rc;
+    int cnt;
+} tree[maxn * 20];
+int tot, root[maxn];
+
+int build(int l, int r) {
+    int p = ++ tot;
+    if(l == r) return p;
+    int mid = l + r &gt;&gt; 1;
+    tree[p].lc = build(l, mid);
+    tree[p].rc = build(mid + 1, r);
+    return p;
+}
+
+int ins(int now, int l, int r, int x) {
+    int p = ++ tot;
+    tree[p] = tree[now];
+    if(l == r) {
+        tree[p].cnt += 1;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(x &lt;= mid) tree[p].lc = ins(tree[now].lc, l, mid, x);
+    else tree[p].rc = ins(tree[now].rc, mid + 1, r, x);
+    tree[p].cnt = tree[tree[p].lc].cnt + tree[tree[p].rc].cnt;
+    return p;
+}
+
+int ask(int p, int q, int l, int r, int L, int R, int k) {
+    if(l == r) return l;
+    int mid = l + r &gt;&gt; 1;
+       int th = tree[tree[p].lc].cnt - tree[tree[q].lc].cnt;
+    if(k &lt;= th) return ask(tree[p].lc, tree[q].lc, l, mid, L, R, k);
+    else return ask(tree[p].rc, tree[q].rc, mid + 1, r, L, R, k - th);
+}
+
+signed main() {
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1; i &lt;= n; i ++)
+        cin &gt;&gt; a[i], b[i] = a[i];
+
+    sort(b + 1, b + 1 + n);
+    cnt = unique(b + 1, b + 1 + n) - b - 1;
+    root[0] = build(1, cnt);
+    for(int i = 1; i &lt;= n; i ++) {
+        int pos = lower_bound(b + 1, b + 1 + cnt, a[i]) - b;
+        root[i] = ins(root[i - 1], 1, cnt, pos);
+    }
+    int l, r, k;
+    while(m --) {
+        cin &gt;&gt; l &gt;&gt; r &gt;&gt; k;
+        cout &lt;&lt; b[ask(root[r], root[l - 1], 1, cnt, l, r, k)] &lt;&lt; endl;
+    }
+
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/16/【区间DP】 Game of Sum UVA-10891/" rel="next" title="【区间DP】 Game of Sum UVA-10891">
+                <i class="fa fa-chevron-left"></i> 【区间DP】 Game of Sum UVA-10891
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/13/【板子 kruskal】 onscription POJ - 3723/" rel="prev" title="【板子 kruskal】 onscription POJ - 3723">
+                【板子 kruskal】 onscription POJ - 3723 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">149</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

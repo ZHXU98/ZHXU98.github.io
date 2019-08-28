@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="给了你一个字符串 要求你给出 长度为 k 的 子序列 同时要满足 输入 每个字母出现次数的 区间我们贪心 + 枚举 就是不太好写 我们处理出每个字母之后下次出现的位置 同时记录之后个数 我们K次枚举26个字母是否可以放入之前位置合法 就将队列里面 之前位置扔了如果这个字符放入 我们每一个 字母 zl[z] - num[z]， 0 长度和 大于剩下位置 就是非法的同时 R[z] - num[z] 最">
+<meta name="description" content="给了你一个字符串 要求你给出 长度为 k 的 子序列 同时要满足 输入 每个字母出现次数的 区间   我们贪心 + 枚举 就是不太好写 我们处理出每个字母之后下次出现的位置 同时记录之后个数 我们K次枚举26个字母是否可以放入之前位置合法 就将队列里面 之前位置扔了如果这个字符放入 我们每一个 字母 zl[z] - num[z]， 0 长度和 大于剩下位置 就是非法的同时 R[z] - num[z">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 杭电多校第一场 I - String HDU - 6586 字符串处理">
 <meta property="og:url" content="http://zhxu98.github.io/2019/07/30/2019 杭电多校第一场 I - String HDU - 6586 字符串处理/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="给了你一个字符串 要求你给出 长度为 k 的 子序列 同时要满足 输入 每个字母出现次数的 区间我们贪心 + 枚举 就是不太好写 我们处理出每个字母之后下次出现的位置 同时记录之后个数 我们K次枚举26个字母是否可以放入之前位置合法 就将队列里面 之前位置扔了如果这个字符放入 我们每一个 字母 zl[z] - num[z]， 0 长度和 大于剩下位置 就是非法的同时 R[z] - num[z] 最">
+<meta property="og:description" content="给了你一个字符串 要求你给出 长度为 k 的 子序列 同时要满足 输入 每个字母出现次数的 区间   我们贪心 + 枚举 就是不太好写 我们处理出每个字母之后下次出现的位置 同时记录之后个数 我们K次枚举26个字母是否可以放入之前位置合法 就将队列里面 之前位置扔了如果这个字符放入 我们每一个 字母 zl[z] - num[z]， 0 长度和 大于剩下位置 就是非法的同时 R[z] - num[z">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T03:10:59.105Z">
+<meta property="og:updated_time" content="2019-08-28T05:51:15.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 杭电多校第一场 I - String HDU - 6586 字符串处理">
-<meta name="twitter:description" content="给了你一个字符串 要求你给出 长度为 k 的 子序列 同时要满足 输入 每个字母出现次数的 区间我们贪心 + 枚举 就是不太好写 我们处理出每个字母之后下次出现的位置 同时记录之后个数 我们K次枚举26个字母是否可以放入之前位置合法 就将队列里面 之前位置扔了如果这个字符放入 我们每一个 字母 zl[z] - num[z]， 0 长度和 大于剩下位置 就是非法的同时 R[z] - num[z] 最">
+<meta name="twitter:description" content="给了你一个字符串 要求你给出 长度为 k 的 子序列 同时要满足 输入 每个字母出现次数的 区间   我们贪心 + 枚举 就是不太好写 我们处理出每个字母之后下次出现的位置 同时记录之后个数 我们K次枚举26个字母是否可以放入之前位置合法 就将队列里面 之前位置扔了如果这个字符放入 我们每一个 字母 zl[z] - num[z]， 0 长度和 大于剩下位置 就是非法的同时 R[z] - num[z">
 
 
 
@@ -361,7 +361,8 @@
       
 
       
-        <p>给了你一个字符串 要求你给出 长度为 k 的 子序列 同时要满足 输入 每个字母出现次数的 区间<br>我们贪心 + 枚举 就是不太好写</p>
+        <a id="more"></a>给了你一个字符串 要求你给出 长度为 k 的 子序列 同时要满足 输入 每个字母出现次数的 区间  
+<p>我们贪心 + 枚举 就是不太好写</p>
 <p>我们处理出每个字母之后下次出现的位置 同时记录之后个数</p>
 <p>我们K次枚举26个字母是否可以放入<br>之前位置合法 就将队列里面 之前位置扔了<br>如果这个字符放入 我们每一个 字母 z<br>l[z] - num[z]， 0 长度和 大于剩下位置 就是非法的<br>同时 R[z] - num[z] 最多放入还不够 k - i 位也是非法的</p>
 <p>合法的直接放入字符串 进入下一层 不然就重复 如果26次还不可以 输出-1</p>
@@ -537,7 +538,7 @@ int main() {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

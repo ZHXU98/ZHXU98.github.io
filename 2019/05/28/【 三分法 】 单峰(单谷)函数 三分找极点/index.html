@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[ https://www.luogu.org/problemnew/show/P3382 ](https://www.luogu.org/problemnew/show/P3382)   题目描述如题，给出一个N次函数，保证在范围[l,r]内存在一点x，使得[l,x]上单调增，[x,r]上单调减。试求出x的值。 输入输出格式输入格式：第一行一次包含一个正整数N和两个实数l、r，含义如题目描述所示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【 三分法 】 单峰(单谷)函数 三分找极点">
+<meta property="og:url" content="http://zhxu98.github.io/2019/05/28/【 三分法 】 单峰(单谷)函数 三分找极点/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="[ https://www.luogu.org/problemnew/show/P3382 ](https://www.luogu.org/problemnew/show/P3382)   题目描述如题，给出一个N次函数，保证在范围[l,r]内存在一点x，使得[l,x]上单调增，[x,r]上单调减。试求出x的值。 输入输出格式输入格式：第一行一次包含一个正整数N和两个实数l、r，含义如题目描述所示">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-28T05:51:34.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【 三分法 】 单峰(单谷)函数 三分找极点">
+<meta name="twitter:description" content="[ https://www.luogu.org/problemnew/show/P3382 ](https://www.luogu.org/problemnew/show/P3382)   题目描述如题，给出一个N次函数，保证在范围[l,r]内存在一点x，使得[l,x]上单调增，[x,r]上单调减。试求出x的值。 输入输出格式输入格式：第一行一次包含一个正整数N和两个实数l、r，含义如题目描述所示">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/05/28/【 三分法 】 单峰(单谷)函数 三分找极点/">
+
+
+
+
+
+  <title>【 三分法 】 单峰(单谷)函数 三分找极点 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/28/【 三分法 】 单峰(单谷)函数 三分找极点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【 三分法 】 单峰(单谷)函数 三分找极点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T14:44:06+08:00">
+                2019-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>[ https://www.luogu.org/problemnew/show/P3382
+<p>](<a href="https://www.luogu.org/problemnew/show/P3382" target="_blank" rel="noopener">https://www.luogu.org/problemnew/show/P3382</a>)  
+题目描述<br>如题，给出一个N次函数，保证在范围[l,r]内存在一点x，使得[l,x]上单调增，[x,r]上单调减。试求出x的值。</p>
+<p>输入输出格式<br>输入格式：<br>第一行一次包含一个正整数N和两个实数l、r，含义如题目描述所示。</p>
+<p>第二行包含N+1个实数，从高到低依次表示该N次函数各项的系数。</p>
+<p>输出格式：<br>输出为一行，包含一个实数，即为x的值。四舍五入保留5位小数。</p>
+<p>原理简单，且适用于所有在定义域中单调性只改变一次的函数，<br>就是比较定义域中的两个三等分点的映射值，若左边的三等分点比较大，则将右边界右移，对于左边界同理，最终不断逼近得到单峰的位置。<br>三等分点怎么求，左边界右边三分之一的区间长度和右边界左边三分之一的区间长度。</p>
+<p><strong>三分法</strong></p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+typedef long long ll;
+typedef pair&lt;int, int&gt; P;
+
+const int maxn = 100000 + 5 ;
+const int INF = 0x3f3f3f3f ;
+const int mod = 9901 ;
+const double eps = 1e-6;
+
+int n;
+double a[25];
+
+double fun(double x) {
+    double res = 0;
+    for(int i = 0; i &lt;= n; i++)
+        res = res * x + a[i];
+    return res;
+}
+
+signed main() {
+    //  fastio;
+    double l, r, midl, midr;
+    cin &gt;&gt; n &gt;&gt; l &gt;&gt; r;
+
+    for(int i = 0; i &lt;= n; i++)
+        cin &gt;&gt; a[i];
+
+    while(r - l &gt; eps) {
+        double d = (r - l) / 3.0;
+        midl = (l + d), midr = (r - d);
+
+        if(fun(midl) &gt; fun(midr))
+            r = midr;
+        else
+            l = midl;
+    }
+    printf(&quot;%.5lf\n&quot;, l);
+    return 0;
+}</code></pre><p><strong>求导二分</strong></p>
+<p>当然 由于这道题是多项式给的好 所以 幂函数求导 然后二分 求导是0的点必然对于这个单峰函数来说是极点</p>
+<p>导数的函数对应的值表示每一点的切线斜率，所以当该点的导数值大于0则单调增，小于零则单调减，所以只需判断是否大于零即可。<br>缺点，如果换一道题不是多项式函数的话就不能用这个求单峰了。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+typedef long long ll;
+typedef pair&lt;int, int&gt; P;
+
+const int maxn = 100000 + 5 ;
+const int INF = 0x3f3f3f3f ;
+const int mod = 9901 ;
+const double eps = 1e-6;
+
+int n;
+double a[25];
+
+double fun(double x) {
+    double res = 0;
+    for(int i = 0; i &lt; n; i++) // 常数项 消失 求导完 
+        res = res * x + a[i];
+    return res;
+}
+
+signed main() {
+    //  fastio;
+    double l, r, midl, midr;
+    cin &gt;&gt; n &gt;&gt; l &gt;&gt; r;
+
+    for(int i = 0; i &lt;= n; i++)
+        cin &gt;&gt; a[i], a[i] *= (n-i);
+
+    while(r - l &gt; eps) {
+        double mid = (r + l) / 2.0;
+
+        if(fun(mid) &gt; 0)
+            l = mid;
+        else
+            r = mid;
+    }
+    printf(&quot;%.5lf\n&quot;, l);
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/28/【 算法竞赛进阶指南 0x00 】 杂谈/" rel="next" title="【 算法竞赛进阶指南 0x00 】 杂谈">
+                <i class="fa fa-chevron-left"></i> 【 算法竞赛进阶指南 0x00 】 杂谈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/28/【 算法竞赛进阶指南 0x10 】 杂谈/" rel="prev" title="【 算法竞赛进阶指南 0x10 】 杂谈">
+                【 算法竞赛进阶指南 0x10 】 杂谈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">149</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

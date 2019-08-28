@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/04/08/CCPC-Wannafly Winter Camp Day2 (Div2, onsite) A Erase Numbers II [暴力]/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/11/【区间计数(元素去重个数)】  树状数组(不变序列)  牛客练习赛47 + DongDong数颜色  HDU-3333 CF-703D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -291,7 +291,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/08/CCPC-Wannafly Winter Camp Day2 (Div2, onsite) A Erase Numbers II [暴力]/" itemprop="url">CCPC-Wannafly Winter Camp Day2 (Div2, onsite) A Erase Numbers II [暴力]</a></h1>
+                <a class="post-title-link" href="/2019/06/11/【区间计数(元素去重个数)】  树状数组(不变序列)  牛客练习赛47 + DongDong数颜色  HDU-3333 CF-703D/" itemprop="url">【区间计数(元素去重个数)】  树状数组(不变序列)  牛客练习赛47 + DongDong数颜色  HDU-3333 CF-703D</a></h1>
         
 
         <div class="post-meta">
@@ -303,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-08T19:51:44+08:00">
-                2019-04-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-11T09:26:41+08:00">
+                2019-06-11
               </time>
             
 
@@ -313,6 +313,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -343,47 +365,17 @@
       
         
           
-            <p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190408195039262.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190408195039262.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>开ull。。。。。<br>位置不变 直接n2 暴力找最大</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long ll;
-typedef unsigned long long ull;
-const int maxn = 6*1e3+10;
-const int INF= 0x3f3f3f3f;
-const int mod = 1000000007;
-int n;
-int a[maxn];
-ull len[maxn];
+          ##  牛客练习赛47 | DongDong数颜色
 
-void init(){
-    for(int i=1;i&lt;=n;i++){
-        int x=a[i];
-        len[i]=1;
-        while(x){
-            len[i]*=10;
-            x/=10;
-        }
-    }
-}
-
-int main(){
-    int t,cas=1;
-    cin&gt;&gt;t;
-    while(t--){
-        cin&gt;&gt;n;
-        for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
-        init();
-        ull ans=0;
-        for(int i=1;i&lt;=n;i++){
-            for(int j=i+1;j&lt;=n;j++){
-                ans=max(ans,a[i]*len[j]+a[j]);
-            }
-        }
-        printf(&quot;Case #%d: %llu\n&quot;,cas++,ans);
-    }
-    return 0;
-} </code></pre>
-          
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190611091344975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shado
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/11/【区间计数(元素去重个数)】  树状数组(不变序列)  牛客练习赛47 + DongDong数颜色  HDU-3333 CF-703D/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -430,7 +422,7 @@ int main(){
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/04/08/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) E 流流流动 (树形DP)/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/10/龙曲线  【分形】  从 DFS暴力 到 规律 实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -449,7 +441,7 @@ int main(){
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/08/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) E 流流流动 (树形DP)/" itemprop="url">CCPC-Wannafly Winter Camp Day1 (Div2, onsite) E 流流流动 (树形DP)</a></h1>
+                <a class="post-title-link" href="/2019/06/10/龙曲线  【分形】  从 DFS暴力 到 规律 实现/" itemprop="url">龙曲线  【分形】  从 DFS暴力 到 规律 实现</a></h1>
         
 
         <div class="post-meta">
@@ -461,8 +453,8 @@ int main(){
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-08T16:58:13+08:00">
-                2019-04-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-10T18:38:41+08:00">
+                2019-06-10
               </time>
             
 
@@ -471,6 +463,28 @@ int main(){
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/搜索/" itemprop="url" rel="index">
+                    <span itemprop="name">搜索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -501,72 +515,16 @@ int main(){
       
         
           
-            <p>orz</p>
-<p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190408165730795.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190408165730795.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
-<p>其实看懂题 他和没有上司的舞会题一样 orz<br>最后建立0为树根 有些点x3 之后 在n外面 所以是孤立的 所以用0连接全部块<br>同时数组开大点 防止越界</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-const int maxn=2000+5;
-typedef long long ll;
-int n,f[maxn],d[maxn];
-int pre[maxn];
-int dp[maxn][5];
-int head[maxn],nxt[maxn&lt;&lt;1],to[maxn&lt;&lt;1],cnt;
-
-void ade(int a,int b) {
-    to[++cnt]=b;
-    nxt[cnt]=head[a];
-    head[a]=cnt;
-}
-
-void init(){
-    for(int i=0;i&lt;maxn;i++) pre[i]=i;
-}
-
-int find(int x) {
-    return pre[x]==x?x:pre[x]=find(pre[x]);
-}
-
-void unions(int x,int y) {
-    int fx=find(x),fy=find(y);
-    if(fx!=fy) pre[fx]=fy;
-}
-
-void dfs(int u,int fa) {
-    dp[u][0]=0;
-    dp[u][1]=f[u];
-    for(int i=head[u]; i; i=nxt[i]) {
-        int v=to[i];
-        if(to[i]!=fa) {
-            dfs(v,u);
-            dp[u][0]+=max(dp[v][0],dp[v][1]);
-            dp[u][1]+=max(dp[v][0],dp[v][1]-d[min(u,v)]);
-        }
-    }
-}
-
-int main() {
-    init();
-    scanf(&quot;%d&quot;,&amp;n);
-    for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;,&amp;f[i]);
-    for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;,&amp;d[i]);
-    for(int i=2; i&lt;=n; i++) {
-        if(i&amp;1) { 
-            ade(i,3*i+1),ade(i*3+1,i);
-            unions(3*i+1,i);
-        } else { 
-            ade(i,i/2),ade(i/2,i);
-            unions(i,i/2);
-        }
-    }
-    for(int i=1; i&lt;=n; i++) {
-        if(pre[i]==i) ade(0,i),ade(i,0);
-    }
-    dfs(0,-1);
-    printf(&quot;%d\n&quot;,max(dp[0][0],dp[0][1]));
-    return 0;
-}</code></pre>
-          
+          龙曲线  
+龙曲线是以简单的数学规则画出一种曲线，它具有以下形态。曲线从一个简单的线段起始，按照一定规则变换此线段完成整个曲线。每形成一次变换称为“完成了一次变换代”，而每完成一代，曲线会进化到更复杂的形式。像这种“放大其一小部分的形状时，表现出与整个形状极为相似构造的图形”，就是分形。画出龙曲线的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/10/龙曲线  【分形】  从 DFS暴力 到 规律 实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -613,7 +571,7 @@ int main() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/04/08/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) I 起起落落 [DP]/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/04/【数学】 CF 1174D - Ehab and the Expected XOR Problem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -632,7 +590,7 @@ int main() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/08/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) I 起起落落 [DP]/" itemprop="url">CCPC-Wannafly Winter Camp Day1 (Div2, onsite) I 起起落落 [DP]</a></h1>
+                <a class="post-title-link" href="/2019/06/04/【数学】 CF 1174D - Ehab and the Expected XOR Problem/" itemprop="url">【数学】 CF 1174D - Ehab and the Expected XOR Problem</a></h1>
         
 
         <div class="post-meta">
@@ -644,8 +602,8 @@ int main() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-08T14:35:28+08:00">
-                2019-04-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-04T15:06:30+08:00">
+                2019-06-04
               </time>
             
 
@@ -654,6 +612,28 @@ int main() {
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/codeforces/" itemprop="url" rel="index">
+                    <span itemprop="name">codeforces</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -684,35 +664,19 @@ int main() {
       
         
           
-            <p>DP<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190408142110711.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190408142110711.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_5,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_8,color_FFFFFF,t_60)<br>样例1<br>5  
-4 2 3 1 5<br>输出 1</p>
-<p>序列 是3个数字的波浪折线<br>dp[ i ]表示以 i 结尾的子序列个数 遍历每个位置 i 记录可以作为中心点的个数k<br>j从i-1遍历之前处理过的答案<br>如果a[ j ] &lt; a [ i ]那么他可以作为 i 的一个中点k++ 如果a[ j ] &gt; a[ i ]那么以 j 结尾的子序列都可以接上k和 i<br>作为一个新子序列 并且j k i也是一个新子序列 dp[ i ] += (dp[ j ] + 1 ) * k</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long ll;
+          codeforces  
+ 1174D - Ehab and the Expected XOR Problem
 
-const int maxn = 2e3+10;
-const int mod = 1e9+7;
-int n,k;
-ll dp[maxn];
-int a[maxn];
-
-int main() {
-    cin&gt;&gt;n;
-    for(int i=1; i&lt;=n; i++) cin&gt;&gt;a[i];
-    for(int i=3; i&lt;=n; i++) {
-        k=0;
-        for(int j=i-1; j&gt;=1; j--) {
-            if(a[j]&gt;a[i]) dp[i]+=(dp[j]+1)*k%mod,dp[i]%=mod;
-            else k++;
-        }
-    }
-    ll ans=0;
-    for(int i=1;i&lt;=n;i++) ans+=dp[i],ans%=mod;
-    cout&lt;&lt;ans&lt;&lt;endl;
-    return 0;
-}</code></pre>
-          
+题意让你构造一个数列A 使他任何一个子段异或值不能是0 也不能是 x同时使他最长
+这里我们考虑 优先构造一个数列A 的前缀异或和 B数列那么 A[ i ] = B[ i ] ^ B [ 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/04/【数学】 CF 1174D - Ehab and the Expected XOR Problem/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -759,7 +723,7 @@ int main() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/03/27/2018 PAT CCCC【暂时弃坑 下次C4前补】/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/02/2019 南昌网络赛 J. Distance on the tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -778,7 +742,7 @@ int main() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/27/2018 PAT CCCC【暂时弃坑 下次C4前补】/" itemprop="url">2018 PAT CCCC【暂时弃坑 下次C4前补】</a></h1>
+                <a class="post-title-link" href="/2019/06/02/2019 南昌网络赛 J. Distance on the tree/" itemprop="url">2019 南昌网络赛 J. Distance on the tree</a></h1>
         
 
         <div class="post-meta">
@@ -790,8 +754,8 @@ int main() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-27T16:10:24+08:00">
-                2019-03-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-02T15:49:06+08:00">
+                2019-06-02
               </time>
             
 
@@ -800,6 +764,28 @@ int main() {
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -830,481 +816,474 @@ int main() {
       
         
           
-            <p>我补完 l1和l2 截至2018年所有题了orz l3做了快一般 现在看这个博客 只能说 弃坑了 (原来 19年更新算这博客19年发啊<br>我之前写了一篇口胡数据结构的博客 主要是关于 树 的 <a href="https://blog.csdn.net/qq_40831340/article/details/88081617" target="_blank" rel="noopener"><br>https://blog.csdn.net/qq_40831340/article/details/88081617
-</a> 欢迎大家斧正)</p>
-<p>这几天有时间 慢慢补完这次c4的题<br>L1 后面2个测试点没有过<br>考完意识到原来队伍数量是可以一样的 ：）<br>L2 迷；</p>
-<p>L3~L8<br>6连-水题</p>
-<pre><code>L1-003. 打折
-时间限制 
-400 ms
-内存限制 
-65536 kB
-代码长度限制 
-8000 B
-判题程序 
-Standard 
-作者 
-陈越
-去商场淘打折商品时，计算打折以后的价钱是件颇费脑子的事情。例如原价 ￥988，标明打 7 折，则折扣价应该是 ￥988 x 70% = ￥691.60。本题就请你写个程序替客户计算折扣价。 
-输入格式： 
-输入在一行中给出商品的原价（不超过1万元的正整数）和折扣（为[1, 9]区间内的整数），其间以空格分隔。 
-输出格式： 
-在一行中输出商品的折扣价，保留小数点后 2 位。 
-输入样例：
-988 7
-输出样例：
-691.60
+          wa 这题重写了一遍过了 ~~我第一次写的什么狗屎啊~~
+
+题目 ：  https://nanti.jisuanke.com/t/38229
+
+如下图![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602154705226.jpg?x-oss-proces
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/02/2019 南昌网络赛 J. Distance on the tree/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/01/【可持续化】 可持续化trie以及 主席树 BZOJ 3261 &  HDU - 4417 Super Mario/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/01/【可持续化】 可持续化trie以及 主席树 BZOJ 3261 &  HDU - 4417 Super Mario/" itemprop="url">【可持续化】 可持续化trie以及 主席树 BZOJ 3261 &  HDU - 4417 Super Mario</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T20:28:25+08:00">
+                2019-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最大异或和  
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190601202201749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6L
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/01/【可持续化】 可持续化trie以及 主席树 BZOJ 3261 &  HDU - 4417 Super Mario/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/01/【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/01/【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302/" itemprop="url">【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T09:43:14+08:00">
+                2019-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          [ https://www.acwing.com/problem/content/246/
+](https://www.acwing.com/problem/content/246/)
+CH4301 Can you answer on these queries III这题改了好久啊
+问 区间子段和
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/01/【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/30/【扫描线】 Atlantis POJ - 1151 + HDU - 1255  覆盖的面积 + POJ - 1177 Pictur/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/30/【扫描线】 Atlantis POJ - 1151 + HDU - 1255  覆盖的面积 + POJ - 1177 Pictur/" itemprop="url">【扫描线】 Atlantis POJ - 1151 + HDU - 1255  覆盖的面积 + POJ - 1177 Pictur</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-30T15:51:56+08:00">
+                2019-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          poj 1151  
+扫描线 面积并
 #include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-using namespace std;
-
-int main(){
-    int n,m;
-    while(cin&gt;&gt;n&gt;&gt;m){
-        printf(&quot;%.2lf\n&quot;,1.0*n*m/10);
-    }
-    return 0;
-} 
-
-
-
-L1-004. 2018我们要赢
-时间限制 
-400 ms
-内存限制 
-65536 kB
-代码长度限制 
-8000 B
-判题程序 
-Standard 
-作者 
-陈越
-2018年天梯赛的注册邀请码是“2018wmyy”，意思就是“2018我们要赢”。本题就请你用汉语拼音输出这句话。 
-输入格式： 
-本题没有输入。 
-输出格式： 
-在第一行中输出：“2018”；第二行中输出：“wo3 men2 yao4 ying2 !”。 
-输入样例：
-本题没有输入。
-输出样例：
-2018
-wo3 men2 yao4 ying2 !
-
-
-
-#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-using namespace std;
-
-int main(){
-    printf(&quot;2018\nwo3 men2 yao4 ying2 !&quot;);
-    return 0;
-} 
-
-
-
-
-L1-005. 电子汪
-时间限制 
-400 ms
-内存限制 
-65536 kB
-代码长度限制 
-8000 B
-判题程序 
-Standard 
-作者 
-陈越
-据说汪星人的智商能达到人类4岁儿童的水平，更有些聪明汪会做加法计算。比如你在地上放两堆小球，分别有1只球和2只球，聪明汪就会用“汪！汪！汪！”表示1加2的结果是3。 
-本题要求你为电子宠物汪做一个模拟程序，根据电子眼识别出的两堆小球的个数，计算出和，并且用汪星人的叫声给出答案。 
-输入格式： 
-输入在一行中给出两个[1, 9]区间内的正整数A和B，用空格分隔。 
-输出格式： 
-在一行中输出A+B个“Wang!”。 
-输入样例：
-2 1
-输出样例：
-Wang!Wang!Wang!
-
-
-#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-using namespace std;
-
-int main(){
-    int n,m;
-    while(cin&gt;&gt;n&gt;&gt;m){
-        for(int i=0;i&lt;n+m;i++){
-            cout&lt;&lt;&quot;Wang!&quot;;
-        }
-        cout&lt;&lt;endl;
-    }
-    return 0;
-} 
-
-
-
-
-L1-006. 福到了
-时间限制 
-400 ms
-内存限制 
-65536 kB
-代码长度限制 
-8000 B
-判题程序 
-Standard 
-作者 
-陈越
-“福”字倒着贴，寓意“福到”。不论到底算不算民俗，本题且请你编写程序，把各种汉字倒过来输出。这里要处理的每个汉字是由一个 N x N 的网格组成的，网格中的元素或者为字符“@”或者为空格。而倒过来的汉字所用的字符由裁判指定。 
-输入格式： 
-输入在第一行中给出倒过来的汉字所用的字符、以及网格的规模 N （不超过100的正整数），其间以 1 个空格分隔；随后 N 行，每行给出 N 个字符，或者为“@”或者为空格。 
-输出格式： 
-输出倒置的网格，如样例所示。但是，如果这个字正过来倒过去是一样的，就先输出“bu yong dao le”，然后再用输入指定的字符将其输出。 
-输入样例 1：
-$ 9
- @  @@@@@
-@@@  @@@ 
- @   @ @ 
-@@@  @@@ 
-@@@ @@@@@
-@@@ @ @ @
-@@@ @@@@@
- @  @ @ @
- @  @@@@@
-输出样例 1：
-$$$$$  $ 
-$ $ $  $ 
-$$$$$ $$$
-$ $ $ $$$
-$$$$$ $$$
- $$$  $$$
- $ $   $ 
- $$$  $$$
-$$$$$  $ 
-输入样例 2：
-&amp; 3
-@@@
- @ 
-@@@
-输出样例 2：
-bu yong dao le
-&amp;&amp;&amp;
- &amp; 
-&amp;&amp;&amp;
-
-
-#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-using namespace std;
-
-const int maxn = 105;
-
-char mp[maxn][maxn];
-char rmp[maxn][maxn];
-
-int main(){
-    int n;
-    char ch;
-    while(cin&gt;&gt;ch&gt;&gt;n){
-        getchar();            //迷 一般的存在 
-        int flag=1;
-        memset(mp,0,sizeof(mp));
-        memset(rmp,0,sizeof(rmp));
-        for(int i=0;i&lt;n;i++){
-            gets(mp[i]);
-        }
-        for(int i=0;i&lt;n;i++){
-            for(int j=0;j&lt;n;j++){
-                if(mp[i][j]!=&apos; &apos;){
-                    rmp[n-1-i][n-1-j]=ch;
-                }
-                else rmp[n-i-1][n-j-1]=&apos; &apos;;
-            }
-        }
-        for(int i=0;i&lt;n&amp;&amp;flag;i++){
-            for(int j=0;j&lt;n&amp;&amp;flag;j++){
-                if(mp[i][j]!=&apos; &apos;){
-                    if(rmp[i][j]==&apos; &apos;)
-                        flag=0;
-                        break;
-                }
-            }
-        }
-        if(flag) cout&lt;&lt;&quot;bu yong dao le\n&quot;;
-        for(int i=0;i&lt;n;i++){
-            cout&lt;&lt;rmp[i]&lt;&lt;endl;
-        }
-    }
-    return 0;
-} 
-
-
-
-
-L1-007. 谁是赢家
-时间限制 
-400 ms
-内存限制 
-65536 kB
-代码长度限制 
-8000 B
-判题程序 
-Standard 
-作者 
-陈越
-某电视台的娱乐节目有个表演评审环节，每次安排两位艺人表演，他们的胜负由观众投票和3名评委投票两部分共同决定。规则为：如果一位艺人的观众票数高，且得到至少1名评委的认可，该艺人就胜出；或艺人的观众票数低，但得到全部评委的认可，也可以胜出。节目保证投票的观众人数为奇数，所以不存在平票的情况。本题就请你用程序判断谁是赢家。 
-输入格式： 
-输入第一行给出 2 个不超过 1000 的正整数 Pa 和 Pb，分别是艺人 a 和艺人 b 得到的观众票数。题目保证这两个数字不相等。随后第二行给出 3 名评委的投票结果。数字 0 代表投票给 a，数字 1 代表投票给 b，其间以一个空格分隔。 
-输出格式： 
-按以下格式输出赢家： 
-The winner is x: P1 + P2 
-其中 x 是代表赢家的字母，P1 是赢家得到的观众票数，P2 是赢家得到的评委票数。 
-输入样例：
-327 129
-1 0 1
-输出样例：
-The winner is a: 327 + 1
-
-
-#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-using namespace std;
-
-int a[5];
-int b[5];
-
-int main(){
-    int n;
-    while(cin&gt;&gt;a[0]&gt;&gt;a[1]){
-    //    cout&lt;&lt;a[0]&lt;&lt;&quot;  &quot;&lt;&lt;a[1]&lt;&lt;endl;
-        memset(b,0,sizeof(b));
-        for(int i=0;i&lt;3;i++){
-            cin&gt;&gt;n;
-            b[n]++;
-        }
-    //    cout&lt;&lt;b[0]&lt;&lt;&quot; b  &quot;&lt;&lt;b[1]&lt;&lt;endl;
-        //cout&lt;&lt;a[0]&lt;&lt;&quot; a  &quot;&lt;&lt;a[1]&lt;&lt;endl;
-        if(b[0]==3){
-            printf(&quot;The winner is a: %d + %d\n&quot;,a[0],b[0]);
-        }
-        else if(b[1]==3){
-            printf(&quot;The winner is b: %d + %d\n&quot;,a[1],b[1]);
-        }
-        else if(a[0]+b[0]&lt;a[1]+b[1]){
-            printf(&quot;The winner is b: %d + %d\n&quot;,a[1],b[1]);
-        }
-        else{
-            printf(&quot;The winner is a: %d + %d\n&quot;,a[0],b[0]);
-        }
-    }
-    return 0;
-} 
-
-
-
-L1-008. 猜数字
-时间限制 
-400 ms
-内存限制 
-65536 kB
-代码长度限制 
-8000 B
-判题程序 
-Standard 
-作者 
-陈越
-一群人坐在一起，每人猜一个 100 以内的数，谁的数字最接近大家平均数的一半就赢。本题就要求你找出其中的赢家。 
-输入格式： 
-输入在第一行给出一个正整数N（&lt;= 104）。随后 N 行，每行给出一个玩家的名字（由不超过8个英文字母组成的字符串）和其猜的正整数（&lt;= 100）。 
-输出格式： 
-在一行中顺序输出：大家平均数的一半（只输出整数部分）、赢家的名字，其间以空格分隔。题目保证赢家是唯一的。 
-输入样例：
-7
-Bob 35
-Amy 28
-James 98
-Alice 11
-Jack 45
-Smith 33
-Chris 62
-输出样例：
-22 Amy
-
-
-#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
 #include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-using namespace std;
-
-const int maxn = 10005;
-
-struct p{
-    int c;
-    string name;
-    int cj;
-}s[maxn];
-
-bool cmp(p x,p y){
-    return x.cj&lt;y.cj;
-}
-
-int main(){
-    int n;
-    while(cin&gt;&gt;n){
-        int sum=0;
-        for(int i=0;i&lt;n;i++){
-            cin&gt;&gt;s[i].name&gt;&gt;s[i].c;
-            sum+=s[i].c;
-        }
-        int ping=sum/n;
-        ping/=2;
-        for(int i=0;i&lt;n;i++){
-            s[i].cj=abs(ping-s[i].c);
-        } 
-        sort(s,s+n,cmp);
-        cout&lt;&lt;ping&lt;&lt;&quot; &quot;&lt;&lt;s[0].name&lt;&lt;endl;
-    }
-    return 0;
-} 
-
-
-
-L2-002. 小字辈
-时间限制 
-400 ms
-内存限制 
-65536 kB
-代码长度限制 
-8000 B
-判题程序 
-Standard 
-作者 
-陈越
-本题给定一个庞大家族的家谱，要请你给出最小一辈的名单。 
-输入格式： 
-输入在第一行给出家族人口总数 N（不超过 100 000 的正整数） —— 简单起见，我们把家族成员从 1 到 N 编号。随后第二行给出 N 个编号，其中第 i 个编号对应第 i 位成员的父/母。家谱中辈分最高的老祖宗对应的父/母编号为 -1。一行中的数字间以空格分隔。 
-输出格式： 
-首先输出最小的辈分（老祖宗的辈分为 1，以下逐级递增）。然后在第二行按递增顺序输出辈分最小的成员的编号。编号间以一个空格分隔，行首尾不得有多余空格。 
-输入样例：
-9
-2 6 5 5 -1 5 6 4 7
-输出样例：
-4
-1 9</code></pre><p>比赛的时候 没有记忆化 全超时…看开了<br>非AC代码 测试点6 未过</p>
-<pre><code>#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 #include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
 using namespace std;
-
-const int maxn = 100050;
-int a[maxn];
-int b[maxn];
-int an[maxn];
-
-int finds(int x){
-    if(x==-1||b[x]!=0){
-        return b[x];
-    }
-    else {
-    //    cout&lt;&lt;x&lt;&lt;&quot;  &quot;&lt;&lt;finds(a[x])&lt;&lt;&quot;  &quot;&lt;&lt;a[x]&lt;&lt;endl;
-        return b[x]=finds(a[x])+1;
-    }
-}
-
-int main(){
-    int n;
-    ios::sync_with_stdio(false);
-    while(cin&gt;&gt;n){
-        for(int i=1;i&lt;=n;i++){
-            cin&gt;&gt;a[i];
-            b[i]=0;
-            an[i]=0;
-        }
-        for(int i=1;i&lt;=n;i++){
-            b[i]=finds(i);
-        //    cout&lt;&lt;&quot;   &quot;&lt;&lt;i&lt;&lt;&quot;     &quot;&lt;&lt;b[i]&lt;&lt;&quot;   &quot;&lt;&lt;endl;
-        }
-        int ans=-1,pos=0;
-        for(int i=1;i&lt;=n;i++){
-            if(ans&lt;=b[i]){
-                ans=b[i];
-            }
-        }
-        for(int i=1;i&lt;=n;i++){
-            if(ans&lt;=b[i]){
-                an[pos++]=i;
-            }
-        }
-        cout&lt;&lt;ans&lt;&lt;endl;
-        for(int i=0;i&lt;pos;i++){
-            printf(i!=(pos-1)?&quot;%d &quot;:&quot;%d\n&quot;,an[i]);
-        }
-    } 
-    return 0;
-} </code></pre><p>L2比赛时只拿了15 分 下这次重写莫名ac了 无奈…</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-using namespace std;
-
-const int maxn = 10005;
-
-struct stu{
-    string name;
-    int cj;
-}s[maxn];
-
-bool cmp(stu x,stu y){
-    if(x.cj==y.cj){
-        return x.name&lt;y.name;
-    }
-    else return x.cj&gt;y.cj;
-}
-
-int main(){
-    int n,g,k;
-    while(cin&gt;&gt;n&gt;&gt;g&gt;&gt;k){
-        int sum=0;
-        for(int i=0;i&lt;n;i++){
-            cin&gt;&gt;s[i].name&gt;&gt;s[i].cj;
-            if(s[i].cj&gt;=g){
-                sum+=50;
-            }
-            else if(s[i].cj&gt;=60&amp;&amp;s[i].cj&lt;g){
-                sum+=20;
-            }
-        }
-        cout&lt;&lt;sum&lt;&lt;endl;
-        sort(s,s+n,cmp);
-        int pos=1;
-        int tmp=s[0].cj;
-        int pw=0;
-        for(int i=0;i&lt;n;i++){
-            if(tmp!=s[i].cj){
-                pos=i+1;
-                tmp=s[i].cj;
-                if(pw&gt;=k){
-                    break;
-                }
-            }
-            cout&lt;&lt;pos&lt;&lt;&quot; &quot;&lt;&lt;s[i].name&lt;&lt;&quot; &quot;&lt;&lt;s[i].cj&lt;&lt;endl;
-            pw++;
-        }
-    }
-    return 0;
-} </code></pre>
-          
+#define 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/30/【扫描线】 Atlantis POJ - 1151 + HDU - 1255  覆盖的面积 + POJ - 1177 Pictur/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1351,7 +1330,7 @@ int main(){
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/02/03/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) A 机器人 [模拟]/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/30/2019 ACM-ICPC 西安邀请赛 A C D L M (+签到题 题解)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -1370,7 +1349,7 @@ int main(){
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/03/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) A 机器人 [模拟]/" itemprop="url">CCPC-Wannafly Winter Camp Day1 (Div2, onsite) A 机器人 [模拟]</a></h1>
+                <a class="post-title-link" href="/2019/05/30/2019 ACM-ICPC 西安邀请赛 A C D L M (+签到题 题解)/" itemprop="url">2019 ACM-ICPC 西安邀请赛 A C D L M (+签到题 题解)</a></h1>
         
 
         <div class="post-meta">
@@ -1382,8 +1361,8 @@ int main(){
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T18:17:20+08:00">
-                2019-02-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-30T10:20:49+08:00">
+                2019-05-30
               </time>
             
 
@@ -1392,6 +1371,28 @@ int main(){
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1422,50 +1423,21 @@ int main(){
       
         
           
-            <p>模拟+贪心 最多穿越2次 一次过去一次回来<br>不管同侧异侧 找关键点得左右 &gt;= 最远点<br>同侧 双侧 和s的位置 讨论下</p>
-<p>注释那里wa上天</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
+          ##  A
+
+Tasks上来以为DP 结果直接贪也是楞了
+#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
 using namespace std;
-typedef long long ll;
-#define fir first
-#define sec second
-const int maxn = 1e6+5;
-const int INF = 0x3f3f3f3f;
-
-pair&lt;int,int&gt; a[maxn];
-int b[maxn];
-
-int main() {
-    int n,r,m,k,s,x;
-    cin&gt;&gt;n&gt;&gt;r&gt;&gt;m&gt;&gt;k&gt;&gt;s;
-    for(int i=0; i&lt;r; i++) cin&gt;&gt; a[i].fir&gt;&gt; a[i].sec;
-    for(int i=1; i&lt;=m; i++) cin&gt;&gt;b[i];
-    b[0]=1, b[m+1]=n;
-    int al=s,bl=n,ar=s,br=1,flag=0;
-    sort(b,b+m+2);
-    for(int i=0; i&lt;r; i++) {
-        if(a[i].sec) {
-            flag=1;
-            bl=min(bl,*(upper_bound(b,b+m+2,a[i].fir)-1));
-            br=max(br,*(lower_bound(b,b+m+2,a[i].fir)));
-        }
-    }
-    b[m+2]=s;sort(b,b+m+3);// 就是这里 wa飞 一开始赋值al=ar=s 以为可以 然后wa飞了
-    for(int i=0; i&lt;r; i++) {
-        if(!a[i].sec) {
-            al=min(al,*(upper_bound(b,b+m+3,a[i].fir)-1));
-            ar=max(ar,*(lower_bound(b,b+m+3,a[i].fir)));
-        }
-    }
-    al=min(al,bl),ar=max(ar,br);
-    if(flag) {
-        cout&lt;&lt;2*k+(br-bl)+(ar-al)+(bl-al)+(ar-br)+(max(0,s-ar)+max(0,al-s))*2&lt;&lt;endl;
-    } else {
-        cout&lt;&lt;(max(0,s-ar)+max(0,al-s)+ar-al)*2&lt;&lt;endl;
-    }
-    return 0;
-}</code></pre>
-          
+#define int lon
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/30/2019 ACM-ICPC 西安邀请赛 A C D L M (+签到题 题解)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1512,7 +1484,7 @@ int main() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/02/03/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) C 拆拆拆数 [数学]/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/28/【 算法竞赛进阶指南 0x40 】 杂谈/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -1531,7 +1503,7 @@ int main() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/03/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) C 拆拆拆数 [数学]/" itemprop="url">CCPC-Wannafly Winter Camp Day1 (Div2, onsite) C 拆拆拆数 [数学]</a></h1>
+                <a class="post-title-link" href="/2019/05/28/【 算法竞赛进阶指南 0x40 】 杂谈/" itemprop="url">【 算法竞赛进阶指南 0x40 】 杂谈</a></h1>
         
 
         <div class="post-meta">
@@ -1543,8 +1515,8 @@ int main() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T15:23:27+08:00">
-                2019-02-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T21:26:00+08:00">
+                2019-05-28
               </time>
             
 
@@ -1553,6 +1525,28 @@ int main() {
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1583,44 +1577,18 @@ int main() {
       
         
           
-            <p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190203152107119.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190203152107119.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>猜结论题 我数学不好 难以理解这为什么 如果AB不互质 那么就肯定当n==2 有解</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long ll;
+          持续跟新
 
-const int maxn = 3*1e5+5;
-const ll mod = 1e9+7; 
-
-ll gcd(ll a,ll b){
-    return b==0?a:gcd(b,a%b);
-}
-
-int main(){
-       int t;
-       ll n,m;
-       cin&gt;&gt;t;
-       while(t--){
-           cin&gt;&gt;n&gt;&gt;m;
-           if(gcd(n,m)==1){
-               cout&lt;&lt;1&lt;&lt;&quot; &quot;&lt;&lt;n&lt;&lt;&quot; &quot;&lt;&lt;m&lt;&lt;endl;
-        }else{
-            int f=1;
-            for(int i=2;i&lt;20&amp;&amp;f;i++){
-                for(int j=2;j&lt;20&amp;&amp;f;j++){
-                    if(f&amp;&amp;gcd(i,j)==1&amp;&amp;gcd(n-i,m-j)==1){
-                        cout&lt;&lt;2&lt;&lt;endl;
-                        cout&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;j&lt;&lt;endl;
-                        cout&lt;&lt;n-i&lt;&lt;&quot; &quot;&lt;&lt;m-j&lt;&lt;endl;
-                        f=0;
-                    }
-                }
-            }
-        }
-   }
-
-    return 0;
-}</code></pre>
-          
+并查集[NOI2015]程序自动分析在实现程序自动分析的过程中，常常需要判定一些约束条件是否能被同时满足。
+考虑一个约束满足问题的简化版本：假设x1,x2,x3…代表程序中出现的变量，给定n个形如xi=xj或xi≠xj的变量相等/不等的约束条件，请判定是否可以分别为每一个变量赋予恰当的值
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/28/【 算法竞赛进阶指南 0x40 】 杂谈/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1667,7 +1635,7 @@ int main(){
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/02/03/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) B 吃豆豆 [DP]/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/28/HASH 字符串 KMP 进制hash 最小表示法 trie树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -1686,7 +1654,7 @@ int main(){
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/03/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) B 吃豆豆 [DP]/" itemprop="url">CCPC-Wannafly Winter Camp Day1 (Div2, onsite) B 吃豆豆 [DP]</a></h1>
+                <a class="post-title-link" href="/2019/05/28/HASH 字符串 KMP 进制hash 最小表示法 trie树/" itemprop="url">HASH 字符串 KMP 进制hash 最小表示法 trie树</a></h1>
         
 
         <div class="post-meta">
@@ -1698,8 +1666,8 @@ int main(){
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:35:18+08:00">
-                2019-02-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T18:39:22+08:00">
+                2019-05-28
               </time>
             
 
@@ -1708,6 +1676,28 @@ int main(){
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1738,603 +1728,18 @@ int main(){
       
         
           
-            <p>忘记把地图赋值成-inf了</p>
-<p>wls在玩一个游戏。wlswlswls有一个nnn行mmm列的棋盘，对于第iii行第jjj列的格子，每过T[i][j]T[i][j]T[i][j]秒会在上面出现一个糖果，第一次糖果出现在第T[i][j]T[i][j]T[i][j]秒，糖果仅会在出现的那一秒存在，下一秒就会消失。假如wlswlswls第kkk秒在第iii行第jjj列的格子上，满足T[i][j]∣kT[i][j]<br>|
-kT[i][j]∣k，则wlswlswls会得到一个糖果。假如当前wlswlswls在第iii行第jjj列的格子上，那么下一秒他可以选择往上下左右走一格或停在原地。现在请问wlswlswls从指定的SSS出发到达指定的TTT，并且在路上得到至少CCC个糖果最少需要多少时间？wlswlswls在SSS的初始时间为第000秒。</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long ll;
-const int maxn = 10000+25 ;
-
-int n,m,k;
-int sx,sy,ex,ey;
-int mp[15][15];
-int dp[15][15][maxn];
-
-int main() {
-    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;
-    for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=m;j++) cin&gt;&gt;mp[i][j];
-    cin&gt;&gt;sx&gt;&gt;sy&gt;&gt;ex&gt;&gt;ey;
-
-    memset(dp,-0x3f,sizeof(dp));
-    dp[sx][sy][0]=0; 
-
-    for(int t=1;t&lt;maxn;t++){
-        for(int i=1;i&lt;=n;i++){
-            for(int j=1;j&lt;=m;j++){
-                 dp[i][j][t]=max(dp[i-1][j][t-1],max(dp[i][j+1][t-1],max(dp[i+1][j][t-1],max(dp[i][j-1][t-1],dp[i][j][t-1]))))+(t%mp[i][j]==0?1:0);
-            }
-        }
-    }
-
-    for(int i=1;i&lt;maxn;i++){
-        if(dp[ex][ey][i]&gt;=k){
-            cout&lt;&lt;i&lt;&lt;endl;
-            break;
-        }
-    }
-    return 0;
-}</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/01/25/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) F 爬爬爬山 [dijkstra]/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHXU1998">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="蒟蒻最后的倔强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) F 爬爬爬山 [dijkstra]/" itemprop="url">CCPC-Wannafly Winter Camp Day1 (Div2, onsite) F 爬爬爬山 [dijkstra]</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T21:55:36+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>爬山是wlswls最喜欢的活动之一。<br>在一个神奇的世界里，一共有n座山，m条路。wls初始有k点体力，在爬山的过程中，他所处的海拔每上升1m，体力会减1点，海拔每下降1m，体力会加一点。<br>现在wls想从1号山走到n号山，在这个过程中，他的体力不能低于0，所以他可以事先花费一些费用请dls把某些山降低，将一座山降低l米需要花费<br>l*l<br>的代价，且每座山的高度只能降低一次。因为wls现在就在1号山上，所以这座山的高度不可降低。wls从1号山到n号山的总代价为降低山的高度的总代价加上他走过的路的总长度。<br>wls想知道最小的代价是多少。</p>
-<p>脑子第一反应是能量守恒 迷wa 上白书板子写过了<br>预处理下 然后跑 dijkstra n可以到100000 加堆<br>(wls 居然吐槽好多队 dj得名字写得千奇百怪 其实我也不记得这么拼写啦 23333)</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long ll;
-const int maxn = 200000+5;
-
-int n,m;
-ll k;
-
-typedef pair&lt;ll,int&gt; P;
-vector&lt;P&gt; G[maxn];
-priority_queue&lt;P,vector&lt;P&gt;,greater&lt;P&gt; &gt; que;
-
-ll dis[maxn];
-ll h[maxn];
-
-void dj() {
-    memset(dis,0x3f,(n+3)*sizeof(ll));
-    dis[1]=0;
-    que.push(P(0,1));
-    while(!que.empty()) {
-        P tp=que.top();
-        que.pop();
-        int u=tp.second,v;
-        if(dis[u]&lt;tp.first) continue;
-        for(int i=0; i&lt;G[u].size(); i++) {
-            P tmp=G[u][i];
-            v=G[u][i].second;
-            if(dis[v]&gt;dis[u]+tmp.first) {
-                dis[v]=dis[u]+tmp.first;
-                que.push(P(dis[v],v));
-            }
-        }
-    }
-    cout&lt;&lt;dis[n]&lt;&lt;endl;
-}
-
-int main() {
-    scanf(&quot;%d %d %lld&quot;,&amp;n,&amp;m,&amp;k);
-    for(int i=0; i&lt;n; i++) scanf(&quot;%lld&quot;,&amp;h[i+1]);
-    k+=h[1];
-    int st,ed;
-    ll co;
-    for(int i=0; i&lt;m; i++) {
-        scanf(&quot;%d %d %lld&quot;,&amp;st,&amp;ed,&amp;co);
-
-        if(h[ed]&gt;k) G[st].push_back(P(co+(h[ed]-k)*(h[ed]-k),ed));
-        else G[st].push_back(P(co,ed));
-
-        if(h[st]&gt;k) G[ed].push_back(P(co+(h[st]-k)*(h[st]-k),st));
-        else G[ed].push_back(P(co,st));
-    }
-    dj();
-    return 0;
-}</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/01/25/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) J 夺宝奇兵 [枚举+贪心]/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHXU1998">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="蒟蒻最后的倔强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/CCPC-Wannafly Winter Camp Day1 (Div2, onsite) J 夺宝奇兵 [枚举+贪心]/" itemprop="url">CCPC-Wannafly Winter Camp Day1 (Div2, onsite) J 夺宝奇兵 [枚举+贪心]</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T21:47:41+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>wls 满足自己从村民哪里买回东西后比每个村民剩下得 都严格多</p>
-<p>枚举wls买了K个 满足k个判断 少于k个 贪心得补全</p>
-<p>INF开小了 ll 4个3f也是醉了 。。。。orz</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long ll;
-const int maxn = 1000+5 ;
-
-int n,m;
-
-struct node {
-    int id,pos;
-    ll val;
-    bool operator &lt; (const node &amp;a) {
-        return val&lt;a.val;
-    }
-    node() {}
-    node(int _id,int _pos,ll _val) {
-        id=_id,pos=_pos,val=_val;
-    }
-} a[maxn];
-
-vector&lt;node&gt; G[maxn];
-bool vis[maxn];
-
-int main() {
-    scanf(&quot;%d %d&quot;,&amp;n,&amp;m);
-    ll cost;
-    int id;
-    for(int i=0; i&lt;m; i++) {
-        scanf(&quot;%lld %d&quot;,&amp;cost,&amp;id);
-        G[id].push_back(node(id,i,cost));
-        a[i]=node(id,i,cost);
-    }
-
-    sort(a,a+m);
-    for(int i=1; i&lt;=n; i++) sort(G[i].begin(),G[i].end());
-
-    ll ans=0x3f3f3f3f3f3f3f3f,tmp=0;
-    int cnt=0;
-
-    for(int k=1; k&lt;=m; k++) {
-        tmp=0,cnt=0;
-        memset(vis,0,(m+5)*sizeof(bool));
-        for(int i=1; i&lt;=n; i++) {
-            if(G[i].size()&gt;=k) {
-                int len=max(0,(int)G[i].size()-k+1);
-                cnt+=len;
-                for(int j=0; j&lt;len; j++) {
-                    tmp+=G[i][j].val;
-                    vis[G[i][j].pos]=1;
-                }
-            }
-        }
-
-        if(cnt&lt;k) {
-            for(int i=0;i&lt;m;i++){
-                if(!vis[a[i].pos]){
-                    tmp+=a[i].val;
-                    cnt++;
-                }
-                if(cnt==k) break;
-            }
-        }
-        if(cnt==k) ans=min(ans,tmp);
-    }
-    cout&lt;&lt;ans&lt;&lt;endl;
-    return 0;
-}</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2018/08/24/(最短路小变形 dijkstra+priority_q) poj2253 Frogger/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHXU1998">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="蒟蒻最后的倔强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/24/(最短路小变形 dijkstra+priority_q) poj2253 Frogger/" itemprop="url">(最短路小变形 dijkstra+priority_q) poj2253 Frogger</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-24T09:54:30+08:00">
-                2018-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>题目连接： <a href="http://poj.org/problem?id=2253" target="_blank" rel="noopener"> http://poj.org/problem?id=2253 </a></p>
-<p>题意：给出一个无向图,求一条1~2的路径使得路径上的最大边权最小.<br>分析：dij将距离更新改成取最大值即可，即d[i]表示到达i点过程中的最大边权，更新后可能多个，再靠优先队列取出最小的最大边权。<br>精度问题 C++过</p>
-<p>这里改变了松弛条件</p>
-<pre><code>if(d[e.second]&gt;max(e.first,d[v])){
-    d[e.second]=max(d[v],e.first);//这样就可以保证 d存的是每次的最长边了 
-    //que.push(P(d[e.second],e.second));
-}</code></pre><p>0ms飘过 实验了一下其他没有用堆去维护的 大部分都是16ms 和 32 ms</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-using namespace std;
-typedef unsigned long long ull;
-typedef long long ll;
-const int maxn=200+5;
-const int mod=1e9+7;
-const int INF=0x3f3f3f3f;
-
-typedef pair&lt;double,int&gt; P;
-vector&lt;P&gt; G[maxn];
-bool vis[maxn];
-int n,m;
-double d[maxn];
-int cas;
-
-double jl(double x1,double y1,double x2,double y2){
-    return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
-}
-
-void dijkstra(int s){
-    priority_queue&lt;P,vector&lt;P&gt;,greater&lt;P&gt; &gt; que;
-    for(int i=0;i&lt;n;i++) {
-        d[i]=1e9;
-        vis[i]=0;   
-    }
-    d[s]=0;
-    que.push(P(0,s));
-    while(!que.empty()){
-        P p=que.top();que.pop();
-        int v=p.second;
-        if(vis[v]) continue;//我们每次弹出的已经是最短路中要的边 所以已经确保了最短路
-        vis[v]=1; //所以在之后 松弛时 直接存每次 最长边就好
-        for(int i=0;i&lt;G[v].size();i++){
-            P e=G[v][i];
-            if(d[e.second]&gt;max(e.first,d[v])){
-                d[e.second]=max(d[v],e.first);
-                que.push(P(d[e.second],e.second));
-            }
-        }
-    }   
-    printf(&quot;Scenario #%d\n&quot;,cas++);
-    printf(&quot;Frog Distance = %.3lf\n\n&quot;,d[1]);
-}
-
-double a[maxn],b[maxn];
-
-int main(){
-    cas=1;
-    while(cin&gt;&gt;n&amp;&amp;n){
-        for(int i=0;i&lt;n;i++) G[i].clear();
-        for(int i=0;i&lt;n;i++){
-            scanf(&quot;%lf %lf&quot;,&amp;a[i],&amp;b[i]);
-        }
-        for(int i=0;i&lt;n;i++){
-            for(int j=0;j&lt;n;j++){
-                if(i==j)  continue;
-                else{
-                    G[i].push_back(P(jl(a[i],b[i],a[j],b[j]),j));
-                }
-            }
-        }
-        dijkstra(0);
-    }
-    return 0;
-}</code></pre>
-          
+          **雪花雪花**
+
+
+有N片雪花，每片雪花由六个角组成，每个角都有长度。 第i片雪花六个角的长度从某个角开始顺时针依次记为ai,1,ai,2,…,ai,6。 因为雪花的形状是封闭的环形，所以从任何一个角开始顺时针或逆时针往后记录长度，得到的六元组都代表形状相同的雪花。 例如ai,1,ai,2,…,a
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/28/HASH 字符串 KMP 进制hash 最小表示法 trie树/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2372,7 +1777,7 @@ int main(){
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2420,7 +1825,7 @@ int main(){
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

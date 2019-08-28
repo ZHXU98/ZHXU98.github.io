@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="二分 树状数组 离散化这题 wa了好多发 最后发现二分从0开始就好了问了一圈人 就我二分乱搞题意 就是 给了你 N 长度序列 你选前 I 个 他们和必须小于 M 你可以让其中某些数字变成0让他们 最后和小于 M （前I个 不包括I） 所以 我考虑 离散化 + 树状数组存对应位置 + 1 和 树状数组维护他们的和这样一来 就存在单调性 可二分了二分树状数组 M - A[I] 大小如果大于 我们 把大">
+<meta name="description" content="二分 树状数组 离散化   这题 wa了好多发 最后发现二分从0开始就好了问了一圈人 就我二分乱搞题意 就是 给了你 N 长度序列 你选前 I 个 他们和必须小于 M 你可以让其中某些数字变成0让他们 最后和小于 M （前I个 不包括I） 所以 我考虑 离散化 + 树状数组存对应位置 + 1 和 树状数组维护他们的和这样一来 就存在单调性 可二分了二分树状数组 M - A[I] 大小如果大于 我们">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019HDU多校第三场 G Find the answer (二分树状数组)">
 <meta property="og:url" content="http://zhxu98.github.io/2019/07/30/2019HDU多校第三场 G Find the answer (二分树状数组)/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="二分 树状数组 离散化这题 wa了好多发 最后发现二分从0开始就好了问了一圈人 就我二分乱搞题意 就是 给了你 N 长度序列 你选前 I 个 他们和必须小于 M 你可以让其中某些数字变成0让他们 最后和小于 M （前I个 不包括I） 所以 我考虑 离散化 + 树状数组存对应位置 + 1 和 树状数组维护他们的和这样一来 就存在单调性 可二分了二分树状数组 M - A[I] 大小如果大于 我们 把大">
+<meta property="og:description" content="二分 树状数组 离散化   这题 wa了好多发 最后发现二分从0开始就好了问了一圈人 就我二分乱搞题意 就是 给了你 N 长度序列 你选前 I 个 他们和必须小于 M 你可以让其中某些数字变成0让他们 最后和小于 M （前I个 不包括I） 所以 我考虑 离散化 + 树状数组存对应位置 + 1 和 树状数组维护他们的和这样一来 就存在单调性 可二分了二分树状数组 M - A[I] 大小如果大于 我们">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T03:10:58.643Z">
+<meta property="og:updated_time" content="2019-08-28T05:51:15.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019HDU多校第三场 G Find the answer (二分树状数组)">
-<meta name="twitter:description" content="二分 树状数组 离散化这题 wa了好多发 最后发现二分从0开始就好了问了一圈人 就我二分乱搞题意 就是 给了你 N 长度序列 你选前 I 个 他们和必须小于 M 你可以让其中某些数字变成0让他们 最后和小于 M （前I个 不包括I） 所以 我考虑 离散化 + 树状数组存对应位置 + 1 和 树状数组维护他们的和这样一来 就存在单调性 可二分了二分树状数组 M - A[I] 大小如果大于 我们 把大">
+<meta name="twitter:description" content="二分 树状数组 离散化   这题 wa了好多发 最后发现二分从0开始就好了问了一圈人 就我二分乱搞题意 就是 给了你 N 长度序列 你选前 I 个 他们和必须小于 M 你可以让其中某些数字变成0让他们 最后和小于 M （前I个 不包括I） 所以 我考虑 离散化 + 树状数组存对应位置 + 1 和 树状数组维护他们的和这样一来 就存在单调性 可二分了二分树状数组 M - A[I] 大小如果大于 我们">
 
 
 
@@ -361,7 +361,8 @@
       
 
       
-        <p>二分 树状数组 离散化<br>这题 wa了好多发 最后发现二分从0开始就好了<br>问了一圈人 就我二分乱搞<br>题意 就是 给了你 N 长度序列 你选前 I 个 他们和必须小于 M 你可以让其中某些数字变成0<br>让他们 最后和小于 M （前I个 不包括I）</p>
+        <a id="more"></a>二分 树状数组 离散化  
+<p>这题 wa了好多发 最后发现二分从0开始就好了<br>问了一圈人 就我二分乱搞<br>题意 就是 给了你 N 长度序列 你选前 I 个 他们和必须小于 M 你可以让其中某些数字变成0<br>让他们 最后和小于 M （前I个 不包括I）</p>
 <p>所以 我考虑 离散化 + 树状数组存对应位置 + 1 和 树状数组维护他们的和<br>这样一来 就存在单调性 可二分了<br>二分树状数组 M - A[I] 大小<br>如果大于 我们 把大于位置之后个数的直接输出就好<br>然后 在把这个数据补充到树状数组中 对应位置 +1</p>
 <pre><code>#include &lt;bits/stdc++.h&gt;
 using namespace std;
@@ -542,7 +543,7 @@ signed main(){
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

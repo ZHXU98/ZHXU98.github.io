@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="1239: Easy的队列时间限制: 2 Sec 内存限制: 128 MB 题目描述Easy的学生的《数据结构》考试挂掉了，他求着Easy再给他一次机会，Easy出了这么一道题，如果他的学生做出来就给这个学生一次重新考试的机会，题目是这样的：维护一个名为队列的数据结构，支持以下四种操作：1. ENQUEUE x将值为x的元素放入队列的尾部2. DEQUEUE输出当前队列首部的元素之后删除队列首部的">
+<meta name="description" content="1239: Easy的队列   时间限制: 2 Sec 内存限制: 128 MB 题目描述Easy的学生的《数据结构》考试挂掉了，他求着Easy再给他一次机会，Easy出了这么一道题，如果他的学生做出来就给这个学生一次重新考试的机会，题目是这样的：维护一个名为队列的数据结构，支持以下四种操作：1. ENQUEUE x将值为x的元素放入队列的尾部2. DEQUEUE输出当前队列首部的元素之后删除队列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模拟维护多个队列 Easy的队列">
 <meta property="og:url" content="http://zhxu98.github.io/2018/07/31/模拟维护多个队列 Easy的队列/index.html">
 <meta property="og:site_name" content="蒟蒻最后的倔强">
-<meta property="og:description" content="1239: Easy的队列时间限制: 2 Sec 内存限制: 128 MB 题目描述Easy的学生的《数据结构》考试挂掉了，他求着Easy再给他一次机会，Easy出了这么一道题，如果他的学生做出来就给这个学生一次重新考试的机会，题目是这样的：维护一个名为队列的数据结构，支持以下四种操作：1. ENQUEUE x将值为x的元素放入队列的尾部2. DEQUEUE输出当前队列首部的元素之后删除队列首部的">
+<meta property="og:description" content="1239: Easy的队列   时间限制: 2 Sec 内存限制: 128 MB 题目描述Easy的学生的《数据结构》考试挂掉了，他求着Easy再给他一次机会，Easy出了这么一道题，如果他的学生做出来就给这个学生一次重新考试的机会，题目是这样的：维护一个名为队列的数据结构，支持以下四种操作：1. ENQUEUE x将值为x的元素放入队列的尾部2. DEQUEUE输出当前队列首部的元素之后删除队列">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T03:11:48.230Z">
+<meta property="og:updated_time" content="2019-08-28T05:52:02.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模拟维护多个队列 Easy的队列">
-<meta name="twitter:description" content="1239: Easy的队列时间限制: 2 Sec 内存限制: 128 MB 题目描述Easy的学生的《数据结构》考试挂掉了，他求着Easy再给他一次机会，Easy出了这么一道题，如果他的学生做出来就给这个学生一次重新考试的机会，题目是这样的：维护一个名为队列的数据结构，支持以下四种操作：1. ENQUEUE x将值为x的元素放入队列的尾部2. DEQUEUE输出当前队列首部的元素之后删除队列首部的">
+<meta name="twitter:description" content="1239: Easy的队列   时间限制: 2 Sec 内存限制: 128 MB 题目描述Easy的学生的《数据结构》考试挂掉了，他求着Easy再给他一次机会，Easy出了这么一道题，如果他的学生做出来就给这个学生一次重新考试的机会，题目是这样的：维护一个名为队列的数据结构，支持以下四种操作：1. ENQUEUE x将值为x的元素放入队列的尾部2. DEQUEUE输出当前队列首部的元素之后删除队列">
 
 
 
@@ -339,7 +339,8 @@
       
 
       
-        <p>1239: Easy的队列<br>时间限制: 2 Sec 内存限制: 128 MB</p>
+        <a id="more"></a>1239: Easy的队列  
+<p>时间限制: 2 Sec 内存限制: 128 MB</p>
 <p>题目描述<br>Easy的学生的《数据结构》考试挂掉了，他求着Easy再给他一次机会，Easy出了这么一道题，如果他的学生做出来就给这个学生一次重新考试的机会，题目是这样的：<br>维护一个名为队列的数据结构，支持以下四种操作：<br>1. ENQUEUE x<br>将值为x的元素放入队列的尾部<br>2. DEQUEUE<br>输出当前队列首部的元素之后删除队列首部的元素<br>3. MAX<br>输出当前队列中的最大值，若队列为空则输出”EMPTY!”（没有引号）<br>4. MIN<br>输出当前队列中的最小值，若队列为空则输出”EMPTY!”（没有引号）</p>
 <p>输入<br>包含多组测试数据<br>每组测试数据以一个整数N作为开始（0&lt;=N&lt;=500000)<br>当1&lt;=N&lt;=500000时，意味着会有N次队列操作，当N为0时意味着输入数据结束<br>如果1&lt;=N&lt;=500000之后会有N行,每行会有一条队列操作命令，分别是<br>1.ENQUEUE x<br>将值为x的元素放入队列的尾部<br>2.DEQUEUE<br>输出当前队列首部的元素之后删除队列首部的元素<br>3.MAX<br>输出当前队列中的最大值，若队列为空则输出”EMPTY!”（没有引号）<br>4.MIN<br>输出当前队列中的最小值，若队列为空则输出”EMPTY!”（没有引号）<br>请按命令进行相关队列操作或者输出</p>
 <p>输出<br>对于每一组测试数据，第一行输出”Case X:”表示第X组数据(没有引号)之后<br>对每一个要求输出的操作进行输出，一个操作的输出占一行<br>样例输入<br>3  
@@ -679,8 +680,8 @@ std::ios::sync_with_stdio(false);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/03/【BFS】Ball Aizu - 0033 原题正解 DFS/" rel="next" title="【BFS】Ball Aizu - 0033 原题正解 DFS">
-                <i class="fa fa-chevron-left"></i> 【BFS】Ball Aizu - 0033 原题正解 DFS
+              <a href="/2018/07/27/【最大生成树 kruskal&&优先队列prim】 Save your cats Aizu - 2224&& Bad Cowtractors POJ - 2377/" rel="next" title="【最大生成树 kruskal&&优先队列prim】 Save your cats Aizu - 2224&& Bad Cowtractors POJ - 2377">
+                <i class="fa fa-chevron-left"></i> 【最大生成树 kruskal&&优先队列prim】 Save your cats Aizu - 2224&& Bad Cowtractors POJ - 2377
               </a>
             
           </div>
@@ -689,8 +690,8 @@ std::ios::sync_with_stdio(false);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/24/(最短路小变形 dijkstra+priority_q) poj2253 Frogger/" rel="prev" title="(最短路小变形 dijkstra+priority_q) poj2253 Frogger">
-                (最短路小变形 dijkstra+priority_q) poj2253 Frogger <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/02/【线段树】Can you answer these queries  HDU - 4027/" rel="prev" title="【线段树】Can you answer these queries  HDU - 4027">
+                【线段树】Can you answer these queries  HDU - 4027 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -761,7 +762,7 @@ std::ios::sync_with_stdio(false);
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[ https://www.acwing.com/problem/content/246/ ](https://www.acwing.com/problem/content/246/) CH4301 Can you answer on these queries III这题改了好久啊 问 区间子段和 最大显然一开始我们分成 lmax rmax lrmax 和 sum 一开始想的还行后面查询就是蛋疼">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302">
+<meta property="og:url" content="http://zhxu98.github.io/2019/06/01/【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="[ https://www.acwing.com/problem/content/246/ ](https://www.acwing.com/problem/content/246/) CH4301 Can you answer on these queries III这题改了好久啊 问 区间子段和 最大显然一开始我们分成 lmax rmax lrmax 和 sum 一开始想的还行后面查询就是蛋疼">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-28T05:51:31.361Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302">
+<meta name="twitter:description" content="[ https://www.acwing.com/problem/content/246/ ](https://www.acwing.com/problem/content/246/) CH4301 Can you answer on these queries III这题改了好久啊 问 区间子段和 最大显然一开始我们分成 lmax rmax lrmax 和 sum 一开始想的还行后面查询就是蛋疼">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/06/01/【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302/">
+
+
+
+
+
+  <title>【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/01/【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【线段树】 CH4301 Can you answer on these queries III + 2019南昌网络赛 I Max answer + Interval GCD CH4302</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T09:43:14+08:00">
+                2019-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>[ https://www.acwing.com/problem/content/246/
+<p>](<a href="https://www.acwing.com/problem/content/246/" target="_blank" rel="noopener">https://www.acwing.com/problem/content/246/</a>)</p>
+<p>CH4301 Can you answer on these queries III<br>这题改了好久啊</p>
+<p>问 区间子段和 最大<br>显然一开始我们分成 lmax rmax lrmax 和 sum 一开始想的还行<br>后面查询就是蛋疼的开始</p>
+<p>如同我注释的那个地方一样<br>如果 我们直接返回 lrmax 我们就丢掉了一些信息<br>这个区间内 我们只存储 lrmax 比如如果左区间递归到最底层 但是 你右区间 没有 可以说是在根节点下一层 但是这节点 是 2 而 左节点是 1<br>我们却只返回的最大值<br>当然 我们这里不能返回和 因为这lrnax区间 题目要求是连续的 而你 lrmax 只维护了本区间 连续 和其他区间是不一定连续的</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+const int maxn = 5e5+10;
+int n, m;
+
+int sum[maxn &lt;&lt; 2], lmax[maxn &lt;&lt; 2], rmax[maxn &lt;&lt; 2], lrmax[maxn &lt;&lt; 2];
+
+void push_up(int rt) {
+    sum[rt] = sum[rt &lt;&lt; 1] + sum[rt &lt;&lt; 1 | 1];
+    lmax[rt] = max(lmax[rt &lt;&lt; 1], sum[rt &lt;&lt; 1] + lmax[rt &lt;&lt; 1 | 1]);
+    rmax[rt] = max(rmax[rt &lt;&lt; 1 | 1], sum[rt &lt;&lt; 1 | 1] + rmax[rt &lt;&lt; 1]);
+    lrmax[rt] = max( max(lrmax[rt &lt;&lt; 1], lrmax[rt &lt;&lt; 1 | 1]), rmax[rt &lt;&lt; 1] + lmax[rt &lt;&lt; 1 | 1]);
+}
+
+void update(int L, int l, int r, int rt, int c) {
+    if(l == r) {
+        lrmax[rt] = lmax[rt] = rmax[rt] = sum[rt] = c;
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(L &lt;= mid) update(L, l, mid, rt &lt;&lt; 1, c);
+    else update(L, mid + 1, r, rt &lt;&lt; 1 | 1, c);
+    push_up(rt);
+}
+
+//int query(int L, int R, int l, int r, int rt) {
+//    if(L &lt;= l &amp;&amp; r &lt;= R) {
+//        return lrmax[rt];
+//    }
+//    int mid = l + r &gt;&gt; 1;
+//    int res = -0x3f3f3f3f;
+//    if(L &lt;= mid) res = max(res, query(L, R, l, mid, rt &lt;&lt; 1));
+//    if(R &gt; mid) res = max(res, query(L, R, mid + 1, r, rt &lt;&lt; 1 | 1));
+//    return res;
+//}
+
+struct node {
+    int sum;
+    int lmax, rmax, lrmax;
+};
+
+node query(int L, int R, int l, int r, int rt) {
+    if(L &lt;= l &amp;&amp; r &lt;= R) {
+        return node {sum[rt], lmax[rt], rmax[rt], lrmax[rt]};
+    }
+    //if(l == r) return node {sum[rt], lmax[rt], rmax[rt], lrmax[rt]};
+    int mid = l + r &gt;&gt; 1;
+    if (R &lt;= mid) return query(L, R, l, mid, rt &lt;&lt; 1);
+    else if (L &gt; mid) return query(L, R, mid + 1, r, rt &lt;&lt; 1 | 1);
+    else {
+        node res;
+        node re1 = query (L, R, l, mid, rt &lt;&lt; 1);
+        node re2 = query (L, R, mid + 1, r, rt &lt;&lt; 1 | 1);
+        res.sum = re1.sum + re2.sum;
+        res.lmax = max(re1.lmax, re1.sum + re2.lmax);
+        res.rmax = max(re2.rmax, re2.sum + re1.rmax);
+        res.lrmax = max( max(re1.lrmax, re2.lrmax), re1.rmax + re2.lmax);
+        return res;
+    }
+}
+
+int main() {
+    fastio;
+    cin &gt;&gt; n &gt;&gt; m;
+    int k;
+    for(int i = 1; i &lt;= n; i ++) {
+        cin &gt;&gt; k;
+        update(i, 1, n, 1, k);
+    }
+    while(m--) {
+        int cmd, x ,y;
+        cin &gt;&gt; cmd &gt;&gt; x &gt;&gt; y;
+        if(cmd == 1) {
+            if(x &gt; y) swap (x, y);
+            cout &lt;&lt; query(x, y, 1, n, 1).lrmax &lt;&lt; endl;
+        } else {
+            update(x, 1, n, 1, y);
+        }
+    }
+    return 0;
+}</code></pre><p><strong>南昌网络赛</strong><br><a href="https://blog.csdn.net/qq_40831340/article/details/89449486" target="_blank" rel="noopener"> https://blog.csdn.net/qq_40831340/article/details/89449486
+</a><br>I Max answer<br>Alice has a magic array. She suggests that the value of a interval is equal to<br>the sum of the values in the interval, multiplied by the smallest value in the<br>interval.<br>Now she is planning to find the max value of the intervals in her array. Can<br>you help her?</p>
+<p>给你一个长度n的序列 选取一个数字 和(包含它连续的)区间(而且它必须是这个区间的最小值) 使a[i]*(这一区间的和) 最大<br>首先单调栈 处理每个a[ i ] 管理区间(没有比它小的最大连续区间)<br>然后 对 a[ i ] 分2种情况 正负来考虑</p>
+<ol>
+<li>大于 0 的情况 显然是 它 管理的区间和 *a[ i ] 因为a[i]&gt;0 同时它肯定是这区间最低点 该区间越长和越大 </li>
+<li>小于 0 的情况 不妨我们维护一个 前缀和 既然它是负数 我们 当前i 到R[ i ]前缀和最好越小越好 而L[ i ] 到 i得和越大越好 </li>
+</ol>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0);cout.tie(0)
+//#define int long long
+using namespace std;
+typedef long long ll;
+const long long INF = 0x3f3f3f3f3f3f3f3f ;
+const int maxn = 5e5 + 5 ;
+
+int n;
+ll a[maxn],sum[maxn]; 
+int L[maxn],R[maxn];
+
+struct node {
+    ll minsum,maxsum;
+} tr[maxn&lt;&lt;4];
+
+void pushup(int rt) {
+    tr[rt].minsum=min(tr[rt&lt;&lt;1].minsum,tr[rt&lt;&lt;1|1].minsum);
+    tr[rt].maxsum=max(tr[rt&lt;&lt;1].maxsum,tr[rt&lt;&lt;1|1].maxsum);
+}
+
+void build(int l,int r,int rt) {
+    if(l==r) {
+        tr[rt]={sum[l],sum[l]};
+        return ;
+    }
+    int mid=(l+r)&gt;&gt;1;
+    build(l,mid,rt&lt;&lt;1);
+    build(mid+1,r,rt&lt;&lt;1|1);
+    pushup(rt);
+}
+
+ll maxquery(int L,int R,int l,int r,int rt){
+    if(L&lt;=l&amp;&amp;r&lt;=R){
+        return tr[rt].maxsum;
+    }
+    int mid=(l+r)&gt;&gt;1;
+    ll res=-INF;
+    if(L&lt;=mid) res=max(res,maxquery(L,R,l,mid,rt&lt;&lt;1));
+    if(R&gt;mid) res=max(res,maxquery(L,R,mid+1,r,rt&lt;&lt;1|1));
+    return res;
+}
+
+ll minquery(int L,int R,int l,int r,int rt){
+    if(L&lt;=l&amp;&amp;r&lt;=R){
+        return tr[rt].minsum;
+    }
+    int mid=(l+r)&gt;&gt;1;
+    ll res=INF;
+    if(L&lt;=mid) res=min(res,minquery(L,R,l,mid,rt&lt;&lt;1));
+    if(R&gt;mid) res=min(res,minquery(L,R,mid+1,r,rt&lt;&lt;1|1));
+    return res;
+}
+
+void solLR() {
+    stack&lt;int&gt; s;
+    for(int i=1; i&lt;=n; i++) {
+        while(!s.empty()&amp;&amp;a[s.top()]&gt;=a[i]) s.pop();
+        L[i]=(s.empty())?0:s.top();
+        s.push(i);
+    }
+    while(!s.empty()) s.pop();
+    for(int i=n; i&gt;=1; i--) {
+        while(!s.empty()&amp;&amp;a[s.top()]&gt;=a[i]) s.pop();
+        R[i]=(s.empty())?(n+1):s.top();
+        s.push(i);
+    }
+}
+
+signed main() {
+    scanf(&quot;%lld&quot;,&amp;n);
+    for(int i=1; i&lt;=n; i++) scanf(&quot;%lld&quot;,&amp;a[i]),sum[i]=sum[i-1]+a[i];
+    solLR();
+    build(1,n,1);
+    ll ans=-INF;
+    ll rmin,lmax;
+    for(int i=1; i&lt;=n; i++) {
+        if(a[i]&lt;0) {
+            rmin=minquery(i,R[i]-1,1,n,1);
+            lmax=maxquery(L[i]+1,i,1,n,1);
+            ans=max(ans,a[i]*(rmin-lmax));
+        } else {
+            ans=max(ans,a[i]*(sum[R[i]-1]-sum[L[i]]));
+        }
+    }
+    printf(&quot;%lld\n&quot;,ans);
+    return 0;
+}</code></pre><p><strong>Interval GCD CH4302</strong></p>
+<p>这题真实跪了 l &gt; n 越界这情况也是绝了 看题解才改过这地方orz</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+
+const int maxn = 5e5+10;
+int n, m;
+int a[maxn],b[maxn],c[maxn];
+
+struct node {
+    int val;
+} tree[maxn &lt;&lt; 2];
+
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd (b, a%b);
+}
+
+void push_up(int rt) {
+    tree[rt].val = gcd(tree[rt &lt;&lt; 1].val, tree[rt &lt;&lt; 1 | 1].val);
+}
+
+void build(int l, int r, int rt) {
+    if(l == r) {
+        tree[rt].val = b[l];
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    build(l, mid, rt &lt;&lt; 1);
+    build(mid + 1, r, rt &lt;&lt; 1 | 1);
+    push_up(rt);
+}
+
+void update(int L, int l, int r, int rt, int c) {
+    if(L &gt; n) return ; // wc 这里什么鬼啊 越界到什么一个位置了  
+//  这里 L &gt; n 的话  最后一个点 差分 被 暴力改掉了  导致gcd错误 
+//  这bug真实难找orz 
+    if(l == r) {
+        tree[rt].val += c;
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(L &lt;= mid) update(L, l, mid, rt &lt;&lt; 1, c);
+    else update(L, mid + 1, r, rt &lt;&lt; 1 | 1, c);
+    push_up(rt);
+}
+
+int query(int L, int R, int l, int r, int rt) {
+    if(L &lt;= l &amp;&amp; r &lt;= R) {
+        return abs(tree[rt].val);
+    }
+    int mid = l + r &gt;&gt; 1;
+    int x = 0, y = 0;
+    if(L &lt;= mid) x=query(L, R, l, mid, rt &lt;&lt; 1);
+    if(R &gt; mid) y=query(L, R, mid + 1, r, rt &lt;&lt; 1 | 1);
+    return gcd(x, y);
+}
+
+int ask(int x) {
+    int res=0;
+    for(; x; x -= (-x) &amp; x) {
+        res += c[x];
+    }
+    return res;
+}
+
+int add(int x, int y) {
+    for(; x &lt;= n; x += (-x) &amp; x ) {
+        c[x] += y;
+    }
+}
+
+signed main() {
+    fastio; 
+    cin &gt;&gt; n &gt;&gt; m;
+    for (int i = 1; i &lt;= n; i ++ ) {
+        cin &gt;&gt; a[i];
+        b[i] = a[i] - a[i - 1];
+    }
+    build(1, n, 1);
+    string cmd;
+    int l, r, d;
+    for(int i = 1; i &lt;= m ; i ++ ) {
+        cin &gt;&gt; cmd &gt;&gt; l &gt;&gt; r;
+        if(cmd[0] == &apos;C&apos;) {
+            cin &gt;&gt; d;
+            update(l, 1, n, 1, d);
+            update(r + 1, 1, n, 1, -d);
+            add(l, d);
+            add(r + 1, -d);
+        } else {
+            cout &lt;&lt; gcd(a[l] + ask(l), query(l + 1, r, 1, n, 1)) &lt;&lt; endl;
+        }
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/30/【扫描线】 Atlantis POJ - 1151 + HDU - 1255  覆盖的面积 + POJ - 1177 Pictur/" rel="next" title="【扫描线】 Atlantis POJ - 1151 + HDU - 1255  覆盖的面积 + POJ - 1177 Pictur">
+                <i class="fa fa-chevron-left"></i> 【扫描线】 Atlantis POJ - 1151 + HDU - 1255  覆盖的面积 + POJ - 1177 Pictur
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/01/【可持续化】 可持续化trie以及 主席树 BZOJ 3261 &  HDU - 4417 Super Mario/" rel="prev" title="【可持续化】 可持续化trie以及 主席树 BZOJ 3261 &  HDU - 4417 Super Mario">
+                【可持续化】 可持续化trie以及 主席树 BZOJ 3261 &  HDU - 4417 Super Mario <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">149</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

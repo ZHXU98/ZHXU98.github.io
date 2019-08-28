@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2018/07/31/模拟维护多个队列 Easy的队列/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/28/【 算法竞赛进阶指南 0x10 】 杂谈/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -291,7 +291,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/31/模拟维护多个队列 Easy的队列/" itemprop="url">模拟维护多个队列 Easy的队列</a></h1>
+                <a class="post-title-link" href="/2019/05/28/【 算法竞赛进阶指南 0x10 】 杂谈/" itemprop="url">【 算法竞赛进阶指南 0x10 】 杂谈</a></h1>
         
 
         <div class="post-meta">
@@ -303,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T12:36:10+08:00">
-                2018-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T17:41:31+08:00">
+                2019-05-28
               </time>
             
 
@@ -313,6 +313,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -343,324 +365,25 @@
       
         
           
-            <p>1239: Easy的队列<br>时间限制: 2 Sec 内存限制: 128 MB</p>
-<p>题目描述<br>Easy的学生的《数据结构》考试挂掉了，他求着Easy再给他一次机会，Easy出了这么一道题，如果他的学生做出来就给这个学生一次重新考试的机会，题目是这样的：<br>维护一个名为队列的数据结构，支持以下四种操作：<br>1. ENQUEUE x<br>将值为x的元素放入队列的尾部<br>2. DEQUEUE<br>输出当前队列首部的元素之后删除队列首部的元素<br>3. MAX<br>输出当前队列中的最大值，若队列为空则输出”EMPTY!”（没有引号）<br>4. MIN<br>输出当前队列中的最小值，若队列为空则输出”EMPTY!”（没有引号）</p>
-<p>输入<br>包含多组测试数据<br>每组测试数据以一个整数N作为开始（0&lt;=N&lt;=500000)<br>当1&lt;=N&lt;=500000时，意味着会有N次队列操作，当N为0时意味着输入数据结束<br>如果1&lt;=N&lt;=500000之后会有N行,每行会有一条队列操作命令，分别是<br>1.ENQUEUE x<br>将值为x的元素放入队列的尾部<br>2.DEQUEUE<br>输出当前队列首部的元素之后删除队列首部的元素<br>3.MAX<br>输出当前队列中的最大值，若队列为空则输出”EMPTY!”（没有引号）<br>4.MIN<br>输出当前队列中的最小值，若队列为空则输出”EMPTY!”（没有引号）<br>请按命令进行相关队列操作或者输出</p>
-<p>输出<br>对于每一组测试数据，第一行输出”Case X:”表示第X组数据(没有引号)之后<br>对每一个要求输出的操作进行输出，一个操作的输出占一行<br>样例输入<br>3  
-ENQUEUE 1<br>MAX<br>DEQUEUE<br>5  
-ENQUEUE 2<br>MAX<br>DEQUEUE<br>MIN<br>DEQUEUE<br>0  
-样例输出<br>Case 1:<br>1  
-1<br>Case 2:<br>2  
-2<br>EMPTY!  
-EMPTY!</p>
-<p>单调栈+list</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;vector&gt;
-#include &lt;map&gt;
-#include &lt;string&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;set&gt;
-#include &lt;ctime&gt;
-#include &lt;list&gt;
-using namespace std;
-typedef long long ll;
+          ##  栈
 
+包含min函数的栈类似单调栈处理
+class MinStack {
+public:
+    /** initialize your data structure here. */
+    int a[5050];
+    int mi[5050];
+    int tops;
 
-int main(){ 
-//int t=time(0);
-std::ios::sync_with_stdio(false);
-//freopen(&quot;1.in&quot;,&quot;r&quot;,stdin); 
-//freopen(&quot;s1.txt&quot;,&quot;w+&quot;,stdout); 
-    int n;
-    int x;int ts=0;
-    while(cin&gt;&gt;n&amp;&amp;n){
-        char cmd[20]; 
-        printf(&quot;Case %d:\n&quot;,++ts); 
-list&lt;int&gt; G;
-list&lt;int&gt; G1;
-list&lt;int&gt; G2; 
-        for(int i=0;i&lt;n;i++){
-            cin&gt;&gt;cmd;
-            if(cmd[0]==&apos;E&apos;){
-                cin&gt;&gt;x;
-                G.push_back(x);
-                while(G1.size()&amp;&amp;G1.back()&gt;x){
-                    G1.pop_back();
-                }
-                G1.push_back(x);
-                while(G2.size()&amp;&amp;G2.back()&lt;x){
-                    G2.pop_back();
-                }
-                G2.push_back(x);
-            }
-            else if(cmd[0]==&apos;D&apos;){
-                if(G.size()==0){
-                    printf(&quot;EMPTY!\n&quot;);
-                }
-                else{
-                    int tp=G.front();
-                    if(G1.size()&amp;&amp;tp==G1.front()){
-                        G1.pop_front();
-                    }
-                    if(G2.size()&amp;&amp;tp==G2.front()){
-                        G2.pop_front(); 
-                    }
-                printf(&quot;%d\n&quot;,G.front());
-                G.pop_front(); 
-                }
-            }
-            if(cmd[1]==&apos;A&apos;){
-                if(!G2.size()) printf(&quot;EMPTY!\n&quot;);
-                else printf(&quot;%d\n&quot;,G2.front());
-            }
-            else if(cmd[1]==&apos;I&apos;){
-                if(!G1.size()) printf(&quot;EMPTY!\n&quot;);
-                else printf(&quot;%d\n&quot;,G1.front());
-            }
-        }
-    }   
-//  cout&lt;&lt;time(0)-t;           
-    return 0;
-}</code></pre><p>在附带一个 只不过是 双向队列维护的（同学写的）</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;vector&gt;
-#include &lt;map&gt;
-#include &lt;string&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;set&gt;
-#include &lt;list&gt;
-using namespace std;
-typedef long long ll;
-
-int main( )
-{
-    std::ios::sync_with_stdio(false);
-    int n;
-    int k = 1;
-    while(cin &gt;&gt; n&amp;&amp;n){
-        printf(&quot;Case %d:\n&quot;,k++);
-        deque&lt;int&gt; a,b,c;
-        char  s[20];
-        int x;
-        while(n--){
-            cin &gt;&gt; s;
-            if(s[0] == &apos;E&apos;){
-                cin&gt;&gt;x;
-                a.push_back(x);
-                while(b.size() &amp;&amp; b.back()&lt;x){
-                    b.pop_back();
-                }
-                b.push_back(x);
-                while(c.size() &amp;&amp; c.back()&gt;x){
-                    c.pop_back();
-                }
-                c.push_back(x);
-            }
-            else if(s[0] == &apos;D&apos;){
-                if(!a.size())  printf(&quot;EMPTY!\n&quot;);
-                else{
-                    if(b.size() &amp;&amp; b.front() == a.front()) b.pop_front();
-                    if(c.size() &amp;&amp; c.front() == a.front()) c.pop_front();
-                    printf(&quot;%d\n&quot;,a.front());
-
-                    a.pop_front();
-                }
-            }
-            else{
-                    if(s[1] == &apos;A&apos;){
-                        if(!b.size())  printf(&quot;EMPTY!\n&quot;);
-                        else printf(&quot;%d\n&quot;,b.front());
-
-                    }
-                    else{
-                        if(!c.size())  printf(&quot;EMPTY!\n&quot;);
-                        else printf(&quot;%d\n&quot;,c.front());
-
-                    }
-            }
-        }
-    }
-    return 0;
-}</code></pre><p>另外附一个 暴力过了数据的。。。。没有tle</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstring&gt;
-#include&lt;queue&gt; 
-#include&lt;set&gt;
-#include&lt;vector&gt;
-using namespace std;
-int main()
-{
-    int t=1;
-    while(1)
-    {
-        int n;
-        scanf(&quot;%d&quot;,&amp;n);
-        if(n==0) break;
-        printf(&quot;Case %d:\n&quot;,t);
-        t++;
-        queue&lt;int&gt; q;
-        vector&lt;int&gt; maxx;
-        vector&lt;int&gt; minn;
-        vector&lt;int&gt;::iterator startIterator;
-        vector&lt;int&gt;::iterator tempIterator;
-        while(n--)
-        {
-            char s[10];
-            scanf(&quot;%s&quot;,s);
-            if(s[0]==&apos;E&apos;)
-            {
-                int x;
-                scanf(&quot;%d&quot;,&amp;x);
-                if(q.empty())
-                {
-                    maxx.push_back(x);
-                    minn.push_back(x);
-                }
-                else
-                {
-                    while(1)
-                    {
-                        if(maxx.empty()||maxx.back()&gt;x) break;
-                        else maxx.pop_back();   
-                    }
-                    maxx.push_back(x);
-                    while(1)
-                    {
-                        if(minn.empty()||minn.back()&lt;x) break;
-                        else minn.pop_back();   
-                    }
-                    minn.push_back(x);
-                }
-                q.push(x);
-            }
-            else if(s[0]==&apos;D&apos;)
-            {
-                if(!q.empty())
-                {
-                    printf(&quot;%d\n&quot;,q.front());
-                    for( tempIterator = maxx.begin(); tempIterator != maxx.end(); tempIterator++ )
-                    {
-                        if(*tempIterator==q.front()) break;
-                    }
-                    if(tempIterator != maxx.end()) maxx.erase( tempIterator);
-
-                    for( tempIterator = minn.begin(); tempIterator != minn.end(); tempIterator++ )
-                    {
-                        if(*tempIterator==q.front()) break;
-                    }
-                    if(tempIterator != minn.end()) minn.erase( tempIterator);
-                    q.pop();
-                }
-                else 
-                {
-                    printf(&quot;EMPTY!\n&quot;);
-                }
-            }
-            else if(s[1]==&apos;A&apos;)
-            {
-                if(!q.empty()) 
-                {
-                    printf(&quot;%d\n&quot;,maxx.front());
-                }
-                else 
-                {
-                    printf(&quot;EMPTY!\n&quot;);
-                }
-            }
-            else if(s[1]==&apos;I&apos;)
-            {
-                if(!q.empty()) 
-                {
-                    printf(&quot;%d\n&quot;,minn.front());
-                }
-                else 
-                {
-                    printf(&quot;EMPTY!\n&quot;);
-                }
-            }
-        }
-    }
-    return 0;
-}</code></pre><p>然后是我二分都没有过去的 tle</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#include &lt;vector&gt;
-#include &lt;map&gt;
-#include &lt;string&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;set&gt;
-using namespace std;
-typedef long long ll;
-
-vector&lt;int&gt; G;
-vector&lt;int&gt; G1;
-//vector&lt;int&gt; G2; 
-
-bool cmp(int a,int b){
-    return a&gt;b;
-}
-
-int main(){ 
-std::ios::sync_with_stdio(false);
-    int n;
-    int x;int ts=0;
-    while(cin&gt;&gt;n&amp;&amp;n){
-        char cmd[20]; 
-        cout&lt;&lt;&quot;Case &quot;&lt;&lt;++ts&lt;&lt;&quot;:&quot;&lt;&lt;endl; 
-        G.clear();G1.clear();
-        for(int i=0;i&lt;n;i++){
-            cin&gt;&gt;cmd;
-            if(cmd[0]==&apos;E&apos;){
-                cin&gt;&gt;x;
-                G.push_back(x);
-                G1.insert(lower_bound(G1.begin(),G1.end(),x),x);
-            }
-            else if(cmd[0]==&apos;D&apos;){
-                if(G.size()==0){
-                    cout&lt;&lt;&quot;EMPTY!\n&quot;;
-                }
-                else{
-                    cout&lt;&lt;G[0]&lt;&lt;endl;
-                    G1.erase(lower_bound(G1.begin(),G1.end(),G[0]));
-                    G.erase(G.begin());
-                }
-            }
-            if(cmd[1]==&apos;A&apos;){
-                if(G.size()==0) cout&lt;&lt;&quot;EMPTY!\n&quot;;
-                else{
-                    cout&lt;&lt;G1[G1.size()-1]&lt;&lt;endl;
-                }
-            }
-            else if(cmd[1]==&apos;I&apos;){
-                if(G.size()==0) cout&lt;&lt;&quot;EMPTY!\n&quot;;
-                else{
-                    cout&lt;&lt;G1[0]&lt;&lt;endl;
-                }
-            }
-        }
-    }              
-    return 0;
-}</code></pre>
-          
+   
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/28/【 算法竞赛进阶指南 0x10 】 杂谈/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -707,7 +430,7 @@ std::ios::sync_with_stdio(false);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2018/06/03/【BFS】Ball Aizu - 0033 原题正解 DFS/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/28/【 三分法 】 单峰(单谷)函数 三分找极点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -726,7 +449,7 @@ std::ios::sync_with_stdio(false);
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/03/【BFS】Ball Aizu - 0033 原题正解 DFS/" itemprop="url">【BFS】Ball Aizu - 0033 原题正解 DFS</a></h1>
+                <a class="post-title-link" href="/2019/05/28/【 三分法 】 单峰(单谷)函数 三分找极点/" itemprop="url">【 三分法 】 单峰(单谷)函数 三分找极点</a></h1>
         
 
         <div class="post-meta">
@@ -738,8 +461,8 @@ std::ios::sync_with_stdio(false);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T09:02:49+08:00">
-                2018-06-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T14:44:06+08:00">
+                2019-05-28
               </time>
             
 
@@ -761,8 +484,8 @@ std::ios::sync_with_stdio(false);
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/搜索/" itemprop="url" rel="index">
-                    <span itemprop="name">搜索</span>
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
                   </a>
                 </span>
 
@@ -800,81 +523,1203 @@ std::ios::sync_with_stdio(false);
       
         
           
-            <p>RT ORZ<br>硬生生 写成bfs</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cstring&gt;
-#include &lt;stack&gt;
-#include &lt;queue&gt;
-using namespace std;
+          [ https://www.luogu.org/problemnew/show/P3382
+](https://www.luogu.org/problemnew/show/P3382)  
+题目描述如题，给出一个N次函数，保证在范围[l,r]内存在一点x，使得[l,x]上单调增，[x,r]上单调减。
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/28/【 三分法 】 单峰(单谷)函数 三分找极点/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
 
-int a[15];
-//int b[15];
-int n;
+    
 
-struct node {
-    int cnt;
-    int pos1,pos2;
-    int an[15];
-    int bn[15];
-}ball,tmp,t;
+    
 
-bool bfs(){
-    queue&lt;node&gt; q;
-    ball.an[0]=a[0];
-    ball.pos1=0;
-    ball.pos2=0;
-    ball.cnt=0;
-    q.push(ball);
-    while(!q.empty()){
-        tmp=q.front();
-        int f=1;
-        if(tmp.an[tmp.pos1]&lt;a[tmp.cnt+1]){
-            tmp.an[tmp.pos1+1]=a[tmp.cnt+1];
-            tmp.pos1++;
-            tmp.cnt++;
-            q.push(tmp);
-            f=0;
-        }
-        tmp=q.front();
-        if(tmp.pos2==0||tmp.bn[tmp.pos2]&lt;a[tmp.cnt+1]){
-            tmp.bn[tmp.pos2+1]=a[tmp.cnt+1];
-            tmp.pos2++,tmp.cnt++;
-            q.push(tmp);
-            f=0;
-        }
-        /*
-        for(int i=0;i&lt;q.front().pos1;i++){
-            cout&lt;&lt;q.front().an[i]&lt;&lt;&quot;  &quot;;
-        }cout&lt;&lt;endl;
-        for(int i=0;i&lt;q.front().pos2;i++){
-            cout&lt;&lt;q.front().bn[i]&lt;&lt;&quot;  &quot;;
-        }cout&lt;&lt;endl;
-        cout&lt;&lt;&quot;   &quot;&lt;&lt;tmp.cnt&lt;&lt;endl;
-        q.pop();
-    //    if(f) return 0;
-    */
-    q.pop();
-        if(tmp.cnt==9) return 1;
-    }
-    return 0;
-} 
+    
 
-int main(){
-    while(cin&gt;&gt;n){
-        while(n--){
-            ball.pos1=0,ball.pos2=0,ball.cnt=0,ball.bn[0]=0;
-            for(int i=0;i&lt;10;i++) cin&gt;&gt;a[i];
-            if(bfs()) cout&lt;&lt;&quot;YES\n&quot;;
-            else cout&lt;&lt;&quot;NO\n&quot;;
-        }
-    //    
-    }
-    return 0;
-}</code></pre><p>无力orz</p>
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/28/【 算法竞赛进阶指南 0x00 】 杂谈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/28/【 算法竞赛进阶指南 0x00 】 杂谈/" itemprop="url">【 算法竞赛进阶指南 0x00 】 杂谈</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T14:31:46+08:00">
+                2019-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          持续更新。。。。
+
+汉诺塔
+首先考虑n个盘子3塔的经典Hanoi问题，设dn表示求解n个盘子3塔问题的最少步数，显然有dn=2∗dn−1+1
+含义为把前n−1个盘子从A借助C转移到B，再将第n个盘子转移到C，最后把n−1个盘子从B借助A转移到C。
+类似地，对于本题，设f[n]表示求解n个盘子4塔问题
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/28/【 算法竞赛进阶指南 0x00 】 杂谈/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/15/2019 第十四届 中北大学ACM程序设计竞赛 题解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/15/2019 第十四届 中北大学ACM程序设计竞赛 题解/" itemprop="url">2019 第十四届 中北大学ACM程序设计竞赛 题解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-15T14:10:08+08:00">
+                2019-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          **A.CQW又迟到了**  
+CQW是个坏学生，每天都迟到，从没看见他在第一节课出现过，懒惰的他，总是在点名的最后一刻出现。为了治一治他这个坏习惯，教C语言的XZW老师决定每天都给他布置一个单独的作业，并答应只要他每次都能正确完成作业就不点他的名字，CQW为了可以多睡觉，立刻答应了下来。为了让CQ
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/15/2019 第十四届 中北大学ACM程序设计竞赛 题解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/15/【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/15/【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree/" itemprop="url">【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-15T13:40:05+08:00">
+                2019-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          首先理解模板
+
+一.概念​ 是处理树上路径的一个极好的方法。如果你需要大规模的处理一些树上路径的问题时，点分治是一个离线的方法
+一般而言 对于一棵树 我们能选取一个点 将其分割为几个棵子树 如果想要dfs每次进行的少 我们最好就要找到数得重心 这样深度就变为了 log2(n)
+int siz[max
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/15/【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/08/入门状压DP 【SCOI2005】 互不侵犯  【USACO06NOV】 玉米田Corn Fields 【NOI2001】 炮兵阵地/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/08/入门状压DP 【SCOI2005】 互不侵犯  【USACO06NOV】 玉米田Corn Fields 【NOI2001】 炮兵阵地/" itemprop="url">入门状压DP 【SCOI2005】 互不侵犯  【USACO06NOV】 玉米田Corn Fields 【NOI2001】 炮兵阵地</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-08T13:11:59+08:00">
+                2019-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DP/" itemprop="url" rel="index">
+                    <span itemprop="name">DP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          先附上 [ https://blog.csdn.net/qq_40831340/article/details/81502522
+](https://blog.csdn.net/qq_40831340/article/details/81502522)  
+TSP问题Traveling by Sta
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/08/入门状压DP 【SCOI2005】 互不侵犯  【USACO06NOV】 玉米田Corn Fields 【NOI2001】 炮兵阵地/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/02/【线段树 ++ (STL)set 】  P2161 【SHOI2009】会场预约/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/02/【线段树 ++ (STL)set 】  P2161 【SHOI2009】会场预约/" itemprop="url">【线段树 ++ (STL)set 】  P2161 【SHOI2009】会场预约</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-02T17:42:25+08:00">
+                2019-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          题目描述
+
+PP大厦有一间空的礼堂，可以为企业或者单位提供会议场地。这些会议中的大多数都需要连续几天的时间（个别的可能只需要一天），不过场地只有一个，所以不同的会议的时间申请不能够冲突。也就是说，前一个会议的结束日期必须在后一个会议的开始日期之前。所以，如果要接受一个新的场地预约申请，就必须拒绝掉与
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/02/【线段树 ++ (STL)set 】  P2161 【SHOI2009】会场预约/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/04/22/The Preliminary Contest for ICPC China Nanchang 南昌网络赛 A H I K M J题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/22/The Preliminary Contest for ICPC China Nanchang 南昌网络赛 A H I K M J题/" itemprop="url">The Preliminary Contest for ICPC China Nanchang 南昌网络赛 A H I K M J题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-22T13:45:41+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          我补过 J题拉 orz 交了3次 重写了一次orz  
+真是太快乐(自闭)拉连接  https://blog.csdn.net/qq_40831340/article/details/90739880
+
+
+A PERFECT NUMBER PROBLEM Write a program to out
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/22/The Preliminary Contest for ICPC China Nanchang 南昌网络赛 A H I K M J题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/04/15/【树形DP+思维】 CF 551 (Div. 2) 1153D - 43 Serval and Rooted Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/15/【树形DP+思维】 CF 551 (Div. 2) 1153D - 43 Serval and Rooted Tree/" itemprop="url">【树形DP+思维】 CF 551 (Div. 2) 1153D - 43 Serval and Rooted Tree</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-15T15:51:16+08:00">
+                2019-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          [ https://codeforces.com/contest/1153/problem/D
+](https://codeforces.com/contest/1153/problem/D)  
+不算太容易想的dp如果我们知道有一个 子树有m个叶子 ，将K，K-1，K-2，…，K-M + 1分到这
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/15/【树形DP+思维】 CF 551 (Div. 2) 1153D - 43 Serval and Rooted Tree/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/04/10/【大数模拟】 洛谷 P1601 P2142 P1303/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/10/【大数模拟】 洛谷 P1601 P2142 P1303/" itemprop="url">【大数模拟】 洛谷 P1601 P2142 P1303</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-10T19:11:42+08:00">
+                2019-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基本算法/" itemprop="url" rel="index">
+                    <span itemprop="name">基本算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          高精度 + - * orz 除法不会 (搁着 准备补)  
+高精度取余例如123对12取余，实际上就等于（（1%12 10+2）%12 10+3）%12=3
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long l
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/10/【大数模拟】 洛谷 P1601 P2142 P1303/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -912,7 +1757,7 @@ int main(){
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -960,7 +1805,7 @@ int main(){
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

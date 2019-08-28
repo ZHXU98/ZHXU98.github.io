@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="首先理解模板  一.概念​ 是处理树上路径的一个极好的方法。如果你需要大规模的处理一些树上路径的问题时，点分治是一个离线的方法 一般而言 对于一棵树 我们能选取一个点 将其分割为几个棵子树 如果想要dfs每次进行的少 我们最好就要找到数得重心 这样深度就变为了 log2(n) int siz[maxn],SIZ,dp[maxn],root; // 这里部分是之后用的 bool use[maxn];">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree">
+<meta property="og:url" content="http://zhxu98.github.io/2019/05/15/【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="首先理解模板  一.概念​ 是处理树上路径的一个极好的方法。如果你需要大规模的处理一些树上路径的问题时，点分治是一个离线的方法 一般而言 对于一棵树 我们能选取一个点 将其分割为几个棵子树 如果想要dfs每次进行的少 我们最好就要找到数得重心 这样深度就变为了 log2(n) int siz[maxn],SIZ,dp[maxn],root; // 这里部分是之后用的 bool use[maxn];">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-28T05:51:36.409Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree">
+<meta name="twitter:description" content="首先理解模板  一.概念​ 是处理树上路径的一个极好的方法。如果你需要大规模的处理一些树上路径的问题时，点分治是一个离线的方法 一般而言 对于一棵树 我们能选取一个点 将其分割为几个棵子树 如果想要dfs每次进行的少 我们最好就要找到数得重心 这样深度就变为了 log2(n) int siz[maxn],SIZ,dp[maxn],root; // 这里部分是之后用的 bool use[maxn];">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/05/15/【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree/">
+
+
+
+
+
+  <title>【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/15/【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【点分治】 模板  POJ - 3237  Tree  + CF161D Distance in Tree</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-15T13:40:05+08:00">
+                2019-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>首先理解模板
+
+<p>一.概念<br>​ 是处理树上路径的一个极好的方法。如果你需要大规模的处理一些树上路径的问题时，点分治是一个离线的方法</p>
+<p>一般而言 对于一棵树 我们能选取一个点 将其分割为几个棵子树 如果想要dfs每次进行的少 我们最好就要找到数得重心 这样深度就变为了 log2(n)</p>
+<pre><code>int siz[maxn],SIZ,dp[maxn],root; // 这里部分是之后用的
+bool use[maxn];
+
+void get_root(int u,int fa){
+    dp[u]=0,siz[u]=1;
+    for (int i=head[u];i;i=nxt[i]) {
+        int v=to[i];
+        if (v==fa||use[v]) continue;
+        get_root(v,u);
+        dp[u]=max(dp[u],siz[v]);
+        siz[u]+=siz[v];
+    }
+    dp[u]=max(dp[u],SIZ-siz[u]);
+    if (dp[u]&lt;dp[root]) root=u;
+}</code></pre><p>分治代码<br>dfs 处理出子树到跟的距离 然后存到d里面<br>然后答案计数<br>get_ans(x,0，1); 这一句的作用是将答案加上经过x的路径答案。 而这一个0是为了解决掉一些，有重复计算的结果；（看不懂先假装没有这个0）<br>get_ans（ <a href="http://v.to" target="_blank" rel="noopener"> v.to </a> ,edges[i].cost,-1);<br>这一句是将在既经过x这个点，又经过v.to这一个点的路径来去重。因为像这种路径会在get_ans（x,0)和get_ans( <a href="http://v.to" target="_blank" rel="noopener"> v.to
+</a> ,0)中都计算一次。所以在减一次<br>S = size[ <a href="http://v.to" target="_blank" rel="noopener"> v.to </a> ]; 现在我们要分治v.to的这一颗子树，又将求重心的树的大小改为size[ <a href="http://v.to" target="_blank" rel="noopener"> v.to
+</a> ];</p>
+<pre><code>void solve(int u) {
+    get_ans(u,0,1);
+    use[u]=1;
+    for(int i=head[u]; i; i=nxt[i]) {
+        int v=to[i];
+        if(use[v]) continue;
+        get_ans(v,dis[i],-1);
+        root=0,SIZ=siz[v],dp[0]=n;
+        get_root(v,u);
+        solve(root);
+    }
+}</code></pre><p>图例<br>把树分成2部分后 我们找的是路过root的点相对距离长度 但是会有一种情况 我们必须剪掉 她是不合法的 ![在这里插入图片描述](<a href="https://img-" target="_blank" rel="noopener">https://img-</a><br>blog.csdnimg.cn/20190515132548605.png?x-oss-<br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>路过根节点 但是在同一个子树中 显然我们加多了</p>
+<p>给定一棵有n个点的树</p>
+<p>询问树上距离为k的点对是否存在。<br>这代码实际上是N^2的 之后又更低复杂度的 在下2题</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+//#define int long long
+using namespace std;
+typedef long long ll;
+const long long INF = 0x3f3f3f3f3f3f3f3f;
+const long long mod = 1e8;
+const int maxn = 4e4+5;
+
+int n,m,k;
+
+int cnt,head[maxn];
+int to[maxn&lt;&lt;1],nxt[maxn&lt;&lt;1],dis[maxn&lt;&lt;1];
+
+void ade(int a,int b,int c) {
+    to[++cnt]=b;
+    nxt[cnt]=head[a];
+    dis[cnt]=c;
+    head[a]=cnt;
+}
+
+int siz[maxn],SIZ,dp[maxn],root;
+bool use[maxn];
+
+void get_root(int u,int fa){
+    dp[u]=0,siz[u]=1;
+    for (int i=head[u];i;i=nxt[i]) {
+        int v=to[i];
+        if (v==fa||use[v]) continue;
+        get_root(v,u);
+        dp[u]=max(dp[u],siz[v]);
+        siz[u]+=siz[v];
+    }
+    dp[u]=max(dp[u],SIZ-siz[u]);
+    if (dp[u]&lt;dp[root]) root=u;
+}
+
+int d[maxn],tail;
+
+void get_dist(int u,int fa,int len) {
+    d[++tail]=len;
+    siz[u]=1;
+    for(int i=head[u]; i; i=nxt[i]) {
+        int v=to[i];
+        if(v==fa||use[v]) continue ;
+        get_dist(v,u,len+dis[i]);
+        siz[u]+=siz[v];
+    }
+}
+
+int ans[int(1e6)+5];
+
+void get_ans(int u,int len,int w) {
+    d[tail=0]=0;
+    get_dist(u,0,len);
+    int l=1,r=tail,res=0;
+    for(int i=1;i&lt;=tail;i++)
+        for(int j=1;j&lt;=tail;j++)
+        if(i!=j) ans[d[i]+d[j]]+=w;
+}
+
+void solve(int u) {
+    get_ans(u,0,1);
+    use[u]=1;
+    for(int i=head[u]; i; i=nxt[i]) {
+        int v=to[i];
+        if(use[v]) continue;
+        get_ans(v,dis[i],-1);
+        root=0,SIZ=siz[v],dp[0]=n;
+        get_root(v,u);
+        solve(root);
+    }
+}
+
+signed main() {
+    fastio;
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1; i&lt;n; i++) {
+        int a,b,c;
+        cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;
+        ade(a,b,c),ade(b,a,c);
+    }
+    dp[0]=SIZ=n,root=0;
+    get_root(1,0);
+    solve(root);
+    while(m--){
+        cin&gt;&gt;k;
+        if(ans[k]) cout&lt;&lt;&quot;AYE&quot;&lt;&lt;endl;
+        else cout&lt;&lt;&quot;NAY&quot;&lt;&lt;endl;
+    }
+    return 0;
+}</code></pre><p><strong>CF161D Distance in Tree</strong></p>
+<p>输入点数为N一棵树</p>
+<p>求树上长度恰好为K的路径个数<br>这里用二分 压复杂度 k-一个子树到根节点距离 在另一个子树查 存在这个数据对于 就是一对点</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+#define int long long
+using namespace std;
+typedef long long ll;
+const long long INF = 0x3f3f3f3f3f3f3f3f;
+const long long mod = 1e8;
+const int maxn = 5e4+5;
+
+int n,m,k;
+
+int cnt,head[maxn];
+int to[maxn&lt;&lt;1],nxt[maxn&lt;&lt;1],dis[maxn&lt;&lt;1];
+
+void ade(int a,int b,int c) {
+    to[++cnt]=b;
+    nxt[cnt]=head[a];
+    dis[cnt]=c;
+    head[a]=cnt;
+}
+
+int siz[maxn],SIZ,dp[maxn],root;
+bool use[maxn];
+
+void get_root(int u,int fa) {
+    dp[u]=0,siz[u]=1;
+    for (int i=head[u]; i; i=nxt[i]) {
+        int v=to[i];
+        if (v==fa||use[v]) continue;
+        get_root(v,u);
+        dp[u]=max(dp[u],siz[v]);
+        siz[u]+=siz[v];
+    }
+    dp[u]=max(dp[u],SIZ-siz[u]);
+    if (dp[u]&lt;dp[root]) root=u;
+}
+
+int d[maxn],tail;
+
+void get_dist(int u,int fa,int len) {
+    d[++tail]=len;
+    siz[u]=1;
+    for(int i=head[u]; i; i=nxt[i]) {
+        int v=to[i];
+        if(v==fa||use[v]) continue ;
+        get_dist(v,u,len+dis[i]);
+        siz[u]+=siz[v];
+    }
+}
+
+int ans;
+
+void get_ans(int u,int len,int w) {
+    d[tail=0]=0;
+    get_dist(u,0,len);
+    sort(d+1,d+1+tail);
+    for (int i=1; i&lt;=tail; i++) {
+        int t1=lower_bound(d+1,d+1+tail,k-d[i])-d;
+        int t2=upper_bound(d+1,d+1+tail,k-d[i])-d-1;
+        if (t2&lt;t1) continue;
+        if (t1==0) continue;
+        if ((d[t1]!=k-d[i])) continue;
+        ans+=(w)*(t2-t1+1);
+        if (i&gt;=t1&amp;&amp;i&lt;=t2) ans-=w;
+    }
+}
+
+void solve(int u) {
+    get_ans(u,0,1);
+    use[u]=1;
+    for(int i=head[u]; i; i=nxt[i]) {
+        int v=to[i];
+        if(use[v]) continue;
+        get_ans(v,dis[i],-1);
+        root=0,SIZ=siz[v],dp[0]=n;
+        get_root(v,u);
+        solve(root);
+    }
+}
+
+signed main() {
+    fastio;
+    cin&gt;&gt;n&gt;&gt;k;
+    for(int i=1; i&lt;n; i++) {
+        int a,b,c;
+        cin&gt;&gt;a&gt;&gt;b;
+        ade(a,b,1),ade(b,a,1);
+    }
+    dp[0]=SIZ=n,root=0;
+    get_root(1,0);
+    solve(root);
+    cout&lt;&lt;(ans&gt;&gt;1)&lt;&lt;endl;
+    return 0;
+}</code></pre><p><strong>Tree POJ - 3237</strong><br>给你一棵TREE,以及这棵树上边的距离.问有多少对点它们两者间的距离小于等于K</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+//#define int long long
+using namespace std;
+typedef long long ll;
+const long long INF = 0x3f3f3f3f3f3f3f3f;
+const long long mod = 1e8;
+const int maxn = 4e4+5;
+
+int n,m,k,ans;
+
+int cnt,head[maxn];
+int to[maxn&lt;&lt;1],nxt[maxn&lt;&lt;1],dis[maxn&lt;&lt;1];
+
+void ade(int a,int b,int c) {
+    to[++cnt]=b;
+    nxt[cnt]=head[a];
+    dis[cnt]=c;
+    head[a]=cnt;
+}
+
+int siz[maxn],SIZ,dp[maxn],root;
+bool use[maxn];
+
+void get_root(int u,int fa){
+    dp[u]=0,siz[u]=1;
+    for (int i=head[u];i;i=nxt[i]) {
+        int v=to[i];
+        if (v==fa||use[v]) continue;
+        get_root(v,u);
+        dp[u]=max(dp[u],siz[v]);
+        siz[u]+=siz[v];
+    }
+    dp[u]=max(dp[u],SIZ-siz[u]);
+    if (dp[u]&lt;dp[root]) root=u;
+}
+
+int d[maxn],tail;
+
+void get_dist(int u,int fa,int len) {
+    d[++tail]=len;
+    siz[u]=1;
+    for(int i=head[u]; i; i=nxt[i]) {
+        int v=to[i];
+        if(v==fa||use[v]) continue ;
+        get_dist(v,u,len+dis[i]);
+        siz[u]+=siz[v];
+    }
+}
+
+int get_ans(int u,int len) {
+    d[tail=0]=0;
+    get_dist(u,0,len);
+    sort(d+1,d+1+tail);
+    int l=1,r=tail,res=0;
+    while(l&lt;=r) {
+        if(d[l]+d[r]&lt;=k) res+=r-l,l++;
+        else r--;
+    }
+    return res;
+}
+
+void solve(int u) {
+    ans+=get_ans(u,0);
+    use[u]=1;
+    for(int i=head[u]; i; i=nxt[i]) {
+        int v=to[i];
+        if(use[v]) continue;
+        ans-=get_ans(v,dis[i]);
+        root=0,SIZ=siz[v],dp[0]=n;
+        get_root(v,u);
+        solve(root);
+    }
+}
+
+signed main() {
+    fastio;
+    cin&gt;&gt;n;
+    for(int i=1; i&lt;n; i++) {
+        int a,b,c;
+        cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;
+        ade(a,b,c),ade(b,a,c);
+    }
+    cin&gt;&gt;k;
+    dp[0]=SIZ=n,root=0;
+    get_root(1,0);
+    solve(root);
+    cout&lt;&lt;ans&lt;&lt;endl;
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/08/入门状压DP 【SCOI2005】 互不侵犯  【USACO06NOV】 玉米田Corn Fields 【NOI2001】 炮兵阵地/" rel="next" title="入门状压DP 【SCOI2005】 互不侵犯  【USACO06NOV】 玉米田Corn Fields 【NOI2001】 炮兵阵地">
+                <i class="fa fa-chevron-left"></i> 入门状压DP 【SCOI2005】 互不侵犯  【USACO06NOV】 玉米田Corn Fields 【NOI2001】 炮兵阵地
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/15/2019 第十四届 中北大学ACM程序设计竞赛 题解/" rel="prev" title="2019 第十四届 中北大学ACM程序设计竞赛 题解">
+                2019 第十四届 中北大学ACM程序设计竞赛 题解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">149</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
