@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="看到题解说二分 心里也有数了。。。。。 H Cutting Bamboos给了一些高度得柱子 每区间你可以坎y次 y次之后 必须砍没有了没有砍 总长度得一样 问第x次砍得高度在哪里因为砍得次数 和 每次砍得总长度是一定得 我们二分高度这样 剩下得总长度 就可以用来做二分 得判断了小于高度得总距离 和高于 高度得数量 * mid 就是我们剩下得距离 #include &amp;lt;bits/stdc++.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019牛客多校第九场 H Cutting Bamboos (二分主席树)">
+<meta property="og:url" content="http://zhxu98.github.io/2019/08/16/2019牛客多校第九场 H Cutting Bamboos (二分主席树)/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="看到题解说二分 心里也有数了。。。。。 H Cutting Bamboos给了一些高度得柱子 每区间你可以坎y次 y次之后 必须砍没有了没有砍 总长度得一样 问第x次砍得高度在哪里因为砍得次数 和 每次砍得总长度是一定得 我们二分高度这样 剩下得总长度 就可以用来做二分 得判断了小于高度得总距离 和高于 高度得数量 * mid 就是我们剩下得距离 #include &amp;lt;bits/stdc++.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-28T03:10:47.238Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019牛客多校第九场 H Cutting Bamboos (二分主席树)">
+<meta name="twitter:description" content="看到题解说二分 心里也有数了。。。。。 H Cutting Bamboos给了一些高度得柱子 每区间你可以坎y次 y次之后 必须砍没有了没有砍 总长度得一样 问第x次砍得高度在哪里因为砍得次数 和 每次砍得总长度是一定得 我们二分高度这样 剩下得总长度 就可以用来做二分 得判断了小于高度得总距离 和高于 高度得数量 * mid 就是我们剩下得距离 #include &amp;lt;bits/stdc++.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/08/16/2019牛客多校第九场 H Cutting Bamboos (二分主席树)/">
+
+
+
+
+
+  <title>2019牛客多校第九场 H Cutting Bamboos (二分主席树) | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/16/2019牛客多校第九场 H Cutting Bamboos (二分主席树)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2019牛客多校第九场 H Cutting Bamboos (二分主席树)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T08:26:39+08:00">
+                2019-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/树型结构/" itemprop="url" rel="index">
+                    <span itemprop="name">树型结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>看到题解说二分 心里也有数了。。。。。</p>
+<h2 id="H-Cutting-Bamboos"><a href="#H-Cutting-Bamboos" class="headerlink" title="H Cutting Bamboos"></a>H Cutting Bamboos</h2><p>给了一些高度得柱子 每区间你可以坎y次 y次之后 必须砍没有了<br>没有砍 总长度得一样 问第x次砍得高度在哪里<br>因为砍得次数 和 每次砍得总长度是一定得 我们二分高度<br>这样 剩下得总长度 就可以用来做二分 得判断了<br>小于高度得总距离 和高于 高度得数量 * mid 就是我们剩下得距离</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 2e5 + 10;
+const double dmax = 1e9 + 1;
+const double eps = 1e-8;
+
+int n, m;
+int a[maxn], b[maxn], cnt;
+long long sum[maxn];
+struct node {
+    int lc, rc;
+    long long sum;
+    int cnt;
+} tree[maxn * 20];
+int tot, root[maxn];
+
+int build(int l, int r) {
+    int p = ++ tot;
+    if(l == r) return p;
+    int mid = l + r &gt;&gt; 1;
+    tree[p].lc = build(l, mid);
+    tree[p].rc = build(mid + 1, r);
+    return p;
+}
+
+int ins(int now, int l, int r, int x, long long val) {
+    int p = ++ tot;
+    tree[p] = tree[now];
+    if(l == r) {
+        tree[p].sum += val;
+        tree[p].cnt += 1;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(x &lt;= mid) tree[p].lc = ins(tree[now].lc, l, mid, x, val);
+    else tree[p].rc = ins(tree[now].rc, mid + 1, r, x, val);
+    tree[p].sum = tree[tree[p].lc].sum + tree[tree[p].rc].sum;
+    tree[p].cnt = tree[tree[p].lc].cnt + tree[tree[p].rc].cnt;
+    return p;
+}
+
+long long ask_sum(int p, int q, int l, int r, int L, int R) {
+    if(R &lt; L) return 0;
+    if(L &lt;= l &amp;&amp; r &lt;= R) return tree[p].sum - tree[q].sum;
+    int mid = l + r &gt;&gt; 1;
+    long long res = 0;
+    if(L &lt;= mid) res += ask_sum(tree[p].lc, tree[q].lc, l, mid, L, R);
+    if(R &gt; mid) res += ask_sum(tree[p].rc, tree[q].rc, mid + 1, r, L, R);
+    return res;
+}
+
+int ask_cnt(int p, int q, int l, int r, int L, int R) {
+    if(R &lt; L) return 0;
+    if(L &lt;= l &amp;&amp; r &lt;= R) return tree[p].cnt - tree[q].cnt;
+    int mid = l + r &gt;&gt; 1;
+    int res = 0;
+    if(L &lt;= mid) res += ask_cnt(tree[p].lc, tree[q].lc, l, mid, L, R);
+    if(R &gt; mid) res += ask_cnt(tree[p].rc, tree[q].rc, mid + 1, r, L, R);
+    return res;
+}
+
+bool chk(int l, int r, double mid, double tall) {
+    int pos = lower_bound(b + 1, b + 1 + cnt, ceil(mid)) - b;
+    int k = ask_cnt(root[r], root[l - 1], 1, cnt, pos, cnt);
+    long long presum = ask_sum(root[r], root[l - 1], 1, cnt, 1, pos - 1);
+    if(1.0 * presum + k * mid &gt; tall) return 0;
+    else return 1;
+}
+
+signed main() {
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1; i &lt;= n; i ++)
+        cin &gt;&gt; a[i], sum[i] = sum[i - 1] + a[i], b[i] = a[i];
+
+    sort(b + 1, b + 1 + n);
+    cnt = unique(b + 1, b + 1 + n) - b - 1;
+    root[0] = build(1, cnt);
+    for(int i = 1; i &lt;= n; i ++) {
+        int pos = lower_bound(b + 1, b + 1 + cnt, a[i]) - b;
+        root[i] = ins(root[i - 1], 1, cnt, pos, 1ll * a[i]);
+    }
+
+    while(m --) {
+        int L, R, X, Y;
+        cin &gt;&gt; L &gt;&gt; R &gt;&gt; X &gt;&gt; Y;
+        double l = 0, r = dmax;
+        double tall = 1.0 * (1.0 * sum[R] - sum[L - 1]) / Y * (Y - X);
+        while(r - l &gt; eps) {
+            double mid = (l + r) / 2;
+            if( chk(L, R, mid, tall) ) l = mid;
+            else r = mid;
+        }
+        printf(&quot;%.12lf\n&quot;, l);
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/15/2019 牛客多校第九场 E All men are brothers (并查集 + 数学)/" rel="next" title="2019 牛客多校第九场 E All men are brothers (并查集 | 数学)">
+                <i class="fa fa-chevron-left"></i> 2019 牛客多校第九场 E All men are brothers (并查集 | 数学)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/16/牛客 小白月赛16 小雨坐地铁 （分层最短路+优化建图）2019暑期多校训练营（第六场）D move/" rel="prev" title="牛客 小白月赛16 小雨坐地铁 （分层最短路|优化建图）2019暑期多校训练营（第六场）D move">
+                牛客 小白月赛16 小雨坐地铁 （分层最短路|优化建图）2019暑期多校训练营（第六场）D move <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#H-Cutting-Bamboos"><span class="nav-number">1.</span> <span class="nav-text">H Cutting Bamboos</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="A Eddy Walker你有n个点（0～n-1），按顺序形成一个环，初始时你在0的位子，你随机顺时针走一步或者逆时针走一步问你全部路过完时停在哪里的概率 除了 0 点 其他是等可能的 特判 一个点 就好 #include &amp;lt;bits/stdc++.h&amp;gt; using namespace std; #define fastio ios::sync_with_stdio(false);ci">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019牛客暑期多校(第二场) 写题记录">
+<meta property="og:url" content="http://zhxu98.github.io/2019/07/26/2019牛客暑期多校(第二场) 写题记录/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="A Eddy Walker你有n个点（0～n-1），按顺序形成一个环，初始时你在0的位子，你随机顺时针走一步或者逆时针走一步问你全部路过完时停在哪里的概率 除了 0 点 其他是等可能的 特判 一个点 就好 #include &amp;lt;bits/stdc++.h&amp;gt; using namespace std; #define fastio ios::sync_with_stdio(false);ci">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-28T03:11:01.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019牛客暑期多校(第二场) 写题记录">
+<meta name="twitter:description" content="A Eddy Walker你有n个点（0～n-1），按顺序形成一个环，初始时你在0的位子，你随机顺时针走一步或者逆时针走一步问你全部路过完时停在哪里的概率 除了 0 点 其他是等可能的 特判 一个点 就好 #include &amp;lt;bits/stdc++.h&amp;gt; using namespace std; #define fastio ios::sync_with_stdio(false);ci">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/07/26/2019牛客暑期多校(第二场) 写题记录/">
+
+
+
+
+
+  <title>2019牛客暑期多校(第二场) 写题记录 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/07/26/2019牛客暑期多校(第二场) 写题记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2019牛客暑期多校(第二场) 写题记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-26T21:25:51+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="A-Eddy-Walker"><a href="#A-Eddy-Walker" class="headerlink" title="A Eddy Walker"></a>A Eddy Walker</h3><p>你有n个点（0～n-1），按顺序形成一个环，初始时你在0的位子，你随机顺时针走一步或者逆时针走一步<br>问你全部路过完时停在哪里的概率 除了 0 点 其他是等可能的 特判 一个点 就好</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define fastio ios::sync_with_stdio(false);cin.tie(0);
+typedef long long ll;
+const int maxn = 1000 + 5;
+const int mod = 1e9 + 7;
+
+int n, m, t, ans;
+
+int q_mod(int a, int b){
+    int res = 1;
+    for(; b; b &gt;&gt;= 1){
+        if(b &amp; 1) res = 1ll*res * a % mod;
+        a = 1ll*a * a % mod;
+    }
+    return res;
+}
+
+int main(){
+    fastio;
+    cin &gt;&gt; t;
+    ans = 1;
+    while(t--) {
+        cin &gt;&gt; n &gt;&gt; m;
+        if(n == 1){
+            ans*=1;
+            cout &lt;&lt; ans &lt;&lt; endl;
+        }
+        else if(m == 0){
+            ans = 0;
+            cout &lt;&lt; 0 &lt;&lt; endl;
+
+        }
+        else cout &lt;&lt; (ans = (1ll*ans * q_mod(n - 1, mod - 2)%mod)) &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><h3 id="D-Kth-Minimum-Clique"><a href="#D-Kth-Minimum-Clique" class="headerlink" title="D Kth Minimum Clique"></a>D Kth Minimum Clique</h3><p>考察关于团的知识<br>团 加入一个点 这个点 必须与其他点 相连 相当于 这个点集合 是个完全图<br>加入这个点 即这个点集合的点 与 未在点集的点 &amp; 运算 当前 点集依然是 之前点集合 便可以加入<br>BFS 拓展这个团就好 对每个团 记录它最后的点 我们按顺序加入 每次扫它记录最后点位置之后的加入 就可以去重</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;bitset&gt;
+#include &lt;queue&gt;
+#include &lt;string&gt;
+using namespace std;
+#define fastio ios::sync_with_stdio(false);cin.tie(0);
+typedef long long ll;
+const int maxn = 105;
+
+int n, k;
+int w[maxn];
+bitset&lt;105&gt; f[maxn];
+
+struct node{
+    ll val;
+    int p;
+    bitset&lt;105&gt; vis;
+    bool operator &lt; (const node &amp;a)const {
+        return val &gt; a.val;
+    }
+};
+
+priority_queue&lt;node&gt; que;
+
+int main(){
+    cin &gt;&gt; n &gt;&gt; k;
+    for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; w[i];
+    for(int i = 1; i &lt;= n; i ++) {
+        string s;
+        cin &gt;&gt; s;
+        for(int j = 0; j &lt; n; j++) f[i][j + 1] = s[j] - &apos;0&apos;;
+    }
+    que.push(node{0, 0, bitset&lt;105&gt;(0)});
+    while(!que.empty()){
+        node tmp = que.top(); que.pop();
+        k--;
+        if(k == 0) {
+            cout &lt;&lt; tmp.val &lt;&lt; endl;
+            return 0;
+        }
+        bitset&lt;105&gt; v = tmp.vis;
+        for(int i = tmp.p + 1; i &lt;= n; i ++) {
+            if(((v &amp; f[i]) == v)){
+                v[i] = 1;
+                int p;
+                for(int i = 0; i &lt;= n; i ++) if(v[i]) p = i;
+                que.push(node{tmp.val + w[i], p, v});
+                v[i] = 0;
+            }
+        }
+    }
+    cout &lt;&lt; -1 &lt;&lt; endl;
+    return 0;
+}</code></pre><h3 id="F-Partition-problem"><a href="#F-Partition-problem" class="headerlink" title="F Partition problem"></a>F Partition problem</h3><p>这题重点不是剪枝 而是 最后我们统计ans 我们不应该N^2求 必然T 而是在过程中 就进行 对这个分集合 的竞争度计算 就不tle了orz</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int N = 20;
+typedef long long LL;
+
+int n;
+LL v[N + N][N + N], ans;
+int a[N], b[N];
+
+void dfs(int u, int cnt1, int cnt2, LL sum) {
+    if(cnt1 &gt; n || cnt2 &gt; n) return ;
+    if(cnt1 == n &amp;&amp; cnt2 == n) {
+        ans = max(sum, ans);
+        return ;
+    }
+    LL tmp = 0;
+    if(cnt1 &lt; n){
+        a[cnt1 + 1] = u;
+        for(int i = 1; i &lt;= cnt2; i ++) tmp += v[u][b[i]];
+        dfs(u + 1, cnt1 + 1, cnt2, sum + tmp);
+    }
+    tmp = 0;
+    if(cnt2 &lt; n) {
+        b[cnt2 + 1] = u;
+        for(int i = 1; i &lt;= cnt1; i ++) tmp += v[u][a[i]];
+        dfs(u + 1, cnt1, cnt2 + 1, sum + tmp);
+    }
+}
+
+int main() {
+    cin &gt;&gt; n;
+    for(int i = 1; i &lt;= 2 * n; i ++ )
+        for(int j = 1; j &lt;= 2 * n; j ++ )
+            cin &gt;&gt; v[i][j];
+
+    dfs(1, 0, 0, 0);
+    cout &lt;&lt; ans &lt;&lt; endl;
+
+    return 0;
+}</code></pre><h4 id="H-Second-Large-Rectangle"><a href="#H-Second-Large-Rectangle" class="headerlink" title="H Second Large Rectangle"></a>H Second Large Rectangle</h4><p>悬线法 单调栈维护都是一样的东西<br>只要记录下标就好 去重<br>当时我写的很暴力啊 23333 全枚举出来居然没有T</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+const int maxn = 1000 + 5;
+
+int n, m;
+int h[maxn][maxn];
+int q[maxn], l[maxn], r[maxn];
+
+int sol(int l[], int a[]){
+    a[0] = -1;
+    int t = 0;
+    for(int i = 1; i &lt;= m; i ++ ) {
+        while(a[q[t]] &gt;= a[i]) t --;
+        l[i] = q[t] + 1;
+        q[ ++ t ] = i;
+    }
+    return 0;
+}
+
+struct node{
+    int a,b,c,d;
+    int ar;
+    bool operator &lt; (node const &amp;aaa) const {
+        return ar &gt; aaa.ar;
+    }
+};
+
+vector&lt;node&gt; aa;
+
+int ans1, ans2, ans3, ans;
+
+int work(int a[], int kk){
+    sol(l, a);
+    reverse(a + 1, a + 1 + m);
+    sol(r, a);
+    reverse(a + 1, a + 1 + m);
+    int res = 0;
+
+    for(int i = 1; i &lt;= m; i ++ ) {
+        int le = l[i];
+        int ri = m + 1 - r[m - i + 1];
+        res = max(res, a[i] * (ri - le + 1));
+        if((ri - le + 1) * a[i]) {
+                aa.push_back(node{kk - a[i] + 1,l[i], kk , ri, (ri - le + 1) * a[i]});
+                if(a[i] &gt; 1) {
+                    aa.push_back(node{kk - a[i],l[i], kk , ri, (ri - le + 1) * (a[i] - 1)});
+                }
+                if((ri - le + 1) &gt; 1) {
+                     aa.push_back(node{kk - a[i] + 1,l[i], kk , ri - 1, (ri - le) * (a[i])});
+                }
+        }
+    }
+    return res;
+}
+
+char mp[maxn][maxn];
+
+int main(){
+    cin &gt;&gt; n &gt;&gt; m;
+    int ans = 0;
+    for(int i = 1; i &lt;= n; i ++ ) {
+        cin &gt;&gt; (mp[i] + 1);
+        for(int j = 1; j &lt;=m; j ++ ) {
+            if(mp[i][j] == &apos;1&apos;) h[i][j] = h[i - 1][j] + 1;
+            else continue;
+        }
+         work(h[i], i);
+    }
+    int f = 1;
+    if(aa.size() == 0) {
+        cout &lt;&lt; 0 &lt;&lt; endl;
+        return 0;
+    }
+   sort(aa.begin(), aa.end());
+    int a = aa[0].a, b = aa[0].b , c = aa[0].c, d = aa[0].d;
+    for(int i = 0; i &lt; aa.size(); i++) {
+        //cout &lt;&lt; aa[i].a &lt;&lt; &quot; &quot; &lt;&lt; aa[i].b &lt;&lt; &quot; &quot; &lt;&lt; aa[i].c &lt;&lt; &quot; &quot; &lt;&lt; aa[i].d  &lt;&lt; &quot; &quot;  &lt;&lt; aa[i].ar &lt;&lt; endl;
+        if(a != aa[i].a || b != aa[i].b || c != aa[i].c || d != aa[i].d) {
+             f = 0;
+            cout &lt;&lt; aa[i].ar &lt;&lt; endl;
+            break;
+        }
+    }
+  //  cout &lt;&lt; aa.size() &lt;&lt; endl;
+    if(f) cout &lt;&lt; 0 &lt;&lt; endl;
+    // for(int i = 1; i &lt;= n; i ++ ){
+    //     for(int j = 1; j &lt;= m; j ++ ){
+    //         cout &lt;&lt; h[i][j] &lt;&lt; &quot; &quot;;
+    //     }cout &lt;&lt; endl;
+    // }
+
+  //  cout &lt;&lt; ans2 &lt;&lt; endl;
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/25/ubuntu 18.04 基础配置 (编译环境 C++ & py +桌面环境 + gnome 插件)/" rel="next" title="ubuntu 18.04 基础配置 (编译环境 C++ & py /桌面环境 / gnome 插件)">
+                <i class="fa fa-chevron-left"></i> ubuntu 18.04 基础配置 (编译环境 C++ & py /桌面环境 / gnome 插件)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/28/2019牛客暑期多校(第四场) 写题记录/" rel="prev" title="2019牛客暑期多校(第四场) 写题记录">
+                2019牛客暑期多校(第四场) 写题记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Eddy-Walker"><span class="nav-number">1.</span> <span class="nav-text">A Eddy Walker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-Kth-Minimum-Clique"><span class="nav-number">2.</span> <span class="nav-text">D Kth Minimum Clique</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-Partition-problem"><span class="nav-number">3.</span> <span class="nav-text">F Partition problem</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#H-Second-Large-Rectangle"><span class="nav-number">3.1.</span> <span class="nav-text">H Second Large Rectangle</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

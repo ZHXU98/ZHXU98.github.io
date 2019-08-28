@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="排序离散化 例题 Cinema之前一直读错题 orz 今天补下 #include &amp;lt;iostream&amp;gt; #include &amp;lt;algorithm&amp;gt; #include &amp;lt;cstring&amp;gt; using namespace std; const int maxn = 2e5 + 5;  int a[maxn], b[maxn], num[maxn]; struct no">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《算法竞赛进阶指南》 0x05 ~ 0x06 代码 + 杂谈">
+<meta property="og:url" content="http://zhxu98.github.io/2019/07/04/《算法竞赛进阶指南》 0x05 ~ 0x06 代码 + 杂谈/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="排序离散化 例题 Cinema之前一直读错题 orz 今天补下 #include &amp;lt;iostream&amp;gt; #include &amp;lt;algorithm&amp;gt; #include &amp;lt;cstring&amp;gt; using namespace std; const int maxn = 2e5 + 5;  int a[maxn], b[maxn], num[maxn]; struct no">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-28T03:11:10.968Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《算法竞赛进阶指南》 0x05 ~ 0x06 代码 + 杂谈">
+<meta name="twitter:description" content="排序离散化 例题 Cinema之前一直读错题 orz 今天补下 #include &amp;lt;iostream&amp;gt; #include &amp;lt;algorithm&amp;gt; #include &amp;lt;cstring&amp;gt; using namespace std; const int maxn = 2e5 + 5;  int a[maxn], b[maxn], num[maxn]; struct no">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/07/04/《算法竞赛进阶指南》 0x05 ~ 0x06 代码 + 杂谈/">
+
+
+
+
+
+  <title>《算法竞赛进阶指南》 0x05 ~ 0x06 代码 + 杂谈 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/07/04/《算法竞赛进阶指南》 0x05 ~ 0x06 代码 + 杂谈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《算法竞赛进阶指南》 0x05 ~ 0x06 代码 + 杂谈</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T14:31:37+08:00">
+                2019-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p><strong>离散化</strong></p>
+<p>例题 <strong>Cinema</strong><br>之前一直读错题 orz 今天补下</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+using namespace std;
+const int maxn = 2e5 + 5;
+
+int a[maxn], b[maxn], num[maxn];
+struct node{
+    int id;
+    int lan;
+    int sub;
+    bool operator &lt; (const node &amp; a) const {
+        return a.lan &lt; lan || (a.lan == lan &amp;&amp; a.sub &lt; sub);
+    }
+}mo[maxn];
+
+int chk(int x, int cnt){
+    int l = 1, r = cnt;
+    while(l &lt; r) {
+        int mid = l + r &gt;&gt; 1;
+        if(b[mid] &gt;= x) r = mid;
+        else l = mid + 1;
+    }
+    if(x != b[l]) return 0;
+    else return l;
+}
+
+int main(){
+    int n, m;
+    cin &gt;&gt; n;
+    for(int i = 1, t; i &lt;= n; i ++ ) {
+        cin &gt;&gt; a[i];
+        b[i] = a[i];
+    }
+    sort(b + 1, b + 1 + n);
+    for(int i = 1; i &lt;= n; i ++ ) 
+        num[chk(a[i], n)] ++;
+    cin &gt;&gt; m;
+    for(int i = 1, pos; i &lt;= m; i ++ ) {
+        cin &gt;&gt; pos;
+        mo[i].id = i;
+        pos = chk(pos, n);
+        pos ? mo[i].lan = num[pos] : 0;
+    }
+    for(int i = 1, pos; i &lt;= m; i ++ ) {
+        cin &gt;&gt; pos;
+        pos = chk(pos, n);
+        pos ? mo[i].sub = num[pos] : 0;
+    }
+    sort(mo + 1, mo + 1 + m);
+    cout &lt;&lt; mo[1].id &lt;&lt; endl;
+    return 0;
+}</code></pre><p><strong>货仓选址问题</strong><br>ps 一般固定点选中位数 如果 没有这个要求的话 那个平均数更好</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int maxn = 1e5 + 5 ;
+int n, m, a[maxn];
+
+int main() {
+    cin &gt;&gt; n;
+    for(int i = 1; i &lt;= n; i++) cin &gt;&gt; a[i];
+    int sum = 0;
+    sort(a + 1, a + 1 + n);
+    int pos = a[(n + 1) / 2];
+    for(int i = 1;i &lt;= n; i ++ ){
+        sum += abs(a[i] - pos);
+    }
+    cout &lt;&lt; sum &lt;&lt; endl;
+    return 0;
+}</code></pre><p><strong>七夕祭</strong><br>这题和货舱选址 用中位数 并且 和 均分纸牌有关<br>首先我们 先想 对一个列 or 行 进行纸牌均分 而且他是成环的 我们可以考虑从k人隔开<br>为了让这个和最小 我们最好 选中位数(货舱选址) 所以这题就这样狗出来了</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+using namespace std;
+const int maxn = 100000 + 5;
+
+int N, M, T;
+int c[2][maxn], a[maxn], s[maxn];
+
+int main(){
+    cin &gt;&gt; N &gt;&gt; M &gt;&gt; T;
+    for(int i = 1; i &lt;= T; i ++ ) {
+        int x, y;
+        cin &gt;&gt; x &gt;&gt; y;
+        c[0][y] ++;
+        c[1][x] ++;
+    }
+    if((T % N) != 0 &amp;&amp; (T % M) != 0) {
+        cout &lt;&lt; &quot;impossible&quot; &lt;&lt; endl;
+        return 0;
+    }
+    int ans = 0, flag = 0, ok = 0;
+    if((T % M) == 0){
+        int TM = T / M;
+        for(int i = 1; i &lt;= M; i ++ ) {
+            a[i] = c[0][i] - TM;
+            s[i] = s[i - 1] + a[i];
+        }
+        sort(s + 1, s + 1 + M);
+        int mid = s[M + 1 &gt;&gt; 1];
+        for(int i = 1; i &lt;= M; i ++ ) {
+            ans += abs(s[i] - mid);
+        }
+        ok = 1;
+    }
+    if((T % N) == 0){
+        int TM = T / N;
+        for(int i = 1; i &lt;= N; i ++ ) {
+            a[i] = c[1][i] - TM;
+            s[i] = s[i - 1] + a[i];
+        }
+        sort(s + 1, s + 1 + N);
+        int mid = s[N + 1 &gt;&gt; 1];
+        for(int i = 1; i &lt;= N; i ++ ) {
+            ans += abs(s[i] - mid);
+        }
+        flag = 1;
+    }
+    if(flag &amp;&amp; ok) cout &lt;&lt; &quot;both &quot; &lt;&lt; ans &lt;&lt; endl;
+    else if(flag) cout &lt;&lt; &quot;row &quot; &lt;&lt; ans &lt;&lt; endl;
+    else cout &lt;&lt; &quot;column &quot; &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</code></pre><p><strong>动态中位数</strong> 对顶堆 我记得我以前那权值线段树水过一个各种中位数的题<br>开两个堆，一个大根堆，一个小根堆，大根堆用来存放已经扫描到的元素里面，从小到大排名为前一半的元素，小根堆放后一半比较大的数 每次查询小根堆堆顶即为中位数。</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+using namespace std;
+const int maxn = 1e5 + 5 ;
+int n, m;
+
+priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt; &gt; minheap;
+priority_queue&lt;int, vector&lt;int&gt;, less&lt;int&gt; &gt; maxheap;
+
+int main() {
+    int cas;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        while(!minheap.empty()) minheap.pop();
+        while(!maxheap.empty()) maxheap.pop();
+        cin &gt;&gt; m &gt;&gt; n;
+        cout &lt;&lt; m &lt;&lt; &quot; &quot; &lt;&lt; (n + 1) / 2 &lt;&lt; endl;
+
+        for(int i = 1, t; i &lt;= n; i ++ ) {
+            cin &gt;&gt; t;
+            if(minheap.empty()) minheap.push(t);
+            else if(minheap.top() &lt; t) minheap.push(t);
+            else maxheap.push(t);
+
+            if(minheap.size() &lt; maxheap.size()) minheap.push(maxheap.top()), maxheap.pop();
+            else if(minheap.size() &gt; maxheap.size() + 1) maxheap.push(minheap.top()), minheap.pop();
+
+            if(i &amp; 1) cout &lt;&lt; minheap.top() &lt;&lt; &quot; &quot;;
+            if(i % 20 == 0) cout &lt;&lt; endl;
+        }
+        cout &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><p><strong>ｋ大数</strong></p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+int n, a[500], k, ans, f;
+int qsort(int left, int right) {
+    if(left == right) return a[left];
+    if(left &gt; right) return 0;
+    int l = left, r = right;
+    int x = a[l];
+    while(l &lt; r) {
+        while(l &lt; r &amp;&amp; a[r] &lt; x) r--;
+        if(l &lt; r) a[l++] = a[r];
+        while(l &lt; r &amp;&amp; a[l] &gt; x) l++;
+        if(l &lt; r) a[r--] = a[l];
+    }
+    a[l] = x;
+    if(l == k) return a[l];
+    if(l &lt; k) return qsort(l + 1, right);
+    else return qsort(left, l - 1);
+}
+int main() {
+    cin &gt;&gt; n &gt;&gt; k;
+    for(int i = 1; i &lt;= n; i++) cin &gt;&gt; a[i];
+    printf(&quot;%d&quot;, qsort(1, n));
+}</code></pre><p><strong>逆序对</strong><br>１．归并</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+const int maxn = 5e5 + 5 ;
+
+int n, m;
+int a[maxn], b[maxn];
+int cnt;
+
+void merges(int l, int r) {
+    if(r - l &lt; 1)
+        return ;
+    int mid=l + r &gt;&gt; 1;
+    merges(l, mid);
+    merges(mid + 1, r);
+    int i = l, j = mid + 1;
+    for(int k = l; k &lt;= r; k++) {
+        if(j &gt; r || i &lt;= mid &amp;&amp; a[i] &lt;= a[j])
+            b[k] = a[i++];
+        else
+            b[k] = a[j++], cnt += mid - i + 1;
+    }
+    for(int k = l; k &lt;= r; k++)
+        a[k] = b[k];
+}
+
+signed main() {
+    while(cin &gt;&gt; n, n) {
+        cnt = 0;
+        for(int i = 1; i &lt;= n; i++)
+            cin &gt;&gt; a[i];
+        merges(1, n);
+        cout &lt;&lt; cnt &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><ol start="2">
+<li>树状数组<br>数据大时离散化．．．</li>
+</ol>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+const int maxn = 5e5 + 5 ;
+
+int n, m;
+int c[maxn];
+int lowbit(int x) {
+    return (-x) &amp; x;
+}
+
+void add(int x, int y){
+    while(x &lt;= n) {
+        c[x] += y;
+        x += lowbit(x);
+    }
+}
+
+int get_sum(int x) {
+    int res = 0;
+    while(x){
+        res += c[x];
+        x -= lowbit(x);
+    }
+    return res;
+}
+
+int main() {
+    while(cin &gt;&gt; n, n) {
+        int cnt = 0;
+        memset(c, 0, sizeof(c));
+        for(int i = 1, t; i &lt;= n; i++){
+            cin &gt;&gt; t;
+            cnt += get_sum(n) - get_sum(t);
+            add(t, 1);
+        }
+        cout &lt;&lt; cnt &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><p><strong>奇数码问题</strong><br>ｐｓ：逆序对奇数和偶数 相同有解</p>
+<h2 id="倍增"><a href="#倍增" class="headerlink" title="倍增"></a>倍增</h2><p><strong>天才ＡＣＭ</strong> 倍增</p>
+<p>归并完成对Ｂ的排序 ｃｈｋ从中找最大<br>如果 超过的话 还原Ｂ数组(A);<br>没有的话 保留排序 下一次就可以从ｎｒ开始排序 减低复杂度<br>倍增找到最长可行区间 使分段最少</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 5e5 + 5;
+int K, N, M, ans;
+int A[maxn], B[maxn], C[maxn];
+ll T;
+
+bool chk(int cnt){
+    ll res = 0;
+    int p = 1,q = cnt, ms = M;
+    while(p &lt; q &amp;&amp; ms --){
+        ll s = C[q] - C[p];
+        res += s * s;
+        if(res &gt; T) return false;
+        p++, q--;
+    }
+    return true;
+}
+
+bool combine(int l,int r,int nr){
+    sort(B + r + 1,B + nr + 1);
+    int p = l,q = r + 1;
+    int cnt = 0;
+    while(p &lt;= r &amp;&amp; q &lt;= nr){
+        if(B[p] &lt; B[q])  C[++ cnt] = B[p ++];
+        else C[++ cnt] = B[q ++];
+    }
+    while(p &lt;= r) C[++ cnt] = B[p ++];
+    while(q &lt;= nr) C[++ cnt] = B[q ++];
+    if(chk(cnt)){
+        int i = l;
+        for(int i = l; i &lt;= nr; i ++ ) A[i] = B[i] = C[i - l + 1];
+        return true;
+    }
+    else{
+        for(int i = r + 1;i &lt;= nr;i++)  B[i] = A[i];
+        return false;
+    }   
+}
+
+void solve(){
+    int l = 1,r = 1;
+    ans = 0;
+    while(l &lt;= N){
+        int nr,d = 1;
+        while(d){
+            nr =  r + d;
+            if(nr &lt;= N &amp;&amp; combine(l,r,nr)) r = nr,d *= 2;
+            else d /= 2;
+        }
+        ans++;
+        r = l = r + 1;
+    }
+}
+int main(){
+    cin &gt;&gt; K;
+    while(K --){
+        cin &gt;&gt; N &gt;&gt; M &gt;&gt; T;
+        for(int i = 1; i &lt;= N; i ++) cin &gt;&gt; A[i], B[i] = A[i];
+        solve();
+        cout&lt;&lt;ans&lt;&lt;endl;
+    }
+    return 0;
+}</code></pre><p><strong>ＳＴ表</strong><br><a href="https://www.luogu.org/problemnew/show/P3865" target="_blank" rel="noopener"> https://www.luogu.org/problemnew/show/P3865
+</a></p>
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+const int maxn = 1e5 + 5;
+
+int lg[maxn];
+int a[maxn], f[maxn][30];
+
+int n, m;
+
+void STbuild() {
+    for(int i = 1; i &lt;= n; i ++ ) f[i][0] = a[i];
+    int t = (lg[n]-1)/(lg[2]-1) + 1;
+    for(int j = 1; j &lt; t; j ++ ) {
+        for(int i = 1; i &lt;= n - (1 &lt;&lt; j) + 1; i ++ ) {
+            f[i][j] = max(f[i][j - 1], f[i + (1 &lt;&lt; (j - 1))][j - 1]);
+        }
+    }
+}
+
+int STquery(int l, int r){
+    int k = (lg[r - l + 1] - 1);
+    return max(f[l][k], f[r - (1 &lt;&lt; k) + 1][k]);
+}
+
+int main() {
+    for(int i = 1; i &lt; maxn; i ++){
+        lg[i] = lg[i - 1] + ((1 &lt;&lt; lg[i - 1]) == i);
+    }
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+    for(int i = 1; i &lt;= n; i ++){
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    }
+    STbuild();
+    for(int i = 1; i &lt;= m; i ++) {
+        int x, y;
+        scanf(&quot;%d %d&quot;, &amp;x, &amp;y);
+        printf(&quot;%d\n&quot;, STquery(x, y));
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/03/《算法竞赛进阶指南》 0x03 ~ 0x04 代码 + 杂谈/" rel="next" title="《算法竞赛进阶指南》 0x03 ~ 0x04 代码 + 杂谈">
+                <i class="fa fa-chevron-left"></i> 《算法竞赛进阶指南》 0x03 ~ 0x04 代码 + 杂谈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/05/《算法竞赛进阶指南》0x07 代码 + 杂谈/" rel="prev" title="《算法竞赛进阶指南》0x07 代码 + 杂谈">
+                《算法竞赛进阶指南》0x07 代码 + 杂谈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">1.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#倍增"><span class="nav-number">2.</span> <span class="nav-text">倍增</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

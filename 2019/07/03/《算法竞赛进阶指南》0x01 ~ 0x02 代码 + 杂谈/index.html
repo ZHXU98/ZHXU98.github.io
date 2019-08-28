@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0x01 位运算位运算符 第 i 位为从右往左从0开始数 如果要设置 n 的第 i 位为1，n=（n|（1&amp;lt;&amp;lt;i）；                               如果要设置 n 的第 i 位为0，n=（n &amp;amp;（~（1&amp;lt;&amp;lt;i））；  &amp;amp; 按位与 如果两个相应的二进制位都为1，则该位的结果值为1，否则为0 | 按位或 两个相应的二进制位中只要有一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《算法竞赛进阶指南》0x01 ~ 0x02 代码 + 杂谈">
+<meta property="og:url" content="http://zhxu98.github.io/2019/07/03/《算法竞赛进阶指南》0x01 ~ 0x02 代码 + 杂谈/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="0x01 位运算位运算符 第 i 位为从右往左从0开始数 如果要设置 n 的第 i 位为1，n=（n|（1&amp;lt;&amp;lt;i）；                               如果要设置 n 的第 i 位为0，n=（n &amp;amp;（~（1&amp;lt;&amp;lt;i））；  &amp;amp; 按位与 如果两个相应的二进制位都为1，则该位的结果值为1，否则为0 | 按位或 两个相应的二进制位中只要有一">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190703143445133.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190703143454989.png">
+<meta property="og:updated_time" content="2019-08-28T03:11:11.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《算法竞赛进阶指南》0x01 ~ 0x02 代码 + 杂谈">
+<meta name="twitter:description" content="0x01 位运算位运算符 第 i 位为从右往左从0开始数 如果要设置 n 的第 i 位为1，n=（n|（1&amp;lt;&amp;lt;i）；                               如果要设置 n 的第 i 位为0，n=（n &amp;amp;（~（1&amp;lt;&amp;lt;i））；  &amp;amp; 按位与 如果两个相应的二进制位都为1，则该位的结果值为1，否则为0 | 按位或 两个相应的二进制位中只要有一">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190703143445133.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/07/03/《算法竞赛进阶指南》0x01 ~ 0x02 代码 + 杂谈/">
+
+
+
+
+
+  <title>《算法竞赛进阶指南》0x01 ~ 0x02 代码 + 杂谈 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/07/03/《算法竞赛进阶指南》0x01 ~ 0x02 代码 + 杂谈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《算法竞赛进阶指南》0x01 ~ 0x02 代码 + 杂谈</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-03T14:36:24+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="0x01-位运算"><a href="#0x01-位运算" class="headerlink" title="0x01 位运算"></a>0x01 位运算</h2><p><strong>位运算符</strong></p>
+<pre><code>第 i 位为从右往左从0开始数
+如果要设置 n 的第 i 位为1，n=（n|（1&lt;&lt;i）；                              
+如果要设置 n 的第 i 位为0，n=（n &amp;（~（1&lt;&lt;i））；
+
+&amp; 按位与
+如果两个相应的二进制位都为1，则该位的结果值为1，否则为0
+| 按位或
+两个相应的二进制位中只要有一个为1，该位的结果值为1
+^  按位异或
+若参加运算的两个二进制位值相同则为0，否则为1
+~ 取反
+~是一元运算符，用来对一个二进制数按位取\反，即将0变1，将1变0
+&lt;&lt; 左移
+用来将一个数的各二进制位全部左移N位，右补0
+
+&gt;&gt; 右移 
+将一个数的各二进制位右移N位，移到右端 的低位被舍弃，对于无符号数，高位补0</code></pre><p><strong>补码</strong><br>一个负整数（或原码）与其补数（或补码）相加，和为模。(C &lt; 0);<br>-C + S = INT_MAX;<br>~n = -1 - n;</p>
+<p><strong>a^b</strong></p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+typedef long long ll;
+
+ll q_mod(ll a, ll b, ll p) {
+    ll res = 1 % p;
+    while(b){
+        if(b &amp; 1) res = res * a % p;
+        a = a * a % p;
+        b &gt;&gt;= 1;
+    }
+    return res;
+}
+
+int main(){
+    ll a, b, p;
+    cin &gt;&gt; a &gt;&gt; b &gt;&gt; p;
+    cout &lt;&lt; q_mod(a, b, p) &lt;&lt; endl;
+    return 0;
+}</code></pre><p><strong>64位整数乘法</strong> (快速乘带mod)</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+typedef unsigned long long ull;
+typedef long long ll;
+
+ll mul(ll a, ll b, ll p) {
+    ll res = 0;
+    while(b) {
+        if(b &amp; 1) res = (res + a) % p;
+        a = (a &lt;&lt; 1) % p;
+        b &gt;&gt;= 1;
+    }
+    return res;
+}
+
+int main(){
+    ll a, b, p;
+    cin &gt;&gt; a &gt;&gt; b &gt;&gt; p;
+    cout &lt;&lt; mul(a, b, p) &lt;&lt; endl;
+    return 0;
+}</code></pre><p>以上都是利用 b的二进制 有1的才有乘法和加法意义 所做的</p>
+<p><strong>lowbit</strong><br>lowbIt(x) = (-x) &amp; x; 获得最低位的 1 ;</p>
+<p><strong>最短 hamilton 路径</strong><br>状压DP 居然第一节就有了 orz</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+
+const int maxn = 20 + 5;
+int mp[maxn][maxn];
+int dp[(1 &lt;&lt; 20) + 5][maxn];
+
+int main(){
+    int n;
+    cin &gt;&gt; n;
+
+    for(int i = 1; i &lt;= n; i ++ ) for(int j = 1; j &lt;= n; j ++ ) 
+        cin &gt;&gt; mp[i][j];
+        // for(int k=1;k&lt;=n;k++){
+        //     for(int i=1;i&lt;=n;i++){
+        //         for(int j=1;j&lt;=n;j++){
+        //             if(mp[i][j]&gt;mp[i][k]+mp[k][j]) mp[i][j]=mp[i][k]+mp[k][j];
+        //         }
+        //     }
+        // } 数据保证最短路 不然跑floyd先  
+    memset(dp, 0x3f, sizeof dp);
+    //for(int i = 0; i &lt;=n ; i ++ ) dp[1 &lt;&lt; i][i] = 0; // 任意开始最短路径
+    dp[1][0] = 0;
+    for(int s = 1; s &lt; (1 &lt;&lt; n); s ++ ) {
+        for(int i = 0; i &lt; n; i ++ ) {
+            if( !(s &amp; (1 &lt;&lt; i)) ) continue; // 借助这个城市
+            for(int j = 0; j &lt; n; j ++ ) {
+                if(s &amp; (1 &lt;&lt; j)) continue; // 要去这个城市
+                dp[s | (1 &lt;&lt; j)][j] = min(dp[s | (1 &lt;&lt; j)][j], dp[s][i] + mp[i + 1][j + 1]);
+            }
+        }
+    }
+    cout &lt;&lt; dp[(1 &lt;&lt; n) - 1][n - 1] &lt;&lt; endl;
+    return 0;
+}</code></pre><h2 id="0x02递推与递归"><a href="#0x02递推与递归" class="headerlink" title="0x02递推与递归"></a>0x02递推与递归</h2><p>枚举: 排列 组合 (多项式级和指数级别, 递归、循环 剪支);</p>
+<p><strong>递归实现指数型枚举</strong></p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+const int maxn = 20;
+int ans[maxn], hh, tt;
+int n;
+
+void dfs(int num){
+    if(num == n + 1) {
+        for(int i = hh; i &lt; tt; i ++ ) {
+            cout &lt;&lt; ans[i] &lt;&lt; &quot; &quot;;
+        }cout &lt;&lt; endl;
+        return;
+    }
+    dfs(num + 1);
+    ans[tt] = num;
+    tt ++;
+    dfs(num + 1);
+    tt --;
+}
+
+int main(){
+    cin &gt;&gt; n;
+    hh = 1, tt = 1;
+    dfs(1);
+    return 0;
+}</code></pre><p><strong>递归实现组合型枚举</strong><br>注意剪枝</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+const int maxn = 30;
+int ans[maxn], hh, tt;
+int n, m;
+
+void dfs(int num){
+    if(tt &gt; m + 1|| tt + (n - num) &lt; m)
+        return;
+    if(tt == m + 1) {
+        for(int i = 1; i &lt; tt; i ++ ){
+            cout &lt;&lt; ans[i] &lt;&lt; &quot; &quot;;
+        }cout &lt;&lt; endl;
+        return ;
+    }
+    ans[tt] = num;
+    tt ++;
+    dfs(num + 1);
+    tt --;
+    dfs(num + 1);
+}
+
+int main(){
+    cin &gt;&gt; n &gt;&gt; m;
+    hh = 1, tt = 1;
+    dfs(1);
+    return 0;
+}</code></pre><p><strong>递归实现排列枚举型</strong></p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+const int maxn = 15;
+bool vis[maxn];
+int ans[maxn], hh, tt;
+int n, m;
+
+void dfs(int num){
+    if(num == n + 1) {
+        for(int i = 1; i &lt; tt; i ++ ) {
+            cout &lt;&lt; ans[i] &lt;&lt; &quot; &quot;;
+        }cout &lt;&lt; endl;
+        return ;
+    }
+    for(int i = 1; i &lt;= n; i ++ ) {
+        if(vis[i]) continue;
+        ans[tt] = i;
+        tt ++;
+        vis[i] = 1;
+        dfs(num + 1);
+        tt -- ;
+        vis[i] = 0;
+    }
+}
+
+int main(){
+    cin &gt;&gt; n;
+    hh = 1, tt = 1;
+    dfs(1);
+    return 0;
+}</code></pre><p>例题:<br><strong>费解的开关</strong><br>每一点 只影响上下左右<br>不妨枚举第一次方案 这样 之后每一层都必须根据上一层来处理 翻不翻<br>最后判断最后一层 是否可行就行</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+
+const int maxn = 10;
+int a[maxn][maxn], b[maxn][maxn];
+int n, ans;
+
+int solve(int k){
+    int res = 0;
+    for(int i = 2; i &lt;= n; i ++ ) {
+        for(int j = 1; j &lt;= n; j ++ ) {
+            if((a[i - 1][j] + b[i - 1][j] + b[i - 1][j - 1] + b[i - 1][j + 1] + b[i - 2][j]) &amp; 1) {
+                res ++;
+                b[i][j] = 1;
+            }else {
+                b[i][j] = 0;
+            }
+        }
+        if(res + k &gt; 6) return 0x3f3f3f3f;
+    }
+
+    for(int j = 1; j &lt;= n; j ++ ) {
+        if((a[n][j] + b[n][j] + b[n][j - 1] + b[n][j + 1] + b[n - 1][j]) &amp; 1) {
+            return 0x3f3f3f3f;
+        }
+    }
+    return res;
+}
+
+void dfs(int num, int k) {
+    if(num == n + 1) {
+        ans = min(solve(k) + k, ans);
+        return ;
+    }
+    b[1][num] = 0;
+    dfs(num + 1, k);
+    b[1][num] = 1;
+    dfs(num + 1, k + 1);
+}
+
+int main(){
+    int cas ;
+    cin &gt;&gt; cas;
+    n = 5;
+    while(cas --) {
+        memset(a, 0, sizeof a);
+        memset(b, 0, sizeof b);
+        string line;
+        for(int i = 1; i &lt;= 5; i++ ) {
+            cin &gt;&gt; line;
+            for(int j = 1; j &lt;= 5; j++ ) {
+                if(line[j - 1] == &apos;0&apos;) a[i][j] = 1;
+            }
+        }
+        ans = 0x3f3f3f3f;
+        dfs(1, 0);
+        if(ans &gt; 6) cout &lt;&lt; -1 &lt;&lt; endl;
+        else cout &lt;&lt; ans &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><p><strong>多汉诺塔问题</strong></p>
+<blockquote>
+<p>首先考虑n个盘子3塔的经典Hanoi问题，设dn表示求解n个盘子3塔问题的最少步数，显然有 dn=2∗dn−1+1</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>含义为把前n−1个盘子从A借助C转移到B，再将第n个盘子转移到C，最后把n−1个盘子从B借助A转移到C。</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>类似地，对于本题，设f[n]表示求解n个盘子4塔问题的最小步数，则有 fn=min(2∗fi+dn−i)(1≤i&lt;n)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>含义为把前i个盘子在4柱的情况下从A转移到B，再将n−i个盘子在3柱的情况下从A转移到D，最后再将i个盘子在4柱的情况下从B转移到D<br> 那么对于n盘m塔的问题(m&gt;4)，就有 fn,m=min(2∗fi,m+fn−i,m−1)(1≤i&lt;n)<br> 使得我们可以在O(n^2∗m)的复杂度内求解该问题</p>
+</blockquote>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+const int maxn = 25 + 5 ;
+int n, m;
+
+int dp[20], d[20];
+
+signed main() {
+    d[1] = 1;
+    for(int i = 2; i &lt;= 15; i++) {
+        d[i] = d[i - 1] * 2 + 1;
+    }
+    memset(dp, 0x3f, sizeof(dp));
+    dp[1] = 1;
+    for(int i = 2; i &lt;= 15; i++) {
+        for(int j = 1; j &lt; i; j++) {
+            dp[i] = min(dp[i], d[i - j] + dp[j] * 2);
+        } // 2 * 4塔模式  + 1 * 3塔模式
+    }
+    for(int i = 1; i &lt;= 12; i++) {
+        cout &lt;&lt; dp[i] &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><p><strong>约数之和</strong> 这题不仅分治可以做… 矩阵快速幂 还有后面的数论一个解法 好像也提到过<br>这里先先补上书上的解法</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+typedef long long ll;
+const int mod = 9901;
+const int maxn = 105;
+int n, m;
+int p[maxn], c[maxn], cnt;
+
+void divide(int n) {
+    cnt = 0;
+    for(int i = 2; i &lt;= sqrt(n); i++) {
+        if(n % i == 0) {
+            p[++cnt] = i, c[cnt] = 0;
+            while(n % i == 0)
+                n /= i, c[cnt]++;
+        }
+    }
+    if(n &gt; 1)
+        p[++cnt] = n, c[cnt] = 1;
+}
+
+int q_mod(int a, int b) {
+    int res = 1;
+    while(b){
+        if(b &amp; 1) res = 1ll*  res * a % mod;
+        a = 1ll * a * a % mod;
+        b &gt;&gt;= 1;
+    }
+    return res;
+}
+
+int dfs(int pt, int ct) {
+    if(ct == 0) return 1;
+    if(ct % 2 == 1)
+        return ((1ll + q_mod(pt, (ct + 1) / 2)) * dfs(pt, (ct - 1) / 2)) % mod;
+    else
+        return ((1ll + q_mod(pt, ct / 2)) * dfs(pt, (ct / 2) - 1) % mod + q_mod(pt, ct)) % mod;
+}
+
+int main(){
+    cin &gt;&gt; n &gt;&gt; m;
+    divide(n);
+    int ans = 1 ;
+    if(n == 0) ans = 0;
+    for(int i = 1; i &lt;= cnt ; i ++ ) {
+        ans *= dfs(p[i], c[i] * m);
+        ans %= mod;
+    }
+    cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</code></pre><p><strong>分形之城</strong><br>补充这个</p>
+<blockquote>
+<p>ps : 坐标旋转公式<br> (x, y) 旋转 b 度 (逆时针)<br> s = x cos(b) – y sin(b)<br> t = x sin(b) + y cos(b)<br> <img src="https://img-blog.csdnimg.cn/20190703143445133.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p>坐标轴旋转<br> <img src="https://img-blog.csdnimg.cn/20190703143454989.png" alt="在这里插入图片描述"></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/10/龙曲线  [分形]  从 DFS暴力 到 规律 实现/" rel="next" title="龙曲线  [分形]  从 DFS暴力 到 规律 实现">
+                <i class="fa fa-chevron-left"></i> 龙曲线  [分形]  从 DFS暴力 到 规律 实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/03/《算法竞赛进阶指南》 0x03 ~ 0x04 代码 + 杂谈/" rel="prev" title="《算法竞赛进阶指南》 0x03 ~ 0x04 代码 + 杂谈">
+                《算法竞赛进阶指南》 0x03 ~ 0x04 代码 + 杂谈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-位运算"><span class="nav-number">1.</span> <span class="nav-text">0x01 位运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02递推与递归"><span class="nav-number">2.</span> <span class="nav-text">0x02递推与递归</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="链表数组模拟大法好啊 orz 前向星 + 数组下标搞得各种线段树什么得邻值查找STL嚎啊 #include &amp;lt;iostream&amp;gt; #include &amp;lt;set&amp;gt; using namespace std; typedef pair&amp;lt;int, int&amp;gt; P; const int maxn = 1e5 + 5; #define int long long  struct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《算法竞赛进阶指南》 0x13 + 0x17 代码 + 杂谈">
+<meta property="og:url" content="http://zhxu98.github.io/2019/07/07/《算法竞赛进阶指南》 0x13 + 0x17 代码 + 杂谈/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="链表数组模拟大法好啊 orz 前向星 + 数组下标搞得各种线段树什么得邻值查找STL嚎啊 #include &amp;lt;iostream&amp;gt; #include &amp;lt;set&amp;gt; using namespace std; typedef pair&amp;lt;int, int&amp;gt; P; const int maxn = 1e5 + 5; #define int long long  struct">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-28T03:11:08.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《算法竞赛进阶指南》 0x13 + 0x17 代码 + 杂谈">
+<meta name="twitter:description" content="链表数组模拟大法好啊 orz 前向星 + 数组下标搞得各种线段树什么得邻值查找STL嚎啊 #include &amp;lt;iostream&amp;gt; #include &amp;lt;set&amp;gt; using namespace std; typedef pair&amp;lt;int, int&amp;gt; P; const int maxn = 1e5 + 5; #define int long long  struct">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/07/07/《算法竞赛进阶指南》 0x13 + 0x17 代码 + 杂谈/">
+
+
+
+
+
+  <title>《算法竞赛进阶指南》 0x13 + 0x17 代码 + 杂谈 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/07/07/《算法竞赛进阶指南》 0x13 + 0x17 代码 + 杂谈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《算法竞赛进阶指南》 0x13 + 0x17 代码 + 杂谈</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-07T14:02:42+08:00">
+                2019-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>数组模拟大法好啊 orz 前向星 + 数组下标搞得各种线段树什么得<br><strong>邻值查找</strong><br>STL嚎啊</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;set&gt;
+using namespace std;
+typedef pair&lt;int, int&gt; P;
+const int maxn = 1e5 + 5;
+#define int long long
+
+struct node{
+    int v, id;
+    node(){}
+    node(int _v, int _id){
+        v = _v, id = _id;
+    }
+    bool operator &lt; (const node &amp; a) const {
+        return v &lt; a.v || (v == a.v &amp;&amp; id &lt; a.id);
+    }
+}a[maxn];
+P ans[maxn];
+set&lt;node&gt; S;
+
+signed main(){
+    int n;
+    cin &gt;&gt; n;
+    for(int i = 1; i &lt;= n; i++ ){
+        cin &gt;&gt; a[i].v;
+        a[i].id = i;
+        S.insert(a[i]);
+    }
+    S.insert(node(-2e9, -1)), S.insert(node(2e9, -1));
+    for(int i = n; i &gt;= 2; i --) {
+        auto p1 = S.lower_bound(a[i]);
+        auto p3 = p1;
+        p3++;
+        int cha = 2e9, pos;
+        if((*p3).id != -1) pos = (*p3).id, cha = abs((*p3).v - a[i].v);
+        auto p2 = p1;
+        p2--;
+        if((*p2).id != -1 &amp;&amp; cha &gt;= abs((*p2).v - a[i].v)) pos = (*p2).id, cha = abs((*p2).v - a[i].v);
+        ans[i] = P(cha, pos);
+        S.erase(p1);
+    }
+    for(int i = 2; i &lt;= n; i ++) cout &lt;&lt; ans[i].first &lt;&lt; &quot; &quot; &lt;&lt; ans[i].second &lt;&lt; endl;
+    return 0;
+}</code></pre><p>yxc 老师 写的模拟链表解法</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef long long LL;
+typedef pair&lt;LL, int&gt; PII;
+const int N = 100010;
+
+int n;
+int l[N], r[N];
+int p[N];
+PII a[N], ans[N];
+
+int main()
+{
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i ++ )
+    {
+        cin &gt;&gt; a[i].first;
+        a[i].second = i;
+    }
+    sort(a + 1, a + 1 + n);
+
+    a[0].first = -3e9, a[n + 1].first = 3e9;
+    for (int i = 1; i &lt;= n; i ++ )
+    {
+        l[i] = i - 1, r[i] = i + 1;
+        p[a[i].second] = i;
+    }
+
+    for (int i = n; i &gt; 1; i -- )
+    {
+        int j = p[i], left = l[j], right = r[j];
+        LL left_value = abs(a[left].first - a[j].first);
+        LL right_value = abs(a[right].first - a[j].first);
+        if (left_value &lt;= right_value) ans[i] = {left_value, a[left].second};
+        else ans[i] = {right_value, a[right].second};
+        l[right] = left, r[left] = right;
+    }
+
+    for (int i = 2; i &lt;= n; i ++ ) cout &lt;&lt; ans[i].first &lt;&lt; &apos; &apos; &lt;&lt; ans[i].second &lt;&lt; endl;
+
+    return 0;
+}
+作者：yxc
+链接：https://www.acwing.com/activity/content/code/content/29173/
+来源：AcWing
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</code></pre><h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>先上手写堆</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 1000000+5;
+
+int heap[maxn];
+int siz=0;
+
+void push(int x){
+    heap[++siz]=x;
+    int cnt=siz;
+    while(cnt&gt;1){
+        int nxt=cnt&gt;&gt;1;
+        if(heap[cnt&gt;&gt;1]&gt;heap[cnt]) swap(heap[cnt&gt;&gt;1],heap[cnt]);
+        else break;
+        cnt=nxt;
+    }
+    return ;
+}
+
+void pop(){
+    swap(heap[siz],heap[1]);
+    siz--;
+    int cnt=1;
+    while((cnt&lt;&lt;1) &lt;= siz){
+        int nxt=cnt&lt;&lt;1;
+        if((nxt|1)&lt;=siz&amp;&amp;heap[nxt|1]&lt;heap[nxt]) nxt++;// 先换右 写的方便
+        if(heap[nxt]&lt;heap[cnt]) swap(heap[cnt],heap[nxt]); // 反正左右都行时 随意换
+        else break;
+        cnt=nxt;
+    }
+    return ;
+}
+
+int top(){
+    return heap[1];
+}
+
+int n,m,cmd,x;
+int main() {
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++){
+        cin&gt;&gt;cmd;
+        if(cmd==1){
+            cin&gt;&gt;x;
+            push(x);
+        }else if(cmd==2){
+            cout&lt;&lt;top()&lt;&lt;endl;
+        }else if(cmd==3){
+            pop();
+        }
+    }
+    return 0;
+}</code></pre><p><strong>超市</strong><br>贪心 优先队列模拟 放前d天的 不能就尽可能放val大的</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int maxn = 4e6+5;
+priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; que;
+
+struct node{
+    int val;
+    int d; 
+    bool operator &lt; (const node &amp; a)const{
+        return d&lt;a.d;
+    } 
+}a[maxn];
+
+signed main() {
+    int n;
+    while(cin&gt;&gt;n){
+        int day;
+        for(int i=1;i&lt;=n;i++){
+            cin&gt;&gt;a[i].val&gt;&gt;a[i].d;
+        }
+        sort(a+1,a+1+n);
+        for(int i=1;i&lt;=n;i++){
+            day=a[i].d;
+            if(que.size()&lt;day) que.push(a[i].val);
+            else{
+                if(que.top()&lt;a[i].val){
+                    que.pop();
+                    que.push(a[i].val);
+                }
+            }
+        }
+        int ans=0;
+        while(!que.empty()){
+            ans+=que.top();
+            que.pop();
+        }
+        cout&lt;&lt;ans&lt;&lt;endl;
+    }
+    return 0;
+}</code></pre><p><strong>Sequence</strong><br>提前放进去第一层 然后每取一个 把它之后的再放入 就不MLE了</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn=100000+10;
+const int maxe=2e5+10;
+int n,m,cnt;
+
+int a[maxn],b[maxn];
+
+struct node{
+    int sum,p1,p2;
+    bool operator &lt; (node const &amp; a)const {
+        return a.sum&lt;sum;
+    }
+};
+
+priority_queue&lt;node&gt; que; 
+
+int main() {
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
+    for(int i=1;i&lt;=n;i++) {
+        cin&gt;&gt;b[i];
+        que.push(node{a[1]+b[i],1,i});
+    }
+    for(int i=1;i&lt;=n;i++){
+        node p=que.top();
+        cout&lt;&lt;p.sum&lt;&lt;&quot; &quot;;
+        que.pop();
+        que.push(node{a[p.p1+1]+b[p.p2],p.p1+1,p.p2});
+    }
+
+    return 0;
+}</code></pre><p><strong>数据备份</strong><br>模拟链表 + 贪心<br>当选择了num[i]后，反悔了，反之选择选了num[i-1]和num[i+1]时，获利便增加了num[i-1]+num[i+1]-num[i]。所以当num[i]被选时，我们就可以删去num[i-1]和num[i+1]，即为其代表的vis数组打上标记并把num[i]改成num[i-1]+num[i+1]-num[i]，放进堆中，重新找最大的。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 4e6+5;
+
+struct node {
+    int id,val;
+    bool operator &lt; (const node &amp; a)const {
+        return val&gt;a.val;
+    }
+};
+priority_queue&lt;node&gt; que;
+int a[maxn];
+
+bool vis[maxn];
+int l[maxn],r[maxn];
+signed main() {
+    int n,k;
+    cin&gt;&gt;n&gt;&gt;k;
+    for(int i = 0; i &lt; n; i ++ ) cin &gt;&gt; a[i];
+    for(int i = n - 1; i&gt;=1; i -- ) a[i] -= a[i - 1];
+    for(int i=1; i&lt;n; i++) l[i]=i-1,r[i]=i+1,que.push(node {i,a[i]});
+    l[0]=0,r[n-1]=n;
+    a[0]=a[n]=0x3f3f3f3f;
+    int ans=0;
+    for(int i=1; i&lt;=k; i++) {
+        while(!que.empty()&amp;&amp;vis[que.top().id]) que.pop();
+        node t=que.top();
+        que.pop();
+        ans+=t.val;
+
+        vis[r[t.id]]=vis[l[t.id]]=1;
+        a[t.id]=a[l[t.id]]+a[r[t.id]]-a[t.id];
+
+        l[t.id]=l[l[t.id]];
+        r[t.id]=r[r[t.id]];
+
+        l[r[t.id]]=t.id;
+        r[l[t.id]]=t.id;
+
+        que.push(node {t.id,a[t.id]});
+    }
+    cout&lt;&lt;ans&lt;&lt;endl;
+    return 0;
+}</code></pre><p><strong>Huffman树</strong> 贪心<br>荷马史诗</p>
+<p>每次都是将k个节点合并为1个（减少k-1个），一共要将n个节点合并为1个，如果（n-1）%（k-1）！=0<br>则最后一次合并时不足k个。也就表明了最靠近根节点的位置反而没有被排满，因此我们需要加入k-1-（n-1）%（k-1）个空节点使每次合并都够k个节点（也就是利用空节点将其余的节点挤到更优的位置上）。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+
+const int maxn = 100000 + 5 ;
+const int INF = 0x3f3f3f3f ;
+
+struct node {
+    int w,h;
+    bool operator &lt; (node const &amp; a) const {
+        return a.w&lt;w||(a.w==w&amp;&amp;a.h&lt;h);
+    }
+};
+
+priority_queue&lt;node&gt; que;
+
+signed main() {
+    int n,k,m;
+    cin&gt;&gt;n&gt;&gt;k;
+    int cnt=0;
+    if((n-1)%(k-1)) cnt+=(k-1)-(n-1)%(k-1);
+    for(int i=1; i&lt;=cnt; i++) que.push(node {0,0});
+    cnt+=n;
+    for(int i=1; i&lt;=n; i++) {
+        cin&gt;&gt;m;
+        que.push(node {m,0});
+    }
+    int ans=0;
+    while(que.size()&gt;1) {
+        int res=0,hh=-1;
+        for(int i=0; i&lt;k; i++) {
+            hh=max(que.top().h,hh);
+            res+=que.top().w;
+            que.pop();
+        }
+        ans+=res;
+        que.push(node {res,hh+1});
+    }
+    cout&lt;&lt;ans&lt;&lt;endl&lt;&lt;que.top().h&lt;&lt;endl;
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/06/《算法竞赛进阶指南》 0x11 ~ 0x12  代码 + 杂谈/" rel="next" title="《算法竞赛进阶指南》 0x11 ~ 0x12  代码 + 杂谈">
+                <i class="fa fa-chevron-left"></i> 《算法竞赛进阶指南》 0x11 ~ 0x12  代码 + 杂谈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/07/《算法竞赛进阶指南》 0x14 ~ 0x16 代码 + 杂谈/" rel="prev" title="《算法竞赛进阶指南》 0x14 ~ 0x16 代码 + 杂谈">
+                《算法竞赛进阶指南》 0x14 ~ 0x16 代码 + 杂谈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#链表"><span class="nav-number">1.</span> <span class="nav-text">链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆"><span class="nav-number">2.</span> <span class="nav-text">堆</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

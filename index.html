@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/12/高级树状数组——区间修改区间查询、二维树状数组/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/24/2019中国大学生程序设计竞赛（CCPC） - 网络选拔赛/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -291,7 +291,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/12/高级树状数组——区间修改区间查询、二维树状数组/" itemprop="url">高级树状数组——区间修改区间查询、二维树状数组</a></h1>
+                <a class="post-title-link" href="/2019/08/24/2019中国大学生程序设计竞赛（CCPC） - 网络选拔赛/" itemprop="url">2019中国大学生程序设计竞赛（CCPC） - 网络选拔赛</a></h1>
         
 
         <div class="post-meta">
@@ -303,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-12T20:15:18+08:00">
-                2019-08-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T20:47:32+08:00">
+                2019-08-24
               </time>
             
 
@@ -313,6 +313,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -343,201 +365,438 @@
       
         
           
-            <p>原文链接： <a href="https://www.cnblogs.com/RabbitHu/p/BIT.html" target="_blank" rel="noopener"> https://www.cnblogs.com/RabbitHu/p/BIT.html
-</a></p>
-<h1 id="“高级”数据结构——树状数组！"><a href="#“高级”数据结构——树状数组！" class="headerlink" title="“高级”数据结构——树状数组！"></a>“高级”数据结构——树状数组！</h1><p>※本文一切代码未经编译，不保证正确性，如发现问题，欢迎指正！</p>
-<ol>
-<li>单点修改 + 区间查询<br>最简单的树状数组就是这样的：</li>
-</ol>
-<pre><code>void add(int p, int x){ //给位置p增加x
-    while(p &lt;= n) sum[p] += x, p += p &amp; -p;
-}
-int ask(int p){ //求位置p的前缀和
-    int res = 0;
-    while(p) res += sum[p], p -= p &amp; -p;
-    return res;
-}
-int range_ask(int l, int r){ //区间求和
-    return ask(r) - ask(l - 1);
-}</code></pre><ol start="2">
-<li>区间修改 + 单点查询<br>通过“差分”（就是记录数组中每个元素与前一个元素的差），可以把这个问题转化为问题1。</li>
-</ol>
-<p>查询<br>设原数组为a[i], 设数组d[i]=a[i]−a <a href="a%5B0%5D=0"> i−1 </a> ，则<br>a[i]=∑ij=1d[j]，可以通过求d[i]的前缀和查询。</p>
-<p>修改<br>当给区间[l,r]加上x的时候，a[l] 与前一个元素 a[l−1] 的差增加了x，a[r+1] 与 a[r]<br>的差减少了x。根据d[i]数组的定义，只需给d[l] 加上 x, 给d[r+1] 减去 x 即可。</p>
-<pre><code>void add(int p, int x){ //这个函数用来在树状数组中直接修改
-    while(p &lt;= n) sum[p] += x, p += p &amp; -p;
-}
-void range_add(int l, int r, int x){ //给区间[l, r]加上x
-    add(l, x), add(r + 1, -x);
-}
-int ask(int p){ //单点查询
-    int res = 0;
-    while(p) res += sum[p], p -= p &amp; -p;
-    return res;
-}</code></pre><ol start="3">
-<li>区间修改 + 区间查询<br>这是最常用的部分，也是用线段树写着最麻烦的部分——但是现在我们有了树状数组！</li>
-</ol>
-<p>怎么求呢？我们基于问题2的“差分”思路，考虑一下如何在问题2构建的树状数组中求前缀和：</p>
-<p>位置p的前缀和 =<br>∑i=1pa[i]=∑i=1p∑j=1id[j]</p>
-<p>在等式最右侧的式子∑pi=1∑ij=1d[j]中，d[1] 被用了p次，d[2]被用了p−1次……那么我们可以写出：</p>
-<p>位置p的前缀和 =<br>∑i=1p∑j=1id[j]=∑i=1pd[i]∗(p−i+1)=(p+1)∗∑i=1pd[i]−∑i=1pd[i]∗i</p>
-<p>那么我们可以维护两个数组的前缀和：<br>一个数组是 sum1[i]=d[i]，<br>另一个数组是 sum2[i]=d[i]∗i。</p>
-<p>查询<br>位置p的前缀和即： (p + 1) * sum1数组中p的前缀和 - sum2数组中p的前缀和。</p>
-<p>区间[l, r]的和即：位置r的前缀和 - 位置l的前缀和。</p>
-<p>修改<br>对于sum1数组的修改同问题2中对d数组的修改。</p>
-<p>对于sum2数组的修改也类似，我们给 sum2[l] 加上 l * x，给 sum2[r + 1] 减去 (r + 1) * x。</p>
-<pre><code>void add(ll p, ll x){
-    for(int i = p; i &lt;= n; i += i &amp; -i)
-        sum1[i] += x, sum2[i] += x * p;
-}
-void range_add(ll l, ll r, ll x){
-    add(l, x), add(r + 1, -x);
-}
-ll ask(ll p){
-    ll res = 0;
-    for(int i = p; i; i -= i &amp; -i)
-        res += (p + 1) * sum1[i] - sum2[i];
-    return res;
-}
-ll range_ask(ll l, ll r){
-    return ask(r) - ask(l - 1);
-}</code></pre><p>用这个做区间修改区间求和的题，无论是时间上还是空间上都比带lazy标记的线段树要优。</p>
-<ol start="4">
-<li>二维树状数组<br>我们已经学会了对于序列的常用操作，那么我们不由得想到（谁会想到啊喂）……能不能把类似的操作应用到矩阵上呢？这时候我们就要写二维树状数组了！</li>
-</ol>
-<p>在一维树状数组中，tree[x]（树状数组中的那个“数组”）记录的是右端点为x、长度为lowbit(x)的区间的区间和。<br>那么在二维树状数组中，可以类似地定义tree[x][y]记录的是右下角为(x, y)，高为lowbit(x), 宽为 lowbit(y)的区间的区间和。</p>
-<p>单点修改 + 区间查询</p>
-<pre><code>void add(int x, int y, int z){ //将点(x, y)加上z
-    int memo_y = y;
-    while(x &lt;= n){
-        y = memo_y;
-        while(y &lt;= n)
-            tree[x][y] += z, y += y &amp; -y;
-        x += x &amp; -x;
-    }
-}
-void ask(int x, int y){//求左上角为(1,1)右下角为(x,y) 的矩阵和
-    int res = 0, memo_y = y;
-    while(x){
-        y = memo_y;
-        while(y)
-            res += tree[x][y], y -= y &amp; -y;
-        x -= x &amp; -x;
-    }
-}</code></pre><p>区间修改 + 单点查询<br>我们对于一维数组进行差分，是为了使差分数组前缀和等于原数组对应位置的元素。</p>
-<p>那么如何对二维数组进行差分呢？可以针对二维前缀和的求法来设计方案。</p>
-<p>二维前缀和：<br>sum[i][j]=sum[i−1][j]+sum[i][j−1]−sum[i−1][j−1]+a[i][j]</p>
-<p>那么我们可以令差分数组d[i][j] 表示 a[i][j] 与 a[i−1][j]+a[i][j−1]−a[i−1][j−1] 的差。</p>
-<p>例如下面这个矩阵</p>
-<p>1 4 8<br>6 7 2<br>3 9 5<br>对应的差分数组就是</p>
-<p>1 3 4<br>5 -2 -9<br>-3 5 1<br>当我们想要将一个矩阵加上x时，怎么做呢？<br>下面是给最中间的3*3矩阵加上x时，差分数组的变化：</p>
-<p>0 0 0 0 0<br>0 +x 0 0 -x<br>0 0 0 0 0<br>0 0 0 0 0<br>0 -x 0 0 +x<br>这样给修改差分，造成的效果就是：</p>
-<p>0 0 0 0 0<br>0 x x x 0<br>0 x x x 0<br>0 x x x 0<br>0 0 0 0 0<br>那么我们开始写代码吧！</p>
-<pre><code>void add(int x, int y, int z){ 
-    int memo_y = y;
-    while(x &lt;= n){
-        y = memo_y;
-        while(y &lt;= n)
-            tree[x][y] += z, y += y &amp; -y;
-        x += x &amp; -x;
-    }
-}
-void range_add(int xa, int ya, int xb, int yb, int z){
-    add(xa, ya, z);
-    add(xa, yb + 1, -z);
-    add(xb + 1, ya, -z);
-    add(xb + 1, yb + 1, z);
-}
-void ask(int x, int y){
-    int res = 0, memo_y = y;
-    while(x){
-        y = memo_y;
-        while(y)
-            res += tree[x][y], y -= y &amp; -y;
-        x -= x &amp; -x;
-    }
-}</code></pre><p>区间修改 + 区间查询<br>类比之前一维数组的区间修改区间查询，下面这个式子表示的是点(x, y)的二维前缀和：</p>
-<p>∑i=1x∑j=1y∑k=1i∑h=1jd[h][k]<br>(d[h][k]为点(h, k)对应的“二维差分”(同上题))</p>
-<p>这个式子炒鸡复杂( O(n4) 复杂度！)，但利用树状数组，我们可以把它优化到 O(log2n)！</p>
-<p>首先，类比一维数组，统计一下每个d[h][k]出现过多少次。d[1][1]出现了x∗y次，d[1][2]出现了x∗(y−1)次……d[h][k] 出现了<br>(x−h+1)∗(y−k+1) 次。</p>
-<p>那么这个式子就可以写成：</p>
-<p>∑i=1x∑j=1yd[i][j]∗(x+1−i)∗(y+1−j)</p>
-<p>把这个式子展开，就得到：</p>
-<p>(x+1)∗(y+1)∗∑i=1x∑j=1yd[i][j]</p>
-<p>−(y+1)∗∑i=1x∑j=1yd[i][j]∗i</p>
-<p>−(x+1)∗∑i=1x∑j=1yd[i][j]∗j</p>
-<p>+∑i=1x∑j=1yd[i][j]∗i∗j</p>
-<p>那么我们要开四个树状数组，分别维护：</p>
-<p>d[i][j],d[i][j]∗i,d[i][j]∗j,d[i][j]∗i∗j</p>
-<p>这样就完成了！</p>
-<pre><code>#include &lt;cstdio&gt;
-#include &lt;cmath&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-#include &lt;iostream&gt;
+            <h2 id="HDU-6702-amp"><a href="#HDU-6702-amp" class="headerlink" title="HDU 6702 ^ &amp; ^"></a>HDU 6702 ^ &amp; ^</h2><p>这题<br>Bit operation is a common computing method in computer science ,Now we have<br>two positive integers A and B ,Please find a positive integer C that minimize<br>the value of the formula (A xor C) &amp; (B xor C) .Sometimes we can find a lot of<br>C to do this ,So you need to find the smallest C that meets the criteria .</p>
+<p>For example ,Let’s say A is equal to 5 and B is equal to 3 ,we can choose<br>C=1,3… ,so the answer we’re looking for C is equal to 1.</p>
+<p>If the value of the expression is 0 when C=0, please print 1.</p>
+<p>让 (A xor C) &amp; (B xor C) 最小 反正 xor C 只要 C和 A&amp;B 对齐就好 C == 0 输出 1</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
 using namespace std;
-typedef long long ll;
-ll read(){
-    char c; bool op = 0;
-    while((c = getchar()) &lt; &apos;0&apos; || c &gt; &apos;9&apos;)
-        if(c == &apos;-&apos;) op = 1;
-    ll res = c - &apos;0&apos;;
-    while((c = getchar()) &gt;= &apos;0&apos; &amp;&amp; c &lt;= &apos;9&apos;)
-        res = res * 10 + c - &apos;0&apos;;
-    return op ? -res : res;
-}
-const int N = 205;
-ll n, m, Q;
-ll t1[N][N], t2[N][N], t3[N][N], t4[N][N];
-void add(ll x, ll y, ll z){
-    for(int X = x; X &lt;= n; X += X &amp; -X)
-        for(int Y = y; Y &lt;= m; Y += Y &amp; -Y){
-            t1[X][Y] += z;
-            t2[X][Y] += z * x;
-            t3[X][Y] += z * y;
-            t4[X][Y] += z * x * y;
-        }
-}
-void range_add(ll xa, ll ya, ll xb, ll yb, ll z){ //(xa, ya) 到 (xb, yb) 的矩形
-    add(xa, ya, z);
-    add(xa, yb + 1, -z);
-    add(xb + 1, ya, -z);
-    add(xb + 1, yb + 1, z);
-}
-ll ask(ll x, ll y){
-    ll res = 0;
-    for(int i = x; i; i -= i &amp; -i)
-        for(int j = y; j; j -= j &amp; -j)
-            res += (x + 1) * (y + 1) * t1[i][j]
-                - (y + 1) * t2[i][j]
-                - (x + 1) * t3[i][j]
-                + t4[i][j];
-    return res;
-}
-ll range_ask(ll xa, ll ya, ll xb, ll yb){
-    return ask(xb, yb) - ask(xb, ya - 1) - ask(xa - 1, yb) + ask(xa - 1, ya - 1);
-}
-int main(){
-    n = read(), m = read(), Q = read();
-    for(int i = 1; i &lt;= n; i++){
-        for(int j = 1; j &lt;= m; j++){
-            ll z = read();
-            range_add(i, j, i, j, z);
-        }
-    }
-    while(Q--){
-        ll ya = read(), xa = read(), yb = read(), xb = read(), z = read(), a = read();
-        if(range_ask(xa, ya, xb, yb) &lt; z * (xb - xa + 1) * (yb - ya + 1))
-            range_add(xa, ya, xb, yb, a);
-    }
-    for(int i = 1; i &lt;= n; i++){
-        for(int j = 1; j &lt;= m; j++)
-            printf(&quot;%lld &quot;, range_ask(i, j, i, j));
-        putchar(&apos;\n&apos;);
+const int maxn = 2e5 + 10;
+#define int long long
+
+int a, b, c;
+
+signed main() {
+    int cas;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        cin &gt;&gt; a &gt;&gt; b;
+        if(a &amp; b) cout &lt;&lt;  (a &amp; b) &lt;&lt; endl;
+        else cout &lt;&lt; 1 &lt;&lt; endl;
     }
     return 0;
-}</code></pre><p>本文作者：胡小兔<br>博客地址： <a href="http://rabbithu.cnblogs.com" target="_blank" rel="noopener"> http://rabbithu.cnblogs.com </a></p>
+}</code></pre><p><a href="https://blog.csdn.net/qq_40831340/article/details/100049418" target="_blank" rel="noopener"> 1002 array </a></p>
+<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><p>无源点 无汇点 找第K短路<br>有源点A* 没有的话</p>
+<blockquote>
+<p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190824203550550.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190824203550550.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
+</blockquote>
+<p>我们把 当前 下一次 (这里存 from 而不是 v 了)起点 + 总路程和 放入队列 // 出边的这个点放入队列存储<br>同时 考虑 把(from)这边的下一个次边 也放入队列 进行扩展</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 5e4 + 100;
+typedef long long ll;
 
+int n, m, cas, q, mak, tail;
+int qes[maxn];
+ll ans[maxn];
+struct node {
+    int u, pos;
+    ll w;
+    bool operator &lt; (const node&amp; a) const {
+        return w &gt; a.w;
+    }
+};
+
+bool cmp(const node &amp;a, const node &amp;b) {
+    return a.w &lt; b.w;
+}
+
+vector&lt;node&gt; G[maxn];
+priority_queue&lt;node&gt; que;
+void ade(int a, int b, int c) {
+    G[a].push_back(node {b, 0, c});
+}
+
+void init() {
+    for(int i = 1; i &lt;= n; i ++) G[i].clear();
+    mak = 0;
+    tail = 0;
+    while(!que.empty()) que.pop();
+}
+
+
+signed main() {
+    scanf(&quot;%d&quot;, &amp;cas);
+    while(cas --) {
+        scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;q);
+        init();
+        for(int i = 1, a, b, c; i &lt;= m; i ++)
+            scanf(&quot;%d %d %d&quot;, &amp;a, &amp;b, &amp;c), ade(a, b, c);
+
+        for(int i = 1; i &lt;= q; i ++)
+            scanf(&quot;%d&quot;, &amp;qes[i]), mak = max(mak, qes[i]);
+
+        for(int i = 1; i &lt;= n; i ++) sort(G[i].begin(), G[i].end(), cmp);
+
+        for(int i = 1; i &lt;= n; i ++)
+            if(!G[i].empty()) que.push(node {i, 0, G[i][0].w});
+
+        while(!que.empty()) {
+            node p = que.top(); que.pop();
+            int u = p.u;
+            ll w = p.w;
+            if(w == 0) {
+                while(1);
+            }
+            ans[++ tail] = w;
+            if(tail == mak + 5) break;
+            if(p.pos &lt; (int)G[u].size() - 1)
+                que.push(node {u, p.pos + 1, w - G[u][p.pos].w + G[u][p.pos + 1].w});
+            int v = G[u][p.pos].u;
+            if(!G[v].empty())
+                que.push(node {v, 0, w + G[v][0].w});
+        }
+        for(int i = 1; i &lt;= q; i ++)
+            printf(&quot;%lld\n&quot;, ans[qes[i]]);
+    }
+    return 0;
+}</code></pre><h2 id="Shuffle-Card-HDU"><a href="#Shuffle-Card-HDU" class="headerlink" title="Shuffle Card HDU"></a>Shuffle Card HDU</h2><p>按找 之后放入顺序 倒序 vis标记 去重</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+const int maxn = 1e5 + 5;
+int n, m, k, cas, sum;
+
+int a[maxn], b[maxn];
+bool vis[maxn];
+
+signed main() {
+    fastio;
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; a[i];
+    for(int i = 1; i &lt;= m; i ++) cin &gt;&gt; b[i];
+
+    bool f = 0;
+    for(int i = m; i &gt;= 1; i--) {
+        if(!vis[b[i]]) {
+
+            cout &lt;&lt; b[i];
+            f = 1;
+            vis[b[i]] = 1;    cout &lt;&lt; &quot; &quot;;
+        }
+    }
+
+    for(int i = 1; i &lt;= n; i ++) {
+        if(!vis[a[i]]) {
+
+            cout &lt;&lt; a[i];
+            f = 1;
+            vis[a[i]] = 1;cout &lt;&lt; &quot; &quot;;
+        }
+    }//cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><h2 id="HDU-6708-Windows-Of-CCPC"><a href="#HDU-6708-Windows-Of-CCPC" class="headerlink" title="HDU 6708 Windows Of CCPC"></a>HDU 6708 Windows Of CCPC</h2><p>一般分形简单题 模拟</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+char ch[1500][1500];
+
+void init() {
+    for(int i = 1; i &lt;= 9; i ++) {
+        int l1 = (1 &lt;&lt; i) + 1;
+        int r1 = (1 &lt;&lt; i) * 2;
+
+        for(int k = 1; k &lt; l1; k ++) {
+            for(int j = l1; j &lt;= r1; j ++) {
+                ch[k][j] = ch[k][j - l1 + 1];
+            }
+        }
+
+        for(int k = l1; k &lt;= r1; k ++) {
+            for(int j = l1; j &lt;= r1; j ++) {
+                ch[k][j] = ch[k - l1 + 1][j - l1 + 1];
+            }
+        }
+
+        for(int k = l1; k &lt;= r1; k ++) {
+            for(int j = 1; j &lt; l1; j ++) {
+                if(ch[k - l1 + 1][j] == &apos;P&apos;) ch[k][j] = &apos;C&apos;;
+                else ch[k][j] = &apos;P&apos;;
+//                ch[k][j] = ch[k - l1 + 1][j];
+            }
+        }
+    }
+}
+
+int main() {
+    ch[1][1] = &apos;C&apos;;
+    ch[1][2] = &apos;C&apos;;
+    ch[2][1] = &apos;P&apos;;
+    ch[2][2] = &apos;C&apos;;
+    int cas;
+    init();
+    scanf(&quot;%d&quot;, &amp;cas);
+    while(cas --) {
+        int n;
+        scanf(&quot;%d&quot;, &amp;n);
+
+        for(int i = 1; i &lt;= (1 &lt;&lt; n); i ++) {
+            for(int j = 1; j &lt;= (1 &lt;&lt; n); j ++) {
+                printf(&quot;%c&quot;, ch[i][j]);
+            }
+            puts(&quot;&quot;);
+        }
+
+    }
+    return 0;
+}</code></pre><h2 id="HDU-6709-Fishing-Master"><a href="#HDU-6709-Fishing-Master" class="headerlink" title="HDU 6709 Fishing Master"></a>HDU 6709 Fishing Master</h2><p>容易wa<br>我们肯定先爪最长时间顿的<br>剩下的 就是靠我们 贪心往里套<br>最后不够抓一条鱼的顿时间存下来，后面抓鱼的时候从这些时间中选出最大的剩余时间，抓鱼的时间会和顿最大相交，这样可以使时间（k-x）最小。<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190824204708402.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190824204708402.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+const int maxn = 1e5 + 5;
+int n, m, k, cas, sum;
+
+priority_queue&lt;int&gt; que;
+int a[maxn];
+signed main() {
+    fastio;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        while(!que.empty()) que.pop();
+        cin &gt;&gt; n &gt;&gt; k;
+        sum = 0;
+        for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; a[i];
+        sort(a + 1, a + 1 + n, greater&lt;int&gt;{});
+//        cout &lt;&lt; a[1] &lt;&lt; endl;
+        sum = k + a[1];
+        int cnt = a[1]/k;
+        if(a[1] % k) que.push(a[1] % k);
+        int pos = 2;
+        for(; pos &lt;= n; pos ++) {
+            if(cnt) {
+                cnt += a[pos] / k;
+                cnt --;
+                sum += a[pos];
+                if(a[pos] % k) que.push(a[pos] % k);
+            } else break;
+        }
+        for(; pos &lt;= n; pos ++) {
+            int tmp = que.top();
+            que.pop();
+            sum += (k - tmp) + a[pos];
+            que.push(a[pos]);
+        }
+        cout &lt;&lt; sum &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><h2 id="K-th-occurrence"><a href="#K-th-occurrence" class="headerlink" title="K-th occurrence"></a>K-th occurrence</h2><p>以下代码 学姐写的 orz 强啊<br>套了好多数据结构orz</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+const int maxn = 500000 + 10;
+
+int tmp_1[maxn], tmp_2[maxn];
+long long RANKP[maxn], height[maxn];
+char str[maxn];
+long long sa[maxn];
+int N, Q;
+
+struct Tree {
+    int a[maxn];
+    int ll[maxn], rr[maxn];
+    void create(int k, int l, int r) {
+        ll[k] = l;
+        rr[k] = r;
+        if(l &gt;= r) {
+            a[k] = height[l + 1];
+            return;
+        }
+        int mid = (l + r) / 2;
+        create(k &lt;&lt; 1, l, mid);
+        create(k &lt;&lt; 1 | 1, mid + 1, r);
+        a[k] = min(a[k &lt;&lt; 1], a[k&lt;&lt;1|1]);
+    }
+    int queryl(int k, int p, int s) {
+        if(a[k] &gt;= s) return -1;
+        if(ll[k] &gt;= p) return -1;
+        if(ll[k] == rr[k]) return ll[k];
+        int ans = -1;
+        if(ll[k&lt;&lt;1|1] &lt; p &amp;&amp; a[k&lt;&lt;1|1] &lt; s)
+            ans = queryl(k&lt;&lt;1|1, p, s);
+        if(ans != -1)
+            return ans;
+        return queryl(k&lt;&lt;1, p, s);
+    }
+    int queryr(int k, int p, int s) {
+        if(a[k] &gt;= s)
+            return -1;
+        if(rr[k] &lt; p)
+            return -1;
+        if(ll[k] == rr[k])
+            return ll[k];
+        int ans = -1;
+        if(rr[k&lt;&lt;1] &gt;= p &amp;&amp; a[k&lt;&lt;1] &lt; s)
+            ans = queryr(k&lt;&lt;1, p, s);
+        if(ans != -1)
+            return ans;
+        return queryr(k&lt;&lt;1|1, p, s);
+    }
+}sdt;
+
+bool cmp(int *r, int a, int b, int i) {
+    return r[a] == r[b] &amp;&amp; r[a + i] == r[b + i];
+}
+
+int c[maxn];
+
+void solssda(char str[], int sa[], int RANKP[], int height[], int n, int m) {
+    n++;
+    int i, j, p, *x = tmp_1, *y = tmp_2;
+    for(i = 0; i &lt; m; i++)
+        c[i] = 0;
+    for(i = 0; i &lt; n; i++)
+        c[x[i] = str[i]]++;
+    for(i = 0; i &lt; m; i++)
+        c[i] += c[i - 1];
+    for(i = n - 1; i &gt;= 0; i--)
+        sa[--c[x[i]]] = i;
+    for(j = 1; j &lt;= n; j &lt;&lt;= 1) {
+        p = 0;
+        for(i = n - j; i &lt; n; i++)
+            y[p++] = i;
+
+        for(i = 0; i &lt; n; i++)
+            if(sa[i] &gt;= j)
+                y[p++] = sa[i] - j;
+        for(i = 0; i &lt; m; i++)
+            c[i] = 0;
+        for(i = 0; i &lt; n; i++)
+            c[x[y[i]]]++;
+        for(i = 1; i &lt; m; i++)
+            c[i] += c[i - 1];
+        for(i = n - 1; i &gt;= 0; i--)
+            sa[--c[x[y[i]]]] = y[i];
+        swap(x, y);
+        p = 1;
+        x[sa[0]] = 0;
+        for(i = 1; i &lt; n; i++)
+            x[sa[i]] = cmp(y, sa[i - 1], sa[i], j) ? p - 1 : p++;
+        if(p &gt;= n)
+            break;
+        m = p;
+    }
+    int k = 0;
+    n--;
+    for(i = 0; i &lt;= n; i++)
+        RANKP[sa[i]] = i;
+    for(i = 0; i &lt; n; i++) {
+        if(k)
+            k--;
+        j = sa[RANKP[i] - 1];
+        while(str[i + k] == str[j + k])
+            k++;
+        height[RANKP[i]] = k;
+    }
+}
+
+struct Data {
+    int l, r, sum;
+}T[maxn * 15];
+
+int cnt = 0;
+
+
+vector&lt;int&gt; vec;
+
+
+int get(int x) {
+    return lower_bound(vec.begin(), vec.end(), x) - vec.begin() + 1;
+}
+void insert(int l, int r, int &amp;now, int pre, int x) {
+    ++cnt;
+    now = cnt;
+    T[now] = T[pre];
+    T[now].sum += 1;
+
+    int mid = (l + r) / 2;
+    if(l == r) return;
+
+    if(mid &gt;= x)
+        insert(l, mid, T[now].l, T[pre].l, x);
+    else
+        insert(mid + 1, r, T[now].r, T[pre].r, x);
+}
+int query(int l, int r, int x, int y, int k) {
+    if(l == r)
+        return l;
+    int mid = (l + r) / 2;
+    int R_sum = T[T[y].r].sum - T[T[x].r].sum;
+    if(k &lt;= R_sum)
+        query(mid + 1, r, T[x].r, T[y].r, k);
+    else
+        query(l, mid, T[x].l, T[y].l, k - R_sum);
+}
+int root[maxn];
+void solve(int n){
+    for(int i = 0; i &lt; Q; i++) {
+        int l, r, k;
+        scanf(&quot;%lld%lld%lld&quot;, &amp;l, &amp;r, &amp;k);
+        int len = r - l + 1;
+        int p = RANKP[l - 1];
+        int pl = sdt.queryl(1, p, len);
+        int pr = sdt.queryr(1, p, len);
+        if(pl == -1)
+            pl = 1;
+        else
+            pl += 1;
+        if(pr == -1)
+            pr = n;
+        if(pr &gt; n)
+            pr = n;
+        if(pl &gt; n)
+            pl = n;
+        if(pr - pl + 1 &lt; k) {
+            printf(&quot;-1\n&quot;);
+            continue;
+        }
+        k = pr - pl + 2 - k;
+        int ans = query(1, vec.size(), root[pl - 1], root[pr], k);
+        printf(&quot;%lld\n&quot;, vec[ans - 1]);
+    }
+}
+void dos() {
+    scanf(&quot;%d%d&quot;, &amp;N, &amp;Q);
+    scanf(&quot;%s&quot;, str);
+    long long n = N;
+    str[n] = 0;
+    solssda(str, sa, RANKP, height, n, 200);
+    for(int i = 1; i &lt;= n; i++)
+        ++sa[i];
+    for(int i = 1; i &lt;= n; i++)
+        vec.push_back(sa[i]);
+    sort(vec.begin(), vec.end());
+    vec.erase(unique(vec.begin(), vec.end()), vec.end());
+    for(int i = 0; i &lt; n; i++)
+        insert(1, vec.size(), root[i + 1], root[i], get(sa[i + 1]));
+    height[n + 1] = height[n];
+    sdt.create(1, 1, n);
+    solve(n);
+}
+
+void inputs() {
+    int cas;
+    scanf(&quot;%lld&quot;, &amp;cas);
+    while(cas --)
+        dos();
+}
+
+signed main() {
+    inputs();
+    return 0;
+}</code></pre>
           
         
       
@@ -585,7 +844,7 @@ int main(){
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/12/KMP + Z函数 基本概念 入门水题/">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/24/100056742/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHXU1998">
@@ -604,7 +863,7 @@ int main(){
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/12/KMP + Z函数 基本概念 入门水题/" itemprop="url">KMP + Z函数 基本概念 入门水题</a></h1>
+                <a class="post-title-link" href="/2019/08/24/100056742/" itemprop="url">2019�й���ѧ��������ƾ�����CCPC�� - ����ѡ����</a></h1>
         
 
         <div class="post-meta">
@@ -616,8 +875,8 @@ int main(){
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-12T13:31:14+08:00">
-                2019-08-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T20:47:32+08:00">
+                2019-08-24
               </time>
             
 
@@ -639,30 +898,8 @@ int main(){
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/字符串/" itemprop="url" rel="index">
-                    <span itemprop="name">字符串</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/字符串/KMP/" itemprop="url" rel="index">
-                    <span itemprop="name">KMP</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/字符串/KMP/Z函数-拓展kmp/" itemprop="url" rel="index">
-                    <span itemprop="name">Z函数(拓展kmp)</span>
+                  <a href="/categories/�⼯/" itemprop="url" rel="index">
+                    <span itemprop="name">�⼯</span>
                   </a>
                 </span>
 
@@ -700,241 +937,2425 @@ int main(){
       
         
           
-            <p><a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> </a> 版权声明：本文为博主原创文章，遵循 <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0<br>by-sa </a> 版权协议，转载请附上原文出处链接和本声明。</p>
-<p>本文链接： <a href="https://blog.csdn.net/qq_40831340/article/details/99289620" target="_blank" rel="noopener"> https://blog.csdn.net/qq_40831340/article/details/99289620
-</a></p>
-<p>KMP<br>Z函数 | 拓展KMP</p>
-<h2 id="kmp"><a href="#kmp" class="headerlink" title="kmp"></a>kmp</h2><p>字符串 abcabcd 的前缀函数为 0 0 0 1 2 3 0 ，<br>字符串 aabaaab的前缀函数为 0 1 0 1 2 2 3 .<br>以第 i 个 作为 结尾 和前缀匹配 最多往前匹多长</p>
-<h2 id="Z函数"><a href="#Z函数" class="headerlink" title="Z函数"></a>Z函数</h2><p><img src="https://img-blog.csdnimg.cn/2019081211182145.png" alt="在这里插入图片描述"><br>已第i个 作为开始 和前缀匹配 往后面最长匹配多少</p>
-<h5 id="洛谷板子题-kmp-找位置"><a href="#洛谷板子题-kmp-找位置" class="headerlink" title="洛谷板子题 kmp 找位置"></a>洛谷板子题 kmp 找位置</h5><pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
+            <h2 id="HDU-6702-amp"><a href="#HDU-6702-amp" class="headerlink" title="HDU 6702 ^ &amp; ^"></a>HDU 6702 ^ &amp; ^</h2><p>����<br>Bit operation is a common computing method in computer science ,Now we have<br>two positive integers A and B ,Please find a positive integer C that minimize<br>the value of the formula (A xor C) &amp; (B xor C) .Sometimes we can find a lot of<br>C to do this ,So you need to find the smallest C that meets the criteria .</p>
+<p>For example ,Let��s say A is equal to 5 and B is equal to 3 ,we can choose<br>C=1,3�� ,so the answer we��re looking for C is equal to 1.</p>
+<p>If the value of the expression is 0 when C=0, please print 1.</p>
+<p>�� (A xor C) &amp; (B xor C) ��С ���� xor C ֻҪ C�� A&amp;B ����ͺ� C == 0 ��� 1</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
 using namespace std;
-const int maxn = 1e6 + 10;
+const int maxn = 2e5 + 10;
+#define int long long
 
-int nxt[maxn];
-char s1[maxn], s2[maxn];
+int a, b, c;
 
-void get_nxt(int n, char *s){
-    memset(nxt, 0, (n + 5) * sizeof(int));
-    nxt[0] = -1;
-    int i = 0, j = -1;
-    while(i &lt; n){
-        if(j == -1 || s[j] == s[i]){
-            i++, j++;
-            nxt[i] = j;
-        }
-        else j = nxt[j];
-    }
-}
-
-void kmp(int n, int m) {
-    int t1 = 0, t2 = 0;
-    while(t1 &lt; n) {
-        if(t2 == -1 || s1[t1] == s2[t2]) t1 ++, t2 ++;
-        else t2 = nxt[t2];
-        if(t2 == m) {
-            printf(&quot;%d\n&quot;, t1 - m + 1);
-            t2 = nxt[t2]; // t2 = 0 不重复用的输出
-        }
-    }
-}
-
-int main() {
-    scanf(&quot;%s %s&quot;, s1, s2);
-    int n, m;
-    n = strlen(s1), m = strlen(s2);
-    get_nxt(m, s2);
-    kmp(n, m);
-    for(int i = 1; i &lt;= m; i ++) printf(&quot;%d &quot;, nxt[i]);
-    puts(&quot;&quot;);
-    return 0;
-}</code></pre><h5 id="kmp-找循环节"><a href="#kmp-找循环节" class="headerlink" title="kmp 找循环节"></a>kmp 找循环节</h5><p>POJ 2406</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-using namespace std;
-const int maxn = 1e6 + 10;
-
-int nxt[maxn];
-char s[maxn];
-int n;
-
-void get_nxt(){
-    memset(nxt, 0, (n + 5) * sizeof(int));
-    nxt[0] = -1;
-    int i = 0, j = -1;
-    while(i &lt; n){
-        if(j == -1 || s[j] == s[i]){
-            i++;
-            j++;
-            nxt[i] = j;
-        }
-        else
-            j = nxt[j];
-    }
-}
-
-int main() {
-    while(scanf(&quot;%s&quot;, s) &amp;&amp; s[0] != &apos;.&apos;) {
-        n = strlen(s);
-        get_nxt();
-        if(n % (n - nxt[n]) != 0) puts(&quot;1&quot;);
-        else printf(&quot;%d\n&quot;, n / (n - nxt[n]));
+signed main() {
+    int cas;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        cin &gt;&gt; a &gt;&gt; b;
+        if(a &amp; b) cout &lt;&lt;  (a &amp; b) &lt;&lt; endl;
+        else cout &lt;&lt; 1 &lt;&lt; endl;
     }
     return 0;
-}</code></pre><h5 id="kmp-找所有循环节周期"><a href="#kmp-找所有循环节周期" class="headerlink" title="kmp 找所有循环节周期"></a>kmp 找所有循环节周期</h5><p>POJ 1961</p>
-<pre><code>#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
+}</code></pre><p><a href="https://blog.csdn.net/qq_40831340/article/details/100049418" target="_blank" rel="noopener"> 1002 array </a></p>
+<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><p>��Դ�� �޻�� �ҵ�K��·<br>��Դ��A* û�еĻ�</p>
+<blockquote>
+<p>![���������ͼƬ����](<a href="https://img-blog.csdnimg.cn/20190824203550550.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190824203550550.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
+</blockquote>
+<p>���ǰ� ��ǰ ��һ�� (����� from ������ v ��)��� + ��·�̺� ������� // ���ߵ�����������д洢<br>ͬʱ ���� ��(from)��ߵ���һ���α� Ҳ������� ������չ</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
 using namespace std;
-const int maxn = 1e6 + 10;
+const int maxn = 5e4 + 100;
+typedef long long ll;
 
-int nxt[maxn];
-char s[maxn];
-int n;
-
-void get_nxt(){
-    memset(nxt, 0, (n + 5) * sizeof(int));
-    nxt[0] = -1;
-    int i = 0, j = -1;
-    while(i &lt; n){
-        if(j == -1 || s[j] == s[i]){
-            i++, j++;
-            nxt[i] = j;
-        }
-        else j = nxt[j];
+int n, m, cas, q, mak, tail;
+int qes[maxn];
+ll ans[maxn];
+struct node {
+    int u, pos;
+    ll w;
+    bool operator &lt; (const node&amp; a) const {
+        return w &gt; a.w;
     }
+};
+
+bool cmp(const node &amp;a, const node &amp;b) {
+    return a.w &lt; b.w;
 }
 
-int main() {
-    int cas = 1;
-    while(scanf(&quot;%d&quot;, &amp;n) &amp;&amp; n) {
+vector&lt;node&gt; G[maxn];
+priority_queue&lt;node&gt; que;
+void ade(int a, int b, int c) {
+    G[a].push_back(node {b, 0, c});
+}
 
-        scanf(&quot;%s&quot;, s);
-        get_nxt();
-        printf(&quot;Test case# %d\n&quot;, cas ++);
-        for(int i = 1; i &lt;= n; i ++) {
-            int k = i - nxt[i];
-            if(i % k == 0 &amp;&amp; i != k) printf(&quot;%d %d\n&quot;, i, i/k);
-        }    puts(&quot;&quot;);
+void init() {
+    for(int i = 1; i &lt;= n; i ++) G[i].clear();
+    mak = 0;
+    tail = 0;
+    while(!que.empty()) que.pop();
+}
+
+
+signed main() {
+    scanf(&quot;%d&quot;, &amp;cas);
+    while(cas --) {
+        scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;q);
+        init();
+        for(int i = 1, a, b, c; i &lt;= m; i ++)
+            scanf(&quot;%d %d %d&quot;, &amp;a, &amp;b, &amp;c), ade(a, b, c);
+
+        for(int i = 1; i &lt;= q; i ++)
+            scanf(&quot;%d&quot;, &amp;qes[i]), mak = max(mak, qes[i]);
+
+        for(int i = 1; i &lt;= n; i ++) sort(G[i].begin(), G[i].end(), cmp);
+
+        for(int i = 1; i &lt;= n; i ++)
+            if(!G[i].empty()) que.push(node {i, 0, G[i][0].w});
+
+        while(!que.empty()) {
+            node p = que.top(); que.pop();
+            int u = p.u;
+            ll w = p.w;
+            if(w == 0) {
+                while(1);
+            }
+            ans[++ tail] = w;
+            if(tail == mak + 5) break;
+            if(p.pos &lt; (int)G[u].size() - 1)
+                que.push(node {u, p.pos + 1, w - G[u][p.pos].w + G[u][p.pos + 1].w});
+            int v = G[u][p.pos].u;
+            if(!G[v].empty())
+                que.push(node {v, 0, w + G[v][0].w});
+        }
+        for(int i = 1; i &lt;= q; i ++)
+            printf(&quot;%lld\n&quot;, ans[qes[i]]);
     }
     return 0;
-}</code></pre><h2 id="Z-函数"><a href="#Z-函数" class="headerlink" title="Z 函数"></a>Z 函数</h2><h4 id="Codeforces-126B-Password"><a href="#Codeforces-126B-Password" class="headerlink" title="Codeforces 126B Password"></a>Codeforces 126B Password</h4><p>你要在一个串中找到“密码”，密码定义为既是前缀，也是后缀，同时在串中间出现过的子串。<br>i + z[i] == n i位开始能匹配到的 后缀 同时 ma &gt;= n - i 之前 出现过不小它 的串</p>
-<pre><code>#include&lt;bits/stdc++.h&gt;
+}</code></pre><h2 id="Shuffle-Card-HDU"><a href="#Shuffle-Card-HDU" class="headerlink" title="Shuffle Card HDU"></a>Shuffle Card HDU</h2><p>���� ֮�����˳�� ���� vis��� ȥ��</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
 using namespace std;
-const int maxn = 1e6 + 10;
+#define int long long
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+const int maxn = 1e5 + 5;
+int n, m, k, cas, sum;
 
-int z[maxn];
-string s;
-int n;
+int a[maxn], b[maxn];
+bool vis[maxn];
 
-void get_z() {
-    int l=0,r=0;
-    for (int i=1; i&lt;n; i++) {
-        if (i&gt;r) {
-            l=i,r=i;
-            while (r&lt;n &amp;&amp; s[r-l]==s[r]) r++;
-            z[i]=r-l,r--;
-        } else {
-            int k=i-l;
-            if (z[k]&lt;r-i+1) z[i]=z[k];
-            else {
-                l=i;
-                while (r&lt;n &amp;&amp; s[r-l]==s[r]) r++;
-                z[i]=r-l,r--;
+signed main() {
+    fastio;
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; a[i];
+    for(int i = 1; i &lt;= m; i ++) cin &gt;&gt; b[i];
+
+    bool f = 0;
+    for(int i = m; i &gt;= 1; i--) {
+        if(!vis[b[i]]) {
+
+            cout &lt;&lt; b[i];
+            f = 1;
+            vis[b[i]] = 1;    cout &lt;&lt; &quot; &quot;;
+        }
+    }
+
+    for(int i = 1; i &lt;= n; i ++) {
+        if(!vis[a[i]]) {
+
+            cout &lt;&lt; a[i];
+            f = 1;
+            vis[a[i]] = 1;cout &lt;&lt; &quot; &quot;;
+        }
+    }//cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><h2 id="HDU-6708-Windows-Of-CCPC"><a href="#HDU-6708-Windows-Of-CCPC" class="headerlink" title="HDU 6708 Windows Of CCPC"></a>HDU 6708 Windows Of CCPC</h2><p>һ����μ��� ģ��</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+char ch[1500][1500];
+
+void init() {
+    for(int i = 1; i &lt;= 9; i ++) {
+        int l1 = (1 &lt;&lt; i) + 1;
+        int r1 = (1 &lt;&lt; i) * 2;
+
+        for(int k = 1; k &lt; l1; k ++) {
+            for(int j = l1; j &lt;= r1; j ++) {
+                ch[k][j] = ch[k][j - l1 + 1];
+            }
+        }
+
+        for(int k = l1; k &lt;= r1; k ++) {
+            for(int j = l1; j &lt;= r1; j ++) {
+                ch[k][j] = ch[k - l1 + 1][j - l1 + 1];
+            }
+        }
+
+        for(int k = l1; k &lt;= r1; k ++) {
+            for(int j = 1; j &lt; l1; j ++) {
+                if(ch[k - l1 + 1][j] == &apos;P&apos;) ch[k][j] = &apos;C&apos;;
+                else ch[k][j] = &apos;P&apos;;
+//                ch[k][j] = ch[k - l1 + 1][j];
             }
         }
     }
 }
 
 int main() {
-    cin &gt;&gt; s;
-    n = s.size();
-    get_z();
-    int pos = -1, ma = 0;
-    for(int i = 1; i &lt; n; i ++) {
-        if(z[i] + i == n &amp;&amp; ma &gt;= n - i) {
-            pos = i;
+    ch[1][1] = &apos;C&apos;;
+    ch[1][2] = &apos;C&apos;;
+    ch[2][1] = &apos;P&apos;;
+    ch[2][2] = &apos;C&apos;;
+    int cas;
+    init();
+    scanf(&quot;%d&quot;, &amp;cas);
+    while(cas --) {
+        int n;
+        scanf(&quot;%d&quot;, &amp;n);
+
+        for(int i = 1; i &lt;= (1 &lt;&lt; n); i ++) {
+            for(int j = 1; j &lt;= (1 &lt;&lt; n); j ++) {
+                printf(&quot;%c&quot;, ch[i][j]);
+            }
+            puts(&quot;&quot;);
+        }
+
+    }
+    return 0;
+}</code></pre><h2 id="HDU-6709-Fishing-Master"><a href="#HDU-6709-Fishing-Master" class="headerlink" title="HDU 6709 Fishing Master"></a>HDU 6709 Fishing Master</h2><p>����wa<br>���ǿ϶���צ�ʱ��ٵ�<br>ʣ�µ� ���ǿ����� ̰��������<br>��󲻹�ץһ����Ķ�ʱ�������������ץ���ʱ�����Щʱ����ѡ������ʣ��ʱ�䣬ץ���ʱ���Ͷ�����ཻ����������ʹʱ�䣨k-x����С��<br>![���������ͼƬ����](<a href="https://img-blog.csdnimg.cn/20190824204708402.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190824204708402.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+const int maxn = 1e5 + 5;
+int n, m, k, cas, sum;
+
+priority_queue&lt;int&gt; que;
+int a[maxn];
+signed main() {
+    fastio;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        while(!que.empty()) que.pop();
+        cin &gt;&gt; n &gt;&gt; k;
+        sum = 0;
+        for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; a[i];
+        sort(a + 1, a + 1 + n, greater&lt;int&gt;{});
+//        cout &lt;&lt; a[1] &lt;&lt; endl;
+        sum = k + a[1];
+        int cnt = a[1]/k;
+        if(a[1] % k) que.push(a[1] % k);
+        int pos = 2;
+        for(; pos &lt;= n; pos ++) {
+            if(cnt) {
+                cnt += a[pos] / k;
+                cnt --;
+                sum += a[pos];
+                if(a[pos] % k) que.push(a[pos] % k);
+            } else break;
+        }
+        for(; pos &lt;= n; pos ++) {
+            int tmp = que.top();
+            que.pop();
+            sum += (k - tmp) + a[pos];
+            que.push(a[pos]);
+        }
+        cout &lt;&lt; sum &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><h2 id="K-th-occurrence"><a href="#K-th-occurrence" class="headerlink" title="K-th occurrence"></a>K-th occurrence</h2><p>���´��� ѧ��д�� orz ǿ��<br>���˺ö����ݽṹorz</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+const int maxn = 500000 + 10;
+
+int tmp_1[maxn], tmp_2[maxn];
+long long RANKP[maxn], height[maxn];
+char str[maxn];
+long long sa[maxn];
+int N, Q;
+
+struct Tree {
+    int a[maxn];
+    int ll[maxn], rr[maxn];
+    void create(int k, int l, int r) {
+        ll[k] = l;
+        rr[k] = r;
+        if(l &gt;= r) {
+            a[k] = height[l + 1];
+            return;
+        }
+        int mid = (l + r) / 2;
+        create(k &lt;&lt; 1, l, mid);
+        create(k &lt;&lt; 1 | 1, mid + 1, r);
+        a[k] = min(a[k &lt;&lt; 1], a[k&lt;&lt;1|1]);
+    }
+    int queryl(int k, int p, int s) {
+        if(a[k] &gt;= s) return -1;
+        if(ll[k] &gt;= p) return -1;
+        if(ll[k] == rr[k]) return ll[k];
+        int ans = -1;
+        if(ll[k&lt;&lt;1|1] &lt; p &amp;&amp; a[k&lt;&lt;1|1] &lt; s)
+            ans = queryl(k&lt;&lt;1|1, p, s);
+        if(ans != -1)
+            return ans;
+        return queryl(k&lt;&lt;1, p, s);
+    }
+    int queryr(int k, int p, int s) {
+        if(a[k] &gt;= s)
+            return -1;
+        if(rr[k] &lt; p)
+            return -1;
+        if(ll[k] == rr[k])
+            return ll[k];
+        int ans = -1;
+        if(rr[k&lt;&lt;1] &gt;= p &amp;&amp; a[k&lt;&lt;1] &lt; s)
+            ans = queryr(k&lt;&lt;1, p, s);
+        if(ans != -1)
+            return ans;
+        return queryr(k&lt;&lt;1|1, p, s);
+    }
+}sdt;
+
+bool cmp(int *r, int a, int b, int i) {
+    return r[a] == r[b] &amp;&amp; r[a + i] == r[b + i];
+}
+
+int c[maxn];
+
+void solssda(char str[], int sa[], int RANKP[], int height[], int n, int m) {
+    n++;
+    int i, j, p, *x = tmp_1, *y = tmp_2;
+    for(i = 0; i &lt; m; i++)
+        c[i] = 0;
+    for(i = 0; i &lt; n; i++)
+        c[x[i] = str[i]]++;
+    for(i = 0; i &lt; m; i++)
+        c[i] += c[i - 1];
+    for(i = n - 1; i &gt;= 0; i--)
+        sa[--c[x[i]]] = i;
+    for(j = 1; j &lt;= n; j &lt;&lt;= 1) {
+        p = 0;
+        for(i = n - j; i &lt; n; i++)
+            y[p++] = i;
+
+        for(i = 0; i &lt; n; i++)
+            if(sa[i] &gt;= j)
+                y[p++] = sa[i] - j;
+        for(i = 0; i &lt; m; i++)
+            c[i] = 0;
+        for(i = 0; i &lt; n; i++)
+            c[x[y[i]]]++;
+        for(i = 1; i &lt; m; i++)
+            c[i] += c[i - 1];
+        for(i = n - 1; i &gt;= 0; i--)
+            sa[--c[x[y[i]]]] = y[i];
+        swap(x, y);
+        p = 1;
+        x[sa[0]] = 0;
+        for(i = 1; i &lt; n; i++)
+            x[sa[i]] = cmp(y, sa[i - 1], sa[i], j) ? p - 1 : p++;
+        if(p &gt;= n)
             break;
-        }
-        ma = max(ma, z[i]);
+        m = p;
     }
+    int k = 0;
+    n--;
+    for(i = 0; i &lt;= n; i++)
+        RANKP[sa[i]] = i;
+    for(i = 0; i &lt; n; i++) {
+        if(k)
+            k--;
+        j = sa[RANKP[i] - 1];
+        while(str[i + k] == str[j + k])
+            k++;
+        height[RANKP[i]] = k;
+    }
+}
 
-//    for(int i = 1; i &lt; n; i ++) {
-//        cout &lt;&lt; z[i] &lt;&lt; &quot; &quot;;
-//    }
-//    cout &lt;&lt; endl;
-//    cout &lt;&lt; pos &lt;&lt; &quot; &quot; &lt;&lt; ma &lt;&lt; endl;
-    if(pos == -1) cout &lt;&lt; &quot;Just a legend&quot;;
-    else for(int i = 0; i &lt; n - pos; i ++) cout &lt;&lt; s[i];
-    cout &lt;&lt; endl;
+struct Data {
+    int l, r, sum;
+}T[maxn * 15];
+
+int cnt = 0;
+
+
+vector&lt;int&gt; vec;
+
+
+int get(int x) {
+    return lower_bound(vec.begin(), vec.end(), x) - vec.begin() + 1;
+}
+void insert(int l, int r, int &amp;now, int pre, int x) {
+    ++cnt;
+    now = cnt;
+    T[now] = T[pre];
+    T[now].sum += 1;
+
+    int mid = (l + r) / 2;
+    if(l == r) return;
+
+    if(mid &gt;= x)
+        insert(l, mid, T[now].l, T[pre].l, x);
+    else
+        insert(mid + 1, r, T[now].r, T[pre].r, x);
+}
+int query(int l, int r, int x, int y, int k) {
+    if(l == r)
+        return l;
+    int mid = (l + r) / 2;
+    int R_sum = T[T[y].r].sum - T[T[x].r].sum;
+    if(k &lt;= R_sum)
+        query(mid + 1, r, T[x].r, T[y].r, k);
+    else
+        query(l, mid, T[x].l, T[y].l, k - R_sum);
+}
+int root[maxn];
+void solve(int n){
+    for(int i = 0; i &lt; Q; i++) {
+        int l, r, k;
+        scanf(&quot;%lld%lld%lld&quot;, &amp;l, &amp;r, &amp;k);
+        int len = r - l + 1;
+        int p = RANKP[l - 1];
+        int pl = sdt.queryl(1, p, len);
+        int pr = sdt.queryr(1, p, len);
+        if(pl == -1)
+            pl = 1;
+        else
+            pl += 1;
+        if(pr == -1)
+            pr = n;
+        if(pr &gt; n)
+            pr = n;
+        if(pl &gt; n)
+            pl = n;
+        if(pr - pl + 1 &lt; k) {
+            printf(&quot;-1\n&quot;);
+            continue;
+        }
+        k = pr - pl + 2 - k;
+        int ans = query(1, vec.size(), root[pl - 1], root[pr], k);
+        printf(&quot;%lld\n&quot;, vec[ans - 1]);
+    }
+}
+void dos() {
+    scanf(&quot;%d%d&quot;, &amp;N, &amp;Q);
+    scanf(&quot;%s&quot;, str);
+    long long n = N;
+    str[n] = 0;
+    solssda(str, sa, RANKP, height, n, 200);
+    for(int i = 1; i &lt;= n; i++)
+        ++sa[i];
+    for(int i = 1; i &lt;= n; i++)
+        vec.push_back(sa[i]);
+    sort(vec.begin(), vec.end());
+    vec.erase(unique(vec.begin(), vec.end()), vec.end());
+    for(int i = 0; i &lt; n; i++)
+        insert(1, vec.size(), root[i + 1], root[i], get(sa[i + 1]));
+    height[n + 1] = height[n];
+    sdt.create(1, 1, n);
+    solve(n);
+}
+
+void inputs() {
+    int cas;
+    scanf(&quot;%lld&quot;, &amp;cas);
+    while(cas --)
+        dos();
+}
+
+signed main() {
+    inputs();
     return 0;
-}</code></pre><h4 id="Codeforces-535D-Tavas-and-Malekas"><a href="#Codeforces-535D-Tavas-and-Malekas" class="headerlink" title="Codeforces 535D Tavas and Malekas"></a>Codeforces 535D Tavas and Malekas</h4><p>每个位置 如果不与之前重合 直接放就行<br>重合 判断 能不能合法放进去<br>用差分标记 最后0得位置就是26 ^ 多少</p>
-<pre><code>#include&lt;bits/stdc++.h&gt;
+}</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/24/100029897/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/24/100029897/" itemprop="url">��һ�����Է��� [��ѧ]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T11:13:21+08:00">
+                2019-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/��ѧ/" itemprop="url" rel="index">
+                    <span itemprop="name">��ѧ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/24/解一类线性方程 [数学]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/24/解一类线性方程 [数学]/" itemprop="url">解一类线性方程 [数学]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T11:13:21+08:00">
+                2019-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-线性同余方程"><a href="#1-线性同余方程" class="headerlink" title="1.线性同余方程"></a>1.线性同余方程</h2><p><a href="https://www.luogu.org/problem/P1082" target="_blank" rel="noopener"> https://www.luogu.org/problem/P1082 </a></p>
+<p>a  x  +  b  y  =  c  ax +by = c  a  x  +  b  y  =  c  有解 需要  g  c  d  (  a<br>,  b  )  ∣  c  gcd(a, b) | c  g  c  d  (  a  ,  b  )  ∣  c<br>这题也算找逆元 方法很多 <a href="https://blog.csdn.net/qq_40831340/article/details/100024550" target="_blank" rel="noopener"> https://blog.csdn.net/qq_40831340/article/details/100024550
+</a></p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
 using namespace std;
-const int maxn = 1e6 + 10;
-const int mod = 1e9 + 7;
+const int maxn = 3e6 + 10;
+long long n, m;
 
-int z[maxn], pos[maxn], a[maxn];
-string s;
-int n, m, l;
-
-void get_z(int n) {
-    int l=0,r=0;
-    for (int i=1; i&lt;n; i++) {
-        if (i&gt;r) {
-            l=i,r=i;
-            while (r&lt;n &amp;&amp; s[r-l]==s[r]) r++;
-            z[i]=r-l,r--;
-        } else {
-            int k=i-l;
-            if (z[k]&lt;r-i+1) z[i]=z[k];
-            else {
-                l=i;
-                while (r&lt;n &amp;&amp; s[r-l]==s[r]) r++;
-                z[i]=r-l,r--;
-            }
-        }
+long long exgcd(long long a, long long b, long long &amp;x, long long &amp;y) {
+    if (b == 0) {
+        x = 1, y = 0;
+        return a;
     }
+    int d = exgcd(b, a % b, y, x);
+    y -= a / b * x;
+    return d;
 }
 
-bool chk(int i, int j) {
-    if(i + l &lt;= j) return 1;
-    return z[j - i] &gt;= i + l - j;
+signed main() {
+    ios::sync_with_stdio(0);
+    long long a, b;
+    cin &gt;&gt; a &gt;&gt; b;
+    long long x = 0, y = 0;
+    exgcd(a, b, x, y);
+    cout &lt;&lt; (x % b + b) % b &lt;&lt; endl;
+    return 0;
+}</code></pre><h4 id="青蛙约会"><a href="#青蛙约会" class="headerlink" title="青蛙约会"></a>青蛙约会</h4><p><a href="https://www.luogu.org/problem/P1516" target="_blank" rel="noopener"> https://www.luogu.org/problem/P1516 </a><br>exgcd 解 是 ax0+by0 = gcd(a, b);<br>那样 通解就是<br>x = c/d * x0 + k*b/d;<br>y = c/d * y0 - k * a/d;</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 1e5 + 5;
+
+long long exgcd(long long a, long long b, long long &amp;x, long long &amp;y) {
+    if (b == 0) {
+        x = 1, y = 0;
+        return a;
+    }
+    int d = exgcd(b, a % b, y, x);
+    y -= a / b * x;
+    return d;
 }
 
-int ksm(int a, int b) {
-    int res = 1;
+//*((x0(K/gcd(a,b)))%(l/gcd(a,b))+(l/gcd(a,b)))%(l/gcd(a,b))
+
+signed main() {
+    ll n, m, x, y, l;
+    cin &gt;&gt; x &gt;&gt; y &gt;&gt; m &gt;&gt; n &gt;&gt; l;
+    ll a = n - m;
+    ll b = l;
+    ll c = x - y;
+    if(a &lt; 0) a = -a, c = -c;
+    ll x0 = 0, y0 = 0;
+    ll gcd = exgcd(a, b, x0, y0);
+    if(c%gcd != 0 ) cout &lt;&lt; &quot;Impossible&quot; &lt;&lt; endl;
+    else cout &lt;&lt; (x0*(c/gcd)%(l/gcd)+(l/gcd))%(l/gcd) &lt;&lt; endl;
+    return 0;
+}</code></pre><h2 id="2-高次不定方程"><a href="#2-高次不定方程" class="headerlink" title="2.高次不定方程"></a>2.高次不定方程</h2><p>A  x  ≡  B  (  m  o  d  p  )  A^x≡B(modp)  A  x  ≡  B  (  m  o  d  p  )<br>分为两种情况， p是质数和 p 不是质数的情况……</p>
+<ol>
+<li>p 是质数的情况 p|A 且 B!=0 </li>
+<li>非素数 当通过枚举等方法发现其在  [  0  ,  p  −  1  ]  [0,p−1]  [  0  ,  p  −  1  ]  内无整数解，则此方程无整数解（关于当 p 为质数时，方程一定在  [  0  ,  p  −  1  ]  [0,p - 1]  [  0  ,  p  −  1  ]  有一个整数解 </li>
+</ol>
+<h4 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h4><p><del>北上广深算法。。。。。</del> 只算 p 是素数时可以</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 1e5 + 5;
+#define int long long
+
+long long pow_mod(long long a, long long b, long long p) {
+    long long res = 1;
     for(; b; b &gt;&gt;= 1) {
-        if(b &amp; 1) res = 1ll * res * a % mod;
-        a = 1ll * a * a % mod;
+        if(b &amp; 1)
+            res = res * a % p;
+        a = a * a % p;
     }
     return res;
 }
 
-signed main() {
-    cin &gt;&gt; n &gt;&gt; m;
-    cin &gt;&gt; s;
-    l = s.size();
-    get_z(l);
-    for(int i = 1; i &lt;= m; i ++) cin &gt;&gt; pos[i], pos[i]--;
+unordered_map&lt;int, int&gt; V;
 
-    for(int i = 1; i &lt; m; i ++) {
-        if(chk(pos[i], pos[i + 1])) {
-            a[pos[i]] ++, a[pos[i] + l] --;
-        } else {
-            cout &lt;&lt; 0 &lt;&lt; endl;
-            return 0;
+ll BSGS(ll A, ll B, ll C) {
+    const int sizes = ceil(sqrt(C));
+    ll base = B % C;
+    V[base] = 0;
+    for(int i = 1; i &lt;= sizes; i++) {
+        base = base * A % C;
+        V[base] = i;
+    }
+    base = pow_mod(A, sizes, C);
+    ll tmp = 1;
+    for(ll i = 1; i &lt;= sizes; i++) {
+        tmp = tmp * base % C;
+        if(V[tmp])
+            return ((i * sizes - V[tmp]) % C + C) % C;
+    }
+    return -1;
+}
+
+signed main() {
+    int p, b, n;
+    cin &gt;&gt; p &gt;&gt; b &gt;&gt; n;
+    int ans = BSGS(b, n, p);
+    if(ans == -1)
+        cout &lt;&lt; &quot;no solution&quot; &lt;&lt; endl;
+    else
+        cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</code></pre><h2 id="中国剩余定理"><a href="#中国剩余定理" class="headerlink" title="中国剩余定理"></a>中国剩余定理</h2><p>EXCRT</p>
+<pre><code>#include&lt;cstdio&gt;
+using namespace std;
+typedef long long ll;
+ll n;
+ll a[100010],b[100010]; 
+ll mul(ll A,ll B,ll mod) //快速乘取余 模板
+{
+    ll ans=0;
+    while(B&gt;0)
+      {
+        if(B &amp; 1) ans=(ans+A%mod)%mod;
+        A=(A+A)%mod;
+        B&gt;&gt;=1;
+      }
+    return ans;
+}
+ll exgcd(ll A,ll B,ll &amp;x,ll &amp;y) //扩展欧几里得 模板
+{
+    if(!B)
+      {
+        x=1,y=0;
+        return A;
+      }
+    ll d=exgcd(B,A%B,x,y);
+    ll tmp=x;
+    x=y , y=tmp-A/B*y;
+    return d;
+}
+ll lcm(ll A,ll B) //求最小公倍数
+{
+    ll xxx,yyy;
+    ll g=exgcd(A,B,xxx,yyy);
+    return (A/g*B);
+}
+ll excrt() //重点:求解同余方程组
+{
+    ll x,y;
+    ll M=b[1],ans=a[1]; //赋初值 
+    //M为前k-1个数的最小公倍数，ans为前k-1个方程的通解
+    for(int i=2;i&lt;=n;i++)
+      {
+        ll A=M,B=b[i];
+        ll C=(a[i]-ans%B+B)%B; //代表同余方程 ax≡c(mod b) 中a,b,c
+
+        ll g=exgcd(A,B,x,y);
+        //求得A,B的最大公约数，与同余方程ax≡gcd(a,b)(mod b)的解，
+
+        if(C%g) return -1; //无解的情况
+
+        x=mul(x,C/g,B); //求得x的值,x即t 
+        ans+=x*M;  //获得前k个方程的通解
+        M=lcm(M,B); //更改M的值
+        ans=(ans%M+M)%M;
+      }
+    return ans;
+}
+int main()
+{
+    scanf(&quot;%lld&quot;,&amp;n);
+    for(int i=1;i&lt;=n;i++)
+      scanf(&quot;%lld%lld&quot;,&amp;b[i],&amp;a[i]);
+    ll ans=excrt();
+    printf(&quot;%lld&quot;,ans);
+}</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/24/2019CCPC-网络选拔赛 HDU-6703 array (主席树 or 线段树)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/24/2019CCPC-网络选拔赛 HDU-6703 array (主席树 or 线段树)/" itemprop="url">2019CCPC-网络选拔赛 HDU-6703 array (主席树 or 线段树)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T10:06:01+08:00">
+                2019-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>CY提供的 主席树思路<br><a href="https://blog.csdn.net/chenyume/article/details/100045386" target="_blank" rel="noopener"> https://blog.csdn.net/chenyume/article/details/100045386
+</a></p>
+<blockquote>
+<p>题意：给出一个序列，保证序列是一个1~n的全排列，q次操作，两种类型，一是给a[i] a[i]a[i]加107 10^710<br> 7<br> ，另一种是给出r，k，询问一个最小的数字x，使得x&gt;=k<br>x&gt;=kx&gt;=k，x不等于区间[1,r]内的任何一个数字，强制在线，数据范围：n,m&lt;=105,k&lt;=n n,m&lt;=10^5,k&lt;=nn,m&lt;=10<br> 5<br> ,k&lt;=n  </p>
+</blockquote>
+<p>首先观察数据发现查询的答案最多为n+1，对于操作1来说，给一个数字加一个超大的数字，是不是说明，这个数字之后就不会再出现了，他是不是就可以作为查询的答案之一了。  </p>
+<blockquote>
+<p> 再考虑序列是一个1~n的全排列，那么是不是说明[1,r] [1,r][1,r]内出现过的数字，在区间[r+1,n]<br>[r+1,n][r+1,n]内都不会出现了。<br> 所以序列从后往前向主席树中添加数字，对于操作1如果这个数字被修改了就放到set中，那对于查询操作，是不是查询[r+1,n]<br>[r+1,n][r+1,n]的主席树中大于等于k的最小值，set中大于等于k的最小值两者取最小即可。<br> 为了查询的方便，同时维护一个区间最大数字。</p>
+</blockquote>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 1e5 + 5;
+int a[maxn];
+int n, m, cas;
+set&lt;int&gt; S;
+
+struct node {
+    int lc, rc;
+    int mas;
+} tree[maxn * 20];
+int tot, root[maxn];
+
+int build(int l, int r) {
+    int p = ++ tot;
+    tree[p].mas = 0;
+    if(l == r) return p;
+    int mid = l + r &gt;&gt; 1;
+    tree[p].lc = build(l, mid);
+    tree[p].rc = build(mid + 1, r);
+    return p;
+}
+
+int ins(int now, int l, int r, int x) {
+    int p = ++ tot;
+    tree[p] = tree[now];
+    if(l == r) {
+        tree[p].mas = l;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(x &lt;= mid) tree[p].lc = ins(tree[now].lc, l, mid, x);
+    else tree[p].rc = ins(tree[now].rc, mid + 1, r, x);
+    tree[p].mas = max(tree[tree[p].lc].mas, tree[tree[p].rc].mas);
+    return p;
+}
+
+int query(int now, int l, int r, int k) {
+    if(tree[now].mas &lt; k) return n + 1;
+    if(l == r) return l;
+    int mid = l + r &gt;&gt; 1;
+    if(mid &gt;= k &amp;&amp; tree[tree[now].lc].mas &gt;= k) return query(tree[now].lc, l, mid, k);
+    else return query(tree[now].rc, mid + 1, r, k);
+}
+bool vis[maxn];
+int main() {
+    scanf(&quot;%d&quot;, &amp;cas);
+    while(cas --) {
+        S.clear();
+        tot = 0;
+        scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+        S.insert(n + 1);
+        for(int i = 1; i &lt;= n; i ++) scanf(&quot;%d&quot;, &amp;a[i]);
+        root[n + 1] = build(1, n);
+        for(int i = n; i &gt;= 1; i --)
+            root[i] = ins(root[i + 1], 1, n, a[i]);
+
+        int op, pos, k, r, pre = 0;
+        int t1, t2, t3;
+        while(m --) {
+            scanf(&quot;%d&quot;, &amp;op);
+            if(op == 1) {
+                scanf(&quot;%d&quot;, &amp;t1);
+                pos = t1 ^ pre;
+                S.insert(a[pos]);
+            } else {
+                scanf(&quot;%d %d&quot;, &amp;t2, &amp;t3);
+                r = t2 ^ pre, k = t3 ^ pre;
+                int ans = min(query(root[r + 1], 1, n, k), *S.lower_bound(k));
+                printf(&quot;%d\n&quot;, ans);
+                pre = ans;
+            }
         }
     }
-    if(m) a[pos[m]] ++, a[pos[m] + l] --;
-    for(int i = 1; i &lt; n; i ++) 
-        a[i] += a[i - 1];
+    return 0;
+}</code></pre><p>官方题解<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190824100530604.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190824100530604.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 1e5 + 5;
+int tree[maxn &lt;&lt; 2];
+int cas, n, m;
+int a[maxn];
 
+void build(int l, int r, int rt) {
+    tree[rt] = 0;
+    if(l == r) return ;
+    int mid = l + r &gt;&gt; 1;
+    build(l, mid, rt &lt;&lt; 1);
+    build(mid + 1, r, rt &lt;&lt; 1 | 1);
+}
+
+void updata(int L, int pos, int l, int r, int rt) {
+    if(l == r) {
+        tree[rt] = pos;
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(L &lt;= mid) updata(L, pos, l, mid, rt &lt;&lt; 1);
+    else updata(L, pos, mid + 1, r, rt &lt;&lt; 1 | 1);
+    tree[rt] = max(tree[rt &lt;&lt; 1], tree[rt &lt;&lt; 1 | 1]);
+}
+
+int query(int l, int r, int rt, int k, int pos) {
+    if(tree[rt] &lt;= pos) return -1;
+    if(l == r) return l;
+    int mid = l + r &gt;&gt; 1;
+    int res = - 1;
+    if(k &lt;= mid) res = query(l, mid, rt &lt;&lt; 1, k, pos);
+    if(res == - 1) res = query(mid + 1, r, rt &lt;&lt; 1 | 1, k, pos); 
+    return res;
+}
+
+signed main() {
+    scanf(&quot;%d&quot;, &amp;cas);
+    while(cas --) {
+        scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+        build(1, 1 + n, 1);
+        for(int i = 1; i &lt;= n; i ++) {
+            scanf(&quot;%d&quot;, &amp;a[i]);
+            updata(a[i], i, 1, n + 1, 1);
+        } 
+        updata(n + 1, n + 1, 1, n + 1, 1);
+        int op, pos, k, r, pre = 0;
+        int t1, t2, t3;
+        while(m --) {
+            scanf(&quot;%d&quot;, &amp;op);
+            if(op == 1) {
+                scanf(&quot;%d&quot;, &amp;t1);
+                pos = t1 ^ pre;
+                updata(a[pos], n + 1, 1, n + 1, 1);
+            } else {
+                scanf(&quot;%d %d&quot;, &amp;t2, &amp;t3);
+                r = t2 ^ pre, k = t3 ^ pre;
+                int ans = query(1, n + 1, 1, k, r);
+                printf(&quot;%d\n&quot;, ans);
+                pre = ans;
+            }
+        }
+    }
+    return 0;
+}</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/22/乘法逆元 [数学]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/22/乘法逆元 [数学]/" itemprop="url">乘法逆元 [数学]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T22:01:37+08:00">
+                2019-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>逆元素是指一个可以取消另一给定元素运算的元素<br> —百度百科</p>
+</blockquote>
+<p>简单说 就是  a  ∗  a  −  1  =  1  a * a^{-1} = 1  a  ∗  a  −  1  =  1  一样 在模<br>意义下有更多性质</p>
+<h2 id="常见求逆元的方法"><a href="#常见求逆元的方法" class="headerlink" title="常见求逆元的方法"></a>常见求逆元的方法</h2><h4 id="1-拓展欧几里得求逆元"><a href="#1-拓展欧几里得求逆元" class="headerlink" title="1.拓展欧几里得求逆元"></a>1.拓展欧几里得求逆元</h4><h5 id="ps必须-a-p-a-p-a-p-互质"><a href="#ps必须-a-p-a-p-a-p-互质" class="headerlink" title="ps必须  a  ,  p  a,p  a  ,  p  互质"></a>ps必须  a  ,  p  a,p  a  ,  p  互质</h5><p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190822212558856.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190822212558856.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>复杂度  l  o  g  p  log p  l  o  g  p</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 3e6 + 10;
+long long n, m;
+
+long long exgcd(long long a, long long b, long long &amp;x, long long &amp;y) {
+    if (b == 0) {
+        x = 1, y = 0;
+        return a;
+    }
+    int d = exgcd(b, a % b, y, x);
+    y -= a / b * x;
+    return d;
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    long long a, b;
+    cin &gt;&gt; a &gt;&gt; b;
+    long long x = 0, y = 0;
+    exgcd(a, b, x, y);
+    cout &lt;&lt; (x % b + b) % b &lt;&lt; endl;
+    return 0;
+}</code></pre><h4 id="2-欧拉定理求逆元"><a href="#2-欧拉定理求逆元" class="headerlink" title="2.欧拉定理求逆元"></a>2.欧拉定理求逆元</h4><p>也是 a p 必须互质<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/2019082221293789.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/2019082221293789.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>欧拉值 求法只要按照 公式直接出就好<br><img src="https://img-blog.csdnimg.cn/201908222134288.png" alt="在这里插入图片描述"><br>复杂度  l  o  g  (  p  h  i  (  p  )  )  +  s  q  r  t  (  n  )  log(phi(p)) +<br>sqrt(n)  l  o  g  (  p  h  i  (  p  )  )  +  s  q  r  t  (  n  )</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 3e6 + 10;
+long long n, m;
+
+long long pow_mod(long long a, long long b, long long p) {
+    long long res = 1;
+    for(; b; b &gt;&gt;= 1) {
+        if(b &amp; 1) res = res * a % p;
+        a = a * a % p;
+    }
+    return res;
+}
+
+long long phi(long long x, long long p) {
+    long long res = x, tmp = x;
+    for(int i = 2; i * i &lt;= tmp; i ++) {
+        if(x % i == 0) {
+            res = (res / i) % p * ((i - 1 % p)) % p;
+            while(x % i == 0) x /= i;
+        }
+    }
+    if(x &gt; 1) res = (res / x) % p * ((x - 1) % p) % p;
+    return res;
+} // 一般欧拉值 也不太可能比p大 板子就写下吧 一般也不需要 
+
+long long phi(long long x) {
+    long long res = x, tmp = x;
+    for(int i = 2; i * i &lt;= tmp; i ++) {
+        if(x % i == 0) {
+            res = res / i * (i - 1);
+            while(x % i == 0) x /= i;
+        }
+    }
+    if(x &gt; 1) res = res / x * (x - 1);
+    return res;
+}
+signed main(){
+    cin &gt;&gt; a &gt;&gt; b;
+    long long tmp = phi(b) - 1;
+    cout &lt;&lt; pow_mod(a, tmp, b) &lt;&lt; endl; 
+    return 0;
+}</code></pre><h2 id="3-费马小定理求逆元"><a href="#3-费马小定理求逆元" class="headerlink" title="3.费马小定理求逆元"></a>3.费马小定理求逆元</h2><h6 id="只要p-是质数-就行-不要求互质"><a href="#只要p-是质数-就行-不要求互质" class="headerlink" title="只要p 是质数 就行 不要求互质"></a>只要p 是质数 就行 不要求互质</h6><pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 2e5 + 10;
+long long n, m;
+
+long long pow_mod(long long a, long long b, long long p) {
+    long long res = 1;
+    for(; b; b &gt;&gt;= 1) {
+        if(b &amp; 1) res = res * a % p;
+        a = a * a % p;
+    }
+    return res;
+}
+
+const int p = 19260817;
+template&lt;typename T&gt;
+inline void read(T &amp;x) {
+    x = 0;
+    char ch = getchar();
+    bool f = false;
+    while(!isdigit(ch)) {
+        f |= (ch == &apos;-&apos;);
+        ch = getchar();
+    }
+    while(isdigit(ch)) {
+        x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + (ch ^ 48);
+        x %= p;
+        ch = getchar();
+    }
+    x = f ? -x : x;
+}
+
+signed main() {
+    long long a, b;
+    read(a), read(b);
+    if(!b) puts(&quot;Angry!&quot;);
+    else cout &lt;&lt; a * pow_mod(b, p - 2, p) % p &lt;&lt; endl;
+    return 0;
+}</code></pre><h2 id="线性求逆元"><a href="#线性求逆元" class="headerlink" title="线性求逆元"></a>线性求逆元</h2><p>也算是 打表 不过之后我们通过类似 阶乘逆元的方式 可以 看出 前缀积的逆元就是逆元的前缀积(之后细讲)</p>
+<h4 id="线性求逆元模板"><a href="#线性求逆元模板" class="headerlink" title="线性求逆元模板"></a>线性求逆元模板</h4><p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190822215245195.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190822215245195.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190822215429491.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190822215429491.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 3e6 + 10;
+int n, m;
+
+long long pow_mod(long long a, long long b, long long p) {
+    long long res = 1;
+    for(; b; b &gt;&gt;= 1) {
+        if(b &amp; 1) res = res * a % p;
+        a = a * a % p;
+    }
+    return res;
+}
+
+int inv[maxn], p;
+
+signed main() {
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;p);
+    inv[1] = 1;
+    cout &lt;&lt; inv[1] &lt;&lt; endl;
+    for(int i = 2; i &lt;= n; i ++) {
+        inv[i] = 1ll * (p - p / i) * inv[p % i] % p;
+        printf(&quot;%d\n&quot;, inv[i]);
+    }
+    return 0;
+}</code></pre><h4 id="阶乘-O-n-O-n-O-n-逆元"><a href="#阶乘-O-n-O-n-O-n-逆元" class="headerlink" title="阶乘  O  (  n  )  O(n)  O  (  n  )  逆元"></a>阶乘  O  (  n  )  O(n)  O  (  n  )  逆元</h4><p>这里 证明 一并放到 乘法逆元2 中</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 3e6 + 10;
+long long n, m;
+
+long long pow_mod(long long a, long long b, long long p) {
+    long long res = 1;
+    for(; b; b &gt;&gt;= 1) {
+        if(b &amp; 1) res = res * a % p;
+        a = a * a % p;
+    }
+    return res;
+}
+
+long long inv[maxn], p;
+long long f[maxn], c[maxn];
+
+signed main() {
+    scanf(&quot;%lld %lld&quot;, &amp;n, &amp;p);
+    c[1] = c[0] = 1;
+    for(int i = 2; i &lt;= n; i ++) 
+        c[i] = c[i - 1] * i % p;
+    f[n] = pow_mod(c[n], p - 2, p);
+
+    for(int i = n - 1; i &gt;= 1; i --) {
+        f[i] = f[i + 1] * (i + 1) % p;
+    }
+
+    for(int i = 1; i &lt;= n; i ++) 
+        printf(&quot;%lld\n&quot;, f[i] * c[i - 1] % p);
+    return 0;
+}</code></pre><h2 id="乘法逆元2"><a href="#乘法逆元2" class="headerlink" title="乘法逆元2"></a>乘法逆元2</h2><p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190822220036269.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190822220036269.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>注释部分T了 2333</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+int p, n, k;
+const int maxn = 5e6 + 10;
+
+template&lt;typename T&gt;
+inline void read(T &amp;x) {
+    x = 0;
+    char ch = getchar();
+    bool f = false;
+    while(!isdigit(ch)) {
+        f |= (ch == &apos;-&apos;);
+        ch = getchar();
+    }
+    while(isdigit(ch)) {
+        x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + (ch ^ 48);
+        ch = getchar();
+    }
+    x = f ? -x : x;
+}
+
+long long pow_mod(long long a, long long b, long long p) {
+    long long res = 1;
+    for(; b; b &gt;&gt;= 1) {
+        if(b &amp; 1) res = res * a % p;
+        a = a * a % p;
+    }
+    return res;
+}
+
+int b[maxn], s[maxn], a[maxn];
+
+int main() {
+    read(n), read(p), read(k);
+    int ans = 0;
+//    for(int i = 1, a; i &lt;= n; i ++) {
+//        read(a);
+//        ans = (1ll * ans + pow_mod(k, i, p) * pow_mod(a, p - 2, p)) % p ;
+//    }
+//    printf(&quot;%d\n&quot;, ans);
+    s[0] = 1;
+    b[n + 1] = 1;
+    for(int i = 1; i &lt;= n; i ++) {
+        read(a[i]);
+        s[i] = 1ll * s[i - 1] * a[i] % p;
+    }
+    b[n + 1] = pow_mod(s[n], p - 2, p);
+    for(int i = n; i &gt;= 1; i --) {
+        b[i] = 1ll * b[i + 1] * a[i] % p;
+    }
+    int tmpk = k;
+    for(int i = 1; i &lt;= n; i ++) {
+        ans = (ans + (1ll * b[i + 1] * s[i - 1]) % p * tmpk) % p;
+        tmpk = 1ll * tmpk * k % p;
+    }
+    printf(&quot;%d\n&quot;, ans);
+    return 0;
+}</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/21/二维数点问题  (从线段树到CDQ分治)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/21/二维数点问题  (从线段树到CDQ分治)/" itemprop="url">二维数点问题  (从线段树到CDQ分治)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T13:29:22+08:00">
+                2019-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><del>ps当然还有的二维树状数组 这里暂时不提</del></p>
+<h2 id="star"><a href="#star" class="headerlink" title="star"></a>star</h2><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1541" target="_blank" rel="noopener"> http://acm.hdu.edu.cn/showproblem.php?pid=1541
+</a><br>统计 x y 到 0 0 有多少星星<br>排序 按x y 升序 排 前面只影响后面 离散化 树状数组 统计<br>HDU 星星 这道题 算是简单题 数据范围也没有看 自己在胡诌离散化 处理大矩阵数据了<br>找板子题 没有找到 以下代码 带离散化 可以处理的矩阵相当大了</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 1e5 + 10;
+
+int n, cnt;
+struct node {
+    int x, y;
+    bool operator &lt; (const node&amp; a) const {
+        if(x != a.x) return x &lt; a.x;
+        else return y &lt; a.y;
+    }
+} a[maxn];
+int c[maxn], b[maxn], ans[maxn];
+void add(int x, int y) {
+    for(; x &lt;= n; x += (x &amp; (-x))) c[x] += y;
+}
+
+int sum(int x) {
+    int res = 0;
+    for(; x; x -= (x &amp; (-x))) res += c[x];
+    return res;
+}
+
+int main() {
+    while(cin &gt;&gt; n) {
+        memset(c, 0, sizeof c);
+        memset(ans, 0, sizeof ans);    
+        for(int i = 1; i &lt;= n; i ++)
+            cin &gt;&gt; a[i].x &gt;&gt; a[i].y, b[i] = a[i].y;
+        sort(a + 1, a + 1 + n);
+        sort(b + 1, b + 1 + n);
+        int cnt = unique(b + 1, b + 1 + n) - b - 1;
+        int now;
+        for(int i = 1; i &lt;= n; i ++) {
+            int pos = lower_bound(b + 1, b + 1 + cnt, a[i].y) - b;
+            now = sum(pos + 1);
+            ans[now] ++;
+            add(pos + 1, 1);
+        }
+        for(int i = 0; i &lt; n; i ++) {
+            printf(&quot;%d\n&quot;, ans[i]);
+        }
+    }
+    return 0;
+}</code></pre><h2 id="P2163-SHOI2007-园丁的烦恼"><a href="#P2163-SHOI2007-园丁的烦恼" class="headerlink" title="P2163 [SHOI2007]园丁的烦恼"></a>P2163 [SHOI2007]园丁的烦恼</h2><p>本来想着二维数组 然后不对劲啊<br>CDQ分治嚎啊<br>如果你理解的CDQ 分治 这题并不难<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190821102755942.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190821102755942.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 3e6 + 10;
+const int INF = 0x3f3f3f3f;
+typedef pair&lt;int, int&gt; P;
+
+int n, m, cnt;
+struct node {
+    int x, y, op, id;
+    bool operator &lt; (const node &amp;b) const {
+        return x == b.x ? (y == b.y ? op &lt; b.op : y &lt; b.y) : x &lt; b.x;
+    }
+} que[maxn], tmp[maxn];
+int ans[maxn];
+void cdq(int L, int R) {
+    if(L == R) return ;
+    int mid = L + R &gt;&gt; 1;
+    cdq(L, mid), cdq(mid + 1, R);
+    int l = L, r = mid + 1, pos = L, tot = 0;
+    while(l &lt;= mid &amp;&amp; r &lt;= R) {
+        if(que[l].y &lt;= que[r].y)
+            tot += !que[l].op, tmp[pos ++] = que[l ++];
+        else
+            ans[que[r].id] += tot, tmp[pos ++] = que[r ++];
+    }
+    while(l &lt;= mid) tmp[pos ++] = que[l ++];
+    while(r &lt;= R) ans[que[r].id] += tot, tmp[pos ++] = que[r ++];
+    for(int i = L; i &lt;= R; i ++) que[i] = tmp[i];
+}
+
+int main() {
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+    for(int i = 1, x, y; i &lt;= n; i ++) {
+        scanf(&quot;%d %d&quot;, &amp;x, &amp;y);
+        que[++ cnt] = node {x, y, 0, 0};
+    }
     int tot = 0;
-    for(int i = 0; i &lt; n; i ++) if(!a[i]) tot ++;
-    cout &lt;&lt; ksm(26, tot) &lt;&lt; endl;
+    for(int i = 1, a, b, c, d; i &lt;= m; i ++) {
+        scanf(&quot;%d %d %d %d&quot;, &amp;a, &amp;b, &amp;c, &amp;d);
+        que[++ cnt] = node {c, d, 1, ++ tot};
+        que[++ cnt] = node {c, b - 1, 1, ++ tot};
+        que[++ cnt] = node {a - 1, d, 1, ++ tot};
+        que[++ cnt] = node {a - 1, b - 1, 1, ++ tot};
+    }
+    sort(que + 1, que + 1 + cnt);
+    cdq(1, cnt);
+    for(int i = 1; i + 3 &lt;= tot; i += 4)
+        printf(&quot;%d\n&quot;, ans[i] - ans[i + 1] - ans[i + 2] + ans[i + 3]);
+    return 0;
+}</code></pre><h2 id="CDQ-陌上花开-动态逆序对"><a href="#CDQ-陌上花开-动态逆序对" class="headerlink" title="CDQ 陌上花开 动态逆序对"></a>CDQ 陌上花开 动态逆序对</h2><p>这里是三维偏序<br><a href="https://blog.csdn.net/qq_40831340/article/details/99587234" target="_blank" rel="noopener"> https://blog.csdn.net/qq_40831340/article/details/99587234
+</a></p>
+<h2 id="P4390-BOI2007-Mokia-摩基亚"><a href="#P4390-BOI2007-Mokia-摩基亚" class="headerlink" title="P4390 [BOI2007]Mokia 摩基亚"></a>P4390 [BOI2007]Mokia 摩基亚</h2><p>依然是三维偏序 注意坐标 要加一 题目给的是 在格子中数量</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 4e6 + 10;
+const int INF = 0x3f3f3f3f;
+typedef pair&lt;int, int&gt; P;
+
+int n, m, cnt;
+struct node { // 1是询问 ; 0 是需改
+    int x, y, z, op, id, val;
+} que[maxn], tmp[maxn];
+int ans[maxn], c[maxn];
+
+bool cmp(const node &amp;a, const node &amp;b) {
+    if(a.x != b.x) return a.x &lt; b.x;
+    if(a.y != b.y) return a.y &lt; b.y;
+    if(a.z != b.z) return a.z &lt; b.z;
+    return a.op &lt; b.op;
+}
+
+void add(int x, int y) {
+    for(; x &lt;= n; x += (x &amp; (-x))) c[x] += y;
+}
+
+void add(int x) {
+    for(; x &lt;= n; x += (x &amp; (-x))) c[x] = 0;
+}
+
+int sum(int x) {
+    int res = 0;
+    for(; x; x -= (x &amp; (-x))) res += c[x];
+    return res;
+}
+
+void cdq(int L, int R) {
+    if(L == R) return ;
+    int mid = L + R &gt;&gt; 1;
+    cdq(L, mid), cdq(mid + 1, R);
+    int l = L, r = mid + 1, pos = L, tot = 0;
+    while(l &lt;= mid &amp;&amp; r &lt;= R) {
+        if(que[l].y &lt;= que[r].y) {
+            if(!que[l].op) add(que[l].z, que[l].val);
+            tmp[pos ++] = que[l ++];
+        } else {
+            if(que[r].op) ans[que[r].id] += sum(que[r].z);
+            tmp[pos ++] = que[r ++];
+        }
+    }
+    while(r &lt;= R) {
+        if(que[r].op) ans[que[r].id] += sum(que[r].z);
+        tmp[pos ++] = que[r ++];
+    }
+    while(l &lt;= mid) {
+        if(!que[l].op) add(que[l].z, que[l].val);
+        tmp[pos ++] = que[l ++];
+    }
+
+    for(int i = L; i &lt;= R; i ++) {
+        if(i &lt;= mid &amp;&amp; !que[i].op) add(que[i].z);
+        que[i] = tmp[i];
+    }
+}
+
+int main() {
+    scanf(&quot;%d %d&quot;, &amp;m, &amp;n);
+    ++ n;
+    int tot = 0, tim = 0;
+    int x1, y1, x2, y2, val, op;
+    while(scanf(&quot;%d&quot;, &amp;op) &amp;&amp; op != 3) {
+        if(op == 1) {
+            tim ++;
+            scanf(&quot;%d %d %d&quot;, &amp;x1, &amp;y1, &amp;val);
+            que[++ cnt] = node {x1 + 1, y1 + 1, tim, 0, 0, val};
+        } else {
+            scanf(&quot;%d %d %d %d&quot;, &amp;x1, &amp;y1, &amp;x2, &amp;y2);
+            x2 += 1, y2 += 1;
+            que[++ cnt] = node {x2, y2, tim, 1, ++tot, 0};
+            que[++ cnt] = node {x2, y1, tim, 1, ++tot, 0};
+            que[++ cnt] = node {x1, y2, tim, 1, ++tot, 0};
+            que[++ cnt] = node {x1, y1, tim, 1, ++tot, 0};
+        }
+    }
+    n = tim;
+    sort(que + 1, que + 1 + cnt, cmp);
+    cdq(1, cnt);
+    for(int i = 1; i + 3 &lt;= tot; i += 4)
+        printf(&quot;%d\n&quot;, ans[i] - ans[i + 1] - ans[i + 2] + ans[i + 3]);
+    return 0;
+}</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/20/2018 ICPC 沈阳 C Insertion Sort (数学推导规律)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/20/2018 ICPC 沈阳 C Insertion Sort (数学推导规律)/" itemprop="url">2018 ICPC 沈阳 C Insertion Sort (数学推导规律)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-20T19:35:33+08:00">
+                2019-08-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>常见的数学规律 要不开跟 平方 做差 求和 要不就是 位置关系 作差 作和 差分<br>打表 之后 就是考验眼力和脑子能不能转的时候了  </p>
+<p>现有一段函数，要求输入一个数组A和一个k，进行一次题目给出的冒泡模仿插入 进行k次。<br>问给你三个数，n，k，mod，你在1-n的全排列中，有多少个序列运行这个函数之后其最长上升子序列的长度大于等于(n-1)，最后的结果对mod取模。<br><img src="https://img-blog.csdnimg.cn/20190820191950631.png" alt="在这里插入图片描述"><br>然后 我们上下做差 能看出是等差数列<br><img src="https://img-blog.csdnimg.cn/20190820192238144.png" alt="在这里插入图片描述"><br>首项是  i  ∗  i  !  i * i!  i  ∗  i  !  ，然后差是  2  ∗  i  !  2 * i!  2  ∗  i  !  
+那么 对应第 k 列 n 行 来说 它就是  k  !  +  k! +  k  !  +  等差数列的和<br>这样开始化简公式<br>矩阵 对角线 是 K！ 我们差 也是从这里开始的 之后就是细心推了 //看上图<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190820192953782.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190820192953782.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>要注意 相对位置 该加对加好<br>不要少去mod 有负数 加成正的在处理</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+typedef long long ll;
+
+int n, m , mod;
+
+signed main() {
+    int cas;
+    int tt = 1;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        cin &gt;&gt; n &gt;&gt; m &gt;&gt; mod;
+        int k = 1;
+        if(m &gt;= n - 1) m = n;
+        for(int i = 2; i &lt;= m; i ++) {
+            k *= i % mod;
+            k %= mod;
+        }
+        cout &lt;&lt; &quot;Case #&quot; &lt;&lt; tt ++ &lt;&lt; &quot;: &quot; ;
+        if(m &gt;= n - 1) cout &lt;&lt; k &lt;&lt; endl;
+        else cout &lt;&lt; (k)*(n * n % mod - (m + 1) * n % mod + m + 1 + mod) % mod &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/19/2019杭电多校第五场 permutation 1 (全排列)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/19/2019杭电多校第五场 permutation 1 (全排列)/" itemprop="url">2019杭电多校第五场 permutation 1 (全排列)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-19T20:07:22+08:00">
+                2019-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基本算法/" itemprop="url" rel="index">
+                    <span itemprop="name">基本算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h5 id="给你n个数-1到n-你全排列相邻差序列-有字典序第k大差序列的-输出"><a href="#给你n个数-1到n-你全排列相邻差序列-有字典序第k大差序列的-输出" class="headerlink" title="给你n个数 1到n 你全排列相邻差序列 有字典序第k大差序列的 输出"></a>给你n个数 1到n 你全排列相邻差序列 有字典序第k大差序列的 输出</h5><p>数据到1e4 大于 8 的直接暴力 n 后面 1 ~ n-1 的第k-1排列 就是解<br>然后 1 到 8 打表处理</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int maxn = 1e6 + 6;
+
+struct node {
+    int num[10];
+    char st[10];
+    bool operator &lt; (const node &amp;a) const {
+        return strcmp(st, a.st) &lt; 0;
+    }
+} a[10][maxn];
+int b[30];
+
+void init() {
+    for(int k = 2; k &lt;= 8; k ++) {
+        for(int i = 1; i &lt;= k; i ++) b[i] = i;
+        int cnt = 1;
+        do {
+            for(int i = 1; i &lt;= k; i ++) {
+                a[k][cnt].num[i] = b[i];
+                if(i != 1) a[k][cnt].st[i-2] = b[i] - b[i-1] + &apos;*&apos;;
+            }
+            a[k][cnt].st[k-1] = &apos;\0&apos;;
+            cnt ++;
+        } while(next_permutation(b + 1, b + k + 1));
+        sort(a[k] + 1,a[k] + cnt);
+    }
+}
+
+signed main() {
+    init();
+    int cas, n, k;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        cin &gt;&gt; n &gt;&gt; k;
+        if(n &gt; 8) {
+            b[1] = n;
+            for(int i = 2; i &lt;= n; i ++) b[i] = i - 1;
+            while(--k) next_permutation(b + 1, b + 1 + n);
+            for(int i = 1; i &lt;= n; i ++) {
+                if(i != 1) cout &lt;&lt; &quot; &quot;;
+                cout &lt;&lt; b[i];
+            }
+            puts(&quot;&quot;);
+        } else {
+            for(int i = 1; i &lt;= n; i ++) {
+                if(i != 1) cout &lt;&lt; &quot; &quot;;
+                cout &lt;&lt; a[n][k].num[i];
+            }
+            puts(&quot;&quot;);
+        }
+    }
+    return 0;
+}</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/19/2019 牛客多校第十场 E Hilbert Sort (分形 + 平面坐标旋转)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/19/2019 牛客多校第十场 E Hilbert Sort (分形 + 平面坐标旋转)/" itemprop="url">2019 牛客多校第十场 E Hilbert Sort (分形 | 平面坐标旋转)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-19T16:25:06+08:00">
+                2019-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基本算法/" itemprop="url" rel="index">
+                    <span itemprop="name">基本算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>算法竞赛进阶指南 差不多就是 分形之城<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190819162241932.jpg?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190819162241932.jpg?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>看作向量旋转 平移 细节还不算多</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace  std;
+
+long long f(int n, int x, int y) {
+    if (n == 0) return 1;
+    int m = 1 &lt;&lt; (n - 1);
+    if (x &lt;= m &amp;&amp; y &lt;= m) {
+        return f(n - 1, y, x);
+    }
+    if (x &lt;= m &amp;&amp; y &gt; m) {
+        return 3LL * m * m + f(n - 1, m * 2 - y + 1 , m - x + 1);
+    }
+    if (x &gt; m &amp;&amp; y &lt;= m) {
+        return 1LL * m * m + f(n - 1, x - m, y);
+    }
+    if (x &gt; m &amp;&amp; y &gt; m) {
+        return 2LL * m * m + f(n - 1, x - m, y - m);
+    }
+}
+
+struct node {
+    int x, y;
+    int id;
+    bool operator &lt; (const node &amp;a) const {
+        return id &lt; a.id;
+    }
+} a[1000005];
+
+int main() {
+    int n, k;
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;k);
+    for(int i = 1; i &lt;= n; i ++) {
+        scanf(&quot;%d %d&quot;, &amp;a[i].x , &amp;a[i].y);
+    }
+    for(int i = 1; i &lt;= n; i ++) {
+        a[i].id = f(k, a[i].x, a[i].y);
+    }
+    sort(a + 1, a + 1 + n);
+    for(int i = 1; i &lt;= n; i ++) {
+        printf(&quot;%d %d\n&quot;,a[i].x, a[i].y);
+    }
     return 0;
 }</code></pre>
           
@@ -974,6 +3395,10 @@ signed main() {
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1019,7 +3444,7 @@ signed main() {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1030,21 +3455,12 @@ signed main() {
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
             
 
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">标签</span>
-                
-              </div>
             
 
           </nav>
