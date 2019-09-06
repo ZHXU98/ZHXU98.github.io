@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="思路观察题目，不难发现，我们需要在给定GG,NN的情况下，求 G  ∑  i  ∣  N  C  N  i  m  o  d  &amp;ThinSpace;&amp;ThinSpace;  999911659G^{\sum_{i|N}C_N^i} \mod \ 999911659  G  ∑  i  ∣  N  ​  C  N  i  ​  m  o  d  99  9  9  1  1  6  5  9 的值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P2480_【SDOI2010】古代猪文_(组合数_CRT_inv_lucas)">
+<meta property="og:url" content="http://zhxu98.github.io/2019/08/31/P2480_【SDOI2010】古代猪文_(组合数_CRT_inv_lucas)/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="思路观察题目，不难发现，我们需要在给定GG,NN的情况下，求 G  ∑  i  ∣  N  C  N  i  m  o  d  &amp;ThinSpace;&amp;ThinSpace;  999911659G^{\sum_{i|N}C_N^i} \mod \ 999911659  G  ∑  i  ∣  N  ​  C  N  i  ​  m  o  d  99  9  9  1  1  6  5  9 的值">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:15:58.610Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="P2480_【SDOI2010】古代猪文_(组合数_CRT_inv_lucas)">
+<meta name="twitter:description" content="思路观察题目，不难发现，我们需要在给定GG,NN的情况下，求 G  ∑  i  ∣  N  C  N  i  m  o  d  &amp;ThinSpace;&amp;ThinSpace;  999911659G^{\sum_{i|N}C_N^i} \mod \ 999911659  G  ∑  i  ∣  N  ​  C  N  i  ​  m  o  d  99  9  9  1  1  6  5  9 的值">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/08/31/P2480_【SDOI2010】古代猪文_(组合数_CRT_inv_lucas)/">
+
+
+
+
+
+  <title>P2480_【SDOI2010】古代猪文_(组合数_CRT_inv_lucas) | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/31/P2480_【SDOI2010】古代猪文_(组合数_CRT_inv_lucas)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">P2480_【SDOI2010】古代猪文_(组合数_CRT_inv_lucas)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-31T10:38:42+08:00">
+                2019-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>思路<br>观察题目，不难发现，我们需要在给定GG,NN的情况下，求</p>
+<p>G  ∑  i  ∣  N  C  N  i  m  o  d  &ThinSpace;&ThinSpace;  999911659<br>G^{\sum_{i|N}C_N^i} \mod \ 999911659  G  ∑  i  ∣  N  ​  C  N  i  ​  m  o  d  9<br>9  9  9  1  1  6  5  9</p>
+<p>的值。所以，我们只需要求出GG的幂的值就可以进行计算。</p>
+<p>然而数据范围告诉我们，先求  ∑  i  ∣  N  C  N  i  ​  \sum_{i|N}C_N^i​  ∑  i  ∣  N  ​  C  N<br>i  ​  ​  再进行计算是会爆空间的。所以，我们利用费马小定理的一个推论。</p>
+<p>a  b  ≡  a  b  m  o  d  (  p  −  1  )  (  m  o  d  p  )  (  a  !  =  p  )<br>a^b\equiv a^{b \ mod \ (p-1)}\pmod{p} \ \ \ \ \ \ (a != p)  a  b  ≡  a  b  m<br>o  d  (  p  −  1  )  (  m  o  d  p  )  (  a  !  =  p  )</p>
+<p>于是，我们考虑对组合数取模。发现p-1，即9999116589不是质数，将它分解，得2 <em>3</em> 4679*35617<br>。所以，我们先利用Lucas定理对组合数分别取模，然后用中国剩余定理求出GG的幂，最后用快速幂求得答案。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define debug(x, str) cout &lt;&lt; (str) &lt;&lt; &quot; = [ &lt;&lt; : &quot; &lt;&lt; (x) &lt;&lt; &quot; ]&quot; &lt;&lt; endl;
+#define fastio ios::sync_with_stdio(0),cin.tie(0);
+#define fir first
+#define sec second
+using namespace std;
+typedef pair&lt;int, int&gt; pii;
+typedef long long ll;
+const int maxn = 1e5 + 5;
+const int p = 999911659;
+
+ll n, g;
+ll prime[] = {2, 3, 4679, 35617};
+ll X[5], inv[maxn], fac[maxn];
+
+ll qmod(ll a, ll b, ll mod) {
+    ll res = 1;
+    for(; b; b &gt;&gt;= 1) {
+        if(b &amp; 1) res = res * a % mod;
+        a = a * a % mod;
+    }
+    return res;
+}
+
+void init(ll p) {
+    fac[0] = 1;
+    for(int i = 1; i &lt;= p; i ++) fac[i] = fac[i - 1] * i % p;
+    inv[p - 1] = p - 1;
+    for(int i = p - 2; i &gt;= 0; i --) inv[i] = inv[i + 1] * (i + 1) % p; 
+}
+
+ll C(ll n,ll m,ll p) {//Lucas theorem
+    if(n&lt;m) return 0;
+    if(n&lt;p &amp;&amp; m&lt;p) return fac[n]*inv[m]%p*inv[n-m]%p;
+    return C(n%p,m%p,p)*C(n/p,m/p,p)%p;
+}
+
+long long exgcd(long long a, long long b, long long &amp;x, long long &amp;y) {
+    if (b == 0) {
+        x = 1, y = 0;
+        return a;
+    }
+    int d = exgcd(b, a % b, y, x);
+    y -= a / b * x;
+    return d;
+}
+
+ll crt(ll mod) {
+    ll ans = 0;
+    for(int i = 0; i &lt; 4; i ++) {
+        ll d, x, y;
+        exgcd(mod/prime[i], prime[i], x, y);
+        ll cach = (x % mod * (mod / prime[i]) % mod + mod) % mod;
+        ans += cach * X[i] % mod;
+        ans %= mod;
+    }
+    return ans;
+}
+
+int sol(ll p) {
+    init(p);
+    ll limit = sqrt(n), ans = 0;
+    for(int i = 1; i &lt;= limit; i ++) {
+        if(n % i) continue;
+        ans = (ans + C(n, i, p)) % p;
+        if(n/i == i) continue;
+        ans = (ans + C(n, n/i, p)) % p;
+    }
+    return ans;
+}
+
+int main() {
+    cin &gt;&gt; n &gt;&gt; g;
+    if(!(g%p)) cout &lt;&lt; 0 &lt;&lt; endl;
+    else {
+        for(int i = 0; i &lt; 4; i ++) X[i] = sol(prime[i]);
+        cout &lt;&lt; qmod(g, crt(p - 1), p);
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/29/codeforces_1204C_Anna,_Svyatoslav_and_Maps_【最短路】/" rel="next" title="codeforces_1204C_Anna,_Svyatoslav_and_Maps_【最短路】">
+                <i class="fa fa-chevron-left"></i> codeforces_1204C_Anna,_Svyatoslav_and_Maps_【最短路】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/31/高斯消元_线性空间_线性基_【数学】/" rel="prev" title="高斯消元_线性空间_线性基_【数学】">
+                高斯消元_线性空间_线性基_【数学】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

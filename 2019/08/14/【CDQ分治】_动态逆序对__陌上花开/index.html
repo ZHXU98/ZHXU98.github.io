@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CDQ 太NB了orz 学不会 (2019-8-21更新 重学 算是理解了吧) [CQOI2011]动态逆序对对于序列A，它的逆序对数定义为满足i&amp;lt;j，且Ai&amp;gt;Aj的数对(i,j)的个数。给1到n的一个排列，按照某种顺序依次删除m个元素，你的任务是在每次删除一个元素之前统计整个序列的逆序对数。 输入格式输入第一行包含两个整数n和m，即初始元素的个数和删除的元素个数。以下n行每行包含一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【CDQ分治】_动态逆序对__陌上花开">
+<meta property="og:url" content="http://zhxu98.github.io/2019/08/14/【CDQ分治】_动态逆序对__陌上花开/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="CDQ 太NB了orz 学不会 (2019-8-21更新 重学 算是理解了吧) [CQOI2011]动态逆序对对于序列A，它的逆序对数定义为满足i&amp;lt;j，且Ai&amp;gt;Aj的数对(i,j)的个数。给1到n的一个排列，按照某种顺序依次删除m个元素，你的任务是在每次删除一个元素之前统计整个序列的逆序对数。 输入格式输入第一行包含两个整数n和m，即初始元素的个数和删除的元素个数。以下n行每行包含一个">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:16:15.976Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【CDQ分治】_动态逆序对__陌上花开">
+<meta name="twitter:description" content="CDQ 太NB了orz 学不会 (2019-8-21更新 重学 算是理解了吧) [CQOI2011]动态逆序对对于序列A，它的逆序对数定义为满足i&amp;lt;j，且Ai&amp;gt;Aj的数对(i,j)的个数。给1到n的一个排列，按照某种顺序依次删除m个元素，你的任务是在每次删除一个元素之前统计整个序列的逆序对数。 输入格式输入第一行包含两个整数n和m，即初始元素的个数和删除的元素个数。以下n行每行包含一个">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/08/14/【CDQ分治】_动态逆序对__陌上花开/">
+
+
+
+
+
+  <title>【CDQ分治】_动态逆序对__陌上花开 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/14/【CDQ分治】_动态逆序对__陌上花开/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【CDQ分治】_动态逆序对__陌上花开</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T17:16:29+08:00">
+                2019-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDQ/" itemprop="url" rel="index">
+                    <span itemprop="name">CDQ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><del>CDQ 太NB了orz 学不会</del> (2019-8-21更新 重学 算是理解了吧)</p>
+<h2 id="CQOI2011-动态逆序对"><a href="#CQOI2011-动态逆序对" class="headerlink" title="[CQOI2011]动态逆序对"></a>[CQOI2011]动态逆序对</h2><p>对于序列A，它的逆序对数定义为满足i&lt;j，且Ai&gt;Aj的数对(i,j)的个数。给1到n的一个排列，按照某种顺序依次删除m个元素，你的任务是在每次删除一个元素之前统计整个序列的逆序对数。</p>
+<p>输入格式<br>输入第一行包含两个整数n和m，即初始元素的个数和删除的元素个数。以下n行每行包含一个1到n之间的正整数，即初始排列。以下m行每行一个正整数，依次为每次删除的元素。</p>
+<p>输出格式<br>输出包含m行，依次为删除每个元素之前，逆序对的个数。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define int long long
+typedef long long ll;
+using namespace std;
+const int maxn = 100000 + 10;
+const int mod = 1e9 + 7;
+const int INF = 0x3f3f3f3f;
+
+int n, m, k;
+struct node {
+    int pos, time, val;
+} a[maxn], tmp[maxn];
+int p[maxn], ans[maxn];
+
+bool cmp(const node &amp;a, const node &amp;b) {
+    return a.time &gt; b.time;
+}
+
+int c[maxn];
+void add(int x, int y) {
+    while(x &lt;= n) c[x] += y, x += (x &amp; -x);
+}
+void cle(int x) {
+    while(x &lt;= n) c[x] = 0, x += (x &amp; -x);
+}
+int sum(int x) {
+    int res = 0;
+    while(x) res += c[x], x -= (x &amp; -x);
+    return res;
+}
+
+void cdqpre(int l, int r) { // 右侧删得早 树状数组存 位置前面的数据 
+    if(l == r) return ;  // 要再被删之前 比位置前面出现的小 统计前面大于的个数 
+    int mid = l + r &gt;&gt; 1;
+    cdqpre(l, mid), cdqpre(mid + 1, r);
+    int i = l, j = mid + 1, k = l;
+    while(i &lt;= mid &amp;&amp; j &lt;= r) {
+        if(a[i].pos &lt; a[j].pos) {
+            add(a[i].val, 1);
+            tmp[k ++] = a[i ++]; 
+        } else {
+            ans[a[j].time] += sum(n) - sum(a[j].val);
+            tmp[k ++] = a[j ++];
+        }
+    }
+    while(i &lt;= mid) tmp[k ++] = a[i ++];
+    while(j &lt;= r) {
+        ans[a[j].time] += sum(n) - sum(a[j].val);
+        tmp[k ++] = a[j ++];
+    }
+    for(int i = l ; i &lt;= mid; i ++) {
+        cle(a[i].val);
+        a[i] = tmp[i];
+    }
+    for(int j = mid + 1; j &lt;= r; j ++) a[j] = tmp[j];
+}
+
+void cdqnxt(int l, int r) { // 同样右侧删得早 我们树状数组存后面位置的数据 
+    if(l == r) return ; // 要再被删之前 比后面位置出现大 统计录进去小的个数 
+    int mid = l + r &gt;&gt; 1;
+    cdqnxt(l, mid), cdqnxt(mid + 1, r);
+    int i = l, j = mid + 1, k = l;
+    while(i &lt;= mid &amp;&amp; j &lt;= r) {
+        if(a[i].pos &gt; a[j].pos) {
+            add(a[i].val, 1);
+            tmp[k ++] = a[i ++];
+        } else {
+            ans[a[j].time] += sum(a[j].val - 1);
+            tmp[k ++] = a[j ++];
+        }
+    }
+    while(i &lt;= mid) tmp[k ++] = a[i ++];
+    while(j &lt;= r) {
+        ans[a[j].time] += sum(a[j].val - 1);
+        tmp[k ++] = a[j ++];
+    }
+    for(int i = l; i &lt;= mid; i ++) {
+        cle(a[i].val);
+        a[i] = tmp[i];
+    }
+    for(int j = mid + 1; j &lt;= r; j ++) a[j] = tmp[j];
+}
+
+int ans0() {
+    int a0 = 0;
+    for(int i = n; i &gt;= 1; i --) {
+        int x = a[i].val;
+        a0 += sum(a[i].val - 1);
+        add(x, 1);
+    }
+    memset(c, 0, sizeof(c));
+    return a0;
+}
+
+signed main() {
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1; i &lt;= n; i ++) {
+        cin &gt;&gt; a[i].val;
+        p[a[i].val] = i;
+        a[i].pos = i;
+        a[i].time = 50000 + 10;
+    }
+    for(int i = 1, t; i &lt;= m; i ++) cin &gt;&gt; t, a[p[t]].time = i;
+    ans[0] = ans0();
+    sort(a + 1, a + 1 + n, cmp);
+    cdqpre(1, n);
+    sort(a + 1, a + 1 + n, cmp);
+    cdqnxt(1, n);
+    cout &lt;&lt; ans[0] &lt;&lt; endl;
+    for(int i = 1; i &lt; m; i ++) {
+        ans[i] = ans[i - 1] - ans[i];
+        cout &lt;&lt; ans[i] &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><h2 id="三维偏序（陌上花开）"><a href="#三维偏序（陌上花开）" class="headerlink" title="三维偏序（陌上花开）"></a>三维偏序（陌上花开）</h2><p><a href="https://www.luogu.org/problem/P3810" target="_blank" rel="noopener">https://www.luogu.org/problem/P3810</a></p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+//#define int long long
+typedef long long ll;
+using namespace std;
+const int maxn = 2e5 + 10;
+const int mod = 1e9 + 7;
+const int INF = 0x3f3f3f3f;
+
+int n, m, k;
+
+struct node {
+    int x, y, z, id;
+} a[maxn];
+int p[maxn], ans[maxn], b[maxn];
+
+bool cmp1(const node &amp;a, const node &amp;b) {
+    return a.x &lt; b.x || (a.x == b.x &amp;&amp; a.y &lt; b.y) \
+           || (a.x == b.x &amp;&amp; a.y == b.y &amp;&amp; a.z &lt; b.z);
+}
+
+bool cmp2(const node &amp;a, const node &amp;b) {
+    return a.y &lt; b.y || (a.y == b.y &amp;&amp; a.z &lt; b.z) \
+           || (a.y == b.y &amp;&amp; a.z == b.z &amp;&amp; a.x &lt; b.x);
+}
+
+int c[maxn];
+void add(int x, int y) {
+    while(x &lt;= k) c[x] += y, x += (x &amp; -x);
+}
+int sum(int x) {
+    int res = 0;
+    while(x) res += c[x], x -= (x &amp; -x);
+    return res;
+}
+
+void cdq(int l, int r) {
+    if(l == r) return ;
+    int mid = l + r &gt;&gt; 1;
+    cdq(l, mid), cdq(mid + 1, r);
+    sort(a + l, a + r + 1, cmp2);
+    for(int i = l; i &lt;= r; i ++) {
+        if(a[i].x &lt;= mid) add(a[i].z, 1);
+        else b[a[i].id] += sum(a[i].z);
+    }
+    for(int i = l; i &lt;= r; i ++) {
+        if(a[i].x &lt;= mid) add(a[i].z, -1);
+    }
+}
+
+signed main() {
+    cin &gt;&gt; n &gt;&gt; k;
+    for(int i = 1; i &lt;= n; i ++)
+        cin &gt;&gt; a[i].x &gt;&gt; a[i].y &gt;&gt; a[i].z, a[i].id = i;
+
+    sort(a + 1, a + 1 + n, cmp1);
+    for(int i = 1; i &lt;= n; ) {
+        int j = 1 + i;
+        while(j &lt;= n &amp;&amp; a[j].x == a[i].x &amp;&amp; \
+                a[j].y == a[i].y &amp;&amp; a[j].z == a[i].z) j ++;
+
+        while(i &lt; j) {
+            p[a[i].id] = a[j - 1].id;
+            a[i].x = i;
+            i ++;
+        }
+    }
+    cdq(1, n);
+    for(int i = 1; i &lt;= n; i ++) {
+        ans[b[p[a[i].id]]] ++;
+    }
+    for(int i = 0; i &lt; n; i ++) cout &lt;&lt; ans[i] &lt;&lt; endl;
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/12/高级树状数组——区间修改区间查询、二维树状数组/" rel="next" title="高级树状数组——区间修改区间查询、二维树状数组">
+                <i class="fa fa-chevron-left"></i> 高级树状数组——区间修改区间查询、二维树状数组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/14/2019HDU多校第四场_AND_Minimum_Spanning_Tree_HDU_-_6614/" rel="prev" title="2019HDU多校第四场_AND_Minimum_Spanning_Tree_HDU_-_6614">
+                2019HDU多校第四场_AND_Minimum_Spanning_Tree_HDU_-_6614 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CQOI2011-动态逆序对"><span class="nav-number">1.</span> <span class="nav-text">[CQOI2011]动态逆序对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三维偏序（陌上花开）"><span class="nav-number">2.</span> <span class="nav-text">三维偏序（陌上花开）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

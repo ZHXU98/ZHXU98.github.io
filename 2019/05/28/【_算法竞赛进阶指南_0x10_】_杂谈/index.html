@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="栈包含min函数的栈类似单调栈处理 class MinStack { public:     /** initialize your data structure here. */     int a[5050];     int mi[5050];     int tops;      MinStack() {         tops=0;     }      void push(int x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【_算法竞赛进阶指南_0x10_】_杂谈">
+<meta property="og:url" content="http://zhxu98.github.io/2019/05/28/【_算法竞赛进阶指南_0x10_】_杂谈/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="栈包含min函数的栈类似单调栈处理 class MinStack { public:     /** initialize your data structure here. */     int a[5050];     int mi[5050];     int tops;      MinStack() {         tops=0;     }      void push(int x">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:16:57.912Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【_算法竞赛进阶指南_0x10_】_杂谈">
+<meta name="twitter:description" content="栈包含min函数的栈类似单调栈处理 class MinStack { public:     /** initialize your data structure here. */     int a[5050];     int mi[5050];     int tops;      MinStack() {         tops=0;     }      void push(int x">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/05/28/【_算法竞赛进阶指南_0x10_】_杂谈/">
+
+
+
+
+
+  <title>【_算法竞赛进阶指南_0x10_】_杂谈 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/28/【_算法竞赛进阶指南_0x10_】_杂谈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【_算法竞赛进阶指南_0x10_】_杂谈</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T17:41:31+08:00">
+                2019-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p><strong>包含min函数的栈</strong><br>类似单调栈处理</p>
+<pre><code>class MinStack {
+public:
+    /** initialize your data structure here. */
+    int a[5050];
+    int mi[5050];
+    int tops;
+
+    MinStack() {
+        tops=0;
+    }
+
+    void push(int x) {
+        a[++tops]=x;
+        if(tops==1){
+            mi[tops]=x;
+        }else{
+            mi[tops]=min(mi[tops-1],x);
+        }
+    }
+
+    void pop() {
+        tops--;
+    }
+
+    int top() {
+        return a[tops];
+    }
+
+    int getMin() {
+        return mi[tops];
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */</code></pre><p><strong>编辑器</strong><br>如上 多了好多模拟步骤</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+
+const int maxn = 1e6 + 5 ;
+const double pi = acos(-1.0);
+
+int n, m;
+int A[maxn], Atop;
+int B[maxn], Btop;
+int sum[maxn], f[maxn];
+
+signed main() {
+    fastio;
+    cin &gt;&gt; n;
+    string cmd;
+    f[0]=-0x3f3f3f3f;
+    while(n--) {
+        cin &gt;&gt; cmd;
+
+        if(cmd[0] == &apos;I&apos;) {
+
+            cin &gt;&gt; m;
+            A[++Atop] = m;
+            sum[Atop] = sum[Atop - 1] + A[Atop];
+            f[Atop] = max(sum[Atop], f[Atop - 1]);
+
+        } else if(cmd[0] == &apos;Q&apos;) {
+
+            cin &gt;&gt; m;
+            cout &lt;&lt; f[m] &lt;&lt; endl;
+
+        } else if(cmd[0] == &apos;D&apos;) {
+            if(Atop)
+                Atop--;
+
+        } else if(cmd[0] == &apos;R&apos;) {
+
+            if(Btop == 0)
+                continue;
+            A[++Atop] = B[Btop--];
+            sum[Atop] = sum[Atop - 1] + A[Atop];
+            f[Atop] = max(f[Atop - 1], sum[Atop]);
+
+        } else if(cmd[0] == &apos;L&apos;) {
+
+            if(Atop == 0)
+                continue;
+            B[++Btop] = A[Atop--];
+
+        }
+    }
+    return 0;
+}</code></pre><p><strong>火车进栈</strong><br>栈模拟 dfs 在站内的 和出战 的 达到n的时候输出 只有前20种 而且 优先出栈 保证字典序小</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+
+const int maxn = 1e5 + 5 ;
+const double pi = acos(-1.0);
+
+int n, m;
+int sta[maxn], top;
+int que[maxn], head, tail;
+
+int ans;
+
+void dfs(int num) {
+    if(ans &gt;= 20)
+        return ;
+    if(num == n + 1) {
+        for(int i = 1; i &lt;= tail; i++) {
+            cout &lt;&lt; que[i];
+        }
+        for(int i = top; i; i--) {
+            cout &lt;&lt; sta[i];
+        }
+        cout &lt;&lt; endl;
+        ans++;
+        return ;
+    }
+
+    if(top) {
+        que[++tail] = sta[top--];
+        dfs(num);
+        sta[++top] = que[tail--];
+    }
+
+    sta[++top] = num;
+    dfs(num + 1);
+    --top;
+}
+
+signed main() {
+    fastio;
+    cin &gt;&gt; n;
+    dfs(1);
+    return 0;
+}</code></pre><p><strong>火车进出栈问题</strong><br>卡特兰数<br>DP 递推<br>暴力(dfs如上打表的铁定Tle) ；</p>
+<p><strong>直方图中最大的矩形</strong><br>单调栈模板题</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+
+const int maxn = 1e5 + 5 ;
+const double pi = acos(-1.0);
+
+int n, m;
+int a[maxn], L[maxn], R[maxn];
+int st[maxn], top;
+int ans;
+
+signed main() {
+    fastio;
+    while(cin &gt;&gt; n &amp;&amp; n) {
+        top = 0;
+        ans = 0;
+        for(int i = 1; i &lt;= n; i++)
+            cin &gt;&gt; a[i];
+        int top = 0;
+        for(int i = 1; i &lt;= n; i++) {
+            while(top &amp;&amp; a[st[top - 1]] &gt;= a[i])
+                top--;
+            L[i] = (top == 0) ? 0 : st[top - 1];
+            st[top++] = i;
+        }
+        top = 0;
+        for(int i = n; i &gt;= 1; i--) {
+            while(top &amp;&amp; a[st[top - 1]] &gt;= a[i])
+                top--;
+            R[i] = (top == 0) ? (n + 1) : st[top - 1];
+            st[top++] = i;
+        }
+        int ans = 0;
+        for(int i = 1; i &lt;= n; i++) {
+            ans = max(ans, (R[i] - L[i] - 1) * a[i]);
+        }
+        cout &lt;&lt; ans &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p><strong>小组队列</strong><br>开 2个队列A,B 在开个map什么的记录每个人属于什么队<br>第一个队列放map人对应属于什么<br>插入的时候 优先放到 B队列 如果A队列它不再了 插到A尾部 否在不管<br>pop 时候 如果这个第一队列空了 A弹出它 否在不管<br>模拟。。。</p>
+<p><strong>蚯蚓</strong><br>这题不太好想orz<br>首先是坎最长的 不需要考虑<br>但是每坎一次 其他都会长q 这样维护起来就变难了<br>所以 我们使用了一个detla 作为整体应该加的数据</p>
+<p>每次选出最长的+detla 然后坎了它<br>因为被砍出得 这轮不会 在涨 所以 p1-q，p2-q；<br>放回队列<br>detla+=q；</p>
+<p>这样就处理了其他量在变得情况</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+//#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+
+const int maxn = 1e5 + 5 ;
+const double pi = acos(-1.0);
+
+int n, m, q, u, v, t;
+priority_queue&lt;int&gt; que;
+int a[maxn];
+
+queue&lt;int&gt; q2, q3;
+
+int rmax() {
+    int x = -0x3f3f3f3f3f3f3f;
+    if(!que.empty())
+        x = max(x, que.top());
+    if(!q2.empty())
+        x = max(x, q2.front());
+    if(!q3.empty())
+        x = max(x, q3.front());
+    if(!que.empty() &amp;&amp; x == que.top())
+        que.pop() ;
+    else if(!q2.empty() &amp;&amp; x == q2.front())
+        q2.pop() ;
+    else
+        q3.pop() ;
+    return x;
+}
+
+signed main() {
+    // fastio;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; q &gt;&gt; u &gt;&gt; v &gt;&gt; t;
+    for(int i = 1; i &lt;= n; i++)
+        cin &gt;&gt; a[i], \
+            que.push(a[i]);
+    int res = 0;
+    for(int i = 1; i &lt;= m; i += 1) {
+        int ma = rmax();
+        ma += res;
+        if(i%t==0) cout &lt;&lt; ma &lt;&lt; &quot; &quot;;
+        int p1 = ma * u / v;
+        int p2 = ma - p1;
+        res += q;
+        q2.push(p1 - res);
+        q3.push(p2 - res);
+    }
+    cout &lt;&lt; endl;
+    for(int i=1;i&lt;=n+m;i++) {
+        int x = rmax();
+        if(i%t==0)
+            cout &lt;&lt; x + res &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre><p><strong>双端队列</strong></p>
+<p><strong>单调队列</strong></p>
+<p><strong>最大子序和</strong> 单调队列板子题<br>处理长度不超L的 字段最大和</p>
+<p>单调队列做法大致如下:首先我们需要找到单调性,这道题目的显而易见.我们知道区间和的做法,一般都是前缀和,而前缀和的求法就是s[r]−s[l−1],l和r均为左端点和右端点.<br>然后我们接着思考,既然如此如果说我们确定了右端点,那么左端点可以取的点,是不是也存在一个区间[A,B],然后这个区间就是我们的决策区间,接着我们思考如何优化这个决策区间.<br>优化这个区间,首先我们得找出两个点,设ii点为枚举的右端点,jj点为决策区间内的一点,k点也为决策区间内的一点.则不妨设k≤j≤i且 s[k]≤s[j}<br>接着我们发现,如果说k点和j点都满足条件的话,那么明显j点更加优秀,因为s[j]点值又小,答案s[i]−s[j]肯定比s[i]−s[j]越大,而且j点还在k点前,也就是lyd老师所说的生存能力更加优秀.</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+
+const int maxn = 3e5 + 5 ;
+const double pi = acos(-1.0);
+
+int n, m;
+int a[maxn];
+int sum[maxn];
+
+int q[maxn], head, tail;
+
+signed main() {
+    fastio;
+    cin &gt;&gt; n &gt;&gt; m ;
+    for(int i = 1 ; i &lt;= n ; i++) {
+        cin &gt;&gt; a[i];
+        sum[i] = sum[i - 1] + a[i];
+    }
+    q[1] = 0;
+    int l = 1, r = 1;
+    int ans = 0;
+    for(int i = 1; i &lt;= n; i++) {
+        if(l &lt;= r &amp;&amp; q[l] &lt; i - m)
+            l++; // 队列&gt;M
+        ans = max(ans, sum[i] - sum[q[l]]);
+        while(l &lt;= r &amp;&amp; sum[q[r]] &gt;= sum[i])
+            r--;
+        q[++r] = i;
+    }
+    cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</code></pre><h2 id="链表邻接表"><a href="#链表邻接表" class="headerlink" title="链表邻接表"></a>链表邻接表</h2><p>** 跳过</p>
+<h2 id="HASH-字符串-Trie"><a href="#HASH-字符串-Trie" class="headerlink" title="HASH 字符串 Trie"></a>HASH 字符串 Trie</h2><p><strong>链接 ：</strong> <a href="https://blog.csdn.net/qq_40831340/article/details/90644908" target="_blank" rel="noopener"> HASH 字符串 KMP 进制hash 最小表示法
+</a></p>
+<h2 id="二叉堆"><a href="#二叉堆" class="headerlink" title="二叉堆"></a>二叉堆</h2><p><strong>超市</strong></p>
+<p>贪心题 按过期天数排序 大根堆 放day个 不够day往里面放 超的话 看看是不是替换掉小的</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+
+const int maxn = 4e6+5;
+priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; que;
+
+struct node{
+    int val;
+    int d; 
+    bool operator &lt; (const node &amp; a)const{
+        return d&lt;a.d;
+    } 
+}a[maxn];
+
+signed main() {
+    fastio;
+    int n;
+    while(cin&gt;&gt;n){
+        int day;
+        for(int i=1;i&lt;=n;i++){
+            cin&gt;&gt;a[i].val&gt;&gt;a[i].d;
+        }
+        sort(a+1,a+1+n);
+        for(int i=1;i&lt;=n;i++){
+            day=a[i].d;
+            if(que.size()&lt;day) que.push(a[i].val);
+            else{
+                if(que.top()&lt;a[i].val){
+                    que.pop();
+                    que.push(a[i].val);
+                }
+            }
+        }
+        int ans=0;
+        while(!que.empty()){
+            ans+=que.top();
+            que.pop();
+        }
+        cout&lt;&lt;ans&lt;&lt;endl;
+    }
+    return 0;
+}</code></pre><p><strong>序列</strong><br>这题 优先队列 先放入第一次A1+Bi 都是最小的和 记录A下表位置 每次pop出来 位置+1 在把这和放回去<br>直到取够N个 贪心常见题</p>
+<p><strong>数据备份</strong><br>NOI题目<br>用到了一些技巧 这里 可以把我写的a数组看作 用l数组和r数组维护的链表</p>
+<p>为了使布线长度尽量小，每对布线的办公楼一定是相邻的<br>所以我们可以在读入时计算差分数组保存每相邻两个办公楼的距离<br>这样问题转化为， 在差分数组中找k个数，满足k个数之和最小且互不相邻</p>
+<p>显然最优解必定是一下其中一种<br>1.包含a[i]以及除a[i-1]和a[i+1]的数<br>2.包含a[i-1]和a[i+1]以及除a[i]，a[i-2]，a[i+2]</p>
+<p>从这一点扩展， 可以先取a[i]，并以a[i-1]+a[i+1]-a[i]替换，<br>然后在新数列中继续重复k-1次得到最后结果<br>这样若a[i]不属于最优解，则a[i-1]+a[i+1]-a[i]必定被选，满足了上述第二种情况<br>更具体做法是， 将原差分数组每个值插入堆， 并将数组以链表串起来<br>每次取堆顶最小值更新答案，并删除该值，<br>设最小值编号为i， 那么再插入a[ l[i] ]+a[ r[i] ]-a[i]， 并更新链表<br>重复k次即得最优解</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+
+const int maxn = 4e6+5;
+
+struct node {
+    int id,val;
+    bool operator &lt; (const node &amp; a)const {
+        return val&gt;a.val;
+    }
+};
+priority_queue&lt;node&gt; que;
+int a[maxn];
+
+bool vis[maxn];
+int l[maxn],r[maxn];
+signed main() {
+    fastio;
+    int n,k;
+    cin&gt;&gt;n&gt;&gt;k;
+    for(int i = 0; i &lt; n; i ++ ) cin &gt;&gt; a[i];
+    for(int i = n - 1; i&gt;=1; i -- ) a[i] -= a[i - 1];
+    for(int i=1; i&lt;n; i++) l[i]=i-1,r[i]=i+1,que.push(node {i,a[i]});
+    l[0]=0,r[n-1]=n;
+    a[0]=a[n]=0x3f3f3f3f;
+    int ans=0;
+    for(int i=1; i&lt;=k; i++) {
+        while(!que.empty()&amp;&amp;vis[que.top().id]) que.pop();
+        node t=que.top();
+        que.pop();
+        ans+=t.val;
+
+        vis[r[t.id]]=vis[l[t.id]]=1;
+        a[t.id]=a[l[t.id]]+a[r[t.id]]-a[t.id];
+
+        l[t.id]=l[l[t.id]];
+        r[t.id]=r[r[t.id]];
+
+        l[r[t.id]]=t.id;
+        r[l[t.id]]=t.id;
+
+        que.push(node {t.id,a[t.id]});
+    }
+    cout&lt;&lt;ans&lt;&lt;endl;
+    return 0;
+}</code></pre><h2 id="Huffman树"><a href="#Huffman树" class="headerlink" title="Huffman树"></a>Huffman树</h2><p><strong>合并果子</strong> 简单贪心。。<br><strong>荷马史诗</strong></p>
+<p>我们需要维护的是最短的带权路径之和和该哈夫曼树的高度。然后便是如何维护，由于不需要知道哈夫曼树的具体形态，我们便可以按照哈夫曼树的构造方式，将当前最小的K个节点合并为1个父节点，直至只有一个父节点。看到“将最小K个节点合并”便可以明确使用优先队列（二叉堆）进行维护。<br>最后，我们需要注意一个细节。因为每次都是将k个节点合并为1个（减少k-1个），一共要将n个节点合并为1个，如果（n-1）%（k-1）！=0<br>则最后一次合并时不足k个。也就表明了最靠近根节点的位置反而没有被排满，因此我们需要加入k-1-（n-1）%（k-1）个空节点使每次合并都够k个节点（也就是利用空节点将其余的节点挤到更优的位置上）。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+using namespace std;
+#define int long long
+typedef long long ll;
+typedef pair&lt;int, int&gt; P;
+
+const int maxn = 100000 + 5 ;
+const int INF = 0x3f3f3f3f ;
+const int mod = 9901 ;
+const double eps = 1e-6;
+
+struct node {
+    int w,h;
+    bool operator &lt; (node const &amp; a) const {
+        return a.w&lt;w||(a.w==w&amp;&amp;a.h&lt;h);
+    }
+};
+
+priority_queue&lt;node&gt; que;
+
+signed main() {
+    fastio;
+    int n,k,m;
+    cin&gt;&gt;n&gt;&gt;k;
+    int cnt=0;
+    if((n-1)%(k-1)) cnt+=(k-1)-(n-1)%(k-1);
+    for(int i=1; i&lt;=cnt; i++) que.push(node {0,0});
+    cnt+=n;
+    for(int i=1; i&lt;=n; i++) {
+        cin&gt;&gt;m;
+        que.push(node {m,0});
+    }
+    int ans=0;
+    while(que.size()&gt;1) {
+        int res=0,hh=-1;
+        for(int i=0; i&lt;k; i++) {
+            hh=max(que.top().h,hh);
+            res+=que.top().w;
+            que.pop();
+        }
+        ans+=res;
+        que.push(node {res,hh+1});
+    }
+    cout&lt;&lt;ans&lt;&lt;endl&lt;&lt;que.top().h&lt;&lt;endl;
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/28/【_三分法_】_单峰(单谷)函数_三分找极点/" rel="next" title="【_三分法_】_单峰(单谷)函数_三分找极点">
+                <i class="fa fa-chevron-left"></i> 【_三分法_】_单峰(单谷)函数_三分找极点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/28/HASH_字符串_KMP_进制hash_最小表示法_trie树/" rel="prev" title="HASH_字符串_KMP_进制hash_最小表示法_trie树">
+                HASH_字符串_KMP_进制hash_最小表示法_trie树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#栈"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">2.</span> <span class="nav-text">队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表邻接表"><span class="nav-number">3.</span> <span class="nav-text">链表邻接表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HASH-字符串-Trie"><span class="nav-number">4.</span> <span class="nav-text">HASH 字符串 Trie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉堆"><span class="nav-number">5.</span> <span class="nav-text">二叉堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Huffman树"><span class="nav-number">6.</span> <span class="nav-text">Huffman树</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

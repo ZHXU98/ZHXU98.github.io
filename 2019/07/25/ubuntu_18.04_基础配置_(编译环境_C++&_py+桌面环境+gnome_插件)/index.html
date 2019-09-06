@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PC 型号本人电脑是 小米pro 15.6寸 MX150 版本 ubuntu上无指纹支持驱动(目前 2019:7:25 我觉得 20 年前 是不太可能的22年有可能出) ps： 如果非要享受 指纹这玩意 建议debian 这个针对小米pro 出过一系列更新 有指纹什么的 评价小米pro 15.6 MX150 屏幕出众 但也就屏幕出众了… 大部分机子 用久了 尤其是风扇高速转 突然停转 发出异响 多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu_18.04_基础配置_(编译环境_C++&amp;_py+桌面环境+gnome_插件)">
+<meta property="og:url" content="http://zhxu98.github.io/2019/07/25/ubuntu_18.04_基础配置_(编译环境_C++&_py+桌面环境+gnome_插件)/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="PC 型号本人电脑是 小米pro 15.6寸 MX150 版本 ubuntu上无指纹支持驱动(目前 2019:7:25 我觉得 20 年前 是不太可能的22年有可能出) ps： 如果非要享受 指纹这玩意 建议debian 这个针对小米pro 出过一系列更新 有指纹什么的 评价小米pro 15.6 MX150 屏幕出众 但也就屏幕出众了… 大部分机子 用久了 尤其是风扇高速转 突然停转 发出异响 多">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:16:32.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu_18.04_基础配置_(编译环境_C++&amp;_py+桌面环境+gnome_插件)">
+<meta name="twitter:description" content="PC 型号本人电脑是 小米pro 15.6寸 MX150 版本 ubuntu上无指纹支持驱动(目前 2019:7:25 我觉得 20 年前 是不太可能的22年有可能出) ps： 如果非要享受 指纹这玩意 建议debian 这个针对小米pro 出过一系列更新 有指纹什么的 评价小米pro 15.6 MX150 屏幕出众 但也就屏幕出众了… 大部分机子 用久了 尤其是风扇高速转 突然停转 发出异响 多">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/07/25/ubuntu_18.04_基础配置_(编译环境_C++&_py+桌面环境+gnome_插件)/">
+
+
+
+
+
+  <title>ubuntu_18.04_基础配置_(编译环境_C++&_py+桌面环境+gnome_插件) | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/07/25/ubuntu_18.04_基础配置_(编译环境_C++&_py+桌面环境+gnome_插件)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ubuntu_18.04_基础配置_(编译环境_C++&_py+桌面环境+gnome_插件)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T21:22:45+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统配置记录/" itemprop="url" rel="index">
+                    <span itemprop="name">系统配置记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="PC-型号"><a href="#PC-型号" class="headerlink" title="PC 型号"></a>PC 型号</h1><h5 id="本人电脑是-小米pro-15-6寸-MX150-版本-ubuntu上无指纹支持驱动-目前-2019-7-25-我觉得-20-年前-是不太可能的"><a href="#本人电脑是-小米pro-15-6寸-MX150-版本-ubuntu上无指纹支持驱动-目前-2019-7-25-我觉得-20-年前-是不太可能的" class="headerlink" title="本人电脑是 小米pro 15.6寸 MX150 版本 ubuntu上无指纹支持驱动(目前 2019:7:25 我觉得 20 年前 是不太可能的"></a>本人电脑是 小米pro 15.6寸 MX150 版本 ubuntu上无指纹支持驱动(目前 2019:7:25 我觉得 20 年前 是不太可能的</h5><p>22年有可能出)</p>
+<p>ps： 如果非要享受 指纹这玩意 建议debian 这个针对小米pro 出过一系列更新 有指纹什么的</p>
+<p>评价小米pro 15.6 MX150 屏幕出众 但也就屏幕出众了… 大部分机子 用久了 尤其是风扇高速转 突然停转 发出异响 多次这样<br>低速时也会有较小的异响 硬件问题 用久了 重度用的 都有</p>
+<p>官网下的 ubuntu 镜像 U盘启动器直接烧一个就行</p>
+<h3 id="建议最小安装-不按照不必要应用"><a href="#建议最小安装-不按照不必要应用" class="headerlink" title="建议最小安装 不按照不必要应用"></a>建议最小安装 不按照不必要应用</h3><p>默认安装 双系统 什么的也就是 往空盘直接放 我都默认按的 (本身win10 双系统)</p>
+<p>安装完之后<br>一下软件<br>直接再 软件更新 应用里换 阿里源</p>
+<p>有些 更新 和 软件要求重启 我们之后统一处理</p>
+<p><a href="https://www.wps.cn/product/wpslinux/" target="_blank" rel="noopener"> https://www.wps.cn/product/wpslinux/ </a><br>WPS<br><a href="http://www.ubuntuchrome.com/" target="_blank" rel="noopener"> http://www.ubuntuchrome.com/ </a> chrome google<br><a href="https://music.163.com/#/download" target="_blank" rel="noopener"> https://music.163.com/#/download </a> 网易云音乐<br><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener"> https://code.visualstudio.com/download
+</a> vscode<br>sudo apt install git ///git</p>
+<p>从设置找到语言-&gt;管理安装语言，待更新安装完成，设置为fcitx<br><a href="https://pinyin.sogou.com/linux/?r=pinyin" target="_blank" rel="noopener"> https://pinyin.sogou.com/linux/?r=pinyin
+</a> 安装 SOUGOU 这个有些机子要重启 暂时别重启<br>在这个github 里面选择TIM 微信安装<br><a href="https://github.com/wszqkzqk/deepin-wine-ubuntu" target="_blank" rel="noopener"> https://github.com/wszqkzqk/deepin-wine-ubuntu
+</a></p>
+<p>C++ 环境 其实正常你更新了 这些环境都是ubuntu自带的</p>
+<h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><pre><code>sudo apt-get install vim
+sudo apt-get install gcc
+sudo apt-get install g++
+sudo add-apt-repository ppa:pasgui/ppa
+sudo apt-get update
+sudo apt-get install codeblocks
+sudo apt-get install codeblocks-contrib</code></pre><p>vscode 配置 c++ py<br>py 暂时不升级 下载pip<br>c++ launch.json</p>
+<pre><code>{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+        {
+            &quot;name&quot;: &quot;(gdb) Launch&quot;,
+            &quot;type&quot;: &quot;cppdbg&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;program&quot;: &quot;${workspaceFolder}/${fileBasenameNoExtension}.out&quot;,
+            &quot;args&quot;: [],
+            &quot;stopAtEntry&quot;: false,
+            &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
+            &quot;environment&quot;: [],
+            &quot;externalConsole&quot;: true,
+            &quot;MIMode&quot;: &quot;gdb&quot;,
+            &quot;preLaunchTask&quot;: &quot;build&quot;, 
+            &quot;setupCommands&quot;: [
+                {
+                    &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,
+                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
+                    &quot;ignoreFailures&quot;: true
+                }
+            ]
+        }
+    ]
+}</code></pre><p>c++ settings.json</p>
+<pre><code>{
+    &quot;files.associations&quot;: {
+        &quot;iostream&quot;: &quot;cpp&quot;
+    }
+}</code></pre><p>c++ taks.json</p>
+<pre><code>{
+    &quot;tasks&quot;: [
+        {
+            &quot;label&quot;: &quot;build&quot;,
+            &quot;type&quot;: &quot;shell&quot;,
+            &quot;command&quot;: &quot;g++&quot;,
+            &quot;args&quot;: [&quot;-g&quot;, &quot;${file}&quot;, &quot;-std=c++11&quot;, &quot;-o&quot;, &quot;${fileBasenameNoExtension}.out&quot;]
+        }
+     ]
+}</code></pre><p>py launch.json</p>
+<pre><code>{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+
+        {
+            &quot;name&quot;: &quot;Python&quot;,
+            &quot;type&quot;: &quot;python&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;program&quot;: &quot;${file}&quot;,
+            &quot;console&quot;: &quot;externalTerminal&quot;
+            //“integratedTerminal”
+            // &quot;externalTerminal&quot;
+        }
+    ]
+}
+
+
+
+# 1. 更新系统包
+sudo apt-get update
+sudo apt-get upgrade
+
+# 2. 安装Pip
+sudo apt-get install python-pip
+
+# 3. 检查 pip 是否安装成功
+pip -V</code></pre><p>显卡驱动<br>阿里源 一般NV都有 直接再软件和更新 里找 附加驱动就行<br>现在版本是390 官方给了 431 版本了 有点小问题 还行 不建议去更新<br>小米pro 开集显就好 如果你想玩游戏 还是win吧 切换很方便</p>
+<h1 id="TLP-和-GRUB-修复引导"><a href="#TLP-和-GRUB-修复引导" class="headerlink" title="TLP 和 GRUB 修复引导"></a>TLP 和 GRUB 修复引导</h1><p>Tlp 简直NB</p>
+<h2 id="如果出现-耳机杂音-开启TLP-请关掉"><a href="#如果出现-耳机杂音-开启TLP-请关掉" class="headerlink" title="如果出现 耳机杂音 开启TLP 请关掉"></a>如果出现 耳机杂音 开启TLP 请关掉</h2><p>编辑 tlp 配置文件 让 <code>sound_save_power = 0</code> 重点划线</p>
+<p>安装完tlp 和//// 一般不需要 grub 修复<br>tlp 下载安装不需要配置</p>
+<h3 id="grub"><a href="#grub" class="headerlink" title="grub"></a>grub</h3><p>引导修复 ps 一般用不上</p>
+<pre><code>sudo add-apt-repository ppa:yannubuntu/boot-repair
+sudo apt-get update
+sudo apt-get install -y boot-repair</code></pre><h3 id="TLP"><a href="#TLP" class="headerlink" title="TLP"></a>TLP</h3><p>不需要配置 按完就好 默认auto的 笔记本够用的</p>
+<pre><code> sudo add-apt-repository ppa:linrunner/tlp
+sudo apt-get update
+sudo apt-get install tlp tlp-rdw
+ sudo apt-get insta</code></pre><p>Gnome 插件 不一定非得要Gnome 桌面 大部分可以直接用的<br>建议百度 最小安装 桌面<br>//// //sudo apt-get install gnome</p>
+<p>gnome 插件</p>
+<h3 id="GNOME-Shell-扩展"><a href="#GNOME-Shell-扩展" class="headerlink" title="GNOME Shell 扩展"></a>GNOME Shell 扩展</h3><pre><code>sudo apt install gnome-tweak-tool 管理各种美化的用的
+sudo apt install chrome-gnome-shell  // usr主题 插件</code></pre><p><a href="https://extensions.gnome.org/" target="_blank" rel="noopener"> https://extensions.gnome.org/ </a><br>我用的 不多 以下直接搜就好<br>其实还有剪切板插件 Clipboard Indicator<br>截图插件 Screenshot Tool</p>
+<pre><code>Alt-Tab Switcher Popup Delay Removal  
+AlternateTab
+Auto Move Windows  
+Battery Percentage  
+Dynamic Panel Transparency
+Impatience
+OpenWeather  
+Pixel Saver
+TopIcons  
+User Themes
+VSCode Search Provider  </code></pre><h3 id="双系统-时间同步"><a href="#双系统-时间同步" class="headerlink" title="双系统 时间同步"></a>双系统 时间同步</h3><p>看情况了</p>
+<pre><code>sudo apt install ntpdate
+sudo ntpdate time.windows.com
+sudo hwclock --localtime --systohc ok</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/24/【线性基】_2019_航电多校第一场_B_HDU_6579_Operation/" rel="next" title="【线性基】_2019_航电多校第一场_B_HDU_6579_Operation">
+                <i class="fa fa-chevron-left"></i> 【线性基】_2019_航电多校第一场_B_HDU_6579_Operation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/26/2019牛客暑期多校(第二场)_写题记录/" rel="prev" title="2019牛客暑期多校(第二场)_写题记录">
+                2019牛客暑期多校(第二场)_写题记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PC-型号"><span class="nav-number">1.</span> <span class="nav-text">PC 型号</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#本人电脑是-小米pro-15-6寸-MX150-版本-ubuntu上无指纹支持驱动-目前-2019-7-25-我觉得-20-年前-是不太可能的"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">本人电脑是 小米pro 15.6寸 MX150 版本 ubuntu上无指纹支持驱动(目前 2019:7:25 我觉得 20 年前 是不太可能的</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#建议最小安装-不按照不必要应用"><span class="nav-number">1.0.1.</span> <span class="nav-text">建议最小安装 不按照不必要应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c"><span class="nav-number">1.1.</span> <span class="nav-text">c++</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TLP-和-GRUB-修复引导"><span class="nav-number">2.</span> <span class="nav-text">TLP 和 GRUB 修复引导</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如果出现-耳机杂音-开启TLP-请关掉"><span class="nav-number">2.1.</span> <span class="nav-text">如果出现 耳机杂音 开启TLP 请关掉</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#grub"><span class="nav-number">2.1.1.</span> <span class="nav-text">grub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TLP"><span class="nav-number">2.1.2.</span> <span class="nav-text">TLP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GNOME-Shell-扩展"><span class="nav-number">2.1.3.</span> <span class="nav-text">GNOME Shell 扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双系统-时间同步"><span class="nav-number">2.1.4.</span> <span class="nav-text">双系统 时间同步</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

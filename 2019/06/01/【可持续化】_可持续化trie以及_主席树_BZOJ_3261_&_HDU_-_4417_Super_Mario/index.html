@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最大异或和![在这里插入图片描述](https://img-blog.csdnimg.cn/20190601202201749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【可持续化】_可持续化trie以及_主席树_BZOJ_3261_&amp;_HDU_-_4417_Super_Mario">
+<meta property="og:url" content="http://zhxu98.github.io/2019/06/01/【可持续化】_可持续化trie以及_主席树_BZOJ_3261_&_HDU_-_4417_Super_Mario/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="最大异或和![在这里插入图片描述](https://img-blog.csdnimg.cn/20190601202201749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFF">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:16:54.650Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【可持续化】_可持续化trie以及_主席树_BZOJ_3261_&amp;_HDU_-_4417_Super_Mario">
+<meta name="twitter:description" content="最大异或和![在这里插入图片描述](https://img-blog.csdnimg.cn/20190601202201749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFF">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/06/01/【可持续化】_可持续化trie以及_主席树_BZOJ_3261_&_HDU_-_4417_Super_Mario/">
+
+
+
+
+
+  <title>【可持续化】_可持续化trie以及_主席树_BZOJ_3261_&_HDU_-_4417_Super_Mario | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/01/【可持续化】_可持续化trie以及_主席树_BZOJ_3261_&_HDU_-_4417_Super_Mario/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【可持续化】_可持续化trie以及_主席树_BZOJ_3261_&_HDU_-_4417_Super_Mario</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T20:28:25+08:00">
+                2019-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最大异或和<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190601202201749.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190601202201749.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>加了 可持续化 找最大值类比那个 trie 找2个最大异或和 贪就好了<br><a href="https://blog.csdn.net/qq_40831340/article/details/90644908" target="_blank" rel="noopener"> https://blog.csdn.net/qq_40831340/article/details/90644908
+</a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+const int maxn = 100000 + 10;
+
+int m;
+
+struct node {
+    int lc,rc;
+    int val;
+} tree[maxn * 20];
+
+int tot,root[maxn * 20];
+int n, a[maxn];
+
+int build(int l, int r) {
+    int p = ++ tot;
+    if(l == r) {
+        tree[p].val = 0;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    tree[p].lc = build(l, mid);
+    tree[p].rc = build(mid + 1, r);
+    tree[p].val = tree[tree[p].lc].val + tree[tree[p].rc].val;
+    return p;
+}
+
+int insert(int now, int l, int r, int x, int val) {
+    int p = ++ tot;
+    tree[p] = tree[now];
+    if(l == r) {
+        tree[p].val += val ;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(x &lt;= mid) 
+        tree[p].lc = insert(tree[now].lc, l, mid, x, val);
+    else 
+        tree[p].rc = insert(tree[now].rc, mid + 1, r, x, val);
+    tree[p].val = tree[tree[p].lc].val + tree[tree[p].rc].val;
+    return p;
+}
+
+int ask(int p, int q, int l, int r, int k) {
+    if(l == r) {
+        return l;
+    }
+    int mid = l + r &gt;&gt; 1;
+    int cnt = tree[tree[p].lc].val - tree[tree[q].lc].val ;
+    if(k &lt;= cnt) 
+        return ask(tree[p].lc, tree[q].lc, l, mid, k);
+    else 
+        return ask(tree[p].rc, tree[q].rc ,mid + 1, r, k - cnt);
+}
+
+int b[maxn];
+
+int main() {
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+
+    for(int i = 1; i &lt;= n ;i ++ ) {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+        b[i] = a[i];
+    }
+
+    sort(b + 1, b + 1 + n);
+    int cnt = unique(b + 1, b + 1 + n) - b;
+    root[0] = build(1, cnt);
+
+    for(int i = 1; i &lt;= n; i ++ ) {
+        int pos = lower_bound(b + 1, b + cnt, a[i]) - b;
+        root[i] = insert(root[i - 1], 1, cnt, pos, 1);
+    }
+    int l, r, k;
+    for(int i = 0; i &lt; m; i ++ ) {
+        scanf(&quot;%d %d %d&quot;, &amp;l, &amp;r, &amp;k);
+        printf(&quot;%d\n&quot;, b[ask(root[r], root[l - 1], 1, cnt, k)]);
+    }
+    return 0;
+}</code></pre><p><strong>BZOJ 3261</strong><br><strong>静态区间K大值</strong><br>复习orz<br>外链 ： <a href="https://blog.csdn.net/qq_40831340/article/details/82729609" target="_blank" rel="noopener"> https://blog.csdn.net/qq_40831340/article/details/82729609
+</a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+const int maxn = 100000 + 10;
+
+int m;
+
+struct node {
+    int lc,rc;
+    int val;
+} tree[maxn * 20];
+
+int tot,root[maxn * 20];
+int n, a[maxn];
+
+int build(int l, int r) {
+    int p = ++ tot;
+    if(l == r) {
+        tree[p].val = 0;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    tree[p].lc = build(l, mid);
+    tree[p].rc = build(mid + 1, r);
+    tree[p].val = tree[tree[p].lc].val + tree[tree[p].rc].val;
+    return p;
+}
+
+int insert(int now, int l, int r, int x, int val) {
+    int p = ++ tot;
+    tree[p] = tree[now];
+    if(l == r) {
+        tree[p].val += val ;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(x &lt;= mid) 
+        tree[p].lc = insert(tree[now].lc, l, mid, x, val);
+    else 
+        tree[p].rc = insert(tree[now].rc, mid + 1, r, x, val);
+    tree[p].val = tree[tree[p].lc].val + tree[tree[p].rc].val;
+    return p;
+}
+
+int ask(int p, int q, int l, int r, int k) {
+    if(l == r) {
+        return l;
+    }
+    int mid = l + r &gt;&gt; 1;
+    int cnt = tree[tree[p].lc].val - tree[tree[q].lc].val ;
+    if(k &lt;= cnt) 
+        return ask(tree[p].lc, tree[q].lc, l, mid, k);
+    else 
+        return ask(tree[p].rc, tree[q].rc ,mid + 1, r, k - cnt);
+}
+
+int b[maxn];
+
+int main() {
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+
+    for(int i = 1; i &lt;= n ;i ++ ) {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+        b[i] = a[i];
+    }
+
+    sort(b + 1, b + 1 + n);
+    int cnt = unique(b + 1, b + 1 + n) - b;
+    root[0] = build(1, cnt);
+    for(int i = 1; i &lt;= n; i ++ ) {
+        int pos = lower_bound(b + 1, b + cnt, a[i]) - b;
+        root[i] = insert(root[i - 1], 1, cnt, pos, 1);
+    }
+    int l, r, k;
+    for(int i = 0; i &lt; m; i ++ ) {
+        scanf(&quot;%d %d %d&quot;, &amp;l, &amp;r, &amp;k);
+        printf(&quot;%d\n&quot;, b[ask(root[r], root[l - 1], 1, cnt, k)]);
+    }
+    return 0;
+}</code></pre><p><strong>HDU - 4417 Super Mario</strong><br>统计区间小于K的树个数</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+const int maxn = 100000 + 10;
+
+struct node {
+    int lc,rc;
+    int val;
+} tree[maxn * 20];
+
+int tot,root[maxn];
+int n, m, a[maxn], b[maxn];
+
+int build(int l, int r) {
+    int p = ++ tot;
+    if(l == r) {
+        tree[p].val = 0;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    tree[p].lc = build(l, mid);
+    tree[p].rc = build(mid + 1, r);
+    tree[p].val = tree[tree[p].lc].val + tree[tree[p].rc].val;
+    return p;
+}
+
+int insert(int now, int l, int r, int pos, int val) {
+    int p = ++ tot;
+    tree[p] = tree[now];
+    if(l == r) {
+        tree[p].val += val ;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(pos &lt;= mid)
+        tree[p].lc = insert(tree[now].lc, l, mid, pos, val);
+    else
+        tree[p].rc = insert(tree[now].rc, mid + 1, r, pos, val);
+    tree[p].val = tree[tree[p].lc].val + tree[tree[p].rc].val;
+    return p;
+}
+
+int ask(int p, int q, int l, int r, int L, int R) {
+    if(L &lt;= l &amp;&amp; r &lt;= R)
+        return tree[p].val - tree[q].val;
+
+    int mid = l + r &gt;&gt; 1;
+    int res = 0;
+    if(L &lt;= mid)
+        res += ask(tree[p].lc, tree[q].lc, l, mid, L, R);
+    if(R &gt; mid)
+        res += ask(tree[p].rc, tree[q].rc ,mid + 1, r, L, R);
+    return res;
+}
+
+int main() {
+    int T, casenum = 1;
+    scanf(&quot;%d&quot;, &amp;T);
+    while(T--) {
+        printf(&quot;Case %d:\n&quot;, casenum++);
+        int cnt, pos, l, r, h;
+        scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+        for(int i = 1; i &lt;= n; ++i) {
+            scanf(&quot;%d&quot;, &amp;a[i]);
+            b[i] = a[i];
+        }
+        sort(b + 1, b + n + 1);
+        cnt = unique(b + 1, b + 1 + n) - b - 1;
+        tot = 0;
+        root[0] = build(1, cnt);
+        for(int i = 1; i &lt;= n; ++i) {
+            pos = lower_bound(b + 1, b + 1 + cnt, a[i]) - b;
+            root[i] = insert(root[i - 1], 1, cnt, pos, 1);
+        }
+        for(int i = 1; i &lt;= m; ++i) {
+            scanf(&quot;%d %d %d&quot;, &amp;l, &amp;r, &amp;h);
+            l ++,r ++;
+            pos = upper_bound(b + 1, b + cnt + 1, h) - b - 1;
+            if(1 &gt; pos) printf(&quot;0\n&quot;); // 疯狂炸内存 这里我也是京了
+            else printf(&quot;%d\n&quot;, ask(root[r],root[l - 1], 1, cnt, 1, pos));
+        }
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/01/【线段树】_CH4301_Can_you_answer_on_these_queries_III__2019南昌网络赛_I_Max_answer__Interval_GCD_CH4302/" rel="next" title="【线段树】_CH4301_Can_you_answer_on_these_queries_III__2019南昌网络赛_I_Max_answer__Interval_GCD_CH4302">
+                <i class="fa fa-chevron-left"></i> 【线段树】_CH4301_Can_you_answer_on_these_queries_III__2019南昌网络赛_I_Max_answer__Interval_GCD_CH4302
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/02/2019_南昌网络赛_J._Distance_on_the_tree/" rel="prev" title="2019_南昌网络赛_J._Distance_on_the_tree">
+                2019_南昌网络赛_J._Distance_on_the_tree <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

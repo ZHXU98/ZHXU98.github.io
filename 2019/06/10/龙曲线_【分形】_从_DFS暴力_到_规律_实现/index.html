@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="龙曲线龙曲线是以简单的数学规则画出一种曲线，它具有以下形态。曲线从一个简单的线段起始，按照一定规则变换此线段完成整个曲线。每形成一次变换称为“完成了一次变换代”，而每完成一代，曲线会进化到更复杂的形式。像这种“放大其一小部分的形状时，表现出与整个形状极为相似构造的图形”，就是分形。画出龙曲线的方法暂且就称为龙曲线字符串吧！龙曲线字符串由X、Y、F、+、-组成。那么，要画出龙曲线就从一个点起始画出如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="龙曲线_【分形】_从_DFS暴力_到_规律_实现">
+<meta property="og:url" content="http://zhxu98.github.io/2019/06/10/龙曲线_【分形】_从_DFS暴力_到_规律_实现/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="龙曲线龙曲线是以简单的数学规则画出一种曲线，它具有以下形态。曲线从一个简单的线段起始，按照一定规则变换此线段完成整个曲线。每形成一次变换称为“完成了一次变换代”，而每完成一代，曲线会进化到更复杂的形式。像这种“放大其一小部分的形状时，表现出与整个形状极为相似构造的图形”，就是分形。画出龙曲线的方法暂且就称为龙曲线字符串吧！龙曲线字符串由X、Y、F、+、-组成。那么，要画出龙曲线就从一个点起始画出如">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:16:48.160Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="龙曲线_【分形】_从_DFS暴力_到_规律_实现">
+<meta name="twitter:description" content="龙曲线龙曲线是以简单的数学规则画出一种曲线，它具有以下形态。曲线从一个简单的线段起始，按照一定规则变换此线段完成整个曲线。每形成一次变换称为“完成了一次变换代”，而每完成一代，曲线会进化到更复杂的形式。像这种“放大其一小部分的形状时，表现出与整个形状极为相似构造的图形”，就是分形。画出龙曲线的方法暂且就称为龙曲线字符串吧！龙曲线字符串由X、Y、F、+、-组成。那么，要画出龙曲线就从一个点起始画出如">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/06/10/龙曲线_【分形】_从_DFS暴力_到_规律_实现/">
+
+
+
+
+
+  <title>龙曲线_【分形】_从_DFS暴力_到_规律_实现 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/10/龙曲线_【分形】_从_DFS暴力_到_规律_实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">龙曲线_【分形】_从_DFS暴力_到_规律_实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-10T18:38:41+08:00">
+                2019-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/搜索/" itemprop="url" rel="index">
+                    <span itemprop="name">搜索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>龙曲线<br>龙曲线是以简单的数学规则画出一种曲线，它具有以下形态。曲线从一个简单的线段起始，按照一定规则变换此线段完成整个曲线。每形成一次变换称为“完成了一次变换代”，而每完成一代，曲线会进化到更复杂的形式。像这种“放大其一小部分的形状时，表现出与整个形状极为相似构造的图形”，就是分形。<br>画出龙曲线的方法暂且就称为龙曲线字符串吧！龙曲线字符串由X、Y、F、+、-组成。<br>那么，要画出龙曲线就从一个点起始画出如下曲线即可。</p>
+<p>F：向前方移动一格并画线。<br>+：向左旋转90度。<br>-：向右旋转90度。<br>X、Y：忽略。<br>画出第0代龙曲线的字符串是FX。从下一代开始，按照如下方式利用前一代字符串进行字符替换，从而获得当前一代的龙曲线字符串。<br>X-&gt; X+YF<br>Y-&gt; FX+Y</p>
+<p>根据上面的替换式，就有如下的1、2代龙曲线字符串。<br>第一代：FX+YF<br>第二代：FX+YF+FX-YF<br>我们想要求出第n代龙曲线字符串。不过，考虑到答案有可能很长，所以只想计算出第p个字符起始长度为l个字符的字符串。请编写程序实现这种功能。</p>
+<p>输入<br>第一行输入测试用例的个数C（C&lt;=50）。各测试用例的第一行分别输入3个整数，即龙曲线的世代n（0&lt;=n&lt;=50）、p以及l（1&lt;=p&lt;=1 000 000<br>000、1&lt;=l&lt;=50）。第n代龙曲线字符串的长度可假设成总是大于等于p+l的数值。<br>输出<br>每个测试用例在1行内输出第n代龙曲线字符串的第p个字符开始，输出l个字符。</p>
+<p>示例输入<br>4  
+0 1 2<br>1 1 5<br>2 6 5<br>42 764853475 30<br>示例输出<br>FX<br>FX+YF<br>+FX-Y<br>FX-YF-FX+YF+FX-YF-FX+YF-FX-YF-  </p>
+<p>首先是暴力 代码</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+
+void dfs(string str, int N) {
+    if(N == 0) {
+        cout &lt;&lt; str;
+        return;
+    }
+    for(int i = 0; i &lt; str.size(); ++i) {
+        if(str[i] == &apos;X&apos;)
+            dfs(&quot;X+YF&quot;, N - 1);
+        else if(str[i] == &apos;Y&apos;)
+            dfs(&quot;FX-Y&quot;, N - 1);
+        else
+            cout &lt;&lt; str[i];
+    }
+}
+
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    dfs(&quot;FX&quot;, n);
+}</code></pre><p>这里我们爆出 1 到 5 的数据表</p>
+<pre><code>第一代：FX+YF // 5
+第二代：FX+YF+FX-YF // 11
+第三代：FX+YF+FX-YF+FX+YF-FX-YF // 23
+第四代：FX+YF+FX-YF+FX+YF-FX-YF+FX+YF+FX-YF-FX+YF-FX-YF // 47
+五:        FX+YF+FX-YF+FX+YF-FX-YF+FX+YF+FX-YF-FX+YF-FX-YF  \
+        +FX+YF+FX-YF+FX+YF-FX-YF-FX+YF+FX-YF-FX+YF-FX-YF</code></pre><p>字符数：sum[i] = (sum[i-1] &lt;&lt; 1) + 1;</p>
+<p>字母规律：循环节 FXYFFXYF<br>符号规律：</p>
+<pre><code>1.    +
+2.    + + -
+3.    + + - + + - -
+4.    + + - + + - - + + + - + + - -
+5.       + + - + + - - + + + - + + - - + + + - + + - - + + + - + + - -</code></pre><p>发现 每个字符 前后的空隙 轮着插 + -;<br>所以 再倍增上一个的同时 把 + - 依次插入<br>这也是为什么 字符数：sum[i] = (sum[i-1] &lt;&lt; 1) + 1; 是这样规律</p>
+<p>那么 我们选择 每次将 非 0， 2， 4 位置的F X Y以外 的下表 首先 / 3<br>然后不断 / 2 只到达到奇数位<br>例如 第 3 代</p>
+<pre><code>  1 2 3 4 5 6 7
+  + + - + + - - 
+  第一位 + 1 mod 4  = 2 :+
+  第二位 / 2 之后 + 1 mod 4 = 2：+
+  第三位 +1 mod 4 = 0 ：-
+  第四位 / 2 / 2 + 1 mod 4 = 2 ：+
+  第五位 + 1 mod 4 = 2 ： +
+  第六位 / 2 + 1 mod 4 =  0 ： -
+  第七位 + 1 mod 4 = 0 ： -
+
+    大体上是这样的一般规律 其实mod 2在搞规律也行 我找的时候当4的循环节了 同时mod 4也是因为我前面没有处理好
+
+
+
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+void get_c(int &amp;x) {
+    while(x % 2 == 0) {
+        x /= 2;
+    }
+} // 确定第 x 位 属于O, E层次
+
+void output(int x) {
+    if(x % 6 == 2) // 循环节 2p
+            cout &lt;&lt; &quot;X&quot;;
+        else if(x % 6 == 4) // 循环节 3p
+            cout &lt;&lt; &quot;Y&quot;;
+        else if(x % 3 == 0) {
+            x = x / 3;
+            get_c(x); // 降 k
+            if((x + 1) % 4 == 2) {
+                cout &lt;&lt; &quot;+&quot;;
+            } else
+                cout &lt;&lt; &quot;-&quot;;
+        } else
+            cout &lt;&lt; &quot;F&quot;; // 循环节 1p
+}
+
+void sol(int p, int l) {
+    for(int i = 0; i &lt; l; i++) {
+        int k = p + i;
+        output(k);
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    int cas;
+    for(cin &gt;&gt; cas; cas--;) {
+        int n, p, l;
+        cin &gt;&gt; n &gt;&gt; p &gt;&gt; l;
+        sol(p, l);
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/04/【数学】_CF_1174D_-_Ehab_and_the_Expected_XOR_Problem/" rel="next" title="【数学】_CF_1174D_-_Ehab_and_the_Expected_XOR_Problem">
+                <i class="fa fa-chevron-left"></i> 【数学】_CF_1174D_-_Ehab_and_the_Expected_XOR_Problem
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/11/【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D/" rel="prev" title="【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D">
+                【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

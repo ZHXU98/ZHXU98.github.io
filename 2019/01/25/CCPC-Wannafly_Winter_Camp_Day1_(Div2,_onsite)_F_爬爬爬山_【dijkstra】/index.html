@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="爬山是wlswls最喜欢的活动之一。在一个神奇的世界里，一共有n座山，m条路。wls初始有k点体力，在爬山的过程中，他所处的海拔每上升1m，体力会减1点，海拔每下降1m，体力会加一点。现在wls想从1号山走到n号山，在这个过程中，他的体力不能低于0，所以他可以事先花费一些费用请dls把某些山降低，将一座山降低l米需要花费l*l的代价，且每座山的高度只能降低一次。因为wls现在就在1号山上，所以这座">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_F_爬爬爬山_【dijkstra】">
+<meta property="og:url" content="http://zhxu98.github.io/2019/01/25/CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_F_爬爬爬山_【dijkstra】/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="爬山是wlswls最喜欢的活动之一。在一个神奇的世界里，一共有n座山，m条路。wls初始有k点体力，在爬山的过程中，他所处的海拔每上升1m，体力会减1点，海拔每下降1m，体力会加一点。现在wls想从1号山走到n号山，在这个过程中，他的体力不能低于0，所以他可以事先花费一些费用请dls把某些山降低，将一座山降低l米需要花费l*l的代价，且每座山的高度只能降低一次。因为wls现在就在1号山上，所以这座">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:17:13.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_F_爬爬爬山_【dijkstra】">
+<meta name="twitter:description" content="爬山是wlswls最喜欢的活动之一。在一个神奇的世界里，一共有n座山，m条路。wls初始有k点体力，在爬山的过程中，他所处的海拔每上升1m，体力会减1点，海拔每下降1m，体力会加一点。现在wls想从1号山走到n号山，在这个过程中，他的体力不能低于0，所以他可以事先花费一些费用请dls把某些山降低，将一座山降低l米需要花费l*l的代价，且每座山的高度只能降低一次。因为wls现在就在1号山上，所以这座">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/01/25/CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_F_爬爬爬山_【dijkstra】/">
+
+
+
+
+
+  <title>CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_F_爬爬爬山_【dijkstra】 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/01/25/CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_F_爬爬爬山_【dijkstra】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_F_爬爬爬山_【dijkstra】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T21:55:36+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>爬山是wlswls最喜欢的活动之一。<br>在一个神奇的世界里，一共有n座山，m条路。wls初始有k点体力，在爬山的过程中，他所处的海拔每上升1m，体力会减1点，海拔每下降1m，体力会加一点。<br>现在wls想从1号山走到n号山，在这个过程中，他的体力不能低于0，所以他可以事先花费一些费用请dls把某些山降低，将一座山降低l米需要花费<br>l*l<br>的代价，且每座山的高度只能降低一次。因为wls现在就在1号山上，所以这座山的高度不可降低。wls从1号山到n号山的总代价为降低山的高度的总代价加上他走过的路的总长度。<br>wls想知道最小的代价是多少。</p>
+<p>脑子第一反应是能量守恒 迷wa 上白书板子写过了<br>预处理下 然后跑 dijkstra n可以到100000 加堆<br>(wls 居然吐槽好多队 dj得名字写得千奇百怪 其实我也不记得这么拼写啦 23333)</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 200000+5;
+
+int n,m;
+ll k;
+
+typedef pair&lt;ll,int&gt; P;
+vector&lt;P&gt; G[maxn];
+priority_queue&lt;P,vector&lt;P&gt;,greater&lt;P&gt; &gt; que;
+
+ll dis[maxn];
+ll h[maxn];
+
+void dj() {
+    memset(dis,0x3f,(n+3)*sizeof(ll));
+    dis[1]=0;
+    que.push(P(0,1));
+    while(!que.empty()) {
+        P tp=que.top();
+        que.pop();
+        int u=tp.second,v;
+        if(dis[u]&lt;tp.first) continue;
+        for(int i=0; i&lt;G[u].size(); i++) {
+            P tmp=G[u][i];
+            v=G[u][i].second;
+            if(dis[v]&gt;dis[u]+tmp.first) {
+                dis[v]=dis[u]+tmp.first;
+                que.push(P(dis[v],v));
+            }
+        }
+    }
+    cout&lt;&lt;dis[n]&lt;&lt;endl;
+}
+
+int main() {
+    scanf(&quot;%d %d %lld&quot;,&amp;n,&amp;m,&amp;k);
+    for(int i=0; i&lt;n; i++) scanf(&quot;%lld&quot;,&amp;h[i+1]);
+    k+=h[1];
+    int st,ed;
+    ll co;
+    for(int i=0; i&lt;m; i++) {
+        scanf(&quot;%d %d %lld&quot;,&amp;st,&amp;ed,&amp;co);
+
+        if(h[ed]&gt;k) G[st].push_back(P(co+(h[ed]-k)*(h[ed]-k),ed));
+        else G[st].push_back(P(co,ed));
+
+        if(h[st]&gt;k) G[ed].push_back(P(co+(h[st]-k)*(h[st]-k),st));
+        else G[ed].push_back(P(co,st));
+    }
+    dj();
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/25/CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_J_夺宝奇兵_【枚举+贪心】/" rel="next" title="CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_J_夺宝奇兵_【枚举+贪心】">
+                <i class="fa fa-chevron-left"></i> CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_J_夺宝奇兵_【枚举+贪心】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/03/CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_B_吃豆豆_【DP】/" rel="prev" title="CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_B_吃豆豆_【DP】">
+                CCPC-Wannafly_Winter_Camp_Day1_(Div2,_onsite)_B_吃豆豆_【DP】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CF-1207F分块题 可以说是原题了  哈希冲突 分块 按模数分块 超过  s  q  r  t  （  n  ）  sqrt（n）  s  q  r  t  （  n  ）  的暴力找 小于的 我们也在n  ∗  s  q  r  t  (  n  )  n*sqrt(n)  n  ∗  s  q  r  t  (  n  )  预处理了之后单点修改 也是sqrt(n)的复杂度 #includ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分块_到_莫队">
+<meta property="og:url" content="http://zhxu98.github.io/2019/08/29/分块_到_莫队/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="CF-1207F分块题 可以说是原题了  哈希冲突 分块 按模数分块 超过  s  q  r  t  （  n  ）  sqrt（n）  s  q  r  t  （  n  ）  的暴力找 小于的 我们也在n  ∗  s  q  r  t  (  n  )  n*sqrt(n)  n  ∗  s  q  r  t  (  n  )  预处理了之后单点修改 也是sqrt(n)的复杂度 #includ">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:15:59.434Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分块_到_莫队">
+<meta name="twitter:description" content="CF-1207F分块题 可以说是原题了  哈希冲突 分块 按模数分块 超过  s  q  r  t  （  n  ）  sqrt（n）  s  q  r  t  （  n  ）  的暴力找 小于的 我们也在n  ∗  s  q  r  t  (  n  )  n*sqrt(n)  n  ∗  s  q  r  t  (  n  )  预处理了之后单点修改 也是sqrt(n)的复杂度 #includ">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/08/29/分块_到_莫队/">
+
+
+
+
+
+  <title>分块_到_莫队 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/29/分块_到_莫队/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">分块_到_莫队</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-29T15:33:08+08:00">
+                2019-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/分块/" itemprop="url" rel="index">
+                    <span itemprop="name">分块</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="CF-1207F"><a href="#CF-1207F" class="headerlink" title="CF-1207F"></a>CF-1207F</h2><p>分块题 可以说是原题了</p>
+<p><a href="https://www.luogu.org/problem/P3396" target="_blank" rel="noopener"> 哈希冲突 </a><br>分块 按模数分块 超过  s  q  r  t  （  n  ）  sqrt（n）  s  q  r  t  （  n  ）  的暴力找 小于的 我们也在<br>n  ∗  s  q  r  t  (  n  )  n*sqrt(n)  n  ∗  s  q  r  t  (  n  )  预处理了<br>之后单点修改 也是sqrt(n)的复杂度</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0);
+//#define int long long
+using namespace std;
+typedef long long ll;
+const int maxn = 1000 + 10;
+const int mod = 998244353;
+
+int n, m;
+int ans[maxn][maxn];
+int a[(signed(2e5 + 10))];
+
+signed main() {
+//    fastio;
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+    int siz = sqrt(n);
+    for(int i = 1; i &lt;= n; i ++) {
+        scanf(&quot;%d&quot;, a + i);
+        for(int j = 1; j &lt;= siz; j ++) ans[j][i % j] += a[i];
+    }
+    while(m --) {
+        char op[3];
+        int x, y;
+        scanf(&quot;%s %d %d&quot;, op, &amp;x, &amp;y);
+        if(op[0] == &apos;A&apos;) {
+            if(x * x &lt;= n) printf(&quot;%d\n&quot;,ans[x][y]);
+            else {
+                int res = 0;
+                for(int i = y; i &lt;= n; i += x) res += a[i];
+                printf(&quot;%d\n&quot;, res);
+            }
+        } else {
+            for(int i = 1; i &lt;= siz; i ++) 
+                ans[i][x % i] += y - a[x];
+            a[x] = y;
+        }
+    }
+
+    return 0;
+}</code></pre><p>CF-1207F</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0);
+//#define int long long
+using namespace std;
+typedef long long ll;
+const int maxn = 1000 + 10;
+const int N = 5e5 + 5;
+const int mod = 998244353;
+
+int n, m;
+ll ans[maxn][maxn];
+int a[N];
+
+signed main() {
+//    fastio;
+    scanf(&quot;%d&quot;, &amp;m);
+    int siz = 710;
+    while(m --) {
+        int op, x, y;
+        scanf(&quot;%d %d %d&quot;, &amp;op, &amp;x, &amp;y);
+        if(op == 2) {
+            if(x &lt;= siz) printf(&quot;%lld\n&quot;,ans[x][y]);
+            else {
+                ll res = 0;
+                for(int i = y; i &lt; N ; i += x) res += a[i];
+                printf(&quot;%lld\n&quot;, res);
+            }
+        } else {
+            for(int i = 1; i &lt;= siz; i ++) 
+                ans[i][x % i] += y;
+            a[x] += y;
+        }
+    }
+    return 0;
+}</code></pre><h2 id="莫队"><a href="#莫队" class="headerlink" title="莫队"></a>莫队</h2><p><a href="https://www.luogu.org/problem/P2709" target="_blank" rel="noopener"> 小B的询问 </a><br>按询问排序之后 算是一般意义上的暴力了</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0);
+using namespace std;
+typedef long long ll;
+const int maxn = 50000 + 10;
+const int mod = 998244353;
+
+int n, m;
+struct node {
+    int l, r, id, d;
+    bool operator &lt; (const node &amp;x) const {
+        return id &lt; x.id || (id == x.id &amp;&amp; r &lt; x.r);
+    }
+} a[maxn];
+int b[maxn], t[maxn], ans[maxn];
+
+signed main() {
+    fastio;
+    int n, m, k;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+    int len = sqrt(n);
+    for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; b[i];
+    for(int i = 1; i &lt;= m; i ++) {
+        cin &gt;&gt; a[i].l &gt;&gt; a[i].r;
+        a[i].id = (a[i].l + len - 1) / len;
+        a[i].d = i;
+    }
+    sort(a + 1, a + 1 + m);
+    int l = a[1].l, r = a[1].l - 1;
+    ll tmp = 0;
+    for(int i = 1; i &lt;= m; i ++) {
+        while(l &gt; a[i].l) l--, tmp += 2 * t[b[l]] + 1, t[b[l]]++;
+        while(r &lt; a[i].r) r++, tmp += 2 * t[b[r]] + 1, t[b[r]]++;
+        while(l &lt; a[i].l) t[b[l]]--, tmp -= 2 * t[b[l]] + 1,  l++;
+        while(r &gt; a[i].r) t[b[r]]--, tmp -= 2 * t[b[r]] + 1,  r--;
+        ans[a[i].d]=tmp;
+    }
+    for(int i = 1; i &lt;= m; i ++)
+        cout &lt;&lt; ans[i] &lt;&lt; endl;
+    return 0;
+}</code></pre><p><a href="https://www.luogu.org/problem/P1494" target="_blank" rel="noopener"> P1494 [国家集训队]小Z的袜子 </a></p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(0);cin.tie(0);
+using namespace std;
+#define int long long
+typedef long long ll;
+const int maxn = 100005;
+
+struct node {
+    int l, r, id;
+    int len;
+}qes[maxn];
+
+int n, m, k, a[maxn], ans[maxn], sum, s[maxn], pos[maxn];
+int l = 1, r, siz;
+int l1[maxn], r1[maxn];
+
+bool cmp(const node &amp;a, const node &amp;b) {
+    if(pos[a.l] &lt; pos[b.l]) return 1;
+    if(pos[a.l] &gt; pos[b.l]) return 0;
+    return a.r &gt; b.r;
+}
+
+signed main(){
+   // fastio;
+    cin &gt;&gt; n &gt;&gt; m;
+    siz = sqrt(n);
+    for(int i = 1; i &lt;= n; i ++)
+        cin &gt;&gt; a[i], pos[i] = (i - 1)/siz + 1;
+    for(int i = 1; i &lt;= m; i ++)
+        cin &gt;&gt; qes[i].l &gt;&gt; qes[i].r, qes[i].id = i, \
+        l1[i] = qes[i].l, r1[i] = qes[i].r;
+    sort(qes + 1, qes + 1 + m, cmp);
+    for(int i = 1; i &lt;= m; i ++) {
+        while(l &lt; qes[i].l) {
+            sum -= s[a[l]] * (s[a[l]] - 1) / 2;
+            s[a[l]]--, sum += s[a[l]] * (s[a[l]] - 1) / 2;
+            l ++;
+        }
+        while(l &gt; qes[i].l) {
+            l --;
+            sum -= s[a[l]] * (s[a[l]] - 1) / 2;
+            s[a[l]]++, sum += s[a[l]] * (s[a[l]] - 1) / 2;
+        }
+        while(r &lt; qes[i].r) {
+            r ++;
+            sum -= s[a[r]] * (s[a[r]] - 1) / 2;
+            s[a[r]]++, sum += s[a[r]] * (s[a[r]] - 1) / 2;
+        }
+        while(r &gt; qes[i].r) {
+            sum -= s[a[r]] * (s[a[r]] - 1) / 2;
+            s[a[r]]--, sum += s[a[r]] * (s[a[r]] - 1) / 2;
+            r --;
+        }
+        ans[qes[i].id] = sum;
+    }
+    for(int i = 1, x; i &lt;= m; i ++) {
+        x = __gcd(ans[i], (r1[i] - l1[i] + 1) * (r1[i] - l1[i]) / 2);
+        if(l1[i] == r1[i]) printf(&quot;0/1\n&quot;);
+        else printf(&quot;%lld/%lld\n&quot;,ans[i]/x, (r1[i] - l1[i] + 1) * (r1[i] - l1[i]) / 2 / x);
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/27/【容斥】_codeforces1027D_Number_Of_Permutations_【数学】/" rel="next" title="【容斥】_codeforces1027D_Number_Of_Permutations_【数学】">
+                <i class="fa fa-chevron-left"></i> 【容斥】_codeforces1027D_Number_Of_Permutations_【数学】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/29/codeforces_1204C_Anna,_Svyatoslav_and_Maps_【最短路】/" rel="prev" title="codeforces_1204C_Anna,_Svyatoslav_and_Maps_【最短路】">
+                codeforces_1204C_Anna,_Svyatoslav_and_Maps_【最短路】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CF-1207F"><span class="nav-number">1.</span> <span class="nav-text">CF-1207F</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫队"><span class="nav-number">2.</span> <span class="nav-text">莫队</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

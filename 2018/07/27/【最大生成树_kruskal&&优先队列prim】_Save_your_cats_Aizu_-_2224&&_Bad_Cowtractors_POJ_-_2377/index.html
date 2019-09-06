@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Save your cats Aizu - 2224 Nicholas Y. Alford was a cat lover. He had a garden in a village and kept manycats in his garden. The cats were so cute that people in the village alsoloved them.One day, an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【最大生成树_kruskal&amp;&amp;优先队列prim】_Save_your_cats_Aizu_-_2224&amp;&amp;_Bad_Cowtractors_POJ_-_2377">
+<meta property="og:url" content="http://zhxu98.github.io/2018/07/27/【最大生成树_kruskal&&优先队列prim】_Save_your_cats_Aizu_-_2224&&_Bad_Cowtractors_POJ_-_2377/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="Save your cats Aizu - 2224 Nicholas Y. Alford was a cat lover. He had a garden in a village and kept manycats in his garden. The cats were so cute that people in the village alsoloved them.One day, an">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:17:41.227Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【最大生成树_kruskal&amp;&amp;优先队列prim】_Save_your_cats_Aizu_-_2224&amp;&amp;_Bad_Cowtractors_POJ_-_2377">
+<meta name="twitter:description" content="Save your cats Aizu - 2224 Nicholas Y. Alford was a cat lover. He had a garden in a village and kept manycats in his garden. The cats were so cute that people in the village alsoloved them.One day, an">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2018/07/27/【最大生成树_kruskal&&优先队列prim】_Save_your_cats_Aizu_-_2224&&_Bad_Cowtractors_POJ_-_2377/">
+
+
+
+
+
+  <title>【最大生成树_kruskal&&优先队列prim】_Save_your_cats_Aizu_-_2224&&_Bad_Cowtractors_POJ_-_2377 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2018/07/27/【最大生成树_kruskal&&优先队列prim】_Save_your_cats_Aizu_-_2224&&_Bad_Cowtractors_POJ_-_2377/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【最大生成树_kruskal&&优先队列prim】_Save_your_cats_Aizu_-_2224&&_Bad_Cowtractors_POJ_-_2377</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T16:04:42+08:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Save your cats Aizu - 2224</p>
+<p>Nicholas Y. Alford was a cat lover. He had a garden in a village and kept many<br>cats in his garden. The cats were so cute that people in the village also<br>loved them.<br>One day, an evil witch visited the village. She envied the cats for being<br>loved by everyone. She drove magical piles in his garden and enclosed the cats<br>with magical fences running between the piles. She said “Your cats are shut<br>away in the fences until they become ugly old cats.” like a curse and went<br>away.<br>Nicholas tried to break the fences with a hummer, but the fences are<br>impregnable against his effort. He went to a church and asked a priest help.<br>The priest looked for how to destroy the magical fences in books and found<br>they could be destroyed by holy water. The Required amount of the holy water<br>to destroy a fence was proportional to the length of the fence. The holy water<br>was, however, fairly expensive. So he decided to buy exactly the minimum<br>amount of the holy water required to save all his cats. How much holy water<br>would be required?<br>Input<br>The input has the following format:<br>N M<br>x1 y1<br>.  
+.<br>.  
+xN yN<br>p1 q1<br>.  
+.<br>.  
+pM qM<br>The first line of the input contains two integers N (2 ≤ N ≤ 10000) and M (1 ≤<br>M). N indicates the number of magical piles and M indicates the number of<br>magical fences. The following N lines describe the coordinates of the piles.<br>Each line contains two integers xi and yi (-10000 ≤ xi, yi ≤ 10000). The<br>following M lines describe the both ends of the fences. Each line contains two<br>integers pj and qj (1 ≤ pj, qj ≤ N). It indicates a fence runs between the pj-<br>th pile and the qj-th pile.<br>You can assume the following:<br>No Piles have the same coordinates.<br>A pile doesn’t lie on the middle of fence.<br>No Fences cross each other.<br>There is at least one cat in each enclosed area.<br>It is impossible to destroy a fence partially.<br>A unit of holy water is required to destroy a unit length of magical fence.<br>Output<br>Output a line containing the minimum amount of the holy water required to save<br>all his cats. Your program may output an arbitrary number of digits after the<br>decimal point. However, the absolute error should be 0.001 or less.<br>Sample Input 1<br>3 3<br>0 0<br>3 0<br>0 4<br>1 2<br>2 3<br>3 1<br>Output for the Sample Input 1<br>3.000<br>Sample Input 2<br>4 3<br>0 0<br>-100 0<br>100 0<br>0 100<br>1 2<br>1 3<br>1 4<br>Output for the Sample Input 2<br>0.000<br>Sample Input 3<br>6 7<br>2 0<br>6 0<br>8 2<br>6 3<br>0 5<br>1 7<br>1 2<br>2 3<br>3 4<br>4 1<br>5 1<br>5 4<br>5 6<br>Output for the Sample Input 3<br>7.236<br>Sample Input 4<br>6 6<br>0 0<br>0 1<br>1 0<br>30 0<br>0 40<br>30 40<br>1 2<br>2 3<br>3 1<br>4 5<br>5 6<br>6 4<br>Output for the Sample Input 4<br>31.000<br>简单翻译过来 是给n个坐标 后面m个 是联通情况</p>
+<p>问你破坏最少是多少</p>
+<p>其实就是破话掉环上最小的一个边 直到没有环</p>
+<p>考虑最（小）大生成树 和边的和 相减</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;stack&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+using namespace std;
+typedef long long ll;
+
+const int maxn=10000+10;
+int pos,n,m;
+
+struct egde{
+    int u,v;
+    double dis;
+    egde(){};
+    egde(int a,int b,double c){u=a,v=b,dis=c;}
+    bool operator&lt;(const egde &amp;a) const {return dis &gt; a.dis; }
+
+};
+egde es[maxn*10],e;// 太小过不去。。。 边也没有个数 m x2吧 得写下面 所以试了几次 x10过了
+
+struct node{
+    int x,y;
+}p[maxn];
+
+int pre[maxn];
+
+void init(){
+    for(int i=0;i&lt;n;i++){
+        pre[i]=i;
+    }
+}
+
+int finds(int x){
+    return pre[x]!=x?pre[x]=finds(pre[x]):x;
+}
+
+void unions(int x,int y){
+    x=finds(x),y=finds(y);
+    if(x!=y){
+        pre[x]=y;
+    }
+}
+
+double Kruskal(){
+    sort(es,es+pos);
+    init();
+    double res=0;
+    for(int i=0;i&lt;pos;i++){
+         e = es[i];
+        if(finds(e.u)!=finds(e.v)){
+            unions(e.u,e.v);
+            res+=e.dis;
+        }
+    }
+    return res;
+}
+
+int main(){
+    while(cin&gt;&gt;n&gt;&gt;m){
+        int x,y;
+        for(int i=0;i&lt;n;i++){
+            cin&gt;&gt;p[i].x&gt;&gt;p[i].y;    
+        }
+        pos=0;
+        double sum=0;
+        for(int i=0;i&lt;m;i++){
+            cin&gt;&gt;x&gt;&gt;y;
+            x--;y--;
+            double t=sqrt((p[x].x-p[y].x)*(p[x].x-p[y].x)+(p[x].y-p[y].y)*(p[x].y-p[y].y));
+            es[pos++]=egde(x,y,t);
+            es[pos++]=egde(y,x,t);
+            sum+=t;
+        }
+        printf(&quot;%.3lf\n&quot;,sum-Kruskal());
+    }
+    return 0;
+}</code></pre><p>这里 我补一个 用堆 优先队列 prim 写的最大生成树<br>Bad Cowtractors POJ - 2377<br><a href="http://poj.org/problem?id=2377" target="_blank" rel="noopener"> http://poj.org/problem?id=2377 </a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+using namespace std;
+typedef unsigned long long ull;
+typedef long long ll;
+const int maxn=1e3+5;
+const int mod=1e9+7;
+const int INF=0x3f3f3f;
+
+typedef pair&lt;int,int&gt; P;
+vector&lt;P&gt; G[maxn];
+bool vis[maxn];
+int n,m;
+int d[maxn];
+
+
+int prim_p(int s){
+    int res=0;
+    priority_queue&lt;P,vector&lt;P&gt;,less&lt;P&gt; &gt; que;
+    for(int i=0;i&lt;=n;i++) {
+        d[i]=-INF;
+        vis[i]=0;   
+    }
+    d[s]=0;
+    que.push(P(0,s));
+    while(!que.empty()){
+        P p=que.top();que.pop();
+        int v=p.second;
+        if(vis[v]||d[v]&gt;p.first) continue;
+        vis[v]=1;
+        res+=d[v];
+        for(int i=0;i&lt;G[v].size();i++){
+            P e=G[v][i];
+            if(d[e.second]&lt;e.first){
+                d[e.second]=e.first;
+                que.push(P(d[e.second],e.second));
+            }
+        }
+    }  
+    return res; 
+}
+
+int main(){
+    int st,ed,dis;
+    while(cin&gt;&gt;n&gt;&gt;m&amp;&amp;n){
+        for(int i=0;i&lt;m;i++){
+            cin&gt;&gt;st&gt;&gt;ed&gt;&gt;dis;
+            G[st].push_back(P(dis,ed));
+            G[ed].push_back(P(dis,st));
+        }
+
+        int ans=prim_p(1);
+        for(int i=1;i&lt;=n;i++){//注意孤立点判断
+            if(d[i]&lt;0){
+                 ans=-1;
+                 break;
+            }
+        }
+        if(ans&lt;=0) cout&lt;&lt;-1&lt;&lt;endl;
+        else cout&lt;&lt;ans&lt;&lt;endl;
+    }
+    return 0;
+}</code></pre><p>480ms 的确是我没有写好</p>
+<p>例外附一个 Kruskal写的 68ms</p>
+<pre><code>#include&lt;set&gt;
+#include&lt;map&gt;
+#include&lt;queue&gt;
+#include&lt;stack&gt;
+#include&lt;bitset&gt;
+#include&lt;math.h&gt;
+#include&lt;string&gt;
+#include&lt;vector&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#define pi acos(-1)
+
+using namespace std;
+typedef long long ll;
+const int maxn = 1e6+5;
+const int INF = 0x3f3f3f3f;
+const double EPS = 1e-10;
+const ll INF_ll = 0x7fffffffffffffff;
+ll mod = 1e9+7;
+
+int n,m;
+struct node{
+    int u,v;
+    int cost;
+}T[maxn];
+int pre[maxn];
+bool cmp(node a, node b){
+    return a.cost&gt; b.cost;
+}
+int finds(int x)
+{
+    return pre[x] == x?x:pre[x]=finds(pre[x]);
+}
+int unions(int x,int y){
+    int xx1 = finds(x);
+    int yy1 = finds(y);
+
+    if(xx1 == yy1) return 0;
+    else{
+        if(xx1 &lt; yy1){
+            pre[yy1] =xx1;
+
+        }
+        else pre[xx1] =yy1;
+    }
+    return 1;
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i = 0; i &lt;= n; i++) pre[i] = i;
+    for(int i = 0; i &lt; m ;i++){
+        scanf(&quot;%d%d%d&quot;,&amp;T[i].u,&amp;T[i].v,&amp;T[i].cost);
+    }
+    sort(T, T + m ,cmp);
+    ll ans1 = 0;
+    int k = 0;
+    for(int i = 0; i &lt; m ;i++){
+        if(unions(T[i].u,T[i].v)){
+            ans1 += T[i].cost;
+            k++;
+        }
+        if(k == n - 1) break;
+    }
+    int i;
+    for(i=1;i&lt;=n;i++) {
+    //  cout&lt;&lt;finds(i)&lt;&lt;&quot;    &quot;&lt;&lt;finds(1)&lt;&lt;endl;
+        if(finds(i)==finds(1))
+            {
+                if(i==n) printf(&quot;%lld\n&quot;,ans1);
+            }
+        else break;
+    }
+    if(i!=n+1) cout&lt;&lt;-1&lt;&lt;endl;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/24/【逆元】The_Wall_(medium)_CodeForces_-_690D2_&&_Sum_HDU_-_4704/" rel="next" title="【逆元】The_Wall_(medium)_CodeForces_-_690D2_&&_Sum_HDU_-_4704">
+                <i class="fa fa-chevron-left"></i> 【逆元】The_Wall_(medium)_CodeForces_-_690D2_&&_Sum_HDU_-_4704
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/31/模拟维护多个队列_Easy的队列/" rel="prev" title="模拟维护多个队列_Easy的队列">
+                模拟维护多个队列_Easy的队列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

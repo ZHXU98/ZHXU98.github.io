@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="牛客练习赛47 | DongDong数颜色![在这里插入图片描述](https://img-blog.csdnimg.cn/20190611091344975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D">
+<meta property="og:url" content="http://zhxu98.github.io/2019/06/11/【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="牛客练习赛47 | DongDong数颜色![在这里插入图片描述](https://img-blog.csdnimg.cn/20190611091344975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,s">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:16:47.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D">
+<meta name="twitter:description" content="牛客练习赛47 | DongDong数颜色![在这里插入图片描述](https://img-blog.csdnimg.cn/20190611091344975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,s">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/06/11/【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D/">
+
+
+
+
+
+  <title>【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/06/11/【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【区间计数(元素去重个数)】_树状数组(不变序列)_牛客练习赛47__DongDong数颜色_HDU-3333_CF-703D</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-11T09:26:41+08:00">
+                2019-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="牛客练习赛47-DongDong数颜色"><a href="#牛客练习赛47-DongDong数颜色" class="headerlink" title="牛客练习赛47 | DongDong数颜色"></a>牛客练习赛47 | DongDong数颜色</h2><p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190611091344975.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190611091344975.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190611091403820.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190611091403820.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)<br>HH的项链 进阶版<br>这里对一个子树包含的所有节点进行处理<br>我们考虑先dfs建序处理成区间问题<br>然后 跟HH项链一样 我们离线处理<br>优先处理右区间在前的 不断更新 每个颜色下表位置 从而在权值线段树上统计个数<br>虽然这里是树状数组写的<br>(当然数据可能水了 如果是一个链的话 dfs 3e4 差不多就炸栈了 当然也可能是牛客栈区大)</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int maxn = 1e5 + 5;
+
+int n, m;
+int head[maxn], cnt;
+int nxt[maxn &lt;&lt; 1], to[maxn &lt;&lt; 1];
+
+void ade(int a, int b) {
+    to[++cnt] = b;
+    nxt[cnt] = head[a];
+    head[a] = cnt;
+}
+
+int in[maxn], out[maxn], tot, pos[maxn];
+
+void dfs(int x, int pre) {
+    in[x] = ++tot;
+    pos[tot] = x;
+    for(int i = head[x]; i; i = nxt[i]) {
+        if(to[i] == pre)
+            continue;
+        dfs(to[i], x);
+    }
+    out[x] = tot;
+}
+
+int col[maxn], vis[maxn], ans[maxn];
+
+struct node {
+    int l, r, id;
+    bool operator &lt; (const node &amp; a) const {
+        return r &lt; a.r;
+    }
+} que[maxn];
+
+int c[maxn];
+
+void add(int p, int x) {
+    for(; p &lt;= n; p += p &amp; -p)
+        c[p] += x;
+}
+
+int getsum(int p) {
+    int ret = 0;
+    for(; p; p -= p &amp; -p)
+        ret += c[p];
+    return ret;
+}
+
+int main() {
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1; i &lt;= n; ++i)
+        cin &gt;&gt; col[i];
+
+    for(int i = 2, x, y; i &lt;= n; ++i) {
+        cin &gt;&gt; x &gt;&gt; y;
+        ade(x, y), ade(y, x);
+    }
+    dfs(1, -1);
+    for(int i = 1, x; i &lt;= m; ++i) {
+        cin &gt;&gt; x;
+        que[i] = node {in[x], out[x], i};
+    }
+    sort(que + 1, que + 1 + m);
+
+    for(int i = 1, p = 1; i &lt;= m; ++i) {
+        while(que[i].r &gt;= p &amp;&amp; p &lt;= n) {
+            int x = col[pos[p]];
+            if(vis[x]) {
+                add(vis[x], -1);
+            }
+            add(p, 1);
+            vis[x] = p;
+            p++;
+        }
+        ans[que[i].id] = getsum(que[i].r) - getsum(que[i].l - 1);
+    }
+    for(int i = 1; i &lt;= m; ++i) {
+        printf(&quot;%d\n&quot;, ans[i]);
+    }
+    return 0;
+}</code></pre><p>HDU 3333<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3333" target="_blank" rel="noopener"> http://acm.hdu.edu.cn/showproblem.php?pid=3333
+</a></p>
+<p>统计区间不同数据的和<br>只要把 -1 +1操作 改成 -a[i] +a[i] 。。。。。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 1e5 + 5;
+
+int n, m;
+
+ll c[maxn], a[maxn], ans[maxn];
+map&lt;int, int&gt; vis;
+
+int lowbit(int x) {
+    return x &amp; (-x);
+}
+
+void add(int x, int y) {
+    for(; x &lt;= n; x += lowbit(x))
+        c[x] += y;
+}
+
+ll getsum(int x) {
+    ll res = 0;
+    for(; x; x -= lowbit(x))
+        res += c[x];
+    return res;
+}
+
+struct node {
+    int l, r, id;
+    bool operator &lt; (const node &amp;a) const {
+        return r &lt; a.r;
+    }
+} que[maxn];
+
+int main() {
+    int cas ;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        cin &gt;&gt; n ;
+        vis.clear();
+        memset(c, 0, sizeof c);
+        for(int i = 1; i &lt;= n; i ++)
+            cin &gt;&gt; a[i];
+
+        cin &gt;&gt; m;
+        for(int i = 1, l, r; i &lt;= m; i ++) {
+            cin &gt;&gt; l &gt;&gt; r;
+            que[i] = node {l, r, i};
+        }
+
+        sort(que + 1, que + 1 + m);
+
+        for(int i = 1, p = 1; i &lt;= m; i ++) {
+            while(que[i].r &gt;= p) {
+                if(vis[a[p]]) {
+                    add(vis[a[p]], -a[p]);
+                    vis[a[p]] = p;
+                }
+                add(p, a[p]);
+                vis[a[p]] = p;
+                p ++;
+            }
+            ans[que[i].id] = getsum(que[i].r) - getsum(que[i].l - 1);
+        }
+
+        for(int i = 1; i &lt;= m; i ++) {
+            cout &lt;&lt; ans[i] &lt;&lt; endl;
+        }
+    }
+    return 0;
+}</code></pre><p>Mishka and Interesting sum CodeForces - 703D<br>统计区间出现偶数次的异或和<br>这道题 我们如果先搞一个 前缀异或和 是不是处理出了 所有技术次数据的异或值</p>
+<p>那么我们考虑 类比上面的 我们可以统计 区间不同(只要一个)数据的异或和 那样 又一个奇数次 异或值被我们处理出来<br>2次奇数次异或 只会剩下 第二次的数据 这就是偶数次(第一次统计不出来的)数据<br>将2次异或和进行处理 我们就可以把偶数次的处理出来</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 1e6 + 5;
+
+int n, m;
+
+int c[maxn], a[maxn], sum[maxn], ans[maxn];
+unordered_map&lt;int, int&gt; vis;
+
+int lowbit(int x) {
+    return x &amp; (-x);
+}
+
+void add(int x, int y) {
+    for(; x &lt;= n; x += lowbit(x))
+        c[x] ^= y;
+}
+
+int getsum(int x) {
+    int res = 0;
+    for(; x; x -= lowbit(x))
+        res ^= c[x];
+    return res;
+}
+
+struct node {
+    int l, r, id;
+    bool operator &lt; (node const &amp; a) const {
+        return r &lt; a.r;
+    }
+} que[maxn];
+
+int main() {
+//    ios::sync_with_stdio(false);cin.tie(0);
+    scanf(&quot;%d&quot;,&amp;n); 
+    for(int i = 1; i &lt;= n; i ++)
+        scanf(&quot;%d&quot;,&amp;a[i]), sum[i] = sum[i - 1] ^ a[i];
+
+    cin &gt;&gt; m;
+    for(int i = 1, l, r; i &lt;= m; i ++) {
+        scanf(&quot;%d %d&quot;,&amp;l,&amp;r);
+        que[i] = node {l, r, i};
+    }
+
+    sort(que + 1, que + 1 + m);
+
+    for(int i = 1, p = 1; i &lt;= m; i ++) {
+        while(p &lt;= n &amp;&amp; que[i].r &gt;= p) {
+            if(vis[a[p]]) {
+                add(vis[a[p]], a[p]);
+                vis[a[p]] = p;
+            }
+            add(p, a[p]);
+            vis[a[p]] = p;
+            p ++ ;
+        }
+        ans[que[i].id] = getsum(que[i].r) ^ getsum(que[i].l - 1) ^ (sum[que[i].r] ^ sum[que[i].l - 1]);
+    }
+
+    for(int i = 1; i &lt;= m; i ++) {
+        printf(&quot;%d\n&quot;,ans[i]);
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/10/龙曲线_【分形】_从_DFS暴力_到_规律_实现/" rel="next" title="龙曲线_【分形】_从_DFS暴力_到_规律_实现">
+                <i class="fa fa-chevron-left"></i> 龙曲线_【分形】_从_DFS暴力_到_规律_实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/12/【量化】_DP__记忆化搜索_(量化过程将宽范围的数值表示为小范围的近似值，达到有损压缩)/" rel="prev" title="【量化】_DP__记忆化搜索_(量化过程将宽范围的数值表示为小范围的近似值，达到有损压缩)">
+                【量化】_DP__记忆化搜索_(量化过程将宽范围的数值表示为小范围的近似值，达到有损压缩) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#牛客练习赛47-DongDong数颜色"><span class="nav-number">1.</span> <span class="nav-text">牛客练习赛47 | DongDong数颜色</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

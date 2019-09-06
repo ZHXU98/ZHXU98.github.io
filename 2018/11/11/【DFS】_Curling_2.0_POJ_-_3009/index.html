@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="https://vjudge.net/problem/15201/origin  然后图上有不能到的点（墙），起点扔一个球，球只能砸到墙才能停止，但是砸到墙上之后，这个墙就没了，最多可以砸10次，扔出界就算输，能不能把这个球从起点扔到终点。注意，要是该点紧挨着就是一个墙，那就不能往这个墙的方向上扔。一开始想用广度优先搜索的，但是因为要每次撞完之后墙就消失了，所以感觉还是深度优先级写起来方便一些，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【DFS】_Curling_2.0_POJ_-_3009">
+<meta property="og:url" content="http://zhxu98.github.io/2018/11/11/【DFS】_Curling_2.0_POJ_-_3009/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="https://vjudge.net/problem/15201/origin  然后图上有不能到的点（墙），起点扔一个球，球只能砸到墙才能停止，但是砸到墙上之后，这个墙就没了，最多可以砸10次，扔出界就算输，能不能把这个球从起点扔到终点。注意，要是该点紧挨着就是一个墙，那就不能往这个墙的方向上扔。一开始想用广度优先搜索的，但是因为要每次撞完之后墙就消失了，所以感觉还是深度优先级写起来方便一些，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:17:16.668Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【DFS】_Curling_2.0_POJ_-_3009">
+<meta name="twitter:description" content="https://vjudge.net/problem/15201/origin  然后图上有不能到的点（墙），起点扔一个球，球只能砸到墙才能停止，但是砸到墙上之后，这个墙就没了，最多可以砸10次，扔出界就算输，能不能把这个球从起点扔到终点。注意，要是该点紧挨着就是一个墙，那就不能往这个墙的方向上扔。一开始想用广度优先搜索的，但是因为要每次撞完之后墙就消失了，所以感觉还是深度优先级写起来方便一些，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2018/11/11/【DFS】_Curling_2.0_POJ_-_3009/">
+
+
+
+
+
+  <title>【DFS】_Curling_2.0_POJ_-_3009 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2018/11/11/【DFS】_Curling_2.0_POJ_-_3009/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【DFS】_Curling_2.0_POJ_-_3009</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-11T15:52:08+08:00">
+                2018-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://vjudge.net/problem/15201/origin" target="_blank" rel="noopener"> https://vjudge.net/problem/15201/origin
+</a></p>
+<p>然后图上有不能到的点（墙），起点扔一个球，球只能砸到墙才能停止，但是砸到墙上之后，这个墙就没了，最多可以砸10次，扔出界就算输，能不能把这个球从起点扔到终点。<br>注意，要是该点紧挨着就是一个墙，那就不能往这个墙的方向上扔。<br>一开始想用广度优先搜索的，但是因为要每次撞完之后墙就消失了，所以感觉还是深度优先级写起来方便一些，要使用bfs的话，有可能到一个点用相同的步数但是有不同的扔法，这就导致了两种办法消失的墙不一样。总是实现起来是够麻烦的<br>然后 超时了<br>这地对深度有一个限制 显然DFS 不怕炸了 不过我还是写了发BFS 果然系数太大 tle了</p>
+<p>猛然回头看着题 限制让我想起了迭代加深 听起来蛮高大上 实际上用起来很方便</p>
+<p>dfs AC代码</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;set&gt;
+#include &lt;stack&gt;
+#include &lt;list&gt; 
+using namespace std;
+typedef long long ll;
+
+const int maxn = 25 ;
+const int mod = 1e9+7;
+const int INF = 0x3f3f3f3f;
+const double PI=acos(-1.0);
+const int cx[]={1,0,-1,0};
+const int cy[]={0,1,0,-1};
+
+int n,m,x;
+int mp[maxn][maxn];
+bool vis[maxn][maxn];
+int ans;
+
+struct point{
+    pair&lt;int,int&gt; P;
+    int sp;    
+}st,ed;
+
+bool check(int x,int y){
+    return (x==ed.P.first)&amp;&amp;(y==ed.P.second);
+}
+
+void dfs(int x, int y, int deep) {
+    if (deep &gt;= 10 || deep&gt;=ans) return ;
+    for (int i = 0;i &lt; 4;++i) {
+        int nx = x, ny = y;
+        while (mp[nx + cx[i]][ny + cy[i]] == 0){
+            nx = nx + cx[i], ny = ny + cy[i];
+            if (check(nx,ny)){
+                ans=min(ans,deep+1);return;
+            }
+        } // 确定不直接碰墙
+        if ((mp[nx + cx[i]][ny + cy[i]] == -1) || (nx == x &amp;&amp; ny == y)) continue;
+        mp[nx + cx[i]][ny + cy[i]] = 0;// 改变
+        dfs(nx, ny, deep + 1); 
+        mp[nx + cx[i]][ny + cy[i]] = 1; // 回溯
+    }
+    return ;
+}
+
+int main(){
+    while(scanf(&quot;%d %d&quot;,&amp;m,&amp;n)!=EOF&amp;&amp;m+n){
+        ans=INF;
+        memset(mp,-1,sizeof(mp));
+        for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=m;j++){
+            scanf(&quot;%d&quot;,&amp;x);
+            if(x==0) mp[i][j]=0;
+            else if(x==1) mp[i][j]=1;
+            else if(x==2){mp[i][j]=0; st.P.first=i;st.P.second=j;}
+            else{mp[i][j]=0;ed.P.first=i;ed.P.second=j;} 
+        }
+        dfs(st.P.first,st.P.second,0);
+        printf(&quot;%d\n&quot;,ans!=INF?ans:-1);
+
+    }
+    return 0;
+}</code></pre><p>最开始写的bfs代码 系数太大<br>先别吐槽goto 我改完goto 准备交的时候 poj 炸到现在都没有好orz 等 poj好了 我在交发试一试；<br>几天后补上 炸内存了</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;set&gt;
+#include &lt;stack&gt;
+#include &lt;list&gt; 
+using namespace std;
+typedef long long ll;
+
+const int maxn = 25 ;
+const int mod = 1e9+7;
+const int INF = 0x3f3f3f3f;
+const double PI=acos(-1.0);
+
+int n,m,x;
+
+struct point{
+    pair&lt;int,int&gt; P;
+    int sp;
+    int mp[maxn][maxn];
+    bool vis[maxn][maxn];
+    void init(){
+        memset(mp,0,sizeof(mp));
+        memset(vis,0,sizeof(vis));
+        sp=0;
+    }
+    void operator = (point &amp;a){
+        this-&gt;P=a.P;
+        this-&gt;sp=a.sp;
+        for(int i=0;i&lt;=n;i++) for(int j=0;j&lt;=m;j++) 
+            this-&gt;mp[i][j]=a.mp[i][j],this-&gt;vis[i][j]=a.vis[i][j];
+    }
+    point(){};
+    point(pair&lt;int,int&gt; _p,int _sp,int _mp[maxn][maxn],bool _vis[maxn][maxn]){
+        P=_p;sp=_sp;
+        for(int i=0;i&lt;=n;i++) for(int j=0;j&lt;=m;j++) 
+            mp[i][j]=_mp[i][j],vis[i][j]=_vis[i][j];
+    }
+
+}st,ed,tmp,tp;
+
+bool check(int x,int y){
+    return (x==ed.P.first)&amp;&amp;(y==ed.P.second);
+}
+
+int bfs(){
+    int res=-1;
+    queue&lt;point&gt; que;
+    que.push(st);
+    int nx,ny;
+    while(!que.empty()){
+        tp=que.front();que.pop();
+        tmp=tp;
+        nx=tp.P.first;ny=tp.P.second;
+        tmp.vis[nx][ny]=1;
+        for(int i=0;i&lt;4;i++){
+            nx=tp.P.first;ny=tp.P.second;
+            tmp=tp;
+        //    cout&lt;&lt;&quot;********&quot;&lt;&lt;nx&lt;&lt;&quot;     &quot;&lt;&lt;ny&lt;&lt;&quot;       &quot;&lt;&lt;tmp.sp&lt;&lt;endl;
+            if(i==0){
+                if(tmp.mp[nx-1][ny]==1) continue;
+                while(nx!=0&amp;&amp;!tmp.mp[nx-1][ny]){
+                    nx--;
+                    if(check(nx,ny)){res=tmp.sp+1;goto end;}
+                }
+                if(nx==0) continue;
+                tmp.mp[nx-1][ny]=0;
+            }else if(i==1){
+                if(tmp.mp[nx+1][ny]==1) continue;
+                while(nx!=n&amp;&amp;!tmp.mp[nx+1][ny]){
+                    nx++;
+                    if(check(nx,ny)){res=tmp.sp+1;goto end;}
+                } 
+                if(nx==n) continue;
+                tmp.mp[nx+1][ny]=0;
+            }else if(i==2){
+                if(tmp.mp[nx][ny-1]==1) continue;
+                while(ny!=0&amp;&amp;!tmp.mp[nx][ny-1]){
+                    ny--;
+                    if(check(nx,ny)){res=tmp.sp+1;goto end;}
+                } 
+                if(ny==0) continue;
+                tmp.mp[nx][ny-1]=0;
+            }else{
+                if(tmp.mp[nx][ny+1]==1) continue;
+                while(ny!=m&amp;&amp;!tmp.mp[nx][ny+1]){
+                    ny++;
+                    if(check(nx,ny)){res=tmp.sp+1;goto end;}
+                } 
+                if(ny==m) continue;
+                tmp.mp[nx][ny+1]=0;
+            }
+        //    cout&lt;&lt;&quot;   &quot;&lt;&lt;nx&lt;&lt;&quot;    &quot;&lt;&lt;ny&lt;&lt;&quot;   &quot;&lt;&lt;tmp.sp&lt;&lt;endl; 
+            if(!tmp.vis[nx][ny]&amp;&amp;tmp.sp+1&lt;=10){
+                que.push(point(make_pair(nx,ny),tmp.sp+1,tmp.mp,tmp.vis));
+            }
+        }
+    }
+    end:
+    return res&lt;=10?res:-1;
+} 
+
+int main(){
+    while(scanf(&quot;%d %d&quot;,&amp;m,&amp;n)!=EOF&amp;&amp;m+n){
+        st.init();
+        for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=m;j++){
+            scanf(&quot;%d&quot;,&amp;x);
+            if(x==0) st.mp[i][j]=0;
+            else if(x==1) st.mp[i][j]=1;
+            else if(x==2){st.mp[i][j]=0; st.P.first=i;st.P.second=j;}
+            else{st.mp[i][j]=0;ed.P.first=i;ed.P.second=j;} 
+        }
+        printf(&quot;%d\n&quot;,bfs());
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/10/【DFS】Pusher_HDU_-_2821_枚举地图上的可行点/" rel="next" title="【DFS】Pusher_HDU_-_2821_枚举地图上的可行点">
+                <i class="fa fa-chevron-left"></i> 【DFS】Pusher_HDU_-_2821_枚举地图上的可行点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/25/【线段树】_Apple_Tree_POJ_-_3321_对树的处理_dfs建序/" rel="prev" title="【线段树】_Apple_Tree_POJ_-_3321_对树的处理_dfs建序">
+                【线段树】_Apple_Tree_POJ_-_3321_对树的处理_dfs建序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

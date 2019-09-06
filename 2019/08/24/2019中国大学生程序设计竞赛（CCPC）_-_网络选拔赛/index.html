@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HDU 6702 ^ &amp;amp; ^这题Bit operation is a common computing method in computer science ,Now we havetwo positive integers A and B ,Please find a positive integer C that minimizethe value of the formula (A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019中国大学生程序设计竞赛（CCPC）_-_网络选拔赛">
+<meta property="og:url" content="http://zhxu98.github.io/2019/08/24/2019中国大学生程序设计竞赛（CCPC）_-_网络选拔赛/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="HDU 6702 ^ &amp;amp; ^这题Bit operation is a common computing method in computer science ,Now we havetwo positive integers A and B ,Please find a positive integer C that minimizethe value of the formula (A">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:16:00.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019中国大学生程序设计竞赛（CCPC）_-_网络选拔赛">
+<meta name="twitter:description" content="HDU 6702 ^ &amp;amp; ^这题Bit operation is a common computing method in computer science ,Now we havetwo positive integers A and B ,Please find a positive integer C that minimizethe value of the formula (A">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/08/24/2019中国大学生程序设计竞赛（CCPC）_-_网络选拔赛/">
+
+
+
+
+
+  <title>2019中国大学生程序设计竞赛（CCPC）_-_网络选拔赛 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/24/2019中国大学生程序设计竞赛（CCPC）_-_网络选拔赛/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2019中国大学生程序设计竞赛（CCPC）_-_网络选拔赛</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T20:47:32+08:00">
+                2019-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="HDU-6702-amp"><a href="#HDU-6702-amp" class="headerlink" title="HDU 6702 ^ &amp; ^"></a>HDU 6702 ^ &amp; ^</h2><p>这题<br>Bit operation is a common computing method in computer science ,Now we have<br>two positive integers A and B ,Please find a positive integer C that minimize<br>the value of the formula (A xor C) &amp; (B xor C) .Sometimes we can find a lot of<br>C to do this ,So you need to find the smallest C that meets the criteria .</p>
+<p>For example ,Let’s say A is equal to 5 and B is equal to 3 ,we can choose<br>C=1,3… ,so the answer we’re looking for C is equal to 1.</p>
+<p>If the value of the expression is 0 when C=0, please print 1.</p>
+<p>让 (A xor C) &amp; (B xor C) 最小 反正 xor C 只要 C和 A&amp;B 对齐就好 C == 0 输出 1</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 2e5 + 10;
+#define int long long
+
+int a, b, c;
+
+signed main() {
+    int cas;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        cin &gt;&gt; a &gt;&gt; b;
+        if(a &amp; b) cout &lt;&lt;  (a &amp; b) &lt;&lt; endl;
+        else cout &lt;&lt; 1 &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><p><a href="https://blog.csdn.net/qq_40831340/article/details/100049418" target="_blank" rel="noopener"> 1002 array </a></p>
+<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><p>无源点 无汇点 找第K短路<br>有源点A* 没有的话</p>
+<blockquote>
+<p>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190824203550550.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190824203550550.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
+</blockquote>
+<p>我们把 当前 下一次 (这里存 from 而不是 v 了)起点 + 总路程和 放入队列 // 出边的这个点放入队列存储<br>同时 考虑 把(from)这边的下一个次边 也放入队列 进行扩展</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 5e4 + 100;
+typedef long long ll;
+
+int n, m, cas, q, mak, tail;
+int qes[maxn];
+ll ans[maxn];
+struct node {
+    int u, pos;
+    ll w;
+    bool operator &lt; (const node&amp; a) const {
+        return w &gt; a.w;
+    }
+};
+
+bool cmp(const node &amp;a, const node &amp;b) {
+    return a.w &lt; b.w;
+}
+
+vector&lt;node&gt; G[maxn];
+priority_queue&lt;node&gt; que;
+void ade(int a, int b, int c) {
+    G[a].push_back(node {b, 0, c});
+}
+
+void init() {
+    for(int i = 1; i &lt;= n; i ++) G[i].clear();
+    mak = 0;
+    tail = 0;
+    while(!que.empty()) que.pop();
+}
+
+
+signed main() {
+    scanf(&quot;%d&quot;, &amp;cas);
+    while(cas --) {
+        scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;q);
+        init();
+        for(int i = 1, a, b, c; i &lt;= m; i ++)
+            scanf(&quot;%d %d %d&quot;, &amp;a, &amp;b, &amp;c), ade(a, b, c);
+
+        for(int i = 1; i &lt;= q; i ++)
+            scanf(&quot;%d&quot;, &amp;qes[i]), mak = max(mak, qes[i]);
+
+        for(int i = 1; i &lt;= n; i ++) sort(G[i].begin(), G[i].end(), cmp);
+
+        for(int i = 1; i &lt;= n; i ++)
+            if(!G[i].empty()) que.push(node {i, 0, G[i][0].w});
+
+        while(!que.empty()) {
+            node p = que.top(); que.pop();
+            int u = p.u;
+            ll w = p.w;
+            if(w == 0) {
+                while(1);
+            }
+            ans[++ tail] = w;
+            if(tail == mak + 5) break;
+            if(p.pos &lt; (int)G[u].size() - 1)
+                que.push(node {u, p.pos + 1, w - G[u][p.pos].w + G[u][p.pos + 1].w});
+            int v = G[u][p.pos].u;
+            if(!G[v].empty())
+                que.push(node {v, 0, w + G[v][0].w});
+        }
+        for(int i = 1; i &lt;= q; i ++)
+            printf(&quot;%lld\n&quot;, ans[qes[i]]);
+    }
+    return 0;
+}</code></pre><h2 id="Shuffle-Card-HDU"><a href="#Shuffle-Card-HDU" class="headerlink" title="Shuffle Card HDU"></a>Shuffle Card HDU</h2><p>按找 之后放入顺序 倒序 vis标记 去重</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+const int maxn = 1e5 + 5;
+int n, m, k, cas, sum;
+
+int a[maxn], b[maxn];
+bool vis[maxn];
+
+signed main() {
+    fastio;
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; a[i];
+    for(int i = 1; i &lt;= m; i ++) cin &gt;&gt; b[i];
+
+    bool f = 0;
+    for(int i = m; i &gt;= 1; i--) {
+        if(!vis[b[i]]) {
+
+            cout &lt;&lt; b[i];
+            f = 1;
+            vis[b[i]] = 1;    cout &lt;&lt; &quot; &quot;;
+        }
+    }
+
+    for(int i = 1; i &lt;= n; i ++) {
+        if(!vis[a[i]]) {
+
+            cout &lt;&lt; a[i];
+            f = 1;
+            vis[a[i]] = 1;cout &lt;&lt; &quot; &quot;;
+        }
+    }//cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><h2 id="HDU-6708-Windows-Of-CCPC"><a href="#HDU-6708-Windows-Of-CCPC" class="headerlink" title="HDU 6708 Windows Of CCPC"></a>HDU 6708 Windows Of CCPC</h2><p>一般分形简单题 模拟</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+char ch[1500][1500];
+
+void init() {
+    for(int i = 1; i &lt;= 9; i ++) {
+        int l1 = (1 &lt;&lt; i) + 1;
+        int r1 = (1 &lt;&lt; i) * 2;
+
+        for(int k = 1; k &lt; l1; k ++) {
+            for(int j = l1; j &lt;= r1; j ++) {
+                ch[k][j] = ch[k][j - l1 + 1];
+            }
+        }
+
+        for(int k = l1; k &lt;= r1; k ++) {
+            for(int j = l1; j &lt;= r1; j ++) {
+                ch[k][j] = ch[k - l1 + 1][j - l1 + 1];
+            }
+        }
+
+        for(int k = l1; k &lt;= r1; k ++) {
+            for(int j = 1; j &lt; l1; j ++) {
+                if(ch[k - l1 + 1][j] == &apos;P&apos;) ch[k][j] = &apos;C&apos;;
+                else ch[k][j] = &apos;P&apos;;
+//                ch[k][j] = ch[k - l1 + 1][j];
+            }
+        }
+    }
+}
+
+int main() {
+    ch[1][1] = &apos;C&apos;;
+    ch[1][2] = &apos;C&apos;;
+    ch[2][1] = &apos;P&apos;;
+    ch[2][2] = &apos;C&apos;;
+    int cas;
+    init();
+    scanf(&quot;%d&quot;, &amp;cas);
+    while(cas --) {
+        int n;
+        scanf(&quot;%d&quot;, &amp;n);
+
+        for(int i = 1; i &lt;= (1 &lt;&lt; n); i ++) {
+            for(int j = 1; j &lt;= (1 &lt;&lt; n); j ++) {
+                printf(&quot;%c&quot;, ch[i][j]);
+            }
+            puts(&quot;&quot;);
+        }
+
+    }
+    return 0;
+}</code></pre><h2 id="HDU-6709-Fishing-Master"><a href="#HDU-6709-Fishing-Master" class="headerlink" title="HDU 6709 Fishing Master"></a>HDU 6709 Fishing Master</h2><p>容易wa<br>我们肯定先爪最长时间顿的<br>剩下的 就是靠我们 贪心往里套<br>最后不够抓一条鱼的顿时间存下来，后面抓鱼的时候从这些时间中选出最大的剩余时间，抓鱼的时间会和顿最大相交，这样可以使时间（k-x）最小。<br>![在这里插入图片描述](<a href="https://img-blog.csdnimg.cn/20190824204708402.png?x-oss-" target="_blank" rel="noopener">https://img-blog.csdnimg.cn/20190824204708402.png?x-oss-</a><br>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODMxMzQw,size_16,color_FFFFFF,t_70)</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+const int maxn = 1e5 + 5;
+int n, m, k, cas, sum;
+
+priority_queue&lt;int&gt; que;
+int a[maxn];
+signed main() {
+    fastio;
+    cin &gt;&gt; cas;
+    while(cas --) {
+        while(!que.empty()) que.pop();
+        cin &gt;&gt; n &gt;&gt; k;
+        sum = 0;
+        for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; a[i];
+        sort(a + 1, a + 1 + n, greater&lt;int&gt;{});
+//        cout &lt;&lt; a[1] &lt;&lt; endl;
+        sum = k + a[1];
+        int cnt = a[1]/k;
+        if(a[1] % k) que.push(a[1] % k);
+        int pos = 2;
+        for(; pos &lt;= n; pos ++) {
+            if(cnt) {
+                cnt += a[pos] / k;
+                cnt --;
+                sum += a[pos];
+                if(a[pos] % k) que.push(a[pos] % k);
+            } else break;
+        }
+        for(; pos &lt;= n; pos ++) {
+            int tmp = que.top();
+            que.pop();
+            sum += (k - tmp) + a[pos];
+            que.push(a[pos]);
+        }
+        cout &lt;&lt; sum &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><h2 id="K-th-occurrence"><a href="#K-th-occurrence" class="headerlink" title="K-th occurrence"></a>K-th occurrence</h2><p>以下代码 学姐写的 orz 强啊<br>套了好多数据结构orz</p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+const int maxn = 500000 + 10;
+
+int tmp_1[maxn], tmp_2[maxn];
+long long RANKP[maxn], height[maxn];
+char str[maxn];
+long long sa[maxn];
+int N, Q;
+
+struct Tree {
+    int a[maxn];
+    int ll[maxn], rr[maxn];
+    void create(int k, int l, int r) {
+        ll[k] = l;
+        rr[k] = r;
+        if(l &gt;= r) {
+            a[k] = height[l + 1];
+            return;
+        }
+        int mid = (l + r) / 2;
+        create(k &lt;&lt; 1, l, mid);
+        create(k &lt;&lt; 1 | 1, mid + 1, r);
+        a[k] = min(a[k &lt;&lt; 1], a[k&lt;&lt;1|1]);
+    }
+    int queryl(int k, int p, int s) {
+        if(a[k] &gt;= s) return -1;
+        if(ll[k] &gt;= p) return -1;
+        if(ll[k] == rr[k]) return ll[k];
+        int ans = -1;
+        if(ll[k&lt;&lt;1|1] &lt; p &amp;&amp; a[k&lt;&lt;1|1] &lt; s)
+            ans = queryl(k&lt;&lt;1|1, p, s);
+        if(ans != -1)
+            return ans;
+        return queryl(k&lt;&lt;1, p, s);
+    }
+    int queryr(int k, int p, int s) {
+        if(a[k] &gt;= s)
+            return -1;
+        if(rr[k] &lt; p)
+            return -1;
+        if(ll[k] == rr[k])
+            return ll[k];
+        int ans = -1;
+        if(rr[k&lt;&lt;1] &gt;= p &amp;&amp; a[k&lt;&lt;1] &lt; s)
+            ans = queryr(k&lt;&lt;1, p, s);
+        if(ans != -1)
+            return ans;
+        return queryr(k&lt;&lt;1|1, p, s);
+    }
+}sdt;
+
+bool cmp(int *r, int a, int b, int i) {
+    return r[a] == r[b] &amp;&amp; r[a + i] == r[b + i];
+}
+
+int c[maxn];
+
+void solssda(char str[], int sa[], int RANKP[], int height[], int n, int m) {
+    n++;
+    int i, j, p, *x = tmp_1, *y = tmp_2;
+    for(i = 0; i &lt; m; i++)
+        c[i] = 0;
+    for(i = 0; i &lt; n; i++)
+        c[x[i] = str[i]]++;
+    for(i = 0; i &lt; m; i++)
+        c[i] += c[i - 1];
+    for(i = n - 1; i &gt;= 0; i--)
+        sa[--c[x[i]]] = i;
+    for(j = 1; j &lt;= n; j &lt;&lt;= 1) {
+        p = 0;
+        for(i = n - j; i &lt; n; i++)
+            y[p++] = i;
+
+        for(i = 0; i &lt; n; i++)
+            if(sa[i] &gt;= j)
+                y[p++] = sa[i] - j;
+        for(i = 0; i &lt; m; i++)
+            c[i] = 0;
+        for(i = 0; i &lt; n; i++)
+            c[x[y[i]]]++;
+        for(i = 1; i &lt; m; i++)
+            c[i] += c[i - 1];
+        for(i = n - 1; i &gt;= 0; i--)
+            sa[--c[x[y[i]]]] = y[i];
+        swap(x, y);
+        p = 1;
+        x[sa[0]] = 0;
+        for(i = 1; i &lt; n; i++)
+            x[sa[i]] = cmp(y, sa[i - 1], sa[i], j) ? p - 1 : p++;
+        if(p &gt;= n)
+            break;
+        m = p;
+    }
+    int k = 0;
+    n--;
+    for(i = 0; i &lt;= n; i++)
+        RANKP[sa[i]] = i;
+    for(i = 0; i &lt; n; i++) {
+        if(k)
+            k--;
+        j = sa[RANKP[i] - 1];
+        while(str[i + k] == str[j + k])
+            k++;
+        height[RANKP[i]] = k;
+    }
+}
+
+struct Data {
+    int l, r, sum;
+}T[maxn * 15];
+
+int cnt = 0;
+
+
+vector&lt;int&gt; vec;
+
+
+int get(int x) {
+    return lower_bound(vec.begin(), vec.end(), x) - vec.begin() + 1;
+}
+void insert(int l, int r, int &amp;now, int pre, int x) {
+    ++cnt;
+    now = cnt;
+    T[now] = T[pre];
+    T[now].sum += 1;
+
+    int mid = (l + r) / 2;
+    if(l == r) return;
+
+    if(mid &gt;= x)
+        insert(l, mid, T[now].l, T[pre].l, x);
+    else
+        insert(mid + 1, r, T[now].r, T[pre].r, x);
+}
+int query(int l, int r, int x, int y, int k) {
+    if(l == r)
+        return l;
+    int mid = (l + r) / 2;
+    int R_sum = T[T[y].r].sum - T[T[x].r].sum;
+    if(k &lt;= R_sum)
+        query(mid + 1, r, T[x].r, T[y].r, k);
+    else
+        query(l, mid, T[x].l, T[y].l, k - R_sum);
+}
+int root[maxn];
+void solve(int n){
+    for(int i = 0; i &lt; Q; i++) {
+        int l, r, k;
+        scanf(&quot;%lld%lld%lld&quot;, &amp;l, &amp;r, &amp;k);
+        int len = r - l + 1;
+        int p = RANKP[l - 1];
+        int pl = sdt.queryl(1, p, len);
+        int pr = sdt.queryr(1, p, len);
+        if(pl == -1)
+            pl = 1;
+        else
+            pl += 1;
+        if(pr == -1)
+            pr = n;
+        if(pr &gt; n)
+            pr = n;
+        if(pl &gt; n)
+            pl = n;
+        if(pr - pl + 1 &lt; k) {
+            printf(&quot;-1\n&quot;);
+            continue;
+        }
+        k = pr - pl + 2 - k;
+        int ans = query(1, vec.size(), root[pl - 1], root[pr], k);
+        printf(&quot;%lld\n&quot;, vec[ans - 1]);
+    }
+}
+void dos() {
+    scanf(&quot;%d%d&quot;, &amp;N, &amp;Q);
+    scanf(&quot;%s&quot;, str);
+    long long n = N;
+    str[n] = 0;
+    solssda(str, sa, RANKP, height, n, 200);
+    for(int i = 1; i &lt;= n; i++)
+        ++sa[i];
+    for(int i = 1; i &lt;= n; i++)
+        vec.push_back(sa[i]);
+    sort(vec.begin(), vec.end());
+    vec.erase(unique(vec.begin(), vec.end()), vec.end());
+    for(int i = 0; i &lt; n; i++)
+        insert(1, vec.size(), root[i + 1], root[i], get(sa[i + 1]));
+    height[n + 1] = height[n];
+    sdt.create(1, 1, n);
+    solve(n);
+}
+
+void inputs() {
+    int cas;
+    scanf(&quot;%lld&quot;, &amp;cas);
+    while(cas --)
+        dos();
+}
+
+signed main() {
+    inputs();
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/24/解一类线性方程_【数学】/" rel="next" title="解一类线性方程_【数学】">
+                <i class="fa fa-chevron-left"></i> 解一类线性方程_【数学】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/27/【容斥】_codeforces1027D_Number_Of_Permutations_【数学】/" rel="prev" title="【容斥】_codeforces1027D_Number_Of_Permutations_【数学】">
+                【容斥】_codeforces1027D_Number_Of_Permutations_【数学】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HDU-6702-amp"><span class="nav-number">1.</span> <span class="nav-text">HDU 6702 ^ &amp; ^</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path"><span class="nav-number">2.</span> <span class="nav-text">path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shuffle-Card-HDU"><span class="nav-number">3.</span> <span class="nav-text">Shuffle Card HDU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDU-6708-Windows-Of-CCPC"><span class="nav-number">4.</span> <span class="nav-text">HDU 6708 Windows Of CCPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDU-6709-Fishing-Master"><span class="nav-number">5.</span> <span class="nav-text">HDU 6709 Fishing Master</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-th-occurrence"><span class="nav-number">6.</span> <span class="nav-text">K-th occurrence</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

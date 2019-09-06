@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="A.CQW又迟到了CQW是个坏学生，每天都迟到，从没看见他在第一节课出现过，懒惰的他，总是在点名的最后一刻出现。为了治一治他这个坏习惯，教C语言的XZW老师决定每天都给他布置一个单独的作业，并答应只要他每次都能正确完成作业就不点他的名字，CQW为了可以多睡觉，立刻答应了下来。为了让CQW知难而退，于是第一天XZW老师就布置了一个超级难的题！ 将一个字符串循环打印输出成一个 n * n 的矩阵。 如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019_第十四届_中北大学ACM程序设计竞赛_题解">
+<meta property="og:url" content="http://zhxu98.github.io/2019/05/15/2019_第十四届_中北大学ACM程序设计竞赛_题解/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="A.CQW又迟到了CQW是个坏学生，每天都迟到，从没看见他在第一节课出现过，懒惰的他，总是在点名的最后一刻出现。为了治一治他这个坏习惯，教C语言的XZW老师决定每天都给他布置一个单独的作业，并答应只要他每次都能正确完成作业就不点他的名字，CQW为了可以多睡觉，立刻答应了下来。为了让CQW知难而退，于是第一天XZW老师就布置了一个超级难的题！ 将一个字符串循环打印输出成一个 n * n 的矩阵。 如">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:16:59.328Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019_第十四届_中北大学ACM程序设计竞赛_题解">
+<meta name="twitter:description" content="A.CQW又迟到了CQW是个坏学生，每天都迟到，从没看见他在第一节课出现过，懒惰的他，总是在点名的最后一刻出现。为了治一治他这个坏习惯，教C语言的XZW老师决定每天都给他布置一个单独的作业，并答应只要他每次都能正确完成作业就不点他的名字，CQW为了可以多睡觉，立刻答应了下来。为了让CQW知难而退，于是第一天XZW老师就布置了一个超级难的题！ 将一个字符串循环打印输出成一个 n * n 的矩阵。 如">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/05/15/2019_第十四届_中北大学ACM程序设计竞赛_题解/">
+
+
+
+
+
+  <title>2019_第十四届_中北大学ACM程序设计竞赛_题解 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/05/15/2019_第十四届_中北大学ACM程序设计竞赛_题解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2019_第十四届_中北大学ACM程序设计竞赛_题解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-15T14:10:08+08:00">
+                2019-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题集/" itemprop="url" rel="index">
+                    <span itemprop="name">题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>A.CQW又迟到了</strong><br>CQW是个坏学生，每天都迟到，从没看见他在第一节课出现过，懒惰的他，总是在点名的最后一刻出现。为了治一治他这个坏习惯，教C语言的XZW老师决定每天都给他布置一个单独的作业，并答应只要他每次都能正确完成作业就不点他的名字，CQW为了可以多睡觉，立刻答应了下来。为了让CQW知难而退，于是第一天XZW老师就布置了一个超级难的题！</p>
+<p>将一个字符串循环打印输出成一个 n * n 的矩阵。</p>
+<p>如输入：abcd</p>
+<p>那么输出：<br>abcd<br>bcda<br>cdab<br>dabc</p>
+<p>也就是说每次都将输出的上一个字符串的第一个字符移动到最后的位置形成新的字符串。</p>
+<p>天哪！对于从来不上课的CQW同学来说这题实在是太难了。他听说你喜欢唱跳、rap和篮球，还练习了两年半的C语言，于是过来请求你的帮助，你可以帮帮他吗？</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+//#define int long long
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int,int&gt; P;
+
+const int maxn = 1e6+5;
+const int INF = 0x3f3f3f3f;
+
+int n,m,k;
+
+
+signed main(){
+    fastio;
+    string str;
+    cin&gt;&gt;str;
+    n=str.size();
+    for(int i=0;i&lt;n;i++){
+        for(int j=0;j&lt;n;j++){
+            cout&lt;&lt;str[(j+i)%n];
+        }cout&lt;&lt;endl;
+    }
+    return 0;
+}</code></pre><p><strong>B.CQW的倔强</strong><br>LCH和LPF是大学，每天都在讨论一些很高深的问题，像迪利克雷卷积之类的简单东西，他们根本不屑一顾。CQW是出了名的学渣，可是学渣也是有上进心的呀，他相信天道酬勤，只要他肯努力，一定可以赶上LCH和LPF的。有道是，一定要努力，只有努力过后，才能明白自己真的是不行。CQW在一次LCH和LPF讨论完后，趁着他们出去的功夫，他偷到了他们使用的手稿！CQW如获至宝，马上就开始研究他们讨论的题目，只见纸上赫然出现几个大字：给出一个整数<br>n ，请出 1 - n 的所有数字中一共出现了多少个 9 。</p>
+<p>能数位DP 但是暴力能过。。。。。</p>
+<p>包含一个整数 n（1&lt;= n &lt;=1000000）。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+#define int long long
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int,int&gt; P;
+
+const int maxn = 1e6+5;
+const int INF = 0x3f3f3f3f;
+
+int n,m,k;
+
+int chk(int i){
+    int res=0;
+    while(i){
+        if(i%10==9) res++;
+        i/=10;
+    }
+    return res;
+}
+
+signed main(){
+    fastio;
+    cin&gt;&gt;n;
+    int ans=0;
+    for(int i=1;i&lt;=n;i++){
+        ans+=chk(i);
+    }
+    cout&lt;&lt;ans&lt;&lt;endl;
+    return 0;
+}</code></pre><p><strong>C.WYS非常方</strong><br>在2019年3月底的团体程序设计天梯赛后，16级队员正式退役了，有的队员迅速找到了一份满意而体面的工作，有的队员估摸一算发现自己好像能保研了，还有一些队员则是在考研的道路上一往无前所向披靡，而有的队员懵在原地，不知所措。</p>
+<p>WYS作为实验室中一个细心观察生活中点点滴滴的人，她很快就发现了实验室中某些人的状态很不对劲，常常呆在某个位置发呆，于是她向LZX，YXY等人询问情况，而却苦于心情难以用言语表达，决定由肢体语言表达出自己的心情<br>—-我很方，非常方。</p>
+<p>作为一名实验室中考研人群中的一员，WYS发现自己似乎没有很多时间去处理这些问题，于是他把这个问题交给了你，希望你能够给出正确的答案。</p>
+<p>我们简化问题，实验室有n(1&lt;=n&lt;=3000)个呆在原地的人，他们被看做为平面上的整数点（x，y)（1&lt;=x,y&lt;=5000)，要表达出他们有多方，一共需要满足两个条件：</p>
+<pre><code>1.组成一个正方形,只有特殊的正方形才能说明他们非常方
+
+2.组成的正方形尽可能大</code></pre><p>即我们要找到平面上四个人组成的最大的正方形面积为多少？</p>
+<p>n^2 枚举 用向量找点 因为都是整数坐标 。。。 所以对应点也是整数坐标 要是用单位向量 又去搞了 根号找距离 大概精度不够wa了</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define double int
+using namespace std;
+
+const double eps = 1e-8;
+bool mp[5005][5005];
+
+struct node {
+    int x;
+    int y;
+} a[3005];
+
+double ans=0;
+
+bool chk(int x,int y){
+    if(x&gt;=0&amp;&amp;y&gt;=0&amp;&amp;y&lt;=5000&amp;&amp;x&lt;=5000){
+        if(mp[x][y]==1) return 1;
+    }
+    return 0;
+}
+
+void dodeal(int i,int j) {
+    int tx,ty;
+    tx=a[i].x-a[j].x;
+    ty=a[i].y-a[j].y;
+    int x=-ty;
+    int y=tx;
+    if(chk(a[i].x+x,a[i].y+y)&amp;&amp;chk(a[j].x+x,a[j].y+y)){
+        ans=max(ans,x*x+y*y);
+    }
+    if(chk(a[i].x-x,a[i].y-y)&amp;&amp;chk(a[j].x-x,a[j].y-y)){
+        ans=max(ans,x*x+y*y);
+    }
+}
+
+signed main() {
+    int n;
+    cin&gt;&gt;n;
+    for(int i=1; i&lt;=n; i++) {
+        cin&gt;&gt;a[i].x&gt;&gt;a[i].y;
+        mp[a[i].x][a[i].y]=1;
+    }
+    ans=0;
+    for(int i=1; i&lt;=n; i++) {
+        for(int j=i+1; j&lt;=n; j++) {
+            dodeal(i,j);
+        }
+    }
+    if(ans==0) cout&lt;&lt;-1&lt;&lt;endl;
+    else cout&lt;&lt;(int)ans&lt;&lt;endl;
+    return 0;
+}</code></pre><p><strong>D.绝对强者LYF</strong></p>
+<p>LYF是一个篮球高手，为了展现自己的篮球技艺，他总和学弟们打篮球，希望通过虐小菜鸡们获得满足感，长久以来终于引起了公愤。为了制裁LYF，大家在暑假集训时进行了疯狂特训，如今已是今非昔比，现在的他们决定要选出他们中的绝对强者去制裁LYF，绝对强者要求：得分、篮板、助攻、抢断、封盖，五项数据都没有人比他高才行。你可以选出绝对强者吗？<br>存最大 直接找</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+#define int long long
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int,int&gt; P;
+
+const int maxn = 1e3+5;
+const int INF = 0x3f3f3f3f;
+
+int n,m,k;
+
+struct node{
+    int a,b,c,d,e;
+    int id;
+}q[maxn];
+
+signed main(){
+    fastio;
+    cin&gt;&gt;n;
+    int ans=0;
+    int a,b,c,d,e;
+    int ma=-1,mb=-1,mc=-1,md=-1,me=-1;
+    for(int i=1;i&lt;=n;i++){
+        cin&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d&gt;&gt;e;
+        q[i]=node{a,b,c,d,e,i};
+        ma=max(ma,a);
+        mb=max(mb,b);
+        mc=max(mc,c);
+        md=max(md,d);
+        me=max(me,e);
+    }
+    for(int i=1;i&lt;=n;i++){
+        if(ma==q[i].a&amp;&amp;q[i].b==mb&amp;&amp;q[i].c==mc&amp;&amp;q[i].d==md&amp;&amp;q[i].e==me){
+            cout&lt;&lt;i&lt;&lt;endl;
+            return 0;
+        }
+    }
+    cout&lt;&lt;&quot;WO LYF MEI YOU KAI GUA !&quot;&lt;&lt;endl;
+    return 0;
+}</code></pre><p><strong>E.1009的奇思妙想</strong><br>1009最近发现自己非常孤独,因为他开始有了自己的思想,并有了一个重大发现:除了1以外,他竟然不能被任何小于他的数整除!这可真是一个令人悲伤的发现呢.<br>后来慢慢的他意识到,他原来是一个较为特殊的数字–质数.</p>
+<p>与此同时他还发现自己还有很多与他一样的小伙伴,如果他们能够抱团组成一个好大好大的数,这样他们就不会再孤独了.</p>
+<p>于是他找到了和他长度相同的质数小伙伴,打算组成一个长度为x的超大数字</p>
+<p>小伙伴们纷纷赞同1009的提议,并觉得如果单单拼在一起好像没什么难度,很无聊嘛,于是他们决定组合在一起,即他们要让组成的长度为x的数中,任意四个连续的数都是他的小伙伴(或者他自己),换句话说,就是组成的长度为x的数字中,任意连续四位都是一个质数且该质数不包含前导零.这样子大家你中有我,我中有你,只要有想组合的人(数字),就不是孤身一人(数字).</p>
+<p>我们举个例子来说:对于98039这个数来说,连续的四位数有9803和8039,这两个数字都是质数,所以98039就算在长度为5的一种组成方法.</p>
+<p>不过有多少种组成方式呢?1009想了很久,似乎还是想不来?那么你能解决这个问题吗?(答案对1e9+7取模)</p>
+<p>注意:对于长度为5的位数来说,10097这种数字是不能算成一种组成方式的哦,因为连续的4位数右1009和0097,而0097虽然是一个质数,但他实际上是一个小于1000的数,即长度小于4,不是1009的小伙伴哦</p>
+<pre><code>每个数字出现次数可能不止一次,且1009无需在每次组合方案中出现,比如98039也可以当成一种组合方案</code></pre><p>先打质数 找到1000到10000内的<br>我们发现 下一位连续4个质数 她的前3位和前一岑的4个质数 后三位一样<br>我们想到 dp[ 长度 ] [ 素数后3位 or前3位有关 ]<br>进而尝试一下 发现<br>dp[ k ] [ 素数%1000 ] += dp [ k - 1 ] [ 质数/10 ] ；不断累计</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+
+const double eps = 1e-8;
+int n,m;
+const int mod = 1e9+7;
+
+bool pri[10000];
+int dp[3][1005];
+int pre[2000];
+int cnt;
+
+void init(){
+    pri[0]=pri[1]=1;
+    for(int i=2;i&lt;10000;i++){
+        if(pri[i]==0){
+            pre[++cnt]=i;
+            if(i&lt;10000&amp;&amp;i&gt;1000) dp[0][i%1000]++;
+            for(int j=i+i;j&lt;10000;j+=i){
+                pri[j]=1;
+            }
+        } 
+    }
+//    for(int i=1;i&lt;=cnt;i++){
+//        if(pre[i]&gt;=1000&amp;&amp;pre[i]&lt;=10000) cout&lt;&lt;i&lt;&lt;&quot;  &quot;&lt;&lt;pre[i]&lt;&lt;endl;
+//    //    else if(pre[i]&lt;=10000) cout&lt;&lt;i&lt;&lt;endl;
+//    }
+}
+
+signed main() {
+    int x;
+    cin&gt;&gt;x;
+    init();
+    for(int i=5;i&lt;=x;i++){
+        for(int j=169;j&lt;=1229;j++){
+            dp[i%2][pre[j]%1000]=dp[i%2][pre[j]%1000]+dp[(i-1)%2][pre[j]/10];
+            dp[i%2][pre[j]%1000]%=mod;
+        }
+        for(int j=0;j&lt;1000;j++) dp[(i-1)%2][j]=0;
+    }
+    int ans=0;
+    for(int i=0;i&lt;1000;i++){
+        ans+=dp[x%2][i];
+        ans%=mod;
+    }
+    cout&lt;&lt;ans&lt;&lt;endl;
+    return 0;
+}</code></pre><p><strong>F.CQW的幸福</strong></p>
+<p>在很久很久以前，CQW喜欢上了一个女孩，可是CQW是一个爆脾气。恰好这个女孩喜欢脾气好的男孩子。于是CQW为了追求这个女孩子，就跑去找巫师NCE。NCE听闻此事之后，告诉CQW在珠穆朗玛之巅有一瓶宝贵的神药可以帮他解决这个问题，并且告知CQW在神药外围有一道机关，这个机关需要让他求出最小的有4^n个因子的数是多少，这一下子难住了CQW，于是CQW向你发起了求助，不知道聪明的你能不能帮CQW完成心愿，要知道CQW的幸福已经在你手中了！</p>
+<p>4^n 变为 2^n<br>因子数 4 16 48 而质因子+1 连积 是约束个数 考虑每个素数贡献度<br>4个 约数的时候 是6 1 2 3 6 2^2 *3^1<br>2 下次在出现 如果想对于 2^n 有贡献度 必然是2^2<br>所以 我们把每次用过的数据平方放回去 一是保证最优同时最小 还确定了贡献度+1</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int,int&gt; P;
+const int maxn = 1e7+5;
+const int INF = 0x3f3f3f3f;
+int cnt;
+
+bool isp[maxn];
+
+priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; que; 
+
+void init(){
+    for(int i=2;i&lt;maxn;i++){
+        if(!isp[i]){
+            que.push(i);
+            for(int j=i+i;j&lt;maxn;j+=i) isp[j]=1;
+        }
+    }
+}
+const int mod = 998244353 ;
+
+signed main() {
+    int n;
+    init();
+    cin&gt;&gt;n;
+    ll ans=1;
+    for(int i=1;i&lt;=n;i++){
+        int res=que.top();
+        que.pop();
+        ans=ans*res%mod;
+        que.push(res*res);
+    //    cout&lt;&lt;res&lt;&lt;endl;
+        res=que.top();
+        que.pop();
+        ans=ans*res%mod;
+        que.push(res*res);
+        //cout&lt;&lt;res&lt;&lt;&quot;  &quot;&lt;&lt;ans&lt;&lt;endl;
+    }
+    cout&lt;&lt;ans&lt;&lt;endl;
+    return 0;
+}</code></pre><p><strong>G.FWJ的追求者</strong><br>众所周知FWJ是一位打篮球特别厉害而且长得特别好看的小姐姐，迷倒了一群又一群篮球场上的小哥哥。最近又有一个小哥哥拜倒在了FWJ的石榴裙下，小哥哥展开了疯狂的最求，每天都送零食来实验室，FWJ小姐姐要保持身材，这些零食当然都到CQW的肚子里去了。可是FWJ早就对XZW芳心暗许，又怎会答应别人的最求呢？于是FWJ想让这位小哥哥知难而退，给他出了一道难题，题目如下：</p>
+<pre><code>商店里有1到n元的商品，现在让你设计一种货币的面额
+
+使得你手里的货币，可以买到1-n元的商品之间的任意一种
+
+求不同货币面值数目最小的设计方法</code></pre><p>这位小哥哥很不甘心就这样放弃，于是向聪明的你发起了求救，你能否帮他解决这一难题呢？<br>洛谷原题。。。。</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define fastio ios::sync_with_stdio(false);cin.tie(0)
+#define int long long
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int,int&gt; P;
+
+const int maxn = 1e3+5;
+const int INF = 0x3f3f3f3f;
+
+int n,m,k;
+
+struct node{
+    int a,b,c,d,e;
+    int id;
+}q[maxn];
+
+signed main(){
+    fastio;
+    int cas;
+    cin&gt;&gt;cas;
+    while(cas--){
+        cin&gt;&gt;n;
+        int res=0;
+        while(n){
+            res++;
+        //    cout&lt;&lt;n/2&lt;&lt;endl;
+            n/=2;
+        }
+        cout&lt;&lt;res&lt;&lt;endl;
+    }
+    return 0;
+}</code></pre><p><strong>H.ZBT的学分</strong><br>现在有N个活动，ZBT完成每个活动都可以获得一些学分，各个活动的获得的学分不尽相同，每个活动最多只能参加一次。</p>
+<p>ZBT缺K个学分才能毕业，ZBT必须修够K个学分，不然他不能毕业，同时ZBT作为一个强迫症患者，有如下要求：</p>
+<ol>
+<li>他不想获得超过K个学分，也就是ZBT最后参加活动获得的总学分刚好是K个。</li>
+</ol>
+<ol start="2">
+<li>如果有一些活动是他喜欢的活动，他哪怕影响毕业也要在这些活动中参加至少一个。</li>
+</ol>
+<p>现在他问你总共有多少个参加活动的方案数可以满足他的条件？</p>
+<p>枚举 喜欢的 然后剩下的分2块 二分查 减低复杂度</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+
+int n,m,k;
+
+const int maxn = 55 ;
+int a[maxn],b[maxn];
+bool vis[maxn];
+int q[maxn],h[maxn];
+int qq[(1&lt;&lt;16)+10],hh[(1&lt;&lt;16)+10];
+int ans;
+
+signed main(){
+    cin&gt;&gt;n;
+    for(int i=0;i&lt;n;i++) cin&gt;&gt;a[i];
+    cin&gt;&gt;k&gt;&gt;m;
+    for(int i=0;i&lt;m;i++) cin&gt;&gt;b[i],b[i]--;
+    if(m==0){
+        int cnt1=0,cnt2=0;
+
+        int resk=k;
+
+        for(int j=0;j&lt;n;j++){
+            if(cnt1&lt;cnt2) q[cnt1++] = a[j];
+            else h[cnt2++] = a[j];
+        }
+
+        int cn1=(1&lt;&lt;cnt1);
+        int cn2=(1&lt;&lt;cnt2);
+
+        for(int j=0;j&lt;(cn1);j++){
+            qq[j]=0;
+            for(int z=0;z&lt;=17;z++)
+                if(j&amp;(1&lt;&lt;z)) qq[j]+=q[z];
+        }
+
+        for(int j=0;j&lt;(cn2);j++){
+            hh[j]=0;
+            for(int z=0;z&lt;=17;z++)
+                if(j&amp;(1&lt;&lt;z)) hh[j]+=h[z];
+        }
+
+        sort(hh,hh+cn2);
+
+        for(int j=0;j&lt;cn1;j++){
+            ans+=(upper_bound(hh,hh+cn2,resk-qq[j])-lower_bound(hh,hh+cn2,resk-qq[j]));
+        }
+    }
+    else for(int i=0;i&lt;m;i++){
+        vis[b[i]]=1;
+
+        int cnt1=0,cnt2=0;
+
+        int resk=k-a[b[i]];
+
+        for(int j=0;j&lt;n;j++){
+            if(vis[j]) continue ; 
+            else if(cnt1&lt;cnt2) q[cnt1++] = a[j];
+            else h[cnt2++] = a[j];
+        }
+
+        int cn1=(1&lt;&lt;cnt1);
+        int cn2=(1&lt;&lt;cnt2);
+
+        for(int j=0;j&lt;(cn1);j++){
+            qq[j]=0;
+            for(int z=0;z&lt;=17;z++)
+                if(j&amp;(1&lt;&lt;z)) qq[j]+=q[z];
+        }
+
+        for(int j=0;j&lt;(cn2);j++){
+            hh[j]=0;
+            for(int z=0;z&lt;=17;z++)
+                if(j&amp;(1&lt;&lt;z)) hh[j]+=h[z];
+        }
+
+        sort(hh,hh+cn2);
+
+        for(int j=0;j&lt;cn1;j++){
+            ans+=(upper_bound(hh,hh+cn2,resk-qq[j])-lower_bound(hh,hh+cn2,resk-qq[j]));
+        }
+
+    }
+        cout&lt;&lt;ans&lt;&lt;endl;
+    return 0;
+}</code></pre><p><strong>I.SHT的梦想</strong><br>欧拉降幂 + 线段树 不会数学 告辞</p>
+<p><strong>J.ZBT的游戏</strong><br>区间计数 裸题 数据应该是水了 0 1 0 1 0 1 底层要是这样的数据 都n2卡死了 正解要不离线 要不莫队分块来着</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int,int&gt; P;
+const int maxn = 2e6+5;
+const int INF = 0x3f3f3f3f;
+
+struct node{
+    int col;
+    int laz;
+}tree[maxn&lt;&lt;2];
+
+void pushup(int rt){
+    if(tree[rt&lt;&lt;1].col!=tree[rt&lt;&lt;1|1].col) tree[rt].col=-1;
+    else tree[rt].col=tree[rt&lt;&lt;1].col;
+}
+
+void pushdown(int rt){
+    if(tree[rt].laz!=0){
+        tree[rt&lt;&lt;1].col=tree[rt&lt;&lt;1|1].col=tree[rt].laz;
+        tree[rt&lt;&lt;1].laz=tree[rt&lt;&lt;1|1].laz=tree[rt].laz;
+        tree[rt].laz=0;
+    }
+}
+
+void update(int L,int R,int l,int r,int rt,int c){
+    if(L&lt;=l&amp;&amp;R&gt;=r){
+        tree[rt].laz=c;
+        tree[rt].col=c;
+        return ;
+    }
+    pushdown(rt);
+    int mid=(l+r)&gt;&gt;1;
+    if(L&lt;=mid) update(L,R,l,mid,rt&lt;&lt;1,c);
+    if(mid&lt;R) update(L,R,mid+1,r,rt&lt;&lt;1|1,c);
+    pushup(rt);
+}
+
+set&lt;int&gt; S;
+
+int query(int L,int R,int l,int r,int rt){
+    if(L&lt;=l&amp;&amp;r&lt;=R&amp;&amp;tree[rt].col!=-1){
+        if(tree[rt].col!=0)    S.insert(tree[rt].col);
+        return 0;
+    }
+    if(l==r){
+        if(tree[rt].col!=0) S.insert(tree[rt].col);
+        return 0;
+    }
+    pushdown(rt);
+    int mid=(l+r)&gt;&gt;1;
+    if(L&lt;=mid) query(L,R,l,mid,rt&lt;&lt;1);
+    if(R&gt;mid) query(L,R,mid+1,r,rt&lt;&lt;1|1);
+    pushup(rt);
+}
+
+signed main() {
+    int cas;
+    int n,m,k;
+//    freopen(&quot;a.in&quot;,&quot;r&quot;,stdin);
+//    freopen(&quot;a.out&quot;,&quot;w+&quot;,stdout);
+    scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+    char cmd[20];
+    int l,r;
+    int f=0;
+    for(int i=1;i&lt;=m;i++){
+        scanf(&quot;%s %d %d&quot;,cmd,&amp;l,&amp;r);
+        int t;
+        if(cmd[0]==&apos;C&apos;){
+            scanf(&quot;%d&quot;,&amp;t);
+            update(l,r,1,n,1,t);
+        }else{
+            f=1;
+            S.clear();
+            query(l,r,1,n,1);
+            printf(&quot;%d\n&quot;,S.size());
+        }
+    }
+    if(!f) printf(&quot;This is a boring game!\n&quot;);
+    return 0;
+}</code></pre><p><strong>K.ZJ和LQW打羽毛球</strong><br>不会<br><strong>L.SW和ZK的恋爱</strong><br>lcm 比如说 8 2个0 你就。。。。找8和200的lcm orz</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/15/【点分治】_模板_POJ_-_3237_Tree__CF161D_Distance_in_Tree/" rel="next" title="【点分治】_模板_POJ_-_3237_Tree__CF161D_Distance_in_Tree">
+                <i class="fa fa-chevron-left"></i> 【点分治】_模板_POJ_-_3237_Tree__CF161D_Distance_in_Tree
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/28/【_算法竞赛进阶指南_0x00_】_杂谈/" rel="prev" title="【_算法竞赛进阶指南_0x00_】_杂谈">
+                【_算法竞赛进阶指南_0x00_】_杂谈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

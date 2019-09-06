@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="树链剖分模板题首先是树链剖分 模板题一般的 我将树 按轻重儿子 建立DFS序列dfs1 处理 轻重儿子 子树大小 之后的dfs2 就方便处理轻重链的分离了从而线段数维护 dfs序列 将一个树上问题 转到 区间 一维的性质1如果边  (  u  ,  v  )  \left( u,v\right)  (  u  ,  v  )  ,为轻边,那么  S  i  z  e  (v  )  ≤  S  i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树链剖分_题型总结一">
+<meta property="og:url" content="http://zhxu98.github.io/2019/09/03/树链剖分_题型总结一/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="树链剖分模板题首先是树链剖分 模板题一般的 我将树 按轻重儿子 建立DFS序列dfs1 处理 轻重儿子 子树大小 之后的dfs2 就方便处理轻重链的分离了从而线段数维护 dfs序列 将一个树上问题 转到 区间 一维的性质1如果边  (  u  ,  v  )  \left( u,v\right)  (  u  ,  v  )  ,为轻边,那么  S  i  z  e  (v  )  ≤  S  i">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:15:57.683Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树链剖分_题型总结一">
+<meta name="twitter:description" content="树链剖分模板题首先是树链剖分 模板题一般的 我将树 按轻重儿子 建立DFS序列dfs1 处理 轻重儿子 子树大小 之后的dfs2 就方便处理轻重链的分离了从而线段数维护 dfs序列 将一个树上问题 转到 区间 一维的性质1如果边  (  u  ,  v  )  \left( u,v\right)  (  u  ,  v  )  ,为轻边,那么  S  i  z  e  (v  )  ≤  S  i">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/09/03/树链剖分_题型总结一/">
+
+
+
+
+
+  <title>树链剖分_题型总结一 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/09/03/树链剖分_题型总结一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">树链剖分_题型总结一</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-03T23:26:44+08:00">
+                2019-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/树链剖分/" itemprop="url" rel="index">
+                    <span itemprop="name">树链剖分</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="树链剖分模板题"><a href="#树链剖分模板题" class="headerlink" title="树链剖分模板题"></a>树链剖分模板题</h2><p>首先是树链剖分 模板题<br>一般的 我将树 按轻重儿子 建立DFS序列<br>dfs1 处理 轻重儿子 子树大小 之后的dfs2 就方便处理轻重链的分离了<br>从而线段数维护 dfs序列 将一个树上问题 转到 区间 一维的<br>性质1<br>如果边  (  u  ,  v  )  \left( u,v\right)  (  u  ,  v  )  ,为轻边,那么  S  i  z  e  (<br>v  )  ≤  S  i  z  e  (  u  )  /  2  Size\left( v\right) \leq Size\left(<br>u\right) /2  S  i  z  e  (  v  )  ≤  S  i  z  e  (  u  )  /  2</p>
+<p>证明：显然，否则该边会成为重边</p>
+<p>性质2<br>树中任意两个节点之间的路径中轻边的条数不会超过  log  ⁡  2  n  \log _{2}n  lo  g  2  ​  n  ,重路径的数目不会超过<br>log  ⁡  2  n  \log _{2}n  lo  g  2  ​  n</p>
+<p>这样的话 重路 最多lg 个， 线树维护复杂度 也是lg的 这样总复杂度是  l  g  2  n  lg^2 n  l  g  2  n  的<br>洛谷树链剖分模板题 <a href="https://www.luogu.org/problem/P3384" target="_blank" rel="noopener"> https://www.luogu.org/problem/P3384
+</a><br>这篇 博客 放2个点剖的 题 之后边剖 下一篇博客发</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define debug(x, str) cout &lt;&lt; (str) &lt;&lt; &quot; = [ &lt;&lt; : &quot; &lt;&lt; (x) &lt;&lt; &quot; ]&quot; &lt;&lt; endl;
+//#define fastio ios::sync_with_stdio(0),cin.tie(0);
+using namespace std;
+typedef pair&lt;int, int&gt; pii;
+typedef long long ll;
+const int maxn = 1e5 + 5;
+int n, k, m, mod;
+int head[maxn], val[maxn], cnt;
+int to[maxn &lt;&lt; 1], nxt[maxn &lt;&lt; 1];
+
+void ade(int a, int b) {
+    to[++ cnt] = b;
+    nxt[cnt] = head[a], head[a] = cnt;
+}
+
+int fa[maxn], dep[maxn], siz[maxn], son[maxn];
+void dfs1(int u, int f) {
+    fa[u] = f;
+    dep[u] = dep[f] + 1;
+    siz[u] = 1;
+    int maxsize = -1;
+    for(int i = head[u]; i; i = nxt[i]) {
+        int v = to[i];
+        if(v == f) continue;
+        dfs1(v, u);
+        siz[u] += siz[v];
+        if(siz[v] &gt; maxsize) {
+            maxsize = siz[v];
+            son[u] = v;
+        }
+    }
+}
+
+int tim, dfn[maxn], top[maxn], w[maxn];
+void dfs2(int u, int t) {
+    dfn[u] = ++ tim;
+    top[u] = t;
+    w[tim] = val[u];
+    if(!son[u]) return;
+    dfs2(son[u], t);
+    for(int i = head[u]; i; i = nxt[i]) {
+        int v = to[i];
+        if(v == fa[u] || v == son[u]) continue;
+        dfs2(v, v);
+    }
+}
+
+int tree[maxn &lt;&lt; 2], lazy[maxn &lt;&lt; 2];
+void push_up(int rt) {
+    tree[rt] = (tree[rt &lt;&lt; 1] + tree[rt &lt;&lt; 1 | 1]) % mod;
+}
+
+void push_down(int rt, int l, int r, int mid) {
+    if(!lazy[rt]) return;
+    lazy[rt &lt;&lt; 1] = (lazy[rt] + lazy[rt &lt;&lt; 1]) % mod;
+    lazy[rt &lt;&lt; 1 | 1] = (lazy[rt] + lazy[rt &lt;&lt; 1 | 1]) % mod;
+    tree[rt &lt;&lt; 1] = (tree[rt &lt;&lt; 1]  + (mid - l + 1) * lazy[rt] % mod) % mod;
+    tree[rt &lt;&lt; 1 | 1] = (tree[rt &lt;&lt; 1 | 1]  + (r - mid) * lazy[rt] % mod) % mod;
+    lazy[rt] = 0;
+}
+
+void build(int l, int r, int rt) {
+    lazy[rt] = 0;
+    if(l == r) {
+        tree[rt] = w[l] % mod;
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    build(l, mid, rt &lt;&lt; 1);
+    build(mid + 1, r, rt &lt;&lt; 1 | 1);
+    push_up(rt);
+}
+
+void updata(int L, int R, int l, int r, int rt, int val) {
+    if(L &lt;= l &amp;&amp; r &lt;= R) {
+        tree[rt] = (tree[rt] + val * (r - l + 1) % mod) % mod;
+        lazy[rt] = (lazy[rt] + val) % mod;
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    push_down(rt, l, r, mid);
+    if(L &lt;= mid) updata(L, R, l, mid, rt &lt;&lt; 1, val);
+    if(R &gt; mid) updata(L, R, mid + 1, r, rt &lt;&lt; 1 | 1, val);
+    push_up(rt);
+}
+
+int query(int L, int R, int l, int r, int rt) {
+    if(L &lt;= l &amp;&amp; r &lt;= R) {
+        return tree[rt];
+    }
+    int mid = l + r &gt;&gt; 1;
+    push_down(rt, l, r, mid);
+    int res = 0;
+    if(L &lt;= mid) res = (res + query(L, R, l, mid, rt &lt;&lt; 1)) % mod;
+    if(R &gt; mid) res = (res +query(L, R, mid + 1, r, rt &lt;&lt; 1 | 1)) % mod;
+    return res;
+}
+
+void mson(int x, int z) {
+    updata(dfn[x], dfn[x] + siz[x] - 1, 1, n, 1, z);
+}
+
+int qson(int x) {
+    return query(dfn[x], dfn[x] + siz[x] - 1, 1, n, 1);
+}
+
+void mchain(int x, int y, int z) {
+    z %= mod;
+    while(top[x] != top[y]) {
+        if(dep[top[x]] &lt; dep[top[y]]) swap(x, y);
+        updata(dfn[top[x]], dfn[x], 1, n, 1, z);
+        x = fa[top[x]];
+    }
+    if(dep[x] &gt; dep[y]) swap(x, y);
+    updata(dfn[x], dfn[y], 1, n, 1, z);
+}
+
+int qchain(int x, int y) {
+    int ret = 0;
+    while(top[x] != top[y]) {
+        if(dep[top[x]] &lt; dep[top[y]]) swap(x, y);
+        ret = (ret + query(dfn[top[x]], dfn[x], 1, n, 1)) % mod;
+        x = fa[top[x]];
+    }
+    if(dep[x] &gt; dep[y]) swap(x, y);
+    ret = (ret + query(dfn[x], dfn[y], 1, n, 1)) % mod;
+    return ret;
+}
+
+signed main() {
+//    freopen(&quot;in.in&quot;,&quot;r&quot;,stdin);
+    int op, x, y, k, r;
+    scanf(&quot;%d %d %d %d&quot;, &amp;n, &amp;m ,&amp; r, &amp;mod);
+    for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; val[i];
+    for(int i = 1, a, b; i &lt; n; i ++) {
+        scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
+        ade(a, b), ade(b, a);
+    }
+    dfs1(r, -1);
+    dfs2(r, -1);
+    build(1, n, 1);
+    while(m --) {
+        scanf(&quot;%d %d&quot;, &amp;op, &amp;x);
+        if(op == 1) {
+            scanf(&quot;%d %d&quot;, &amp;y, &amp;k);
+            mchain(x, y, k);
+        } else if(op == 2) {
+            scanf(&quot;%d&quot;, &amp;y);
+            printf(&quot;%d\n&quot;, qchain(x, y));
+        } else if(op == 3) {
+            scanf(&quot;%d&quot;, &amp;k);
+            mson(x, k);
+        } else if(op == 4) {
+            printf(&quot;%d\n&quot;, qson(x));
+        }
+    }
+    return 0;
+}</code></pre><h2 id="P2146-NOI2015-软件包管理器"><a href="#P2146-NOI2015-软件包管理器" class="headerlink" title="P2146 [NOI2015]软件包管理器"></a>P2146 [NOI2015]软件包管理器</h2><p><a href="https://www.luogu.org/problem/P2146" target="_blank" rel="noopener"> https://www.luogu.org/problem/P2146 </a><br>这道题 正常的建立出 树的关系就好<br>安装一个包 只要统计 0 到 这个点 还有没有个没有安装就好 先统计 最开始有多少1 更新完 减去 就是这次 安装的 ans<br>卸载的话 就是 这个子树 1的个数 区间修改</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define debug(x, str) cout &lt;&lt; (str) &lt;&lt; &quot; = [ &lt;&lt; : &quot; &lt;&lt; (x) &lt;&lt; &quot; ]&quot; &lt;&lt; endl;
+using namespace std;
+typedef pair&lt;int, int&gt; pii;
+typedef long long ll;
+const int maxn = 1e5 + 5;
+int n, k, m, mod;
+int head[maxn], cnt;
+int to[maxn &lt;&lt; 1], nxt[maxn &lt;&lt; 1];
+
+void ade(int a, int b) {
+    to[++ cnt] = b;
+    nxt[cnt] = head[a], head[a] = cnt;
+}
+
+int fa[maxn], dep[maxn], siz[maxn], son[maxn];
+void dfs1(int u, int f) {
+    fa[u] = f;
+    dep[u] = dep[f] + 1;
+    siz[u] = 1;
+    int maxsize = -1;
+    for(int i = head[u]; i; i = nxt[i]) {
+        int v = to[i];
+        if(v == f) continue;
+        dfs1(v, u);
+        siz[u] += siz[v];
+        if(siz[v] &gt; maxsize) {
+            maxsize = siz[v];
+            son[u] = v;
+        }
+    }
+}
+
+int tim, dfn[maxn], top[maxn], w[maxn];
+void dfs2(int u, int t) {
+    dfn[u] = ++ tim;
+    top[u] = t;
+    if(!son[u]) return;
+    dfs2(son[u], t);
+    for(int i = head[u]; i; i = nxt[i]) {
+        int v = to[i];
+        if(v == fa[u] || v == son[u]) continue;
+        dfs2(v, v);
+    }
+}
+
+int tree[maxn &lt;&lt; 2], lazy[maxn &lt;&lt; 2];
+void push_up(int rt) {
+    tree[rt] = (tree[rt &lt;&lt; 1] + tree[rt &lt;&lt; 1 | 1]);
+}
+
+void push_down(int rt, int l, int r, int mid) {
+    if(lazy[rt] == -1) return ;
+    lazy[rt &lt;&lt; 1] = lazy[rt &lt;&lt; 1 | 1] = lazy[rt];
+    tree[rt &lt;&lt; 1] = (mid - l + 1) * lazy[rt];
+    tree[rt &lt;&lt; 1 | 1] = (r - mid) * lazy[rt];
+    lazy[rt] = -1;
+}
+
+void build(int l, int r, int rt) {
+    lazy[rt] = -1, tree[rt] = 0;
+    if(l == r) return ;
+    int mid = l + r &gt;&gt; 1;
+    build(l, mid, rt &lt;&lt; 1);
+    build(mid + 1, r, rt &lt;&lt; 1 | 1);
+    push_up(rt);
+}
+
+void updata(int L, int R, int l, int r, int rt, int val) {
+    if(L &lt;= l &amp;&amp; r &lt;= R) {
+        tree[rt] = (val * (r - l + 1));
+        lazy[rt] = val;
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    push_down(rt, l, r, mid);
+    if(L &lt;= mid) updata(L, R, l, mid, rt &lt;&lt; 1, val);
+    if(R &gt; mid) updata(L, R, mid + 1, r, rt &lt;&lt; 1 | 1, val);
+    push_up(rt);
+}
+
+int query(int L, int R, int l, int r, int rt) {
+    if(L &lt;= l &amp;&amp; r &lt;= R) {
+        return tree[rt];
+    }
+    int mid = l + r &gt;&gt; 1;
+    push_down(rt, l, r, mid);
+    int res = 0;
+    if(L &lt;= mid) res = (res + query(L, R, l, mid, rt &lt;&lt; 1));
+    if(R &gt; mid) res = (res +query(L, R, mid + 1, r, rt &lt;&lt; 1 | 1));
+    return res;
+}
+
+void mson(int x, int z) {
+    updata(dfn[x], dfn[x] + siz[x] - 1, 1, n, 1, z);
+}
+
+int qson(int x) {
+    return query(dfn[x], dfn[x] + siz[x] - 1, 1, n, 1);
+}
+
+void mchain(int x, int y, int z) {
+    while(top[x] != top[y]) {
+        if(dep[top[x]] &lt; dep[top[y]]) swap(x, y);
+        updata(dfn[top[x]], dfn[x], 1, n, 1, z);
+        x = fa[top[x]];
+    }
+    if(dep[x] &gt; dep[y]) swap(x, y);
+    updata(dfn[x], dfn[y], 1, n, 1, z);
+}
+
+int qchain(int x, int y) {
+    int ret = 0;
+    while(top[x] != top[y]) {
+        if(dep[top[x]] &lt; dep[top[y]]) swap(x, y);
+        ret = (ret + query(dfn[top[x]], dfn[x], 1, n, 1));
+        x = fa[top[x]];
+    }
+    if(dep[x] &gt; dep[y]) swap(x, y);
+    ret = (ret + query(dfn[x], dfn[y], 1, n, 1));
+    return ret;
+}
+
+signed main() {
+    scanf(&quot;%d&quot;, &amp;n);
+    for(int i = 1, b; i &lt; n; ++ i) {
+        scanf(&quot;%d&quot;, &amp;b);
+        ade(b ,i), ade(i, b);
+    }
+    dfs1(0, -1);
+    dfs2(0, -1);
+    build(1, n, 1);
+    scanf(&quot;%d&quot;, &amp;m);
+    int id;
+    char op[15];
+    while(m --) {
+        scanf(&quot;%s %d&quot;, op, &amp;id);
+        if(op[0] == &apos;i&apos;) {
+            int ans;
+            ans = qchain(0, id);
+            mchain(0, id, 1);
+            ans = qchain(0, id) - ans;
+            printf(&quot;%d\n&quot;, ans);
+        } else {
+            printf(&quot;%d\n&quot;, qson(id));
+            mson(id, 0);
+        }
+    }
+    return 0;
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/31/高斯消元_线性空间_线性基_【数学】/" rel="next" title="高斯消元_线性空间_线性基_【数学】">
+                <i class="fa fa-chevron-left"></i> 高斯消元_线性空间_线性基_【数学】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/03/树链剖分_题型总结二/" rel="prev" title="树链剖分_题型总结二">
+                树链剖分_题型总结二 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树链剖分模板题"><span class="nav-number">1.</span> <span class="nav-text">树链剖分模板题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2146-NOI2015-软件包管理器"><span class="nav-number">2.</span> <span class="nav-text">P2146 [NOI2015]软件包管理器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#define MAXM 500010 #define MAXN 10010  /* 1 结构体数组edge存边，edge[i]表示第i条边, 2 head[i]存以i为起点的第一条边(在edge中的下标) */ struct EDGE{     int next;   //下一条边的存储下标      int to;     //这条边的终点      int w;      //权值  };">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【链式前向星+树的直径】_2018年小白月赛6_C题_桃花_&amp;&amp;_Roads_in_the_North_POJ_-_2631_&amp;&amp;_Cow_Marathon_POJ_-_1985">
+<meta property="og:url" content="http://zhxu98.github.io/2018/08/22/【链式前向星+树的直径】_2018年小白月赛6_C题_桃花_&&_Roads_in_the_North_POJ_-_2631_&&_Cow_Marathon_POJ_-_1985/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="#define MAXM 500010 #define MAXN 10010  /* 1 结构体数组edge存边，edge[i]表示第i条边, 2 head[i]存以i为起点的第一条边(在edge中的下标) */ struct EDGE{     int next;   //下一条边的存储下标      int to;     //这条边的终点      int w;      //权值  };">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:17:36.112Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【链式前向星+树的直径】_2018年小白月赛6_C题_桃花_&amp;&amp;_Roads_in_the_North_POJ_-_2631_&amp;&amp;_Cow_Marathon_POJ_-_1985">
+<meta name="twitter:description" content="#define MAXM 500010 #define MAXN 10010  /* 1 结构体数组edge存边，edge[i]表示第i条边, 2 head[i]存以i为起点的第一条边(在edge中的下标) */ struct EDGE{     int next;   //下一条边的存储下标      int to;     //这条边的终点      int w;      //权值  };">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2018/08/22/【链式前向星+树的直径】_2018年小白月赛6_C题_桃花_&&_Roads_in_the_North_POJ_-_2631_&&_Cow_Marathon_POJ_-_1985/">
+
+
+
+
+
+  <title>【链式前向星+树的直径】_2018年小白月赛6_C题_桃花_&&_Roads_in_the_North_POJ_-_2631_&&_Cow_Marathon_POJ_-_1985 | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2018/08/22/【链式前向星+树的直径】_2018年小白月赛6_C题_桃花_&&_Roads_in_the_North_POJ_-_2631_&&_Cow_Marathon_POJ_-_1985/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【链式前向星+树的直径】_2018年小白月赛6_C题_桃花_&&_Roads_in_the_North_POJ_-_2631_&&_Cow_Marathon_POJ_-_1985</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T19:14:14+08:00">
+                2018-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <pre><code>#define MAXM 500010
+#define MAXN 10010
+
+/*
+1 结构体数组edge存边，edge[i]表示第i条边,
+2 head[i]存以i为起点的第一条边(在edge中的下标)
+*/
+struct EDGE{
+    int next;   //下一条边的存储下标 
+    int to;     //这条边的终点 
+    int w;      //权值 
+}; 
+
+EDGE edge[MAXM];
+
+int n, m, cnt;
+int head[MAXN];  //head[i]表示以i为起点的第一条边 
+
+void Add(int u, int v, int w) {  //起点u, 终点v, 权值w 
+    edge[++cnt].next = head[u];
+    edge[cnt].w = w;
+    edge[cnt].to = v;
+    head[u] = cnt;    //第一条边为当前边 
+}
+/*
+2.增边：若以点i为起点的边新增了一条，在edge中的下标为j.
+那么edge[j].next=head[i];然后head[i]=j.
+即每次新加的边作为第一条边，最后倒序遍历
+ps 每次更新 都把上次存的边 结构体里next指向他 然后更新他 把j边更新到head里
+head里存的 可以说是 最后那个边出现的位置 二结构体每次存的都是上一次的 所以 就有办法遍历了
+*/</code></pre><p>以下是牛客<br>链接： <a href="https://www.nowcoder.com/acm/contest/136/C" target="_blank" rel="noopener"> https://www.nowcoder.com/acm/contest/136/C
+</a><br>来源：牛客网</p>
+<p>时间限制：C/C++ 1秒，其他语言2秒<br>空间限制：C/C++ 262144K，其他语言524288K<br>64bit IO Format: %lld</p>
+<p>题目描述<br>桃花一簇开无主，可爱深红映浅红。 ——《题百叶桃花》<br>桃花长在桃树上，树的每个节点有一个桃花，调皮的HtBest想摘尽可能多的桃花。HtBest有一个魔法棒，摘到树上任意一条链上的所有桃花，由于HtBest法力有限，只能使用一次魔法棒，请求出Htbest最多可以摘到多少个桃花。<br>输入描述:<br>第一行有一个正整数n，表示桃树的节点个数。接下来n-1行，第i行两个正整数ai,bi ，表示桃树上的节点ai,bi之间有一条边。<br>输出描述:<br>第一行一个整数，表示HtBest使用一次魔法棒最多可以摘到多少桃花。<br>对于100%的测试数据：<br>1 ≤ n ≤ 1000000<br>数据量较大，注意使用更快的输入输出方式。<br>输入<br>3  
+1 2<br>2 3<br>输出<br>3</p>
+<p>以下两种实现<br>分别 BFS和dfs 遍历方式 都是for 一直到I==-1 停止<br>算是求某点到其他点距离的更快方法。。。<br>刚做这题 用 dijkstra2次找最远点 炸了</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;set&gt;
+#include &lt;list&gt;
+using namespace std;
+typedef long long ll;
+
+const int maxn=1000000+5;
+int head[maxn];
+bool vis[maxn];
+int cnt,n,u,v;
+int d[maxn];
+
+
+struct node{
+    int next,to,cost;
+    node(int t,int n,int c){next=n;to=t;cost=c;}
+    node(){};
+}edge[maxn&lt;&lt;1];
+
+void addedge(int u,int v,int c){
+    edge[cnt]=node(u,head[v],c);
+    head[v]=cnt++;
+    edge[cnt]=node(v,head[u],c);
+    head[u]=cnt++;
+}
+
+int pos,dis;
+
+void dfs(int u){
+    vis[u]=1;
+    for(int i=head[u];i!=-1;i=edge[i].next){
+        if(!vis[edge[i].to]){
+            d[edge[i].to]=d[u]+1;
+            dfs(edge[i].to);
+        }
+    }
+}
+/*
+void bfs(int u){
+    memset(vis,0,sizeof(vis));
+    memset(d,0,sizeof(d));
+    queue&lt;int&gt; q;
+    q.push(u);
+    d[u]=1;
+    vis[u]=1;
+    while(!q.empty()){
+        int t=q.front();q.pop();
+        for(int i=head[t];i!=-1;i=edge[i].next){
+            if(!vis[edge[i].to]){
+                vis[edge[i].to]=1;
+                dis=d[edge[i].to]=d[t]+1;
+                pos=edge[i].to;
+                q.push(edge[i].to);
+            }
+        }
+    }
+}
+*/
+int main(){
+    while(cin&gt;&gt;n){
+    cnt=0;
+    memset(head,-1,sizeof(head));
+        for(int i=0;i&lt;n-1;i++){
+            scanf(&quot;%d %d&quot;,&amp;u,&amp;v);
+            addedge(u,v,1);
+        }
+        /*
+        bfs(1);
+        bfs(pos);
+        cout&lt;&lt;dis&lt;&lt;endl;
+        */
+        memset(vis,0,sizeof(vis));
+        memset(d,0,sizeof(d));
+        d[1]=1;
+        dfs(1);
+        int pos=1;
+        for(int i=1;i&lt;=n;i++){
+            if(d[i]&gt;d[pos])
+                pos=i;
+        }
+        memset(vis,0,sizeof(vis)); 
+        d[pos]=1;
+        dfs(pos);
+        dis=0;
+        for(int i=1;i&lt;=n;i++){
+            if(d[i]&gt;dis) dis=d[i];
+        }
+        printf(&quot;%d\n&quot;,dis);
+    }
+    return 0;
+}</code></pre><p>Roads in the North POJ - 2631<br><a href="http://poj.org/problem?id=2631" target="_blank" rel="noopener"> http://poj.org/problem?id=2631 </a><br>这题用的 前项星 我也写不出向上面水题 那样好写的DFS了。。。orz</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;set&gt;
+#include &lt;list&gt;
+using namespace std;
+typedef long long ll;
+
+const int maxn=1000000+5;
+int head[maxn];
+bool vis[maxn];
+int cnt,n,u,v,c;
+int d[maxn];
+
+struct node{
+    int next,to,cost;
+    node(int n,int t,int c){next=n;to=t;cost=c;}
+    node(){};
+}edge[maxn&lt;&lt;1];
+
+void addedge(int u,int v,int c){
+    edge[cnt]=node(head[u],v,c);
+    head[u]=cnt++;
+    edge[cnt]=node(head[v],u,c);
+    head[v]=cnt++;
+}
+
+int pos,dis;
+int ans; 
+
+void bfs(int u){
+    memset(vis,0,sizeof(vis));
+    memset(d,0,sizeof(d));
+    queue&lt;int&gt; q;
+    q.push(u);
+    d[u]=0;
+    vis[u]=1;
+    while(!q.empty()){
+        int t=q.front();q.pop();
+        for(int i=head[t];i!=-1;i=edge[i].next){
+            if(!vis[edge[i].to]){
+                vis[edge[i].to]=1;
+                dis=d[edge[i].to]=d[t]+edge[i].cost;
+                if(dis&gt;ans){//多个判断更新
+                    ans=max(dis,ans);
+                    pos=edge[i].to;
+                }
+                q.push(edge[i].to);
+            }
+        }
+    }
+}
+
+int main(){ 
+memset(head,-1,sizeof(head));
+cnt=0;
+    while(~scanf(&quot;%d %d %d&quot;,&amp;u,&amp;v,&amp;c)){
+        addedge(u,v,c); 
+    }
+    dis=0;
+    bfs(1);
+    ans=0;
+    bfs(pos);
+    printf(&quot;%d\n&quot;,ans);
+    return 0;
+}</code></pre><p>Cow Marathon POJ - 1985<br><a href="http://poj.org/problem?id=1985" target="_blank" rel="noopener"> http://poj.org/problem?id=1985 </a><br>板子题了 成。。。。orz</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;set&gt;
+#include &lt;list&gt;
+using namespace std;
+typedef long long ll;
+
+const int maxn=1000000+5;
+int head[maxn];
+bool vis[maxn];
+int cnt,n,u,v,c;
+int d[maxn];
+
+struct node{
+    int next,to,cost;
+    node(int n,int t,int c){next=n;to=t;cost=c;}
+    node(){};
+}edge[maxn&lt;&lt;1];
+
+void addedge(int u,int v,int c){
+    edge[cnt]=node(head[u],v,c);
+    head[u]=cnt++;
+    edge[cnt]=node(head[v],u,c);
+    head[v]=cnt++;
+}
+
+int pos,dis;
+int ans; 
+
+void bfs(int u){
+    memset(vis,0,sizeof(vis));
+    memset(d,0,sizeof(d));
+    queue&lt;int&gt; q;
+    q.push(u);
+    d[u]=0;
+    vis[u]=1;
+    while(!q.empty()){
+        int t=q.front();q.pop();
+        for(int i=head[t];i!=-1;i=edge[i].next){
+            if(!vis[edge[i].to]){
+                vis[edge[i].to]=1;
+                dis=d[edge[i].to]=d[t]+edge[i].cost;
+                if(dis&gt;ans){//多个判断更新
+                    ans=max(dis,ans);
+                    pos=edge[i].to;
+                }
+                q.push(edge[i].to);
+            }
+        }
+    }
+}
+
+int main(){ 
+memset(head,-1,sizeof(head));
+cnt=0;
+int n,m;
+char cmd[10];
+    while(~scanf(&quot;%d %d &quot;,&amp;n,&amp;m)){
+        for(int i=0;i&lt;m;i++){
+            scanf(&quot;%d %d %d %s&quot;,&amp;u,&amp;v,&amp;c,cmd);
+            addedge(u,v,c); 
+        }
+        dis=0;
+        bfs(1);
+        ans=0;
+        bfs(pos);
+        printf(&quot;%d\n&quot;,ans);
+    }
+
+    return 0;
+}</code></pre><p>附同学写的 感觉写起来方便点。。orz</p>
+<pre><code>#include&lt;vector&gt;
+#include&lt;string.h&gt;
+using namespace std;
+const int maxn = 1e5;
+const int INF =1e9;
+vector&lt;int&gt; G[maxn + 5];
+vector&lt;int&gt; V[maxn + 5];
+int vis[maxn + 5];
+int d[maxn + 5];
+void dfs(int u){
+    vis[u] = 1;
+    for(int i = 0; i &lt; G[u].size() ;i++){
+        int v = G[u][i];
+        if(!vis[v]){
+            d[v] = d[u] + V[u][i];
+            dfs(v);
+        }
+    }
+}
+
+int main(){
+    int n,m;
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+
+    int u,v,w;
+    char c;
+    for(int i = 0; i &lt; m; i++){
+        scanf(&quot;%d%d%d&quot;,&amp;u,&amp;v,&amp;w);
+        scanf(&quot; %c&quot;,&amp;c);
+        G[u].push_back(v );
+        V[u].push_back(w);
+        G[v].push_back(u);
+        V[v].push_back(w);
+    }
+    memset(vis,0,sizeof(vis));
+   // memset(d, INF, sizeof(d));
+
+    for(int i = 1; i &lt;= n ;i++) d[i] = i == 1? 0:INF;
+
+    dfs(1);
+
+    int maxn = -1;
+    int flag;
+    for(int i = 1; i &lt;= n ;i++){
+        if(d[i] &gt; maxn &amp;&amp; d[i] != INF){
+            maxn = d[i];
+            flag = i;
+        }
+    }
+
+    memset(vis, 0, sizeof(vis));
+    for(int i = 1; i &lt;= n ; i++) d[i] = i== flag?0:INF;
+    dfs(flag);
+
+    maxn = -1;
+    for(int i = 1; i &lt;= n; i++){
+        if(d[i] &gt; maxn &amp;&amp; d[i] != INF){
+            maxn = d[i];
+        }
+    }
+    printf(&quot;%d\n&quot;,maxn);
+}</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/22/【线段树_离散化】_Stars_POJ_-_2352_&&_Nested_Segments_CodeForces_-_652D/" rel="next" title="【线段树_离散化】_Stars_POJ_-_2352_&&_Nested_Segments_CodeForces_-_652D">
+                <i class="fa fa-chevron-left"></i> 【线段树_离散化】_Stars_POJ_-_2352_&&_Nested_Segments_CodeForces_-_652D
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/23/【逆向并查集+STLmap存图奇法】_Connections_in_Galaxy_War_ZOJ_-_3261/" rel="prev" title="【逆向并查集+STLmap存图奇法】_Connections_in_Galaxy_War_ZOJ_-_3261">
+                【逆向并查集+STLmap存图奇法】_Connections_in_Galaxy_War_ZOJ_-_3261 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

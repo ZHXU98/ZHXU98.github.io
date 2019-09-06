@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="DFS序前置的几道题 线段树DFS序 1 单点更新 区间查询https://blog.csdn.net/qq_40831340/article/details/84501232线段树DFS序 2 区间子树更新 单点查https://blog.csdn.net/qq_40831340/article/details/84501478 以上都是关于统计 跟改子树的 欧拉序这里我们可以处理出 关于树上路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树进阶总结一_DFS序_欧拉序(括号序)">
+<meta property="og:url" content="http://zhxu98.github.io/2019/08/16/线段树进阶总结一_DFS序_欧拉序(括号序)/index.html">
+<meta property="og:site_name" content="蒟蒻最后的倔强">
+<meta property="og:description" content="DFS序前置的几道题 线段树DFS序 1 单点更新 区间查询https://blog.csdn.net/qq_40831340/article/details/84501232线段树DFS序 2 区间子树更新 单点查https://blog.csdn.net/qq_40831340/article/details/84501478 以上都是关于统计 跟改子树的 欧拉序这里我们可以处理出 关于树上路">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-06T11:16:13.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线段树进阶总结一_DFS序_欧拉序(括号序)">
+<meta name="twitter:description" content="DFS序前置的几道题 线段树DFS序 1 单点更新 区间查询https://blog.csdn.net/qq_40831340/article/details/84501232线段树DFS序 2 区间子树更新 单点查https://blog.csdn.net/qq_40831340/article/details/84501478 以上都是关于统计 跟改子树的 欧拉序这里我们可以处理出 关于树上路">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhxu98.github.io/2019/08/16/线段树进阶总结一_DFS序_欧拉序(括号序)/">
+
+
+
+
+
+  <title>线段树进阶总结一_DFS序_欧拉序(括号序) | 蒟蒻最后的倔强</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?58b7e016a3433eb1162126ec13ec1dbf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蒟蒻最后的倔强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">by-zhxu98</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhxu98.github.io/2019/08/16/线段树进阶总结一_DFS序_欧拉序(括号序)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHXU1998">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻最后的倔强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">线段树进阶总结一_DFS序_欧拉序(括号序)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T19:53:38+08:00">
+                2019-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/线段树/" itemprop="url" rel="index">
+                    <span itemprop="name">线段树</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="DFS序"><a href="#DFS序" class="headerlink" title="DFS序"></a>DFS序</h2><p>前置的几道题</p>
+<p>线段树DFS序 1 单点更新 区间查询<br><a href="https://blog.csdn.net/qq_40831340/article/details/84501232" target="_blank" rel="noopener">https://blog.csdn.net/qq_40831340/article/details/84501232</a><br>线段树DFS序 2 区间子树更新 单点查<br><a href="https://blog.csdn.net/qq_40831340/article/details/84501478" target="_blank" rel="noopener">https://blog.csdn.net/qq_40831340/article/details/84501478</a></p>
+<p>以上都是关于统计 跟改子树的</p>
+<h2 id="欧拉序"><a href="#欧拉序" class="headerlink" title="欧拉序"></a>欧拉序</h2><p>这里我们可以处理出 关于树上路径的<br>虽然我觉得 都是DFS搞这数组也没有啥大区别</p>
+<h5 id="树上操作"><a href="#树上操作" class="headerlink" title="树上操作"></a>树上操作</h5><p><a href="https://www.luogu.org/problem/P3178" target="_blank" rel="noopener">https://www.luogu.org/problem/P3178</a><br>其实我代码没有过样例 能过题的原因 是我读错题了 样例是父亲指向儿子 可是数据全是 儿子指向父亲 23333<br>我可能是出题人以外知道这个事情的人了<br>这次我们要处理 树上路径问题 要是像之前2篇博客内样 肯定不行 我们选择要剪掉 out 的才好<br>不能再把他们压在一个结构体了 当然 我之前那样写 也是没有想过会有这样的问题</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+const int maxn = 2e5 + 10;
+
+int n, m, val[maxn];
+int head[maxn], cnt;
+int to[maxn], nxt[maxn];
+
+void ade(int a, int b) {
+    to[++ cnt] = b;
+    nxt[cnt] = head[a], head[a] = cnt;
+}
+
+int seq[maxn &lt;&lt; 1], inout[maxn &lt;&lt; 1];
+int ind[maxn &lt;&lt; 1], outs[maxn &lt;&lt; 1], tot;
+
+int ss;
+void dfs(int u) {
+    seq[++ tot] = u, inout[tot] = 1, ind[u] = tot;
+    for(int i = head[u]; i; i = nxt[i]) 
+        dfs(to[i]),ss ++;
+    seq[++ tot] = u, inout[tot] = -1, outs[u] = tot;
+}
+
+struct node {
+    int sum, lazy, flag;
+} tree[maxn &lt;&lt; 3];
+
+void push_up(int rt) {
+    tree[rt].sum = tree[rt &lt;&lt; 1].sum + tree[rt &lt;&lt; 1 | 1].sum;
+    tree[rt].flag = tree[rt &lt;&lt; 1].flag + tree[rt &lt;&lt; 1 | 1].flag;
+}
+
+void push_down(int rt) {
+    tree[rt &lt;&lt; 1].sum += tree[rt &lt;&lt; 1].flag * tree[rt].lazy;
+    tree[rt &lt;&lt; 1].lazy += tree[rt].lazy;
+    tree[rt &lt;&lt; 1 | 1].sum += tree[rt &lt;&lt; 1 | 1].flag * tree[rt].lazy;
+    tree[rt &lt;&lt; 1 | 1].lazy += tree[rt].lazy;
+    tree[rt].lazy = 0;
+}
+
+void build(int l, int r, int rt) {
+    if(l == r) {
+        tree[rt].flag = inout[l];
+        tree[rt].sum = inout[l] * val[seq[l]];
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    build(l, mid, rt &lt;&lt; 1);
+    build(mid + 1, r, rt &lt;&lt; 1 | 1);
+    push_up(rt);
+}
+
+void updata(int L, int R, int l, int r, int rt, int val) {
+    if(L &lt;= l &amp;&amp; R &gt;= r) {
+        tree[rt].sum += tree[rt].flag * val;
+        tree[rt].lazy += val;
+        return ;
+    }
+    if(tree[rt].lazy) push_down(rt);
+    int mid = l + r &gt;&gt; 1;
+    if(L &lt;= mid) updata(L, R, l, mid, rt &lt;&lt; 1, val);
+    if(R &gt; mid) updata(L, R, mid + 1, r, rt &lt;&lt; 1 | 1, val);
+    push_up(rt);
+}
+
+int query(int L, int R, int l, int r, int rt) {
+    if(L &lt;= l &amp;&amp; R &gt;= r) {
+        return tree[rt].sum;
+    }
+    if(tree[rt].lazy) push_down(rt);
+    int mid = r + l &gt;&gt; 1;
+    int res = 0;
+    if(L &lt;= mid) res += query(L, R, l, mid, rt &lt;&lt; 1);
+    if(R &gt; mid) res += query(L, R, mid + 1, r, rt &lt;&lt; 1 | 1);
+    return res;
+}
+
+signed main() {
+    scanf(&quot;%lld %lld&quot;, &amp;n, &amp;m);
+    for(int i = 1; i &lt;= n; i ++ ) scanf(&quot;%lld&quot;, &amp;val[i]);
+    for(int i = 1, a, b; i &lt; n; i ++){
+            scanf(&quot;%lld %lld&quot;, &amp;a, &amp;b), ade(b, a);
+    }
+
+    int N = n &lt;&lt; 1;
+    dfs(1);
+    build(1, N, 1);
+    int op, x, a;
+
+    while(m --) {
+        scanf(&quot;%lld %lld&quot;, &amp;op, &amp;x);
+        if(op == 1) {
+            scanf(&quot;%lld&quot;, &amp;a);
+            updata(ind[x], ind[x], 1, N, 1, a);
+            updata(outs[x], outs[x], 1, N, 1, a);
+        } else if(op == 2) {
+            scanf(&quot;%lld&quot;, &amp;a);
+            updata(ind[x], outs[x], 1, N, 1, a);
+        } else {
+            printf(&quot;%lld\n&quot;, query(1, ind[x], 1, N, 1));
+        }
+    }
+    return 0;
+}</code></pre><h4 id="树上路径-区间查-单点改"><a href="#树上路径-区间查-单点改" class="headerlink" title="树上路径 区间查 单点改"></a>树上路径 区间查 单点改</h4><p>接下来就是我们 dfs建立括号序列 如果让路上某个点+v<br>路径询问 我们增加了多少<br>就可以考虑 根节点 到 u 根节点到 v 我们再减去 2倍根节点 到 lca 再加上 lca</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+//#define int long long
+using namespace std;
+const int maxn = 2e5 + 10;
+
+int n, m, val[maxn];
+int head[maxn], cnt;
+int to[maxn], nxt[maxn];
+
+void ade(int a, int b) {
+    to[++ cnt] = b;
+    nxt[cnt] = head[a], head[a] = cnt;
+}
+
+int seq[maxn &lt;&lt; 1], inout[maxn &lt;&lt; 1];
+int ind[maxn &lt;&lt; 1], outs[maxn &lt;&lt; 1], tot;
+
+void dfs(int u, int pre) {
+    seq[++ tot] = u, inout[tot] = 1, ind[u] = tot;
+    for(int i = head[u]; i; i = nxt[i])
+        if(pre != to[i]) dfs(to[i], u);
+    seq[++ tot] = u, inout[tot] = -1, outs[u] = tot;
+}
+
+struct node {
+    int sum, flag;
+} tree[maxn &lt;&lt; 2];
+
+void push_up(int rt) {
+    tree[rt].sum = tree[rt &lt;&lt; 1].sum + tree[rt &lt;&lt; 1 | 1].sum;
+}
+
+void build(int l, int r, int rt) {
+    if(l == r) {
+        tree[rt].flag = inout[l];
+        tree[rt].sum = inout[l] * val[seq[l]];
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    build(l, mid, rt &lt;&lt; 1);
+    build(mid + 1, r, rt &lt;&lt; 1 | 1);
+    push_up(rt);
+}
+
+void updata(int L, int l, int r, int rt, int val) {
+    if(l == r) {
+        tree[rt].sum = tree[rt].flag * val;
+        return ;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if(L &lt;= mid) updata(L, l, mid, rt &lt;&lt; 1, val);
+    else updata(L, mid + 1, r, rt &lt;&lt; 1 | 1, val);
+    push_up(rt);
+}
+
+int query(int L, int R, int l, int r, int rt) {
+    if(L == 0) return 0;
+    if(L &lt;= l &amp;&amp; R &gt;= r) {
+        return tree[rt].sum;
+    }
+    int mid = r + l &gt;&gt; 1;
+    int res = 0;
+    if(L &lt;= mid) res += query(L, R, l, mid, rt &lt;&lt; 1);
+    if(R &gt; mid) res += query(L, R, mid + 1, r, rt &lt;&lt; 1 | 1);
+    return res;
+}
+
+int fa[maxn][30], depth[maxn];
+int lg[maxn];
+
+void lca_dfs(int x,int pre) {
+    depth[x] = depth[pre] + 1;
+    fa[x][0] = pre;
+    for(int i = 1; (1 &lt;&lt; i) &lt;= depth[x]; i ++)
+        fa[x][i] = fa[fa[x][i - 1]][i - 1];
+    for(int i = head[x]; i; i = nxt[i])
+        if(to[i] != pre) {
+            lca_dfs(to[i], x);
+        }
+}
+
+int LCA(int x,int y) {
+    if(depth[x] &lt; depth[y]) swap(x, y);
+    while(depth[x] &gt; depth[y]) x = fa[x][lg[depth[x] - depth[y]] - 1];
+    if(x == y) return x;
+    for(int k = lg[depth[x]] - 1; k &gt;= 0; k --) {
+        if(fa[x][k] != fa[y][k]) {
+            x = fa[x][k], y = fa[y][k];
+        }
+    }
+    return fa[x][0];
+}
+
+signed main() {
+    freopen(&quot;in.in&quot;, &quot;r&quot;, stdin);
+    freopen(&quot;a.out&quot;,&quot;w+&quot;,stdout);
+    for(int i = 1; i &lt; maxn; i ++) lg[i] = lg[i - 1] + (1 &lt;&lt; lg[i - 1] == i);
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+    for(int i = 1; i &lt;= n; i ++ ) scanf(&quot;%d&quot;, &amp;val[i]);
+    for(int i = 1, a, b; i &lt; n; i ++)
+        scanf(&quot;%d %d&quot;, &amp;a, &amp;b), ade(a, b), ade(b, a);
+
+    int N = n &lt;&lt; 1;
+    dfs(1, 0);
+    build(1, N, 1);
+    lca_dfs(1, 0);
+    fa[1][0] = 0;
+    int op , u, v;
+    while(m --) {
+        scanf(&quot;%d %d %d&quot;, &amp;op, &amp;u, &amp;v);
+        if(op == 1) {
+            updata(ind[u], 1, N, 1, v);
+            updata(outs[u], 1, N, 1, v);
+        } else {
+            int lca = LCA(u, v);
+            printf(&quot;%d\n&quot;, \
+                   query(1, ind[u], 1, N, 1) + \
+                   query(1, ind[v], 1, N, 1) - \
+                   2 * query(1, ind[lca], 1, N, 1) + \
+                   query(ind[lca], ind[lca], 1, N, 1) \
+                  );
+        }
+    }
+    return 0;
+}</code></pre><p>区间改 就特别需要debug能力拉 orz 之后补上</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/16/牛客_小白月赛16_小雨坐地铁_（分层最短路_优化建图）2019暑期多校训练营（第六场）D_move/" rel="next" title="牛客_小白月赛16_小雨坐地铁_（分层最短路_优化建图）2019暑期多校训练营（第六场）D_move">
+                <i class="fa fa-chevron-left"></i> 牛客_小白月赛16_小雨坐地铁_（分层最短路_优化建图）2019暑期多校训练营（第六场）D_move
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/17/线段树进阶总结二_(区间取模开根)/" rel="prev" title="线段树进阶总结二_(区间取模开根)">
+                线段树进阶总结二_(区间取模开根) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="ZHXU1998">
+            
+              <p class="site-author-name" itemprop="name">ZHXU1998</p>
+              <p class="site-description motion-element" itemprop="description">等到有一天我认识到自己是炮灰连蒟蒻都不算的时候.... //我该怎么办呢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">158</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS序"><span class="nav-number">1.</span> <span class="nav-text">DFS序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉序"><span class="nav-number">2.</span> <span class="nav-text">欧拉序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#树上操作"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">树上操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#树上路径-区间查-单点改"><span class="nav-number">2.0.1.</span> <span class="nav-text">树上路径 区间查 单点改</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHXU1998</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
